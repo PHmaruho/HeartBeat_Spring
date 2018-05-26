@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias alias="Album" type="com.zero.heartbeat.model.Album" />
+		<typeAlias alias="Alram" type="com.zero.heartbeat.model.Alram" />
+		<typeAlias alias="Artist" type="com.zero.heartbeat.model.Artist" />
+		<typeAlias alias="Code" type="com.zero.heartbeat.model.Code" />
+		<typeAlias alias="Follow" type="com.zero.heartbeat.model.Follow" />
+		<typeAlias alias="Like" type="com.zero.heartbeat.model.Like" />
+		<typeAlias alias="Music" type="com.zero.heartbeat.model.Music" />
+		<typeAlias alias="MusicReply" type="com.zero.heartbeat.model.MusicReply" />
+		<typeAlias alias="MusicTag" type="com.zero.heartbeat.model.MusicTag" />
+		<typeAlias alias="Tag" type="com.zero.heartbeat.model.Tag" />
+		<typeAlias alias="User" type="com.zero.heartbeat.model.User" />
+		<typeAlias alias="UserPlaylist" type="com.zero.heartbeat.model.UserPlaylist" />
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="mybatis/Activity.xml"/>
+		<mapper resource="mybatis/Common.xml"/>
+		<mapper resource="mybatis/Explore.xml"/>
+		<mapper resource="mybatis/Member.xml"/>
+	</mappers>
+</configuration>
