@@ -36,4 +36,11 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping("/home")
+	public String home2(Locale locale, Model model) {
+		model.addAttribute("url", "common/home");
+		
+		return "main";
+	}
+	
 }

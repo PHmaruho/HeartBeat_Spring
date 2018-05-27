@@ -2,16 +2,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style type="text/css">
-	.head {
-		background-color: yellow;
-		height: 80px;
-	}
-</style>
+<meta charset="UTF-8">
+<title>Heart Beat</title>
 </head>
 <body>
-	<div class="head">
-		head
-	</div>
+<script type="text/javascript">
+	location.href="main";
+</script>
 </body>
 </html>
