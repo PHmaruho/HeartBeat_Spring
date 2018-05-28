@@ -5,9 +5,9 @@ import java.util.Date;
 public class Album {
 	private int 		album_sq;
 	private String 		album_nm;
-	private int 		music_sq;
-	private int 		user_sq;
-	private String		comment;
+	private int 		music_sq; // title_music
+	private int 		member_sq;
+	private String		album_comment;
 	private Date		release_dt;
 	private String		img_path;
 	private String		open_yn;
@@ -31,17 +31,17 @@ public class Album {
 	public void setMusic_sq(int music_sq) {
 		this.music_sq = music_sq;
 	}
-	public int getUser_sq() {
-		return user_sq;
+	public int getMember_sq() {
+		return member_sq;
 	}
-	public void setUser_sq(int user_sq) {
-		this.user_sq = user_sq;
+	public void setMember_sq(int member_sq) {
+		this.member_sq = member_sq;
 	}
-	public String getComment() {
-		return comment;
+	public String getAlbum_comment() {
+		return album_comment;
 	}
-	public void setComment(String comment) {
-		this.comment = comment;
+	public void setAlbum_comment(String album_comment) {
+		this.album_comment = album_comment;
 	}
 	public Date getRelease_dt() {
 		return release_dt;

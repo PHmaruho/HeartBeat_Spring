@@ -2,7 +2,7 @@ package com.zero.heartbeat.model;
 
 public class Follow {
 	private int			follow_sq;
-	private int			target_user_sq;
+	private int			target_sq;
 	private int			user_sq;
 	
 	public int getFollow_sq() {
@@ -11,11 +11,11 @@ public class Follow {
 	public void setFollow_sq(int follow_sq) {
 		this.follow_sq = follow_sq;
 	}
-	public int getTarget_user_sq() {
-		return target_user_sq;
+	public int getTarget_sq() {
+		return target_sq;
 	}
-	public void setTarget_user_sq(int target_user_sq) {
-		this.target_user_sq = target_user_sq;
+	public void setTarget_sq(int target_sq) {
+		this.target_sq = target_sq;
 	}
 	public int getUser_sq() {
 		return user_sq;
