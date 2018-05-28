@@ -2,20 +2,20 @@ package com.zero.heartbeat.model;
 
 import java.util.Date;
 
-public class User {
-	private int			user_sq;
+public class Member {
+	private int			member_sq;
 	private String		email;
 	private String		pw;
 	private	String		nick;
 	private String		status;
-	private Date		pw_date;
-	private Date		reg_date;
+	private Date		pw_dt;
+	private Date		reg_dt;
 	
-	public int getUser_sq() {
-		return user_sq;
+	public int getMember_sq() {
+		return member_sq;
 	}
-	public void setUser_sq(int user_sq) {
-		this.user_sq = user_sq;
+	public void setMember_sq(int member_sq) {
+		this.member_sq = member_sq;
 	}
 	public String getEmail() {
 		return email;
@@ -41,16 +41,16 @@ public class User {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public Date getPw_date() {
-		return pw_date;
+	public Date getPw_dt() {
+		return pw_dt;
 	}
-	public void setPw_date(Date pw_date) {
-		this.pw_date = pw_date;
+	public void setPw_dt(Date pw_dt) {
+		this.pw_dt = pw_dt;
 	}
-	public Date getReg_date() {
-		return reg_date;
+	public Date getReg_dt() {
+		return reg_dt;
 	}
-	public void setReg_date(Date reg_date) {
-		this.reg_date = reg_date;
+	public void setReg_dt(Date reg_dt) {
+		this.reg_dt = reg_dt;
 	}
 }
