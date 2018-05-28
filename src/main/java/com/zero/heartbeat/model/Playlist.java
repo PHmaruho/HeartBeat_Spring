@@ -1,8 +1,8 @@
 package com.zero.heartbeat.model;
 
-public class UserPlaylist {
+public class Playlist {
 	private int			list_sq;
-	private int			user_sq;
+	private int			member_sq;
 	private int			music_sq;
 	private int			list_no;
 	
@@ -12,11 +12,11 @@ public class UserPlaylist {
 	public void setList_sq(int list_sq) {
 		this.list_sq = list_sq;
 	}
-	public int getUser_sq() {
-		return user_sq;
+	public int getMember_sq() {
+		return member_sq;
 	}
-	public void setUser_sq(int user_sq) {
-		this.user_sq = user_sq;
+	public void setMember_sq(int member_sq) {
+		this.member_sq = member_sq;
 	}
 	public int getMusic_sq() {
 		return music_sq;

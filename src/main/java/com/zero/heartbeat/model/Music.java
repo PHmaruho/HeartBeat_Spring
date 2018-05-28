@@ -6,9 +6,10 @@ public class Music {
 	private int			music_no;
 	private String		music_nm;
 	private int			play_time;
-	private String		comment;
-	private int			like;
-	private int			share;
+	private String		url;
+	private String		music_comment;
+	private int			music_like;
+	private int			music_share;
 	private String		open_yn;
 	
 	public int getMusic_sq() {
@@ -41,23 +42,29 @@ public class Music {
 	public void setPlay_time(int play_time) {
 		this.play_time = play_time;
 	}
-	public String getComment() {
-		return comment;
+	public String getUrl() {
+		return url;
 	}
-	public void setComment(String comment) {
-		this.comment = comment;
+	public void setUrl(String url) {
+		this.url = url;
 	}
-	public int getLike() {
-		return like;
+	public String getMusic_comment() {
+		return music_comment;
 	}
-	public void setLike(int like) {
-		this.like = like;
+	public void setMusic_comment(String music_comment) {
+		this.music_comment = music_comment;
 	}
-	public int getShare() {
-		return share;
+	public int getMusic_like() {
+		return music_like;
 	}
-	public void setShare(int share) {
-		this.share = share;
+	public void setMusic_like(int music_like) {
+		this.music_like = music_like;
+	}
+	public int getMusic_share() {
+		return music_share;
+	}
+	public void setMusic_share(int music_share) {
+		this.music_share = music_share;
 	}
 	public String getOpen_yn() {
 		return open_yn;
