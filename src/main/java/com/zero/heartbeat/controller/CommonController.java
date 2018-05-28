@@ -34,4 +34,11 @@ public class CommonController {
 		
 		return "main";
 	}
+	
+	@RequestMapping("/test")
+	public String test(Locale locale, Model model) {
+		model.addAttribute("url", "test");
+		
+		return "main";
+	}
 }

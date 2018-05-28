@@ -2,34 +2,5 @@
 <head>
 </head>
 <body>
-	1<br>
-	<br>2<br>
-	<br>3<br>
-	<br>4<br>
-	<br>home<br>
-	<br>home<br>
-	<br>home<br>
-	<br>home<br>
-	<br>home<br>
-	<br>home<br>
-	<br>home<br>
-	<br>home<br>
-	<br>home<br>
-	<br>home<br>
-	<br>home<br>
-	<br>home<br>
-	<br>home<br>
-	<br>home<br>
-	<br>home<br>
-	<br>home<br>
-	<br>home<br>
-	<br>home<br>
-	<br>home<br>
-	<br>home<br>
-	<br>home<br>
-	<br>5<br>
-	<br>4<br>
-	<br>3<br>
-	<br>2<br>
-	<br>1
+	<a href="test">to test</a>
 </body>
