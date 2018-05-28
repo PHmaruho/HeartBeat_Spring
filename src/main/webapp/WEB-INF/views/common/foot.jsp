@@ -1,6 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
 <head>
 <style type="text/css">
 	.foot {
@@ -12,6 +10,5 @@
 <body>
 	<div class="foot">
 		foot
-	</div>	
+	</div>
 </body>
-</html>
