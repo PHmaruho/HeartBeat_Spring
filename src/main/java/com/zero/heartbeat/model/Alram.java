@@ -2,9 +2,9 @@ package com.zero.heartbeat.model;
 
 public class Alram {
 	private int			alram_sq;
-	private int			user_sq;
-	private int			target_user_sq;
-	private String		alram_kind;
+	private int			member_sq;
+	private int			target_sq;
+	private String		alram_type;
 	private String		status;
 	
 	public int getAlram_sq() {
@@ -13,23 +13,23 @@ public class Alram {
 	public void setAlram_sq(int alram_sq) {
 		this.alram_sq = alram_sq;
 	}
-	public int getUser_sq() {
-		return user_sq;
+	public int getMember_sq() {
+		return member_sq;
 	}
-	public void setUser_sq(int user_sq) {
-		this.user_sq = user_sq;
+	public void setMember_sq(int member_sq) {
+		this.member_sq = member_sq;
 	}
-	public int getTarget_user_sq() {
-		return target_user_sq;
+	public int getTarget_sq() {
+		return target_sq;
 	}
-	public void setTarget_user_sq(int target_user_sq) {
-		this.target_user_sq = target_user_sq;
+	public void setTarget_sq(int target_sq) {
+		this.target_sq = target_sq;
 	}
-	public String getAlram_kind() {
-		return alram_kind;
+	public String getAlram_type() {
+		return alram_type;
 	}
-	public void setAlram_kind(String alram_kind) {
-		this.alram_kind = alram_kind;
+	public void setAlram_type(String alram_type) {
+		this.alram_type = alram_type;
 	}
 	public String getStatus() {
 		return status;
