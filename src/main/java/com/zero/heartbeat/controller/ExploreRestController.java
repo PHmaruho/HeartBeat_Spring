@@ -13,7 +13,7 @@ import com.zero.heartbeat.service.MemberService;
 
 @RestController
 @RequestMapping(value="/do")
-public class ActivityRestController {
+public class ExploreRestController {
 	// Logger
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	

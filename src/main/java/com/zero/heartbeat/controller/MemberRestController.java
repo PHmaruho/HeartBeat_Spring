@@ -13,7 +13,7 @@ import com.zero.heartbeat.service.MemberService;
 
 @RestController
 @RequestMapping(value="/do")
-public class ActivityRestController {
+public class MemberRestController {
 	// Logger
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
@@ -22,4 +22,5 @@ public class ActivityRestController {
 	@Autowired private CommonService commonService;
 	@Autowired private ExploreService exploreService;
 	@Autowired private MemberService memberService;
+	
 }
