@@ -14,8 +14,8 @@
 		<typeAlias alias="MusicReply" type="com.zero.heartbeat.model.MusicReply" />
 		<typeAlias alias="MusicTag" type="com.zero.heartbeat.model.MusicTag" />
 		<typeAlias alias="Tag" type="com.zero.heartbeat.model.Tag" />
-		<typeAlias alias="User" type="com.zero.heartbeat.model.User" />
-		<typeAlias alias="UserPlaylist" type="com.zero.heartbeat.model.UserPlaylist" />
+		<typeAlias alias="Member" type="com.zero.heartbeat.model.Member" />
+		<typeAlias alias="Playlist" type="com.zero.heartbeat.model.Playlist" />
 	</typeAliases>
 	
 	<mappers>
