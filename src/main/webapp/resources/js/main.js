@@ -4,8 +4,8 @@ function supports_history_api() {
 
 function swapContent(link) {
 	var req = new XMLHttpRequest();
-	if (link == "/") {
-		req.open("GET", "http://localhost:8181/home", false);
+	if (link == "/?r=1") {
+		req.open("GET", "http://localhost:8181/home?r=1", false);
 	} else {
 		req.open("GET", link, false);
 	}
@@ -19,7 +19,7 @@ function swapContent(link) {
 }
 
 function goto(link) {
-	if (swapContent(link)) {
+	if (swapContent(link + "?r=1")) {
 		history.pushState(null, null, "http://localhost:8181" + link);
 	}
 }
@@ -31,7 +31,7 @@ window.onload = function() {
 
 	window.setTimeout(function() {
 		window.addEventListener("popstate", function(e) {
-			swapContent(location.pathname);
+			swapContent(location.pathname + "?r=1");
 		}, false);
 	}, 1);
 }
