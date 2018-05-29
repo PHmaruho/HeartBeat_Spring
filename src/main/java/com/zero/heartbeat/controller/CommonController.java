@@ -26,8 +26,10 @@ public class CommonController {
 	@Autowired private MemberService memberService;
 	
 	@RequestMapping("/")
-	public String main(Locale locale, Model model) {
-		model.addAttribute("url", "/home");
+	public String main(Locale locale, Model model, String url) {
+		url = url == null ? "/home" : url;
+		model.addAttribute("url", url);
+		System.out.println("/");
 		
 		return "main";
 	}
@@ -39,8 +41,14 @@ public class CommonController {
 	}
 	
 	@RequestMapping("/test2")
-	public String test2(Locale locale, Model model) {
-		
+	public String test2(Locale locale, Model model, String r) {
+		System.out.println(r);
+		if(r.equals("1")) {
+			System.out.println("2");
+			model.addAttribute("url", "/test2");
+			return "forward:/";
+		}
+		System.out.println("f");
 		return "test2";
 	}
 	

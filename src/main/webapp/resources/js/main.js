@@ -7,6 +7,8 @@ function swapContent(link) {
 	if (link == "/") {
 		req.open("GET", "http://localhost:8181/home", false);
 	} else {
+		link = link + "?r=1"
+		alert(link);
 		req.open("GET", link, false);
 	}
 	req.send(null);

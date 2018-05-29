@@ -52,8 +52,6 @@
 	<div class="footDiv">
 		<c:import url="common/foot.jsp"></c:import>
 	</div>
-</body>
-
 <script src="<c:url value="/resources/js/main.js" />"></script>
-
+</body>
 </html>
