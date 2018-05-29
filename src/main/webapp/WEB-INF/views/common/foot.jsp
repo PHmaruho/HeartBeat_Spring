@@ -7,6 +7,18 @@
 		height: 80px;
 	}
 </style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/2.0.5/wavesurfer.min.js"></script>
+<script type="text/javascript">
+	window.onload = function() {
+		var wavesurfer = WaveSurfer.create({
+		    container: '#waveform',
+		    waveColor: 'violet',
+		    progressColor: 'purple'
+		});
+		
+		wavesurfer.load('resources/music/Kalimba.mp3');
+	}
+</script>
 
 </head>
 <body>
@@ -15,4 +27,6 @@
 		<audio id="audio" controls="controls"  src="resources/music/Kalimba.mp3" >
 		</audio>
 	</div>
+	
+	<div id="waveform"></div>
 </body>

@@ -43,7 +43,7 @@
 		<div class="emptyDiv"></div>
 		
 		<div class="contentDiv" id="contentDiv">
-			<c:import url="${url }"></c:import>
+			<c:import url="${url }?c=${c }"></c:import>
 		</div>
 		
 		<div class="emptyDiv"></div>
@@ -52,8 +52,6 @@
 	<div class="footDiv">
 		<c:import url="common/foot.jsp"></c:import>
 	</div>
-</body>
-
 <script src="<c:url value="/resources/js/main.js" />"></script>
-
+</body>
 </html>
