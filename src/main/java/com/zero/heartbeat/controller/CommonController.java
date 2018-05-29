@@ -2,6 +2,8 @@ package com.zero.heartbeat.controller;
 
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,34 +28,28 @@ public class CommonController {
 	@Autowired private MemberService memberService;
 	
 	@RequestMapping("/")
-	public String main(Locale locale, Model model, String url) {
-		url = url == null ? "/home" : url;
+	public String main(Model model, HttpServletRequest request) {
+		String url = request.getAttribute("url") == null ? "/home" : request.getAttribute("url").toString();
+		String c = request.getAttribute("c") == null ? "" : request.getAttribute("c").toString();
+		c = url.equals("/home") ? "1" : c;
 		model.addAttribute("url", url);
-		System.out.println("/");
+		model.addAttribute("c", c);
 		
 		return "main";
 	}
 	
 	@RequestMapping("/home")
-	public String home(Locale locale, Model model) {
-		
+	public String home(Model model) {
 		return "common/home";
 	}
 	
 	@RequestMapping("/test2")
-	public String test2(Locale locale, Model model, String r) {
-		System.out.println(r);
-		if(r.equals("1")) {
-			System.out.println("2");
-			model.addAttribute("url", "/test2");
-			return "forward:/";
-		}
-		System.out.println("f");
+	public String test2(Model model) {
 		return "test2";
 	}
 	
 	@RequestMapping("/test3")
-	public String test3(Locale locale, Model model) {
+	public String test3(Model model) {
 		
 		return "test3";
 	}
