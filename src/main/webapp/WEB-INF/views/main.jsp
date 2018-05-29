@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -41,8 +42,8 @@
 	<div class="contentWrap">
 		<div class="emptyDiv"></div>
 		
-		<div class="contentDiv">
-			<c:import url="${url }.jsp"></c:import>
+		<div class="contentDiv" id="contentDiv">
+			<c:import url="${url }"></c:import>
 		</div>
 		
 		<div class="emptyDiv"></div>
@@ -52,4 +53,7 @@
 		<c:import url="common/foot.jsp"></c:import>
 	</div>
 </body>
+
+<script src="<c:url value="/resources/js/main.js" />"></script>
+
 </html>

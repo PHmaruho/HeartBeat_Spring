@@ -1,7 +1,5 @@
 package com.zero.heartbeat.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -10,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zero.heartbeat.service.ActivityService;
 import com.zero.heartbeat.service.CommonService;
@@ -28,10 +25,28 @@ public class CommonController {
 	@Autowired private ExploreService exploreService;
 	@Autowired private MemberService memberService;
 	
-	@RequestMapping("/main")
+	@RequestMapping("/")
 	public String main(Locale locale, Model model) {
-		model.addAttribute("url", "common/home");
+		model.addAttribute("url", "/home");
 		
 		return "main";
+	}
+	
+	@RequestMapping("/home")
+	public String home(Locale locale, Model model) {
+		
+		return "common/home";
+	}
+	
+	@RequestMapping("/test2")
+	public String test2(Locale locale, Model model) {
+		
+		return "test2";
+	}
+	
+	@RequestMapping("/test3")
+	public String test3(Locale locale, Model model) {
+		
+		return "test3";
 	}
 }
