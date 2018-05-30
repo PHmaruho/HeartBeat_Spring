@@ -6,6 +6,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.zero.heartbeat.model.Music;
+
 @Repository
 public class ActivityDaoImpl implements ActivityDao {
 	// Logger
@@ -13,5 +15,10 @@ public class ActivityDaoImpl implements ActivityDao {
 	
 	// SqlSession
 	@Autowired private SqlSession session;
+
+	@Override
+	public Music selectMusicDetail(int sq) {
+		return session.selectOne("selectMusicDetail", sq);
+	}
 
 }

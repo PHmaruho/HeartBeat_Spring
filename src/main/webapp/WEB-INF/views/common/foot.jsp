@@ -7,26 +7,31 @@
 		height: 80px;
 	}
 </style>
-<script src="//cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/2.0.5/wavesurfer.min.js"></script>
-<script type="text/javascript">
-	window.onload = function() {
-		var wavesurfer = WaveSurfer.create({
-		    container: '#waveform',
-		    waveColor: 'violet',
-		    progressColor: 'purple'
-		});
-		
-		wavesurfer.load('resources/music/Kalimba.mp3');
-	}
-</script>
+
 
 </head>
+
 <body>
-	<div class="foot">
-		foot
-		<audio id="audio" controls="controls"  src="resources/music/Kalimba.mp3" >
+<!-- 	<div class="foot">
+		<audio id="audio" controls="controls"  src="/resources/music/Kalimba.mp3" >
 		</audio>
-	</div>
-	
-	<div id="waveform"></div>
+	</div> -->
+<div id="waveform"></div>
+
+<p align="center">
+  <button class="btn btn-primary" onclick="wavesurfer.playPause()">
+    Play
+  </button>
+</p>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.2.3/wavesurfer.min.js"></script>
+<script type="text/javascript">
+var wavesurfer = WaveSurfer.create({
+	  container: '#waveform',
+	  waveColor: 'darkorange',
+	  progressColor: 'purple',
+	  height: 64
+	});
+
+	wavesurfer.load('https://wavesurfer-js.org/example/split-channels/stereo.mp3');
+</script>
 </body>

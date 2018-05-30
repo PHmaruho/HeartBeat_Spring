@@ -9,6 +9,7 @@ import com.zero.heartbeat.dao.ActivityDao;
 import com.zero.heartbeat.dao.CommonDao;
 import com.zero.heartbeat.dao.ExploreDao;
 import com.zero.heartbeat.dao.MemberDao;
+import com.zero.heartbeat.model.Music;
 
 @Service
 public class ActivityServiceImpl implements ActivityService {
@@ -20,4 +21,9 @@ public class ActivityServiceImpl implements ActivityService {
 	@Autowired private CommonDao commonDao;
 	@Autowired private ExploreDao exploreDao;
 	@Autowired private MemberDao memberDao;
+	
+	@Override
+	public Music selectMusicDetail(int sq) {
+		return activityDao.selectMusicDetail(sq);
+	}
 }
