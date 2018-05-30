@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.zero.heartbeat.model.Member;
 import com.zero.heartbeat.service.ActivityService;
 import com.zero.heartbeat.service.CommonService;
 import com.zero.heartbeat.service.ExploreService;
@@ -35,6 +36,14 @@ public class MemberController {
 	public String loginPro(Model model,String id,String pw) {
 		model.addAttribute("id",id);
 		model.addAttribute("pw",pw);
+		Member member = new Member();
+		member.setEmail(id);
+		member.setPw(pw);
+		Member member1 =  memberService.login(member);
+		if(member1.getEmail().length() == 0) {
+			model.addAttribute("email",member1.getEmail());
+			memberService.addSession(member1.getEmail());
+		}
 		return "member/loginPro";
 	}
 }

@@ -9,6 +9,7 @@ import com.zero.heartbeat.dao.ActivityDao;
 import com.zero.heartbeat.dao.CommonDao;
 import com.zero.heartbeat.dao.ExploreDao;
 import com.zero.heartbeat.dao.MemberDao;
+import com.zero.heartbeat.model.Member;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -20,4 +21,14 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired private CommonDao commonDao;
 	@Autowired private ExploreDao exploreDao;
 	@Autowired private MemberDao memberDao;
+	@Override
+	public Member login(Member member) {
+		// TODO Auto-generated method stub
+		return memberDao.login(member);
+	}
+	@Override
+	public void addSession(String email) {
+		// TODO Auto-generated method stub
+		
+	}
 }
