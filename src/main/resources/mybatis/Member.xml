@@ -4,6 +4,6 @@
 
 <mapper namespace="Member">
 	<select id="login" parameterType="Member" resultType="Member">
-		select * from member where email=#{email},pw=#{pw}
+		select * from member where email=#{email} and pw=#{pw}
 	</select>
 </mapper>

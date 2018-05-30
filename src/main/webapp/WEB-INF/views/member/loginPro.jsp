@@ -7,6 +7,6 @@
 </head>
 <body>
 333 
-${id }
+${email }
 <%=pw %>
 </body>

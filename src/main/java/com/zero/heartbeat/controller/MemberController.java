@@ -2,12 +2,16 @@ package com.zero.heartbeat.controller;
 
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zero.heartbeat.model.Member;
 import com.zero.heartbeat.service.ActivityService;
@@ -33,17 +37,21 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/loginPro")
-	public String loginPro(Model model,String id,String pw) {
-		model.addAttribute("id",id);
+	public String loginPro(Model model,String email,String pw,HttpSession session) {
+		String returnString = "";
+		model.addAttribute("email",email);
 		model.addAttribute("pw",pw);
 		Member member = new Member();
-		member.setEmail(id);
+		member.setEmail(email);
 		member.setPw(pw);
-		Member member1 =  memberService.login(member);
-		if(member1.getEmail().length() == 0) {
-			model.addAttribute("email",member1.getEmail());
-			memberService.addSession(member1.getEmail());
+		Member loginSession =  memberService.login(member);
+		if(loginSession !=null) {
+			session.setAttribute("loginSession", loginSession);
+			returnString =  "member/loginPro";
+		}else {
+			returnString = "member/loginForm";
 		}
-		return "member/loginPro";
+		return returnString;
 	}
+	
 }
