@@ -12,8 +12,38 @@
 		
 		<br />
 		
-		<div class="row" style="border:1px solid;">
-			
+		<div class="row h-50" style="border:1px solid;">
+			<div class="w-25" style="border:1px solid;">
+					<table border="1">
+						<tr>
+							<td colspan="2">
+								<img alt="Album_Image" src="#" id="album_img" name="img_path" class="img-thumbnail">
+							</td>
+							<td colspan="2">
+								<input type="file" class="btn" onclick="#" id="uploadAlbumImg">
+								<input type="button" class="btn" value="삭제" onclick="#" id="deleteAlbumImg">
+							</td>
+						</tr>
+						<tr>
+							<td>앨범명</td>
+							<td>
+								<input type="text" name="album_nm">
+							</td>
+						</tr>
+						<tr>
+							<td>설명</td>
+							<td>
+								<textarea rows="10" cols="2" name="album_comment"></textarea>
+							</td>
+						</tr>
+						
+					</table>
+			</div>
+			<div class="w-75" style="border:1px solid;">
+				<a href="/upload/music">
+					단일곡 등록하기
+				</a>
+			</div>
 		</div>
 	</div>
 </body>

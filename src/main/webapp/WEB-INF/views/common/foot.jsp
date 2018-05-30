@@ -16,7 +16,7 @@
 		    progressColor: 'purple'
 		});
 		
-		wavesurfer.load('resources/music/Kalimba.mp3');
+		wavesurfer.load('/resources/music/Kalimba.mp3');
 	}
 </script>
 
@@ -24,7 +24,7 @@
 <body>
 	<div class="foot">
 		foot
-		<audio id="audio" controls="controls"  src="resources/music/Kalimba.mp3" >
+		<audio id="audio" controls="controls"  src="/resources/music/Kalimba.mp3" >
 		</audio>
 	</div>
 	
