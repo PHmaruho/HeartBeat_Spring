@@ -1,9 +1,13 @@
 package com.zero.heartbeat.controller;
 
+import java.util.Locale;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.zero.heartbeat.service.ActivityService;
 import com.zero.heartbeat.service.CommonService;
@@ -20,4 +24,15 @@ public class MemberController {
 	@Autowired private CommonService commonService;
 	@Autowired private ExploreService exploreService;
 	@Autowired private MemberService memberService;
+	
+	@RequestMapping("loginForm")
+	public String loginForm(Model model, Locale locale) {
+		model.addAttribute("url","member/loginForm");
+		return "main";
+	}
+	
+	@RequestMapping("/loginPro")
+	public String loginPro(Model model,String id,String pw) {
+		return "main";
+	}
 }
