@@ -1,8 +1,8 @@
 package com.zero.heartbeat.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zero.heartbeat.service.ActivityService;
 import com.zero.heartbeat.service.CommonService;
@@ -28,10 +27,30 @@ public class CommonController {
 	@Autowired private ExploreService exploreService;
 	@Autowired private MemberService memberService;
 	
-	@RequestMapping("/main")
-	public String main(Locale locale, Model model) {
-		model.addAttribute("url", "common/home");
+	@RequestMapping("/")
+	public String main(Model model, HttpServletRequest request) {
+		String url = request.getAttribute("url") == null ? "/home" : request.getAttribute("url").toString();
+		String c = request.getAttribute("c") == null ? "" : request.getAttribute("c").toString();
+		c = url.equals("/home") ? "1" : c;
+		model.addAttribute("url", url);
+		model.addAttribute("c", c);
 		
 		return "main";
+	}
+	
+	@RequestMapping("/home")
+	public String home(Model model) {
+		return "common/home";
+	}
+	
+	@RequestMapping("/test2")
+	public String test2(Model model) {
+		return "test2";
+	}
+	
+	@RequestMapping("/test3")
+	public String test3(Model model) {
+		
+		return "test3";
 	}
 }
