@@ -1,10 +1,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <head>
-<%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%> 
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 </head>
 <body>
-	<form action="loginPro.do" method="post">
+	<form action="/loginPro" method="post">
 		<table>
 			<tr>
 				<td>이메일</td>

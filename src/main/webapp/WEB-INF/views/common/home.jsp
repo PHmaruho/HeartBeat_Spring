@@ -5,6 +5,7 @@
 <body>
 	<button onclick="goto('/test2')">to test2</button>
 	<button onclick="goto('/test3')">to test3</button>
+	<button onclick="goto('/loginForm')">to login</button>
 	<br>
 	스크롤 테스트11<br>
 	스크롤 테스트2<br>

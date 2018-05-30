@@ -25,14 +25,16 @@ public class MemberController {
 	@Autowired private ExploreService exploreService;
 	@Autowired private MemberService memberService;
 	
-	@RequestMapping("loginForm")
+	@RequestMapping("/loginForm")
 	public String loginForm(Model model, Locale locale) {
-		model.addAttribute("url","member/loginForm");
-		return "main";
+		
+		return "member/loginForm";
 	}
 	
 	@RequestMapping("/loginPro")
 	public String loginPro(Model model,String id,String pw) {
-		return "main";
+		model.addAttribute("id",id);
+		model.addAttribute("pw",pw);
+		return "member/loginPro";
 	}
 }
