@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Heart Beat</title>
+<link href="/resources/css/bootstrap.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 	.headDiv {
 		height: 80px;
@@ -52,6 +53,7 @@
 	<div class="footDiv">
 		<c:import url="common/foot.jsp"></c:import>
 	</div>
-<script src="<c:url value="/resources/js/main.js" />"></script>
+<script src="/resources/js/jquery.3.3.1.js"></script>
+<script src="/resources/js/main.js"></script>
 </body>
 </html>
