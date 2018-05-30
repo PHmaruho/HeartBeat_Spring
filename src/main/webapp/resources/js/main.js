@@ -24,6 +24,14 @@ function goto(link) {
 	}
 }
 
+function toform(link, id) {
+	var data = $(id).serialize();
+	
+	if (swapContent(link + "?r=1&" + data)) {
+		history.pushState(null, null, "http://localhost:8181" + link);
+	}
+}
+
 window.onload = function() {
 	if (!supports_history_api()) {
 		return;
