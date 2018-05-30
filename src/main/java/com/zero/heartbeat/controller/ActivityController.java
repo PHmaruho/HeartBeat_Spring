@@ -30,4 +30,18 @@ public class ActivityController {
 		
 		return "activity/my/upload";
 	}
+	
+	// uploadAlbum
+	@RequestMapping(value="/upload/album")
+	public String uploadAlbum(Model model) {
+		
+		return "activity/my/uploadAlbum";
+	}
+
+	// uploadMusic
+	@RequestMapping(value="/upload/music")
+	public String uploadMusic(Model model) {
+		
+		return "activity/my/uploadMusic";
+	}
 }
