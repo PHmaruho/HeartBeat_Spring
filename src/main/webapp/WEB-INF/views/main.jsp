@@ -55,5 +55,6 @@
 	</div>
 <script src="/resources/js/jquery.3.3.1.js"></script>
 <script src="/resources/js/main.js"></script>
+<script src="/resources/js/kihan.js"></script>
 </body>
 </html>
