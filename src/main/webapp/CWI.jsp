@@ -8,6 +8,6 @@
 </head>
 <body>
 	<a href="/heartbeat">홈페이지</a>
-	<a href="/others/music/302">음악상세</a>
+	<a href="/heartbeat/others/music/302">음악상세</a>
 </body>
 </html>

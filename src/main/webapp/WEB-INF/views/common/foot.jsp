@@ -12,26 +12,8 @@
 </head>
 
 <body>
-<!-- 	<div class="foot">
-		<audio id="audio" controls="controls"  src="/resources/music/Kalimba.mp3" >
+	<div class="foot">
+		<audio id="audio" controls="controls"  src="${pageContext.request.contextPath }/resources/music/Kalimba.mp3" >
 		</audio>
-	</div> -->
-<div id="waveform"></div>
-
-<p align="center">
-  <button class="btn btn-primary" onclick="wavesurfer.playPause()">
-    Play
-  </button>
-</p>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.2.3/wavesurfer.min.js"></script>
-<script type="text/javascript">
-var wavesurfer = WaveSurfer.create({
-	  container: '#waveform',
-	  waveColor: 'darkorange',
-	  progressColor: 'purple',
-	  height: 64
-	});
-
-	wavesurfer.load('https://wavesurfer-js.org/example/split-channels/stereo.mp3');
-</script>
+	</div>
 </body>

@@ -15,22 +15,48 @@
 		<audio id="audio" controls="controls"  src="/resources/music/Kalimba.mp3" >
 		</audio>
 	</div> -->
+	<img src="${pageContext.request.contextPath }/resources/img/album/${music.MUSIC_SQ }.png">
 	<div id="waveform"></div>
-
-	<p align="center">
-		<button onclick="wavesurferDetail.playPause()">Play</button>
-	</p>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.2.3/wavesurfer.min.js"></script>
-	<script type="text/javascript">
-		var wavesurferDetail = WaveSurfer.create({
-			container : '#waveform',
-			waveColor : 'darkorange',
-			progressColor : 'purple',
-			height : 64
-		});
+	<div id="progress"></div>
 	
-		wavesurferDetail.load("/resources/music/" + $('#music_sq').val() + ".mp3");
+	asd
+	<p align="center">
+		<button onclick="asdf()">Play</button>
+	</p>
+	
+	
+	
+	
+<script type="text/javascript">
+	var wavesurferDetail = WaveSurfer.create({
+		container : '#waveform',
+		waveColor : 'darkorange',
+		progressColor : 'purple',
+		barWidth : 3,
+		barHeight : 3,
+		height : 200,
+		responsive : true
+	});
+	
+	wavesurferDetail.load( "${pageContext.request.contextPath }" + "/resources/music/" + $('#music_sq').val() + ".mp3");
+	
+	function asdf() {
+		wavesurferDetail.playPause();
+		progress();
+	}
+	
+	function progress() {
+		$('#progress').html(wavesurferDetail.getCurrentTime());
 		
-	</script>
+		function frame() {
+			if (width >= 100) {
+				clearInterval(id);
+			} else {
+				width++;
+				elem.style.width = width + '%';
+			}
+		}
+	}
+</script>
 </body>
 

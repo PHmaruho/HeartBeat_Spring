@@ -29,10 +29,8 @@ public class ActivityController {
 	
 	@RequestMapping("/others/music/{sq}")
 	public String othersMusic(Model model, @PathVariable int sq) {
-		Music music = new Music();
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map = activityService.selectMusicDetail(sq);
-		logger.info(map.toString());
 		
 		model.addAttribute("music", map);
 		return "activity/others/music";
