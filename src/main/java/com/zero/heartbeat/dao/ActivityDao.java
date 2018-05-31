@@ -1,5 +1,10 @@
 package com.zero.heartbeat.dao;
 
-public interface ActivityDao {
+import java.util.List;
 
+import com.zero.heartbeat.model.Code;
+
+public interface ActivityDao {
+	// PHmaruho
+	public List<Code> selectAlbumType();
 }

@@ -8,7 +8,7 @@
 </head>
 <body>
 <script type="text/javascript">
-	location.href="/upload";
+	location.href="/";
 </script>
 </body>
 </html>

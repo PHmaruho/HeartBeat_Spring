@@ -3,5 +3,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Activity">
-
+	<!-- PHmaruho -->
+	<select id="selectAlbumType" resultType="Code">
+		SELECT *
+		FROM code
+		WHERE CODE_CATEGORY = 'AT'
+	</select>
 </mapper>
