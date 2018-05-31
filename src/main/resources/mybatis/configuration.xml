@@ -5,7 +5,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias alias="Album" type="com.zero.heartbeat.model.Album" />
-		<typeAlias alias="Alram" type="com.zero.heartbeat.model.Alram" />
+		<typeAlias alias="Alarm" type="com.zero.heartbeat.model.Alarm" />
 		<typeAlias alias="Artist" type="com.zero.heartbeat.model.Artist" />
 		<typeAlias alias="Code" type="com.zero.heartbeat.model.Code" />
 		<typeAlias alias="Follow" type="com.zero.heartbeat.model.Follow" />

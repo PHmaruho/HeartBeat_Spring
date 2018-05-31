@@ -31,14 +31,19 @@ public class CommonController {
 	@Autowired private CommonService commonService;
 	@Autowired private ExploreService exploreService;
 	@Autowired private MemberService memberService;
-	
-	@RequestMapping("/")
+	 
+	// 최우일
+	@RequestMapping("/")	
 	public String main(Model model, HttpServletRequest request) {
 		String url = request.getAttribute("url") == null ? "/home" : request.getAttribute("url").toString();
 		String c = request.getAttribute("c") == null ? "" : request.getAttribute("c").toString();
 		c = url.equals("/home") ? "1" : c;
+		
+		String str[] = this.getClass().getPackage().toString().split("\\.");
+		
 		model.addAttribute("url", url);
 		model.addAttribute("c", c);
+		model.addAttribute("packageName", str[2]);
 		
 		return "main";
 	}

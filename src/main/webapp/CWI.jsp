@@ -8,7 +8,7 @@
 </head>
 <body>
 <script type="text/javascript">
-	location.href="/";
+	location.href="/heartbeat";
 </script>
 </body>
 </html>
