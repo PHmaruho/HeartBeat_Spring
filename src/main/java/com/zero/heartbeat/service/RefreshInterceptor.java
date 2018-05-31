@@ -13,10 +13,13 @@ public class RefreshInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		
+		Boolean check = request.getRequestURI().contains("/do/");
 		String r = request.getParameter("r") == null ? "" : request.getParameter("r");
 		String c = request.getParameter("c") == null ? "" : request.getParameter("c");
 		
+		if(check) {
+			return true;
+		}
 		if (!r.equals("1") || r == "") {
 			if (!c.equals("1") || c == "") {
 				request.setAttribute("url", request.getRequestURI().replace("/heartbeat", ""));

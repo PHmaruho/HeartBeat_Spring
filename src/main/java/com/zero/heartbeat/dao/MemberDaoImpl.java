@@ -17,8 +17,15 @@ public class MemberDaoImpl implements MemberDao {
 	@Autowired private SqlSession session;
 
 	@Override
-	public Member login(Member member) {
+	public int login(Member member) {
 		// TODO Auto-generated method stub
 		return session.selectOne("login",member);
 	}
+
+	@Override
+	public int loginRest(Member member) {
+		// TODO Auto-generated method stub
+		return session.selectOne("loginRest",member);
+	}
+
 }

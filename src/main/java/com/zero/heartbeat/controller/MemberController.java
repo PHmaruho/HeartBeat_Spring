@@ -36,7 +36,7 @@ public class MemberController {
 		return "member/loginForm";
 	}
 	
-	@RequestMapping("/loginPro")
+	@RequestMapping(value="/loginPro",method=RequestMethod.POST)
 	public String loginPro(Model model,String email,String pw,HttpSession session) {
 		System.out.println("membercontroller loginPro");
 		String returnString = "";
@@ -45,14 +45,15 @@ public class MemberController {
 		Member member = new Member();
 		member.setEmail(email);
 		member.setPw(pw);
-		Member loginSession =  memberService.login(member);
-		if(loginSession !=null) {
+		System.out.println(member.getEmail());
+		System.out.println(member.getPw());
+		int loginSession =  memberService.login(member);
+		if(loginSession != 0) {
 			session.setAttribute("loginSession", loginSession);
 			returnString =  "member/loginPro";
 		}else {
 			returnString = "member/loginForm";
 		}
 		return returnString;
-	}
-	
+	}	
 }

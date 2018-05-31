@@ -4,8 +4,11 @@ import com.zero.heartbeat.model.Member;
 
 public interface MemberService {
 
-	Member login(Member member);
+	int login(Member member);
 
 	void addSession(String email);
+
+	int loginRest(Member member);
+
 
 }

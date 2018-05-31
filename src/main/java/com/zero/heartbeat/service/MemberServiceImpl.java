@@ -23,7 +23,7 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired private MemberDao memberDao;
 	
 	@Override
-	public Member login(Member member) {
+	public int login(Member member) {
 		// TODO Auto-generated method stub
 		return memberDao.login(member);
 	}
@@ -32,4 +32,10 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public int loginRest(Member member) {
+		// TODO Auto-generated method stub
+		return memberDao.loginRest(member);
+	}
+
 }
