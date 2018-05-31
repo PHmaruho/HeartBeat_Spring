@@ -19,7 +19,8 @@ public class RefreshInterceptor extends HandlerInterceptorAdapter {
 		
 		if (!r.equals("1") || r == "") {
 			if (!c.equals("1") || c == "") {
-				request.setAttribute("url", request.getRequestURI());
+				request.setAttribute("url", request.getRequestURI().replace("/heartbeat", ""));
+				logger.info(request.getRequestURI());
 				request.setAttribute("c", "1");
 				request.getRequestDispatcher("/").forward(request, response);
 				return false;
