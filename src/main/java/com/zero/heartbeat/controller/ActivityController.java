@@ -1,5 +1,7 @@
 package com.zero.heartbeat.controller;
 
+import java.util.HashMap;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +30,11 @@ public class ActivityController {
 	@RequestMapping("/others/music/{sq}")
 	public String othersMusic(Model model, @PathVariable int sq) {
 		Music music = new Music();
-		music = activityService.selectMusicDetail(sq);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map = activityService.selectMusicDetail(sq);
+		logger.info(map.toString());
 		
-		model.addAttribute("music", music);
+		model.addAttribute("music", map);
 		return "activity/others/music";
 	}
 

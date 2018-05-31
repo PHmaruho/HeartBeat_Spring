@@ -1,5 +1,7 @@
 package com.zero.heartbeat.dao;
 
+import java.util.HashMap;
+
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +19,7 @@ public class ActivityDaoImpl implements ActivityDao {
 	@Autowired private SqlSession session;
 
 	@Override
-	public Music selectMusicDetail(int sq) {
+	public HashMap<String, Object> selectMusicDetail(int sq) {
 		return session.selectOne("selectMusicDetail", sq);
 	}
 

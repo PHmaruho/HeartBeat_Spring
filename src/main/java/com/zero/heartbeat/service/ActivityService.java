@@ -1,9 +1,11 @@
 package com.zero.heartbeat.service;
 
+import java.util.HashMap;
+
 import com.zero.heartbeat.model.Music;
 
 public interface ActivityService {
 
-	Music selectMusicDetail(int sq);
+	HashMap<String, Object> selectMusicDetail(int sq);
 
 }

@@ -1,5 +1,7 @@
 package com.zero.heartbeat.service;
 
+import java.util.HashMap;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,7 @@ public class ActivityServiceImpl implements ActivityService {
 	@Autowired private MemberDao memberDao;
 	
 	@Override
-	public Music selectMusicDetail(int sq) {
+	public HashMap<String, Object> selectMusicDetail(int sq) {
 		return activityDao.selectMusicDetail(sq);
 	}
 }
