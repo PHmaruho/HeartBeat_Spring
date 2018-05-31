@@ -29,7 +29,16 @@
 			<c:forEach var="album" items="${list }" varStatus="i">
 				<table border="1">
 						<tr>
-							<td><a href="/detail/${album.music_sq}">
+							<td><a href="/others/music/${album.music_sq}">
+							
+							
+							
+							
+							
+							
+							
+							
+							
 								<input type="text" id="music_sq${i.index }" name="music_sq${i.index }" value="${album.music_sq}">
 								${album.img_path }: 
 								<img src="resources/${album.img_path }.jpg"></a></td>
