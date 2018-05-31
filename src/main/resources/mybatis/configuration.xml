@@ -16,6 +16,8 @@
 		<typeAlias alias="Tag" type="com.zero.heartbeat.model.Tag" />
 		<typeAlias alias="Member" type="com.zero.heartbeat.model.Member" />
 		<typeAlias alias="Playlist" type="com.zero.heartbeat.model.Playlist" />
+		<typeAlias alias="MainList" type="com.zero.heartbeat.model.MainList" />
+		<typeAlias alias="SearchList" type="com.zero.heartbeat.model.SearchList" />
 	</typeAliases>
 	
 	<mappers>
