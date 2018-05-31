@@ -38,6 +38,7 @@ public class MemberController {
 	
 	@RequestMapping("/loginPro")
 	public String loginPro(Model model,String email,String pw,HttpSession session) {
+		System.out.println("membercontroller loginPro");
 		String returnString = "";
 		model.addAttribute("email",email);
 		model.addAttribute("pw",pw);

@@ -24,17 +24,19 @@ public class MemberRestController {
 	@Autowired private ExploreService exploreService;
 	@Autowired private MemberService memberService;
 	
-	@RequestMapping("/login")
+	@RequestMapping("/login1")
 	public Member login(String email,String pw) {
 		logger.info("들어옴");
 		logger.info(email + " / " + pw);
-		Member member = new Member();
+		System.out.println("RestController login start");
+		/*Member member = new Member();
 		member.setEmail(email);
 		member.setPw(pw);
+		System.out.println("RestController login member 전");
 		
 		member = memberService.login(member);
+		System.out.println("RestController login member 후");*/
 		
-/*		return member;*/
 		return null;
 	}
 }
