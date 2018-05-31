@@ -70,6 +70,12 @@ public class CommonController {
 		list= commonService.selectAlbumMainList(startNum);
 		model.addAttribute("list", list);
 		logger.info("CommonController selectAlbumMainList working");
-		return "common/list";
+		return "common/mainList";
+	}
+	
+	@RequestMapping("/mainListShare")
+	public void mainListShare(Model model,String music_sq) {
+		logger.info(music_sq);
+		
 	}
 }
