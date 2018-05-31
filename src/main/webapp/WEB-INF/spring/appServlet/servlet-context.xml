@@ -23,13 +23,14 @@
 	
 	<context:component-scan base-package="com.zero.heartbeat" />
 	
-	<beans:bean id="RefreshInterceptor" class="com.zero.heartbeat.service.RefreshInterceptor"/>
+	<beans:bean id="RefreshInterceptor" class="com.zero.heartbeat.interceptor.RefreshInterceptor"/>
 	<interceptors>
 		<interceptor>
 			<mapping path="/**"/>
 			<exclude-mapping path="/"/>
 			<exclude-mapping path="/head"/>
 			<exclude-mapping path="/foot"/>
+			<exclude-mapping path="/do/**"/>
 			
 			<exclude-mapping path="/resources/**"/>
 			<beans:ref bean="RefreshInterceptor"/>

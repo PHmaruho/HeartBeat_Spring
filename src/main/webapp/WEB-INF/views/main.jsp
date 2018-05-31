@@ -38,6 +38,7 @@
 </style>
 </head>
 <body>
+con : ${pageContext.request.contextPath }
 	<div class="headDiv">
 		<c:import url="common/head.jsp"></c:import>
 	</div>
