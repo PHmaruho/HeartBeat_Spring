@@ -16,47 +16,53 @@
 		</audio>
 	</div> -->
 	<img src="${pageContext.request.contextPath }/resources/img/album/${music.MUSIC_SQ }.png">
-	<div id="waveform"></div>
-	<div id="progress"></div>
+	<div id="detailWaveform"></div>
+	<span id="detailProgress"></span>
+	<span id="detailDuration"></span>
 	
-	asd
+	asda1
 	<p align="center">
-		<button onclick="asdf()">Play</button>
+		<button onclick="wavesurferDetail.playPause()">Play</button>
 	</p>
+	<input id="detailVoulume" type="range" min="0.0" max="1.0" step="0.01" value="0.5"
+		oninput="wavesurferDetail.setVolume(this.value)" onchange="wavesurferDetail.setVolume(this.value)">
 	
 	
 	
 	
 <script type="text/javascript">
-	var wavesurferDetail = WaveSurfer.create({
-		container : '#waveform',
+	var wavesurferDetail
+	
+	function initDetail() {
+		wavesurferDetail = WaveSurfer.create({
+		container : '#detailWaveform',
 		waveColor : 'darkorange',
 		progressColor : 'purple',
 		barWidth : 3,
 		barHeight : 3,
 		height : 200,
-		responsive : true
-	});
-	
-	wavesurferDetail.load( "${pageContext.request.contextPath }" + "/resources/music/" + $('#music_sq').val() + ".mp3");
-	
-	function asdf() {
-		wavesurferDetail.playPause();
-		progress();
-	}
-	
-	function progress() {
-		$('#progress').html(wavesurferDetail.getCurrentTime());
+		});
 		
-		function frame() {
-			if (width >= 100) {
-				clearInterval(id);
-			} else {
-				width++;
-				elem.style.width = width + '%';
-			}
-		}
+		wavesurferDetail.load( "${pageContext.request.contextPath }" + "/resources/music/" + $('#music_sq').val() + ".mp3");
 	}
+	
+	initDetail();
+	
+	
+	var formatTime = function (time) {
+	    return [
+	        Math.floor((time % 3600) / 60), // minutes
+	        ('00' + Math.floor(time % 60)).slice(-2) // seconds
+	    ].join(':');
+	};
+
+	wavesurferDetail.on('audioprocess', function () {
+	    $('#detailProgress').text( formatTime(wavesurferDetail.getCurrentTime()) );
+	});
+
+	wavesurferDetail.on('ready', function () {
+	    $('#detailDuration').text( formatTime(wavesurferDetail.getDuration()) );
+	});
 </script>
 </body>
 

@@ -7,7 +7,7 @@
 <title>Heart Beat</title>
 <link href="${pageContext.request.contextPath }/resources/css/bootstrap.css" rel="stylesheet" type="text/css">
 <script src="${pageContext.request.contextPath }/resources/js/jquery.3.3.1.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/2.0.5/wavesurfer.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/wavesurfer.js"></script>
 <style type="text/css">
 	.headDiv {
 		height: 80px;
@@ -34,6 +34,7 @@
 		width: 100%;
 		position: fixed;
 		bottom: 0px;
+		z-index: 999;
 	}
 </style>
 </head>
