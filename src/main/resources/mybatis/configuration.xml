@@ -18,6 +18,7 @@
 		<typeAlias alias="Playlist" type="com.zero.heartbeat.model.Playlist" />
 		<typeAlias alias="MainList" type="com.zero.heartbeat.model.MainList" />
 		<typeAlias alias="SearchList" type="com.zero.heartbeat.model.SearchList" />
+		<typeAlias alias="SearchKeyword" type="com.zero.heartbeat.model.SearchKeyword" />
 	</typeAliases>
 	
 	<mappers>

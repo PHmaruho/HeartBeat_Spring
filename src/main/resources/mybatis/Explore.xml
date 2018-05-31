@@ -3,5 +3,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Explore">
-
+	
+	<select id="selectAllSearchList" parameterType="java.util.ArrayList" resultType="searchList">
+		<foreach collection="searchKeyword"
+	</select>
 </mapper>

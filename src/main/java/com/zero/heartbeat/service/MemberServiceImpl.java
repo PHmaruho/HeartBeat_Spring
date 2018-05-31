@@ -20,4 +20,11 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired private CommonDao commonDao;
 	@Autowired private ExploreDao exploreDao;
 	@Autowired private MemberDao memberDao;
+	
+	// JSY
+	public void insertAlarmShareMusic(String id,String music_sq) {
+		memberDao.insertAlarmShareMusic(id,music_sq);
+		logger.info("MemberServiceImpl mainListShare working");
+		
+	}
 }

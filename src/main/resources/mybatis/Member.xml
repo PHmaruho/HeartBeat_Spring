@@ -4,4 +4,7 @@
 
 <mapper namespace="Member">
 
+	<insert id="insertAlarmShareMusic" parameterType="hashmap">
+		insert into alram values(alarm_sq.nextval,#{id},#{music_sq},'Music','N')
+	</insert>
 </mapper>

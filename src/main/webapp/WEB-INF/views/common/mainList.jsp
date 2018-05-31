@@ -13,9 +13,18 @@
 </style>
 <script type="text/javascript">
 	function mainListShare(str){
-		var e='music_sq'+str;
-		var music=document.getElementById(e).value.trim();
+		var mainList_id='music_sq'+str;
+		var mainList_value=document.getElementById(mainList_id).value.trim();
 		
+		$.ajax({
+			url:'/do/mainListShare',
+			data:{
+				music_sq:mainList_value
+				},
+			success:function(data){
+				alert('공유되었습니다.');
+			}
+		});
 	}
 </script>
 </head>
@@ -29,29 +38,22 @@
 			<c:forEach var="album" items="${list }" varStatus="i">
 				<table border="1">
 						<tr>
-							<td><a href="/others/music/${album.music_sq}">
-							
-							
-							
-							
-							
-							
-							
-							
-							
-								<input type="text" id="music_sq${i.index }" name="music_sq${i.index }" value="${album.music_sq}">
-								${album.img_path }: 
+							<td colspan="2"><a href="/others/music/${album.music_sq}">
+								<input type="hidden" id="music_sq${i.index }" name="music_sq${i.index }" value="${album.music_sq}">
 								<img src="resources/${album.img_path }.jpg"></a></td>
 						</tr>
 						
 						<tr>
 							<td>album.music_nm: ${album.music_nm }</td>
+						</tr>
+						
+						<tr>
 							<td>album.music_sq: ${album.music_sq }</td>
 						</tr>
 						
 						<tr>
-							<td>music_like: ${album.music_like }</td>
-							<td><input type="button" value="공유" onclick="mainListShare(${i.index})">
+							<td colspan="2">music_like: ${album.music_like }
+							<input type="button" value="공유" onclick="mainListShare(${i.index})"></td>
 						</tr>
 						
 				</table>

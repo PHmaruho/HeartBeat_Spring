@@ -1,5 +1,7 @@
 package com.zero.heartbeat.dao;
 
+import java.util.HashMap;
+
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,4 +15,12 @@ public class MemberDaoImpl implements MemberDao {
 	
 	// SqlSession
 	@Autowired private SqlSession session;
+
+	//JSY
+	public void insertAlarmShareMusic(String id,String music_sq) {
+		HashMap<String,Object> map=new HashMap<String,Object>();
+		map.put("id", id);
+		map.put("music_sq", music_sq);
+		session.insert("insertAlarmShareMusic", map);
+	}
 }
