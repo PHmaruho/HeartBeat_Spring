@@ -55,8 +55,6 @@ public class CommonController {
 	
 	@RequestMapping("/test3")
 	public String test3(Model model, String txt, String pw) {
-		logger.info(txt);
-		logger.info(pw);
 		
 		return "test3";
 	}

@@ -5,7 +5,7 @@
 <body>
 	<button onclick="goto('/test2')">to test2</button>
 	<button onclick="goto('/test3')">to test3</button>
-	<a href="/others/music/302">음악상세</a>
+	<button onclick="goto('/others/music/302')">음악상세</button>
 	<form id="form">
 		<input type="text" name="txt">
 		<input type="password" name="pw">

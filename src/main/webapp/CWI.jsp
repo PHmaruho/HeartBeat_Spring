@@ -7,7 +7,7 @@
 <title>Heart Beat</title>
 </head>
 <body>
-	<a href="/">홈페이지</a>
+	<a href="/heartbeat">홈페이지</a>
 	<a href="/others/music/302">음악상세</a>
 </body>
 </html>
