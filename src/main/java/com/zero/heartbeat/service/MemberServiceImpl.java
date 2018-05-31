@@ -21,6 +21,7 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired private CommonDao commonDao;
 	@Autowired private ExploreDao exploreDao;
 	@Autowired private MemberDao memberDao;
+	
 	@Override
 	public Member login(Member member) {
 		// TODO Auto-generated method stub
