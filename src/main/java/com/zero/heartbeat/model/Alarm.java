@@ -1,17 +1,17 @@
 package com.zero.heartbeat.model;
 
-public class Alram {
-	private int			alram_sq;
+public class Alarm {
+	private int			alarm_sq;
 	private int			member_sq;
 	private int			target_sq;
-	private String		alram_type;
+	private String		alarm_type;
 	private String		status;
 	
-	public int getAlram_sq() {
-		return alram_sq;
+	public int getAlarm_sq() {
+		return alarm_sq;
 	}
-	public void setAlram_sq(int alram_sq) {
-		this.alram_sq = alram_sq;
+	public void setAlarm_sq(int alarm_sq) {
+		this.alarm_sq = alarm_sq;
 	}
 	public int getMember_sq() {
 		return member_sq;
@@ -25,11 +25,11 @@ public class Alram {
 	public void setTarget_sq(int target_sq) {
 		this.target_sq = target_sq;
 	}
-	public String getAlram_type() {
-		return alram_type;
+	public String getAlarm_type() {
+		return alarm_type;
 	}
-	public void setAlram_type(String alram_type) {
-		this.alram_type = alram_type;
+	public void setAlarm_type(String alarm_type) {
+		this.alarm_type = alarm_type;
 	}
 	public String getStatus() {
 		return status;

@@ -5,7 +5,8 @@
 <html>
 <head>
 <title>Heart Beat</title>
-<link href="/resources/css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="resources/css/bootstrap.css" rel="stylesheet" type="text/css">
+<script src="resources/js/jquery.3.3.1.js"></script>
 <style type="text/css">
 	.headDiv {
 		height: 80px;
@@ -53,8 +54,9 @@
 	<div class="footDiv">
 		<c:import url="common/foot.jsp"></c:import>
 	</div>
-<script src="/resources/js/jquery.3.3.1.js"></script>
-<script src="/resources/js/main.js"></script>
+	
+	<input type="hidden" value="${packageName }" id="packageName">
+	<script src="resources/js/main.js"></script>
 <script src="/resources/js/kihan.js"></script>
 </body>
 </html>
