@@ -5,8 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Heart Beat</title>
-<link href="resources/css/bootstrap.css" rel="stylesheet" type="text/css">
-<script src="resources/js/jquery.3.3.1.js"></script>
+<link href="${pageContext.request.contextPath }/resources/css/bootstrap.css" rel="stylesheet" type="text/css">
+<script src="${pageContext.request.contextPath }/resources/js/jquery.3.3.1.js"></script>
+
 <style type="text/css">
 	.headDiv {
 		height: 80px;
@@ -37,6 +38,7 @@
 </style>
 </head>
 <body>
+con : ${pageContext.request.contextPath }
 	<div class="headDiv">
 		<c:import url="common/head.jsp"></c:import>
 	</div>
@@ -56,6 +58,6 @@
 	</div>
 	
 	<input type="hidden" value="${packageName }" id="packageName">
-	<script src="resources/js/main.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/js/main.js"></script>
 </body>
 </html>
