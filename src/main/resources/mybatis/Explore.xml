@@ -4,7 +4,49 @@
 
 <mapper namespace="Explore">
 	
-	<select id="selectAllSearchList" parameterType="java.util.ArrayList" resultType="searchList">
-		<foreach collection="searchKeyword"
+	<select id="selectAllSearchList" parameterType="SearchKeyword" resultType="SearchList">
+	
+	<!-- select nick from member where nick=
+		<foreach collection="code_list" item="aArtist" open="" close="" separator=" ,">
+						#{aArtist}
+		</foreach> -->
+	
+
+	select * from
+	(select alb.img_path, alb.album_nm, alb.release_dt
+			,mus.album_sq, mus.music_sq, mus.music_nm, mus.music_no
+			, mus.music_like, mus.music_share
+			,mem.nick
+	from 	music mus, album alb,artist art,member mem
+			where mus.album_sq=alb.album_sq and alb.open_yn=mus.open_yn
+			and alb.open_yn='Y' and art.member_sq=mem.member_sq
+				<if test="arrArtist.size()!=0 || arrArtist!=null">
+				and nick=
+				<foreach collection="arrArtist" item="aArtist" open="" close="" separator=" and nick=">
+					#{aArtist}
+				</foreach>
+				
+				<if test="arrTitle.size()!=0 || arrTitle!=null">
+				and music_nm=
+				<foreach collection="arrTitle" item="aTitle" open="" close="" separator=" and music_nm=">
+					#{aTitle}
+				</foreach>
+			)
+	join
+			(select distinct music_sq from music_tag mt, tag t
+				where mt.tag_cd=t.tag_cd 
+				
+				<if test="arrTag.size()!=0|| arrTag!=null">
+				and t.tag_meaning=
+				<foreach collection="arrTag" item="aTag" open="" close="" separator=" and t.tag_meaning=">
+					#{aTag}
+				</foreach>
+				)
+				using (music_sq)
+				</if>
+				</if>
+	</if>	
 	</select>
+	
+	
 </mapper>

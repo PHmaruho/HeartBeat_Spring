@@ -98,7 +98,7 @@ function searchList(){
 	alert('keyword: '+keyword);
 	$.ajax({
 		type:'POST',
-		url:'/do/discover/list',
+		url:'/heartbeat/do/discoverList',
 		data:{
 				val:keyword
 			},
@@ -131,6 +131,7 @@ function searchList(){
 	</div>
 	
 	<div id="keywordList">
+		div id="keywordList"<Br>
 		
 	</div>
 </body>

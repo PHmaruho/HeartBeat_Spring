@@ -12,7 +12,7 @@
 	//location.href="/mainList";
 	
 	/* Search Page */
-	location.href="/discover";
+	location.href="/heartbeat/discover";
 </script>
 </body>
 </html>

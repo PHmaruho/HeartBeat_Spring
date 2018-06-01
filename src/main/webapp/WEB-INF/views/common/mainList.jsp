@@ -21,7 +21,7 @@
 			data:{
 				music_sq:mainList_value
 				},
-			success:function(data){
+			success:function(){
 				alert('공유되었습니다.');
 			}
 		});

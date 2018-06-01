@@ -1,7 +1,9 @@
 package com.zero.heartbeat.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -21,7 +23,15 @@ public class ExploreDaoImpl implements ExploreDao {
 	@Autowired private SqlSession session;
 
 	// JSY
-	public ArrayList<SearchList> selectAllSearchList(SearchKeyword dto) {
-		return session.select
+	public List<SearchList> selectAllSearchList(SearchKeyword dto) {
+		logger.info("ExploreDaoImpl selectAllSearchList working");
+	//	  Map<String, Object> param = new HashMap<String, Object>();
+	//	  param.put("id", "1"); //#{id}에 셋팅
+	//	  param.put("name", "victor"); //#{name}에 셋팅
+	//	  List<String> arrTag = new ArrayList<String>();
+	//	  arrTag.add("@nick5"); //in 조건에 넣을 정보
+	//	  param.put("code_list", arrTag); //map에 list를 넣는다.
+		  
+		return session.selectList("selectAllSearchList",dto);
 	}
 }

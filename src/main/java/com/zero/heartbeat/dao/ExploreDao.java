@@ -1,6 +1,7 @@
 package com.zero.heartbeat.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.zero.heartbeat.model.SearchKeyword;
 import com.zero.heartbeat.model.SearchList;
@@ -8,6 +9,6 @@ import com.zero.heartbeat.model.SearchList;
 public interface ExploreDao {
 
 	// JSY
-	ArrayList<SearchList> selectAllSearchList(SearchKeyword dto);
+	List<SearchList> selectAllSearchList(SearchKeyword dto);
 
 }

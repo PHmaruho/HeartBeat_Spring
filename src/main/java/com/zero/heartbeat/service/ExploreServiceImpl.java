@@ -1,6 +1,7 @@
 package com.zero.heartbeat.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,8 +27,9 @@ public class ExploreServiceImpl implements ExploreService {
 	@Autowired private MemberDao memberDao;
 	
 	// JSY
-	public ArrayList<SearchList> selectAllSearchList(SearchKeyword dto) {
-		ArrayList<SearchList> list= exploreDao.selectAllSearchList(dto);
+	public List<SearchList> selectAllSearchList(SearchKeyword dto) {
+		List<SearchList> list= exploreDao.selectAllSearchList(dto);
+		logger.info("ExploreServiceImpl selectAllSearchList working");
 		return list;
 	}
 }

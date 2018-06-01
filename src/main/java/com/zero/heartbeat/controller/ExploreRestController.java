@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.zero.heartbeat.model.SearchKeyword;
 import com.zero.heartbeat.model.SearchList;
@@ -30,36 +31,46 @@ public class ExploreRestController {
 	@Autowired private MemberService memberService;
 	
 	//JSY
-	@RequestMapping("/discover/list")
-	public void selectAllSearchList(Model model,String val) {
-		ArrayList<Object> tag= new ArrayList<Object>(); 
-		ArrayList<Object> artist= new ArrayList<Object>(); 
-		ArrayList<Object> title= new ArrayList<Object>(); 
-
+	@RequestMapping("/discoverList")
+	public ModelAndView selectAllSearchList(String val) {
+		ArrayList<String> tag= new ArrayList<String>(); 
+		ArrayList<String> artist= new ArrayList<String>(); 
+		ArrayList<String> title= new ArrayList<String>(); 
+		ModelAndView model= new ModelAndView();
+		
 		SearchKeyword dto=new SearchKeyword();
 		String[] arr1=val.split(" ");
 
 		for(String s:arr1) {
 			if(s.contains("#")) {
-				tag.add(s);
-				logger.info("#Tag: "+s);
+				String[] splitTag=s.split("#");
+				tag.add(splitTag[1]);
+				logger.info("#Tag: "+splitTag[1]);
 			}
 			else if(s.contains("@")) {
-				artist.add(s);
-				logger.info("@Artist: "+s);
+				String[] splitArtist=s.split("@");
+				artist.add(splitArtist[1]);
+				logger.info("@Artist: "+splitArtist[1]);
 			}
 			else if(s.contains("*")) {
-				title.add(s);
-				logger.info("*Title: "+s);
+				String[] splitTitle=s.split("\\*");
+				title.add(splitTitle[1]);
+				logger.info("*Title: "+splitTitle[1]);
 			}
+			
+			else if(tag.isEmpty()|| tag.size()==0){tag=null;}
+			else if(artist.isEmpty()|| artist.size()==0){artist=null;}
+			else if(title.isEmpty()|| title.size()==0){title=null;}
 			dto.setArrTag(tag);
 			dto.setArrArtist(artist);
 			dto.setArrTitle(title);
 		}
-		ArrayList<SearchList> discoverList= exploreService.selectAllSearchList(dto);
-		model.addAttribute("discoverList", discoverList);
-		logger.info("ExploreRestController searchKeywordList working");
-		return "explore/discover";
+		List<SearchList> discoverList= new ArrayList<SearchList>();
+		discoverList= exploreService.selectAllSearchList(dto);
+		model.addObject("discoverList", discoverList);
+		model.setViewName("explore/discoverList");
+		logger.info("ExploreRestController selectAllSearchList working");
+		return model;
 	}
 	
 }
