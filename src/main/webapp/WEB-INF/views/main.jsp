@@ -41,7 +41,7 @@
 <body>
 con : ${pageContext.request.contextPath }
 	<div class="headDiv">
-		<c:import url="common/head.jsp"></c:import>
+		<c:import url="/head"></c:import>
 	</div>
 	
 	<div class="contentWrap">
@@ -55,7 +55,7 @@ con : ${pageContext.request.contextPath }
 	</div>
 	
 	<div class="footDiv">
-		<c:import url="common/foot.jsp"></c:import>
+		<c:import url="/foot"></c:import>
 	</div>
 	
 	<input type="hidden" value="${packageName }" id="packageName">

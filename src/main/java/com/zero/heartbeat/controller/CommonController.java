@@ -55,7 +55,16 @@ public class CommonController {
 	
 	@RequestMapping("/test3")
 	public String test3(Model model, String txt, String pw) {
-		
 		return "test3";
+	}
+	
+	@RequestMapping("/head")
+	public String head(Model model) {
+		return "common/head";
+	}
+	
+	@RequestMapping("/foot")
+	public String foot(Model model) {
+		return "common/foot";
 	}
 }
