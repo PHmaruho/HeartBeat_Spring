@@ -9,23 +9,28 @@ System.out.println("context-->"+context);
 	System.out.println("login context-->" + context);
 %>
 <head>
-
 </head>
 <body>
-	<form action="/heartbeat/loginPro" method="post" onsubmit="return kkhcheck()">
-		<!-- <form action="/heartbeat/loginPro" method="post"> -->
+	<form action="/heartbeat/loginPro" method="post" id="kkhform">
 		<table>
 			<tr>
 				<td>이메일</td>
-				<td><input type="text" id="email" name="email" required="required"></td>
+				<td><input type="text" id="email" name="email"
+					required="required"></td>
+					<td>
+						<span id="email_msg"></span>
+					</td>
 			</tr>
 			<tr>
 				<td>비밀번호</td>
-				<td><input type="password" id="pw" name="pw" required="required"></td>
+				<td><input type="password" id="pw" name="pw"
+					required="required"></td>
 			</tr>
 			<tr>
 				<td colspan="2"><input type="button" value="취소"> <input
-					type="submit" value="로그인"></td>
+					type="button" value="로그인" onclick="kkhcheck()">
+					<input type="button" value="회원가입" onclick="location.href='/heartbeat/joinForm'">
+					</td>
 			</tr>
 			<tr>
 				<td colspan="2"><span id="msg"></span></td>

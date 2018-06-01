@@ -8,7 +8,11 @@ public interface MemberService {
 
 	void addSession(String email);
 
-	int loginRest(Member member);
+	Member loginRest(Member member);
+
+	int emailCheck(String email);
+
+	/*void join(Member member);*/
 
 
 }

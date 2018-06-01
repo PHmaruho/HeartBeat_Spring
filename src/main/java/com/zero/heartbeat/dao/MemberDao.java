@@ -6,7 +6,11 @@ public interface MemberDao {
 
 	int login(Member member);
 
-	int loginRest(Member member);
+	Member loginRest(Member member);
+
+	int emailCheck(String email);
+
+	/*void join(Member member);*/
 
 	
 

@@ -23,9 +23,21 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public int loginRest(Member member) {
+	public Member loginRest(Member member) {
 		// TODO Auto-generated method stub
 		return session.selectOne("loginRest",member);
 	}
+
+	@Override
+	public int emailCheck(String email) {
+		// TODO Auto-generated method stub
+		return session.selectOne("emailCheck",email);
+	}
+
+/*	@Override
+	public void join(Member member) {
+		// TODO Auto-generated method stub
+		session.insert("join",member);
+	}*/
 
 }

@@ -33,9 +33,19 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 	@Override
-	public int loginRest(Member member) {
+	public Member loginRest(Member member) {
 		// TODO Auto-generated method stub
 		return memberDao.loginRest(member);
 	}
+	@Override
+	public int emailCheck(String email) {
+		// TODO Auto-generated method stub
+		return memberDao.emailCheck(email);
+	}
+/*	@Override
+	public void join(Member member) {
+		// TODO Auto-generated method stub
+		memberDao.join(member);
+	}*/
 
 }

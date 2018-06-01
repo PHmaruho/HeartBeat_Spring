@@ -24,19 +24,32 @@ public class MemberRestController {
 	@Autowired private ExploreService exploreService;
 	@Autowired private MemberService memberService;
 	
-	@RequestMapping("/login1")
-	public int login(String email,String pw) {
-		logger.info("들어옴");
-		logger.info(email + " / " + pw);
-		System.out.println("RestController login start");
+	@RequestMapping("/loginRest")
+	public Member loginRest(String email,String pw) {
 		Member member = new Member();
 		member.setEmail(email);
 		member.setPw(pw);
-		System.out.println("RestController login member 전");
 		
-		int result = memberService.loginRest(member);
-		System.out.println("RestController login member 후"+result);
+		Member result = memberService.loginRest(member);
+		if(result.getEmail() == null || result.getEmail() == "") {
+			result.setEmail("");
+		}
+		return result;
+	}
+	
+	@RequestMapping("/login")
+	public int login(String email,String pw) {
+		Member member = new Member();
+		member.setEmail(email);
+		member.setPw(pw);
 		
+		int result = memberService.login(member);
+		return result;
+	}
+	
+	@RequestMapping("/emailCheck")
+	public int emailCheck(String email) {
+		int result = memberService.emailCheck(email);
 		return result;
 	}
 }
