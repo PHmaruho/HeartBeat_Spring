@@ -5,97 +5,88 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<!-- <link rel="stylesheet" href="/resources/js/jquery-ui.css">
-  <script src="/resources/js/jquery-ui.js"></script>
-  <script src="/resources/js/jquery.3.3.1.js"></script> -->
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery.3.3.1.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/js/jquery-ui.css">
 <script type="text/javascript">
-
-
-
-/* 
- * 
  
  $(function(){
-	    var autocomplete_text = ["자동완성기능","Autocomplete","개발로짜","국이"];
-	         $("#detail").autocomplete({
-	        	 focus: function(event,ui){
-	        		 $(this).val(ui.item.label);
+	         $("#detailText").autocomplete({
+	        	/* focus: function(event,ui){
 	        		 return false;
-	        	 },
-	            source: autocomplete_text,
-	            minLength: 1,
-	    		select: function(event, ui){
-	    			var r=$('#categor').val();
-	    			var d= $('#detail').val();
-	    			if(r=='제목'){
-		    			$('#searchBox').val($('#searchBox').val()+'*'+d+' ');
-	    			}else if(r=='아티스트'){
-	    				$('#searchBox').val($('#searchBox').val()+'@'+d+' ');
-	    			}else if(r=='태그'){
-	    				$('#searchBox').val($('#searchBox').val()+'#'+d+' ');
-	    			}
-	    		} 
-	         });
-	}) 
- 
- 
- 
- */
+	        	 },  
+	        	
+	        	 matchContains:false,
+	        	 selectFirst:false,
+	             minLength: 1, */
+	    		 source: function(request,respone){
+	    			 var keyword=($('#cat').val()==null)? "":$('#cat').val();
+	    			 alert(keyword);
+	    			$.ajax({
+	    				type:"POST",
+	    				dataType:'json',
+	    				url: "/heartbeat/do/getKeyword/"+keyword,
+	    				data:{
+	    					searchWord:request.term
+	    				},
+	    				success:function(data){
+	    					alert(ok);
+	    				/*	
+	    					var wordList= JSON.parse(data);
+	    					response($.map(wordList,function(item){
+	    						return {
+	    							label:item,
+	    							value:item
+	    						};
+	    					}))
+	    				
+	    					 */
+	    	    		}/* ,
+	    	    		select: function(event,ui){
+	    	    			var cate=$('#categor').val();
+	    	    			var deta= $('#detail').val();
+	    	    			if(cate=='제목'){
+	    		    			$('#searchBox').val($('#searchBox').val()+'*'+d+' ');
+	    	    			}else if(cate=='아티스트'){
+	    	    				$('#searchBox').val($('#searchBox').val()+'@'+d+' ');
+	    	    			}else if(cate=='태그'){
+	    	    				$('#searchBox').val($('#searchBox').val()+'#'+d+' ');
+	    	    			}
+	    	    		} */
+		    		});
+	         	} 
+	   		}); 
+	  });
+
+	 function showDetailSearch(){
+		$('#detailSearchCategory').toggle();
+	}
+
+	function searchDetailShowKeyword(category){
+		var r=category.value;
+		$('#cat').val("");
+		$('#cat').val(r);
+		$('#detailTextSpace').show();
+	}
+	function clickdetailText(){
+		var c=document.getElementById('cat').value;
+		var d=document.getElementById('detailText').value.trim().split(' ');
+		alert('category: '+c);
+		alert('detail: '+d);
+	}
+	
 	 function autoTest(){
 		var v= $('#searchBox').val();
 		var varray=v.trim().split(' ');
 			alert('varray: '+varray);
 	}
 
-	function ds(){
-		$('#detailSearch').toggle();
-	}
-	function searchDetail(testbutton){
-		var r=testbutton.value;
-		$('#categor').val("");
-		$('#categor').val(r);
-		$('#tagsearch').show();
-	}
-	
-	function clickdetail(){
-		var c=document.getElementById('categor').value;
-		var d=document.getElementById('searchBox').value.trim().split(' ');
-		alert('category: '+c);
-		alert('detail: '+d);
-	}
 
-/* $(function(){
-	$("#autocomplete").autocomplete({
-		focus:function(event, ui){
-			return false;
-		},
-		source:function(request, response){
-			$.ajax({
-				type: 'POST',
-				url: "/autocomplete.jsp",
-				dataType:"json",
-				data:{value: request.term},
-				success:function(data){
-					response($.map(data,function(item){
-						return{
-							label: item.data,
-							value: item.data
-						}
-					}));
-				}
-			})
-		},
-		minLength: 2,
-		select: function(event, ui){
-			$('#searchBox').val($('#searchBox').val()+'#'+$('#').val()+' ');
-		}
-	});
-})  */
 
 function searchList(){
 	
 	var keyword=document.getElementById('searchBox').value.trim();
-	alert('keyword: '+keyword);
+	/*alert('keyword: '+keyword);*/
 	$.ajax({
 		type:'POST',
 		url:'/heartbeat/do/discoverList',
@@ -103,7 +94,7 @@ function searchList(){
 				val:keyword
 			},
 		success:function(data){
-			alert('ok');
+			/* alert('ok'); */
 			$('#keywordList').html("");
 			$('#keywordList').html(data);
 		}
@@ -113,20 +104,22 @@ function searchList(){
 </script>
 </head>
 <body>
+	<div id="placeHolder">
+		가수는 @, 곡명은 *를, 태그는 #을 붙이고 단어마다 스페이스바를 해주세요! ex)@가수 *곡명 #태그
+	</div>
+	검색: <input type="text" id="searchBox">
+	<input type="button" id="searchAll" value="검색" onclick="searchList()">
+	<input type="button" id="detailSearch" onclick="showDetailSearch()" value="상세검색">
 	
-	searchBox:<input type="text" id="searchBox">
-	<input type="button" id="searchOne" value="검색" onclick="searchList()">
-	<input type="button" id="detailSear1" onclick="ds()" value="상세검색">
-	
-	<div id="detailSearch" style="display: none;">
-		<input type="button" value="태그" onclick="searchDetail(this)">
-		<input type="button" value="아티스트" onclick="searchDetail(this)">
-		<input type="button" value="제목" onclick="searchDetail(this)">
+	<div id="detailSearchCategory" style="display: block;">
+		<input type="button" value="tag" onclick="searchDetailShowKeyword(this)">
+		<input type="button" value="artist" onclick="searchDetailShowKeyword(this)">
+		<input type="button" value="title" onclick="searchDetailShowKeyword(this)">
 
-		<div id="tagsearch" style="display: none;">
-			<input type="hidden" id="categor"> 
-			<input type="text" id="detail"> 
-			<input type="button" onclick="clickdetail()" value="ok">
+		<div id="detailTextSpace" style="display: block;">
+			<input type="text" id="cat"> 
+			<input type="text" id="detailText"> 
+			<input type="button" onclick="clickdetailText()" value="ok">
 		</div>
 	</div>
 	

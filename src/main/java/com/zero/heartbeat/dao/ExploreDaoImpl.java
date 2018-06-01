@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.zero.heartbeat.model.SearchKeyword;
 import com.zero.heartbeat.model.SearchList;
+import com.zero.heartbeat.model.Tag;
 
 @Repository
 public class ExploreDaoImpl implements ExploreDao {
@@ -25,13 +26,10 @@ public class ExploreDaoImpl implements ExploreDao {
 	// JSY
 	public List<SearchList> selectAllSearchList(SearchKeyword dto) {
 		logger.info("ExploreDaoImpl selectAllSearchList working");
-	//	  Map<String, Object> param = new HashMap<String, Object>();
-	//	  param.put("id", "1"); //#{id}에 셋팅
-	//	  param.put("name", "victor"); //#{name}에 셋팅
-	//	  List<String> arrTag = new ArrayList<String>();
-	//	  arrTag.add("@nick5"); //in 조건에 넣을 정보
-	//	  param.put("code_list", arrTag); //map에 list를 넣는다.
-		  
 		return session.selectList("selectAllSearchList",dto);
+	}
+	public List<String> getKeywordTag(String searchWord) {
+		logger.info("ExploreDaoImpl getKeywordTag working");
+		return session.selectList("getKeywordTag",searchWord);
 	}
 }

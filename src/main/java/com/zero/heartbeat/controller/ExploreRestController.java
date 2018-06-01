@@ -13,10 +13,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.zero.heartbeat.model.SearchKeyword;
 import com.zero.heartbeat.model.SearchList;
+import com.zero.heartbeat.model.Tag;
 import com.zero.heartbeat.service.ActivityService;
 import com.zero.heartbeat.service.CommonService;
 import com.zero.heartbeat.service.ExploreService;
 import com.zero.heartbeat.service.MemberService;
+
+import scala.util.parsing.json.JSONArray;
+import scala.util.parsing.json.JSONObject;
 
 @RestController
 @RequestMapping(value="/do")
@@ -33,9 +37,14 @@ public class ExploreRestController {
 	//JSY
 	@RequestMapping("/discoverList")
 	public ModelAndView selectAllSearchList(String val) {
-		ArrayList<String> tag= new ArrayList<String>(); 
-		ArrayList<String> artist= new ArrayList<String>(); 
-		ArrayList<String> title= new ArrayList<String>(); 
+		String tag= ""; 
+		String artist=""; 
+		String title= ""; 
+		
+		logger.info("tag: "+tag);
+		logger.info("title: "+title);
+		logger.info("artist: "+artist);
+		
 		ModelAndView model= new ModelAndView();
 		
 		SearchKeyword dto=new SearchKeyword();
@@ -44,33 +53,60 @@ public class ExploreRestController {
 		for(String s:arr1) {
 			if(s.contains("#")) {
 				String[] splitTag=s.split("#");
-				tag.add(splitTag[1]);
-				logger.info("#Tag: "+splitTag[1]);
+				tag+=splitTag[1]+" ";
+				logger.info("#ArrTag:"+tag);
 			}
 			else if(s.contains("@")) {
 				String[] splitArtist=s.split("@");
-				artist.add(splitArtist[1]);
-				logger.info("@Artist: "+splitArtist[1]);
+				artist+=splitArtist[1]+" ";
+				logger.info("@ArrArtist:"+artist);
 			}
 			else if(s.contains("*")) {
 				String[] splitTitle=s.split("\\*");
-				title.add(splitTitle[1]);
-				logger.info("*Title: "+splitTitle[1]);
+				title+=splitTitle[1]+" ";
+				logger.info("*ArrTitle:"+title);
 			}
-			
-			else if(tag.isEmpty()|| tag.size()==0){tag=null;}
-			else if(artist.isEmpty()|| artist.size()==0){artist=null;}
-			else if(title.isEmpty()|| title.size()==0){title=null;}
-			dto.setArrTag(tag);
-			dto.setArrArtist(artist);
-			dto.setArrTitle(title);
 		}
+		
+		if(tag.isEmpty()|| tag.length()==0||tag.equals(" ")) tag="all";
+		if(artist.isEmpty()|| artist.length()==0|| artist.equals(" ")) artist="all";
+		if(title.isEmpty()|| title.length()==0|| title.equals(" ")) title="all";
+		
+		artist=artist.trim().replace(" ","|");
+		title=title.trim().replace(" ","|");
+		tag=tag.trim().replace(" ","|");
+
+		dto.setArrArtist(artist);
+		dto.setArrTag(tag);
+		dto.setArrTitle(title);
+		
 		List<SearchList> discoverList= new ArrayList<SearchList>();
 		discoverList= exploreService.selectAllSearchList(dto);
+		
+		String word_art=artist.replace("|", ", ");
+		String word_tag=tag.replace("|", ", ");
+		String word_title=title.replace("|", ", ");
+
+		model.addObject("word_art", word_art);
+		model.addObject("word_tag", word_tag);
+		model.addObject("word_title", word_title);
+		
 		model.addObject("discoverList", discoverList);
 		model.setViewName("explore/discoverList");
 		logger.info("ExploreRestController selectAllSearchList working");
 		return model;
+	}
+	
+	// JSY
+	@RequestMapping("/getKeyword/tag")
+	public ModelAndView getKeywordTag(String searchWord) {
+		ModelAndView mv=new ModelAndView();
+		List<String> tagList=new ArrayList<String>();
+		tagList= exploreService.getKeywordTag(searchWord);
+		mv.addObject("tagList",tagList);
+		//mv.setViewName("explore/getKeywordTag");
+		logger.info("ExploreRestController getKeywordTag working");
+		return mv;
 	}
 	
 }

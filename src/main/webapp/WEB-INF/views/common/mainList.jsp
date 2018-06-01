@@ -17,7 +17,7 @@
 		var mainList_value=document.getElementById(mainList_id).value.trim();
 		
 		$.ajax({
-			url:'/do/mainListShare',
+			url:'/heartbeat/do/mainListShare',
 			data:{
 				music_sq:mainList_value
 				},

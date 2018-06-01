@@ -4,26 +4,25 @@ import java.util.ArrayList;
 
 public class SearchKeyword {
 
-	private ArrayList<String> arrTag;
-	private ArrayList<String> arrTitle;
-	private ArrayList<String> arrArtist;
-	
-	public ArrayList<String> getArrTag() {
+	private String arrTag;
+	private String arrTitle;
+	private String arrArtist;
+	public String getArrTag() {
 		return arrTag;
 	}
-	public void setArrTag(ArrayList<String> arrTag) {
+	public void setArrTag(String arrTag) {
 		this.arrTag = arrTag;
 	}
-	public ArrayList<String> getArrTitle() {
+	public String getArrTitle() {
 		return arrTitle;
 	}
-	public void setArrTitle(ArrayList<String> arrTitle) {
+	public void setArrTitle(String arrTitle) {
 		this.arrTitle = arrTitle;
 	}
-	public ArrayList<String> getArrArtist() {
+	public String getArrArtist() {
 		return arrArtist;
 	}
-	public void setArrArtist(ArrayList<String> arrArtist) {
+	public void setArrArtist(String arrArtist) {
 		this.arrArtist = arrArtist;
 	}
 	

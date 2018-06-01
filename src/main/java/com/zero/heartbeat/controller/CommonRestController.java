@@ -29,8 +29,8 @@ public class CommonRestController {
 	public void insertAlarmShareMusic(Model model,String music_sq) {
 		logger.info(music_sq);
 		/*String id="708";
-		memberService.insertAlarmShareMusic(id,music_sq);
-		logger.info("CommonRestController mainListShare working");*/
+		memberService.insertAlarmShareMusic(id,music_sq);*/
+		logger.info("CommonRestController mainListShare working");
 		
 	}
 }

@@ -12,9 +12,11 @@ public class SearchList {
 	private String music_nm;
 	private int music_no;
 	private int music_like;
-	private int share;
+	private int music_share;
 	private int artist_sq;
 	private String nick;
+	private String url;
+	
 
 	public int getMusic_sq() {
 		return music_sq;
@@ -64,11 +66,11 @@ public class SearchList {
 	public void setMusic_like(int music_like) {
 		this.music_like = music_like;
 	}
-	public int getShare() {
-		return share;
+	public int getMusic_share() {
+		return music_share;
 	}
-	public void setShare(int share) {
-		this.share = share;
+	public void setMusic_share(int music_share) {
+		this.music_share = music_share;
 	}
 	public int getArtist_sq() {
 		return artist_sq;
@@ -82,6 +84,13 @@ public class SearchList {
 	public void setNick(String nick) {
 		this.nick = nick;
 	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
 	
 	
 }

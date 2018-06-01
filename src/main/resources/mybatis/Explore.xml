@@ -5,13 +5,66 @@
 <mapper namespace="Explore">
 	
 	<select id="selectAllSearchList" parameterType="SearchKeyword" resultType="SearchList">
-	
-	<!-- select nick from member where nick=
-		<foreach collection="code_list" item="aArtist" open="" close="" separator=" ,">
-						#{aArtist}
-		</foreach> -->
-	
 
+		select * from (
+				(		select a.album_sq, a.img_path, a.album_nm, a.release_dt
+								,m.music_sq, m.music_nm, m.music_no, m.music_like
+								, m.music_share, m.url
+								from music m, album a 
+								where m.album_sq=a.album_sq 
+								and a.open_yn=m.open_yn 
+								and a.open_yn='Y'
+								 
+									  <if test="!arrTitle.contains('all')">
+											and regexp_like (music_nm,trim(#{arrTitle}))
+									  </if>
+				  				order by album_sq,music_no
+	  				)
+					join 
+								(		select artist_sq,music_sq,nick 
+										from artist a, member m 
+										where a.member_sq=m.member_sq 
+										
+										
+									 	<if test="!arrArtist.contains('all')">
+											 and regexp_like (nick,trim(#{arrArtist}))
+									  	</if>
+										)using(music_sq)
+					)
+					join 
+								(		select distinct music_sq 
+										from music_tag mt, tag t 
+										where mt.tag_cd=t.tag_cd 
+										<if test="!arrTag.contains('all')">
+											and regexp_like (t.tag_meaning,trim(#{arrTag}))
+										</if>
+										)using (music_sq)
+		
+<!-- 
+		select * from (
+						(select a.album_sq, a.img_path, a.album_nm, a.release_dt
+								,m.music_sq, m.music_nm, m.music_no, m.music_like, m.music_share
+								from music m, album a 
+								where m.album_sq=a.album_sq 
+									  and a.open_yn=m.open_yn 
+									  and a.open_yn='Y' 
+									  and regexp_like (music_nm,'music_test')
+									  order by album_sq,music_no)
+		join 
+						(select artist_sq,music_sq,nick 
+								from artist a, member m 
+								where a.member_sq=m.member_sq 
+								and regexp_like (nick,'nick5|nick9')) 
+								using(music_sq)
+						)
+		join 
+						(select distinct music_sq 
+								from music_tag mt, tag t 
+								where mt.tag_cd=t.tag_cd 
+								and regexp_like (t.tag_meaning,'몽환')) 
+								using (music_sq)
+								
+								
 	select * from
 	(select alb.img_path, alb.album_nm, alb.release_dt
 			,mus.album_sq, mus.music_sq, mus.music_nm, mus.music_no
@@ -20,13 +73,13 @@
 	from 	music mus, album alb,artist art,member mem
 			where mus.album_sq=alb.album_sq and alb.open_yn=mus.open_yn
 			and alb.open_yn='Y' and art.member_sq=mem.member_sq
-				<if test="arrArtist.size()!=0 || arrArtist!=null">
-				and nick=
-				<foreach collection="arrArtist" item="aArtist" open="" close="" separator=" and nick=">
+				<if test="!arrArtist.contains('all')">
+				 and regexp_like (nick,
+				<foreach collection="arrArtist" item="aArtist" open="" close="" separator="|">
 					#{aArtist}
 				</foreach>
 				
-				<if test="arrTitle.size()!=0 || arrTitle!=null">
+				<if test="!arrTitle.contains('all')">
 				and music_nm=
 				<foreach collection="arrTitle" item="aTitle" open="" close="" separator=" and music_nm=">
 					#{aTitle}
@@ -46,6 +99,12 @@
 				</if>
 				</if>
 	</if>	
+		 -->
+
+	</select>
+	
+	<select id="getKeywordTag" parameterType="String" resultType="String">
+		select tag_meaning from tag where tag_meaning like '%'||#{searchWord}||'%'
 	</select>
 	
 	
