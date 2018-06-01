@@ -16,12 +16,12 @@
 	
 		<div class="row" style="border:1px solid;">
 			<div class="w-50" style="border:1px solid;">
-				<a href="/upload/album">
+				<a href="upload/album">
 					앨범 등록하기
 				</a>
 			</div>
 			<div class="w-50" style="border:1px solid;">
-				<a href="/upload/music">
+				<a href="upload/music">
 					단일곡 등록하기
 				</a>
 			</div>

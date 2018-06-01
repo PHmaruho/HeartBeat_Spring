@@ -5,10 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Heart Beat</title>
+<script src="${pageContext.request.contextPath }/resources/js/jquery.3.3.1.js"></script>
 </head>
 <body>
 <script type="text/javascript">
-	location.href="/upload";
+	location.href="/heartbeat/upload";
 </script>
 </body>
 </html>
