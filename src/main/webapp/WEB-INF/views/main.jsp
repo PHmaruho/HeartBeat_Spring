@@ -39,8 +39,7 @@
 </style>
 </head>
 <body>
-con : ${pageContext.request.contextPath }
-	<div class="headDiv">
+	<div class="headDiv" id="headDiv">
 		<c:import url="/head"></c:import>
 	</div>
 	
@@ -54,10 +53,9 @@ con : ${pageContext.request.contextPath }
 		<div class="emptyDiv"></div>
 	</div>
 	
-	<div class="footDiv">
+	<div class="footDiv" id="footDiv">
 		<c:import url="/foot"></c:import>
 	</div>
-	
 	<input type="hidden" value="${packageName }" id="packageName">
 	<script src="${pageContext.request.contextPath }/resources/js/main.js"></script>
 </body>

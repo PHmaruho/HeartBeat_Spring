@@ -6,6 +6,10 @@
 		background-color: yellow;
 		height: 80px;
 	}
+	
+	#footProgressBar {
+	width: 50%
+	}
 </style>
 </head>
 
@@ -13,14 +17,16 @@
 	<div class="foot">
 		<button onclick="footPlayer.playPause()">play</button>
 		<input type="range" id="footProgressBar" value="0" min="0.0" max="1.0" step="0.0001"
-			onmousedown="switchFootProgress()" onmouseup="switchFootProgress()">
+			onmousedown="switchFootProgress()" onmouseup="switchFootProgress()" oninput="changeFootProgress()">
 		<span id="footProgress"></span>
 		<span id="footDuration"></span>
 		<input id="footVoulume" type="range" min="0.0" max="1.0" step="0.01" value="0.5"
 			oninput="footPlayer.setVolume(this.value)" onchange="footPlayer.setVolume(this.value)">	
 		<div hidden="true" id="footWaveform"></div>		
 		<button onclick="footPlayer.seekTo(0.9)">test</button>
-		asd12345
+		asd12
+		
+		<input type="button" value="asdf" onclick="qw()">
 	</div>
 	
 	
@@ -40,6 +46,7 @@
 		
 		//footPlayer.load( "${pageContext.request.contextPath }" + "/resources/music/" + $('#music_sq').val() + ".mp3");
 		footPlayer.load( "${pageContext.request.contextPath }" + "/resources/music/" + "302" + ".mp3");
+		//footPlayer.load('https://www.youtube.com/watch?v=EP625xQIGzs');
 	}
 	
 	function switchFootProgress() {
@@ -58,12 +65,17 @@
 		}
 	}
 	
+	function changeFootProgress() {
+		$('#footProgress').text( formatTime($('#footProgressBar').val() * footDuration) );
+	}
+	
 	var formatTime = function (time) {
 	    return [
 	        Math.floor((time % 3600) / 60), // minutes
 	        ('00' + Math.floor(time % 60)).slice(-2) // seconds
 	    ].join(':');
 	};
+	
 
 	footPlayer.on('ready', function () {
 		footDuration = footPlayer.getDuration();
