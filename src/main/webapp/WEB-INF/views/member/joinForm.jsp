@@ -12,6 +12,11 @@
 				<td><span id="email_msg"></span></td>
 			</tr>
 			<tr>
+				<td colspan="2">
+					<span id="email_validate"></span>
+				</td>
+			</tr>
+			<tr>
 				<th>비밀번호</th>
 				<td><input type="password" name="pw" id="pw" required="required"></td>
 				<td><span id="pw_msg"></span></td>

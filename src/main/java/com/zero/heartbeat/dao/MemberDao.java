@@ -10,7 +10,7 @@ public interface MemberDao {
 
 	int emailCheck(String email);
 
-	/*void join(Member member);*/
+	void join(Member member);
 
 	
 

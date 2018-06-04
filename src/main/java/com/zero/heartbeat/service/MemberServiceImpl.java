@@ -42,10 +42,10 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return memberDao.emailCheck(email);
 	}
-/*	@Override
+	@Override
 	public void join(Member member) {
 		// TODO Auto-generated method stub
 		memberDao.join(member);
-	}*/
+	}
 
 }

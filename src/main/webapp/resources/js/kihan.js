@@ -47,6 +47,24 @@ function kkhcheck() {
 
 }
 
+$(document).ready(function(){
+	var emailex = /([\da-z_-]+)@([\da-z_-]+)\.([a-z\.]{2,6})/;
+	
+	$('#email').keyup(function(){
+		var email = $("#email").val(); 
+		document.getElementById("email_msg").innerHTML=email;
+		if(email != null && email != ""){
+			if(emailex.test(email)){
+				document.getElementById("email_validate").innerHTML="";
+			}else{
+				document.getElementById("email_validate").innerHTML="올바른 형식으로 입력해주세요.";
+			}
+		}else{
+			document.getElementById("email_validate").innerHTML="";
+		}
+	});
+});
+
 function kkhjoin(){
 	var Vemail = $('#email').val();
 	var Vpw = $('#pw').val();

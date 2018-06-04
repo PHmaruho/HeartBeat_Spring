@@ -6,13 +6,16 @@
 	<select id="login" parameterType="Member" resultType="int">
 		select count(*) from member where email=#{email} and pw=#{pw}
 	</select>
+	
 	<select id="loginRest" parameterType="Member" resultType="Member">
 		select * from member where email=#{email} and pw=#{pw}
 	</select>
+	
 	<select id="emailCheck" parameterType="Member" resultType="int">
 		select count(*) from member where email=#{email}
 	</select>
-<!-- 	<select id="join" parameterMap="Member">
+	
+	<select id="join" parameterType="Member">
 		insert into member values(
   					(
   					 select nvl(max(member_sq),0)+1 
@@ -20,5 +23,5 @@
   					 )
   					 ,#{email},#{pw},#{nick},'A1',sysdate,sysdate
 		)
-	</select> -->
+	</select>
 </mapper>

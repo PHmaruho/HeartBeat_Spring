@@ -61,13 +61,13 @@ public class MemberController {
 		return "member/joinForm";
 	}
 	
-/*	@RequestMapping("/joinPro")
-	public String joinPro(Model model,Member member) {
-		try {
-			memberService.join(member);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+	@RequestMapping("/joinPro")
+	public String joinPro(Model model,String email, String pw, String nick) {
+		Member member = new Member();
+		member.setEmail(email);
+		member.setPw(pw);
+		member.setNick(nick);
+		memberService.join(member);
 		return "member/joinPro";
-	}*/
+	}
 }

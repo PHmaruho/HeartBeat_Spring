@@ -34,10 +34,10 @@ public class MemberDaoImpl implements MemberDao {
 		return session.selectOne("emailCheck",email);
 	}
 
-/*	@Override
+	@Override
 	public void join(Member member) {
 		// TODO Auto-generated method stub
 		session.insert("join",member);
-	}*/
+	}
 
 }
