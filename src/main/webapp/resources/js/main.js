@@ -3,32 +3,18 @@ function supports_history_api() {
 }
 
 function swapContent(link) {
-	var req = new XMLHttpRequest();
-	
 	if(link == "/foot?r=1" || link == "/head?r=1") {
-		var newLink = link.replace('/', '').split('?')[0];
-		req.open("GET", processUrl() + link, false);
-		req.send(null);
-		
-		if (req.status == 200) {
-			document.getElementById(newLink +  'Div').innerHTML = req.responseText;	// jquery보다 성능이 좋다고 함
-			return false;
-		}
+		var newPath = link.replace('/', '').split('?')[0];
+		$('#' + newPath +  'Div').load(processUrl() + link);
+		return false;
 	} else {
 		if (link == "/" + $('#packageName').val() + "/?r=1") {
-			req.open("GET", processUrl() + "/home?r=1", false);
+			$('#contentDiv').load(processUrl() + '/home?r=1');
 		} else {
-			req.open("GET", processUrl() + link, false);
+			$('#contentDiv').load(processUrl() + link);
 		}
-		req.send(null);
-		
-		if (req.status == 200) {
-			document.getElementById('contentDiv').innerHTML = req.responseText;	// jquery보다 성능이 좋다고 함
-			return true;
-		}
+		return true;
 	}
-	
-	return false;
 }
 
 function goto(link) {
