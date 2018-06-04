@@ -15,21 +15,26 @@
 		<audio id="audio" controls="controls"  src="/resources/music/Kalimba.mp3" >
 		</audio>
 	</div> -->
-	<img src="${pageContext.request.contextPath }/resources/img/album/${music.MUSIC_SQ }.png">
+	<%-- <img src="${pageContext.request.contextPath }/resources/img/album/${music.MUSIC_SQ }.png"> --%>
 	<div id="detailWaveform"></div>
 	<span id="detailProgress"></span>
 	<span id="detailDuration"></span>
 	
-	asda1234
-	<p align="center">
-		<button onclick="detailPlayer.playPause()">Play</button>
-	</p>
+	asda123
+	<input type="button" value="play" onclick="toFoot(${music.MUSIC_SQ })">
+	<input type="button" value="pause" onclick="pauseAll()">
+	
+	<button onclick="goto('/others/music/302')">302</button>
+	<button onclick="goto('/others/music/303')">303</button>
 	
 <script type="text/javascript">
 	var detailPlayer;
+	var detailMusic;
 	initDetail();
 	
 	function initDetail() {
+		detailMusic = $('#music_sq').val();
+		
 		var ctx = document.createElement('canvas').getContext('2d');
 		var linGrad = ctx.createLinearGradient(0, 64, 0, 200);
 		linGrad.addColorStop(0.5, 'rgba(116, 116, 116, 1.000)');
@@ -45,7 +50,8 @@
 		reflection : true
 		});
 		
-		detailPlayer.load( "${pageContext.request.contextPath }" + "/resources/music/" + $('#music_sq').val() + ".mp3");
+		detailPlayer.load( "${pageContext.request.contextPath }" + "/resources/music/" + detailMusic + ".mp3");
+		detailPlayer.setMute(true);
 	}
 	
 	
@@ -62,7 +68,25 @@
 
 	detailPlayer.on('ready', function () {
 	    $('#detailDuration').text( formatTime(detailPlayer.getDuration()) );
+	    
+		if(footPlayer.isPlaying()) {
+			progressSync(detailMusic);
+		}
 	});
+	
+	function playDetail(start) {
+		if(arguments.length == 0) {
+			detailPlayer.play();
+		} else if(arguments.length == 1) {
+			detailPlayer.play(start)
+		} else {
+			console.log('playDetail Error');
+		}
+	}
+	
+	function pauseDetail() {
+		detailPlayer.pause();
+	}
 </script>
 </body>
 

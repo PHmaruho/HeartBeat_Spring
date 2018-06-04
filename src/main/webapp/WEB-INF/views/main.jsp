@@ -58,5 +58,6 @@
 	</div>
 	<input type="hidden" value="${packageName }" id="packageName">
 	<script src="${pageContext.request.contextPath }/resources/js/main.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/js/musicControl.js"></script>
 </body>
 </html>
