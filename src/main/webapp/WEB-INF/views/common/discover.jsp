@@ -9,54 +9,52 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/js/jquery-ui.css">
 <script type="text/javascript">
- 
- $(function(){
-	         $("#detailText").autocomplete({
-	        	/* focus: function(event,ui){
-	        		 return false;
-	        	 },  
-	        	
-	        	 matchContains:false,
-	        	 selectFirst:false,
-	             minLength: 1, */
-	    		 source: function(request,respone){
-	    			 var keyword=($('#cat').val()==null)? "":$('#cat').val();
-	    			 alert(keyword);
-	    			$.ajax({
-	    				type:"POST",
-	    				dataType:'json',
-	    				url: "/heartbeat/do/getKeyword/"+keyword,
-	    				data:{
-	    					searchWord:request.term
-	    				},
-	    				success:function(data){
-	    					alert(ok);
-	    				/*	
-	    					var wordList= JSON.parse(data);
-	    					response($.map(wordList,function(item){
-	    						return {
-	    							label:item,
-	    							value:item
-	    						};
-	    					}))
-	    				
-	    					 */
-	    	    		}/* ,
-	    	    		select: function(event,ui){
-	    	    			var cate=$('#categor').val();
-	    	    			var deta= $('#detail').val();
-	    	    			if(cate=='제목'){
-	    		    			$('#searchBox').val($('#searchBox').val()+'*'+d+' ');
-	    	    			}else if(cate=='아티스트'){
-	    	    				$('#searchBox').val($('#searchBox').val()+'@'+d+' ');
-	    	    			}else if(cate=='태그'){
-	    	    				$('#searchBox').val($('#searchBox').val()+'#'+d+' ');
-	    	    			}
-	    	    		} */
-		    		});
-	         	} 
-	   		}); 
-	  });
+
+	$(document).ready(function(){
+		$("#detailText").autocomplete({
+			source:function(request,response){
+				var keyword=($('#cat').val()==null)? "":$('#cat').val();
+   			 	alert('keyword: '+keyword);
+				$.ajax({
+					url: "/heartbeat/do/getKeyword/"+keyword,
+					dataType:"json",
+					data:{
+						searchWord:request.term
+					},
+					success:function(data){
+						var js=JSON.stringify(data.tagList);
+						/* alert('js: '+js); */
+						response($.map(data.tagList,function(item){
+							return{
+								label:item,
+								value:item
+							};
+						}))
+					}
+				})
+			}			
+		})
+	})
+/* $("#detailText").autocomplete({
+	focus: function(event,ui){
+		 return false;
+	 },  
+	 matchContains:false,
+	 selectFirst:false,
+     minLength: 1, 
+	source: function(request,respone){
+		 var keyword=($('#cat').val()==null)? "":$('#cat').val();
+		 alert(keyword);
+		$.ajax({
+			dataType:'json',
+			url: "/heartbeat/do/getKeyword/"+keyword,
+			data:{
+				searchWord:request.term
+			},
+			success:function(data){
+				alert(ok);
+		}});
+	}});  */
 
 	 function showDetailSearch(){
 		$('#detailSearchCategory').toggle();

@@ -1,13 +1,18 @@
 package com.zero.heartbeat.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -98,15 +103,15 @@ public class ExploreRestController {
 	}
 	
 	// JSY
-	@RequestMapping("/getKeyword/tag")
-	public ModelAndView getKeywordTag(String searchWord) {
-		ModelAndView mv=new ModelAndView();
+	@RequestMapping(value= "/getKeyword/tag", method=RequestMethod.GET)
+	public Map<String,List<String>> getKeywordTag(String searchWord) {
 		List<String> tagList=new ArrayList<String>();
 		tagList= exploreService.getKeywordTag(searchWord);
-		mv.addObject("tagList",tagList);
-		//mv.setViewName("explore/getKeywordTag");
+		Map<String,List<String>> map=new HashMap<String,List<String>>();
+		map.put("tagList", tagList);
 		logger.info("ExploreRestController getKeywordTag working");
-		return mv;
+		return map;
 	}
+	
 	
 }
