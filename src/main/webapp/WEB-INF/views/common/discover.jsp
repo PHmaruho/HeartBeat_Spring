@@ -8,97 +8,66 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery.3.3.1.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/js/jquery-ui.css">
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jsy.js"></script>
 <script type="text/javascript">
-
-	$(document).ready(function(){
-		$("#detailText").autocomplete({
-			source:function(request,response){
-				var keyword=($('#cat').val()==null)? "":$('#cat').val();
-   			 	alert('keyword: '+keyword);
-				$.ajax({
-					url: "/heartbeat/do/getKeyword/"+keyword,
-					dataType:"json",
-					data:{
-						searchWord:request.term
-					},
-					success:function(data){
-						var js=JSON.stringify(data.tagList);
-						/* alert('js: '+js); */
-						response($.map(data.tagList,function(item){
+$(document).ready(function(){
+	$("#detailText").autocomplete({
+		focus:function(event,ui){
+			$(this).val(ui.item.label);
+			return false;
+		},
+		minlength:1,
+		source:function(request,response){
+			var keyword=($('#cat').val()==null)? "":$('#cat').val();
+			$.ajax({
+				url: "/heartbeat/do/getKeyword/"+keyword,
+				dataType:"json",
+				data:{
+					searchWord:request.term
+				},
+				success:function(data){
+					if(keyword=='tag'){
+						response($.map(data.list,function(item){
 							return{
-								label:item,
-								value:item
+								label:item.tag_meaning,
+								value:item.tag_meaning
 							};
-						}))
+						}))	
 					}
-				})
-			}			
-		})
-	})
-/* $("#detailText").autocomplete({
-	focus: function(event,ui){
-		 return false;
-	 },  
-	 matchContains:false,
-	 selectFirst:false,
-     minLength: 1, 
-	source: function(request,respone){
-		 var keyword=($('#cat').val()==null)? "":$('#cat').val();
-		 alert(keyword);
-		$.ajax({
-			dataType:'json',
-			url: "/heartbeat/do/getKeyword/"+keyword,
-			data:{
-				searchWord:request.term
-			},
-			success:function(data){
-				alert(ok);
-		}});
-	}});  */
-
-	 function showDetailSearch(){
-		$('#detailSearchCategory').toggle();
-	}
-
-	function searchDetailShowKeyword(category){
-		var r=category.value;
-		$('#cat').val("");
-		$('#cat').val(r);
-		$('#detailTextSpace').show();
-	}
-	function clickdetailText(){
-		var c=document.getElementById('cat').value;
-		var d=document.getElementById('detailText').value.trim().split(' ');
-		alert('category: '+c);
-		alert('detail: '+d);
-	}
-	
-	 function autoTest(){
-		var v= $('#searchBox').val();
-		var varray=v.trim().split(' ');
-			alert('varray: '+varray);
-	}
-
-
-
-function searchList(){
-	
-	var keyword=document.getElementById('searchBox').value.trim();
-	/*alert('keyword: '+keyword);*/
-	$.ajax({
-		type:'POST',
-		url:'/heartbeat/do/discoverList',
-		data:{
-				val:keyword
-			},
-		success:function(data){
-			/* alert('ok'); */
-			$('#keywordList').html("");
-			$('#keywordList').html(data);
+					else if(keyword=='artist'){
+						response($.map(data.list,function(item){
+							return{
+								label:item.nick,
+								value:item.nick
+							};
+						}))	
+					}
+					else if(keyword=='title'){
+						response($.map(data.list,function(item){
+							return{
+								label:item.music_nm,
+								value:item.music_nm
+							};
+						}))	
+					}
+				},
+			})
+		},
+		select:function(event,ui){
+			var cat=$('#cat').val();
+			var det= $('#detailText').val();
+			
+			if(cat=='title'){
+				$('#searchBox').val($('#searchBox').val()+'*'+det+' ');
+			}else if(cat=='artist'){
+				$('#searchBox').val($('#searchBox').val()+'@'+det+' ');
+			}else if(cat=='tag'){
+				$('#searchBox').val($('#searchBox').val()+'#'+det+' ');
+			} 
 		}
-		
-	});
-}
+	})
+})
+
 </script>
 </head>
 <body>
@@ -109,21 +78,18 @@ function searchList(){
 	<input type="button" id="searchAll" value="검색" onclick="searchList()">
 	<input type="button" id="detailSearch" onclick="showDetailSearch()" value="상세검색">
 	
-	<div id="detailSearchCategory" style="display: block;">
+	<div id="detailSearchCategory" style="display: none;">
 		<input type="button" value="tag" onclick="searchDetailShowKeyword(this)">
 		<input type="button" value="artist" onclick="searchDetailShowKeyword(this)">
 		<input type="button" value="title" onclick="searchDetailShowKeyword(this)">
 
-		<div id="detailTextSpace" style="display: block;">
-			<input type="text" id="cat"> 
-			<input type="text" id="detailText"> 
-			<input type="button" onclick="clickdetailText()" value="ok">
+		<div id="detailTextSpace" style="display: none;">
+			<input type="hidden" id="cat"> 
+			상세검색: <input type="text" id="detailText"> 
 		</div>
 	</div>
 	
 	<div id="keywordList">
-		div id="keywordList"<Br>
-		
 	</div>
 </body>
 

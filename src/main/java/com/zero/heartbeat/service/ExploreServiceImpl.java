@@ -12,6 +12,8 @@ import com.zero.heartbeat.dao.ActivityDao;
 import com.zero.heartbeat.dao.CommonDao;
 import com.zero.heartbeat.dao.ExploreDao;
 import com.zero.heartbeat.dao.MemberDao;
+import com.zero.heartbeat.model.Member;
+import com.zero.heartbeat.model.Music;
 import com.zero.heartbeat.model.SearchKeyword;
 import com.zero.heartbeat.model.SearchList;
 import com.zero.heartbeat.model.Tag;
@@ -33,9 +35,20 @@ public class ExploreServiceImpl implements ExploreService {
 		logger.info("ExploreServiceImpl selectAllSearchList working");
 		return list;
 	}
-	public List<String> getKeywordTag(String searchWord) {
-		List<String> tag=exploreDao.getKeywordTag(searchWord);
+	public List<Tag> getKeywordTag(String searchWord) {
+		List<Tag> tag=exploreDao.getKeywordTag(searchWord);
 		logger.info("ExploreServiceImpl getKeywordTag working");
 		return tag;
 	}
+	public List<Member> getKeywordArtist(String searchWord) {
+		List<Member> member=exploreDao.getKeywordArtist(searchWord);
+		logger.info("ExploreServiceImpl getKeywordArtist working");
+		return member;
+	}
+	public List<Music> getKeywordTitle(String searchWord) {
+		List<Music> title=exploreDao.getKeywordTitle(searchWord);
+		logger.info("ExploreServiceImpl getKeywordTitle working");
+		return title;
+	}
+
 }

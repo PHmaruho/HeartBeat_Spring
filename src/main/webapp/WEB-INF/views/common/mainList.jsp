@@ -11,22 +11,7 @@
 		width:33%;
 	}
 </style>
-<script type="text/javascript">
-	function mainListShare(str){
-		var mainList_id='music_sq'+str;
-		var mainList_value=document.getElementById(mainList_id).value.trim();
-		
-		$.ajax({
-			url:'/heartbeat/do/mainListShare',
-			data:{
-				music_sq:mainList_value
-				},
-			success:function(){
-				alert('공유되었습니다.');
-			}
-		});
-	}
-</script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jsy.js"></script>
 </head>
 <body>
 

@@ -9,10 +9,10 @@
 <body>
 <script type="text/javascript">
 	/* MainList Page */
-	//location.href="/heartbeat/mainList";
+	// location.href="/heartbeat/mainList";
 	
 	/* Search Page */
-	location.href="/heartbeat/discover";
+	 location.href="/heartbeat/discover";
 </script>
 </body>
 </html>
