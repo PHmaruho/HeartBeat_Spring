@@ -50,4 +50,14 @@ public class ActivityController {
 		
 		return "activity/my/uploadMusic";
 	}
+	
+	@RequestMapping("/others/music/{sq}")
+	public String othersMusic(Model model, @PathVariable int sq) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map = activityService.selectMusicDetail(sq);
+		
+		model.addAttribute("music", map);
+		return "activity/others/music";
+	}
+
 }

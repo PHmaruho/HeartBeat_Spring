@@ -87,6 +87,7 @@ $.ajax({
 		
 		</form>
 	</div>
+	<button onclick="goto('/others/music/302')">음악상세</button>
 	<form id="form">
 		<input type="text" name="txt">
 		<input type="password" name="pw">
