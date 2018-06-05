@@ -60,6 +60,7 @@ public class ActivityDaoImpl implements ActivityDao {
 		return session.selectList("selectAlbumType");
 	}
 
+	// 최우일
 	@Override
 	public HashMap<String, Object> selectMusicDetail(int sq) {
 		return session.selectOne("selectMusicDetail", sq);

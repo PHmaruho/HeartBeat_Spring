@@ -64,6 +64,7 @@ public class ActivityServiceImpl implements ActivityService {
 		return activityDao.selectAlbumType();
 	}
 	
+	// 최우일
 	@Override
 	public HashMap<String, Object> selectMusicDetail(int sq) {
 		return activityDao.selectMusicDetail(sq);

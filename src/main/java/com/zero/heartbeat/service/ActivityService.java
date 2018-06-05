@@ -1,5 +1,6 @@
 package com.zero.heartbeat.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.zero.heartbeat.model.MusicLike;
@@ -15,5 +16,7 @@ public interface ActivityService {
 
 	// PHmaruho
 	public List<Code> selectAlbumType();
+	
+	// 최우일
 	HashMap<String, Object> selectMusicDetail(int sq);
 }

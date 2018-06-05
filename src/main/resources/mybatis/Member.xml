@@ -17,8 +17,6 @@
 				          		inner join member
 				          		on a.target_sq=member.member_sq
 		</select> -->
-				          		on a.target_sq=member.member_sq -->
-		</select>
 	<!-- PHmaruho -->
 	<select id="selectMemberArtist" parameterType="java.lang.String" resultType="Member">
 		SELECT member_sq, nick, email

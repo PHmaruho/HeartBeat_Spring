@@ -18,6 +18,8 @@ public interface ActivityDao {
 
 	// PHmaruho
 	public List<Code> selectAlbumType();
+	
+	// 최우일
 	HashMap<String, Object> selectMusicDetail(int sq);
 
 }
