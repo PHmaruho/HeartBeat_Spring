@@ -59,7 +59,7 @@ $.ajax({
 <body>
 	<button onclick="goto('/test2')">to test2</button>
 	<button onclick="goto('/test3')">to test3</button>
-	
+	<button onclick="goto('/loginForm')">to login</button>
 	<button onclick="goto('/arrive')" >최신음악</button>
 	<a href="goto('/trend')">인기음악</a>
 	
@@ -92,5 +92,4 @@ $.ajax({
 		<input type="password" name="pw">
 		<input type="button" value="/test3" onclick="toform('/test3', 'form')">
 	</form>
-	<button onclick="goto('/loginForm')">to login</button>
 </body>
