@@ -12,4 +12,6 @@ public interface CommonService {
 	List<MainList> selectAlbumMainList(int startNum);
 	
 
+	List<Album> selectAlbumArriveList(Album album);
+	List<Album> mainList();
 }

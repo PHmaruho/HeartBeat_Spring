@@ -11,6 +11,7 @@ import com.zero.heartbeat.dao.ActivityDao;
 import com.zero.heartbeat.dao.CommonDao;
 import com.zero.heartbeat.dao.ExploreDao;
 import com.zero.heartbeat.dao.MemberDao;
+import com.zero.heartbeat.model.MusicLike;
 import com.zero.heartbeat.model.Code;
 
 @Service
@@ -23,6 +24,36 @@ public class ActivityServiceImpl implements ActivityService {
 	@Autowired private CommonDao commonDao;
 	@Autowired private ExploreDao exploreDao;
 	@Autowired private MemberDao memberDao;
+	
+	
+
+	@Override
+	public int likeCount(int music_like_sq, int member_sq) {
+		// TODO Auto-generated method stub
+		return activityDao.likeCount(music_like_sq,member_sq);
+	}
+
+	
+	// 이미 좋아요 목록에 있는 시퀀스의 캔슬메소드
+	@Override
+	public void likeCancel(int music_like_sq) {
+		// TODO Auto-generated method stub
+		activityDao.likeCancel(music_like_sq);
+	}
+
+
+	@Override
+	public void insertLike(MusicLike like) {
+		// TODO Auto-generated method stub
+		activityDao.insertLike(like);
+	}
+
+
+	@Override
+	public List<MusicLike> likeList(int member_sq) {
+		// TODO Auto-generated method stub
+		return activityDao.likeList(member_sq);
+	}
 	
 	// PHmaruho
 	@Override

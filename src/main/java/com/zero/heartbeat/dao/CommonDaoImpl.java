@@ -28,4 +28,18 @@ public class CommonDaoImpl implements CommonDao {
 		return session.selectList("selectAlbumMainList",startNum);
 	}
 
+
+	
+	@Override
+	public List<Album> selectAlbumArriveList(Album album) {
+		// TODO Auto-generated method stub
+		return session.selectList("arriveList", album);
+	}
+
+
+	@Override
+	public List<Album> mainList() {
+		logger.info("CommonDaoImpl mainList before");
+		return session.selectList("mainList");
+	}
 }

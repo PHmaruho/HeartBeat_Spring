@@ -36,4 +36,16 @@ public class CommonServiceImpl implements CommonService {
 		return list;
 	}
 
+	@Override
+	public List<Album> selectAlbumArriveList(Album album) {
+		// TODO Auto-generated method stub
+		return commonDao.selectAlbumArriveList(album);
+	}
+
+	//메인 컨텐츠 목록
+	@Override
+	public List<Album> mainList() {
+		logger.info("CommonServiceImpl mainList before");
+		return commonDao.mainList();
+	}
 }

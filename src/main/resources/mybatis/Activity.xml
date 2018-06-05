@@ -3,6 +3,60 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Activity">
+
+	<resultMap id="MusicLikeResult" type="MusicLike">
+		<result property="music_like_sq" column="music_like_sq"/>
+		<result property="target_sq" column="target_sq"/>
+		<result property="member_sq" column="member_sq"/>
+		<result property="music_like_type" column="music_like_type"/>
+	</resultMap>
+
+
+	<!-- 1. 좋아요 눌렀을때 실행되는 메소드 -->
+	<insert id="like">
+		INSERT INTO music_like(
+			music_like_sq,member_sq,target_sq,music_like_type
+		) VALUES (
+			music_like_sq.NEXTVAL,#{target_sq}, #{member_sq},#{music_like_type}
+		)
+	</insert>
+	
+	<!-- 좋아요 목록 -->
+	<select id="likeList" resultType="MusicLike">
+		
+			
+			
+	
+	</select>
+	
+	<!-- 좋아요 동일 시퀀스 레코드체크 -->
+	<select id="likeCount" resultType="int">
+		SELECT COUNT(*)
+		FROM music_like
+		WHERE member_sq = #{member_sq}
+		AND target_sq = #{target_sq}
+	</select>
+	
+	<!-- unlike -->
+	<delete id="likeCancel">
+		DELETE FROM music_like
+		WHERE music_like_sq = #{music_like_sq}
+	
+	</delete>
+	
+
+	<update id="like_check" parameterType="HashMap">
+		UPDATE music_like
+		SET music_like_sq = music_like_sq + 1
+		WHERE member_sq=#{member_sq} AND target_sq=#{target_sq}
+	</update>
+	
+	<update id="like_check_cancel" parameterType="HashMap">
+		UPDATE music_like
+		SET music_like_sq = 0
+		WHERE member_sq=#{member_sq} AND target_sq=#{target_sq}
+	</update>
+
 	<!-- PHmaruho -->
 	<select id="selectAlbumType" resultType="Code">
 		SELECT *

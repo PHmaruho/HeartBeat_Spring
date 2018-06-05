@@ -3,6 +3,47 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Common">
+	<resultMap type="Album" id="AlbumResult">
+		<result property="album_sq" column="album_sq"/>
+		<result property="album_nm" column="album_nm"/>
+		<result property="music_sq" column="music_sq"/>
+		<result property="member_sq" column="member_sq"/>
+		<result property="album_comment" column="album_comment"/>
+		<result property="release_dt" column="release_dt"/>
+		<result property="img_path" column="img_path"/>
+		<result property="open_yn" column="open_yn"/>
+		<result property="album_type" column="album_type"/>
+	</resultMap>
+	
+	
+	<select id="mainList" resultType="Album">
+	select *
+	From Album
+	</select>
+	
+	  <!-- album_sq AS albumSq,
+		album_nm AS albumMm,
+		music_sq AS musicSq,
+		member_sq AS memberSq,
+		album_comment AS albumComment,
+		release_dt AS releaseDt,
+		img_path AS imgPath,
+		open_yn AS openYn,
+		album_type AS albumType
+	 -->
+	<select id="arriveList" parameterType="Album" resultMap="AlbumResult">
+		select * from Album
+	</select>
+	
+	
+	
+	<select id="total" resultType="int">
+		select count(*) from Album
+	</select>
+
+
+
+
 
 	<!-- JSY -->
 	<select id="selectAlbumMainList" parameterType="int" resultType="MainList">
