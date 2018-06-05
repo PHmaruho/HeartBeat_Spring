@@ -1,8 +1,11 @@
 package com.zero.heartbeat.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +26,19 @@ public class MemberRestController {
 	@Autowired private CommonService commonService;
 	@Autowired private ExploreService exploreService;
 	@Autowired private MemberService memberService;
+
+	// PHmaruho
+	// searchArtist
+	@RequestMapping(value="/searchArtist")
+	public List<Member> searchArtist(String keyword) {
+		List<Member> list = memberService.searchArtist(keyword);
+		
+		if(list == null) {
+			return null;
+		}
+		
+		return list;
+	}
 	
 	@RequestMapping("/loginRest")
 	public Member loginRest(String email,String pw) {
