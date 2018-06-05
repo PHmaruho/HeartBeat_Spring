@@ -15,7 +15,8 @@
 
 <body>
 	<div class="foot">
-		<input type="button" value="play" onclick="pauseAll()">
+	asd1
+		<input type="button" value="play" onclick="fromFoot()">
 		<input type="button" value="pause" onclick="pauseAll()">
 		
 		<span id="footProgress"></span>
@@ -26,16 +27,15 @@
 			oninput="footPlayer.setVolume(this.value)" onchange="footPlayer.setVolume(this.value)">	
 		<div hidden="true" id="footWaveform"></div>	
 			
-		asd1234
+		<input type="button" value="exTest()" onclick="exTest()">
 	</div>
-	
 	
 <script type="text/javascript">
 	var footPlayer;
 	var footDuration;
-	var footProgressFlag = 0;
 	var footMusic;
-	var isSync = false;
+	var footProgressFlag = 0;
+	var footReady = false;
 	
 	var formatTime = function (time) {
 	    return [
@@ -48,31 +48,20 @@
 	
 	function initFoot(sq) {
 		footMusic = sq;
-		
 		footPlayer = WaveSurfer.create({
 		container : '#footWaveform',
-		barWidth : 3,
-		barHeight : 3,
-		height : 200,
 		});
 		
 		footPlayer.load( "${pageContext.request.contextPath }" + "/resources/music/" + footMusic + ".mp3");
-		
-		footPlayer.on('ready', function () {
-			footDuration = footPlayer.getDuration();
-		    $('#footDuration').text(formatTime(footDuration));
-		    footPlayer.on('audioprocess', footProgress);
-			$('#footProgress').text( formatTime(0));
-			
-			if(isSync) {
-				playAll();
-			}
-		});
 	}
 	
-	function destroyFoot() {
-		footPlayer.destroy();
-	}
+	footPlayer.on('ready', function () {
+		footDuration = footPlayer.getDuration();
+	    $('#footDuration').text(formatTime(footDuration));
+	    footPlayer.on('audioprocess', footProgress);
+		$('#footProgress').text( formatTime(0));
+		footReady = true;
+	});
 	
 	function switchFootProgress() {
 		if (footProgressFlag == 0) {
@@ -92,10 +81,17 @@
 	
 	function changeFootProgress() {
 		$('#footProgress').text( formatTime($('#footProgressBar').val() * footDuration) );
+		seekFootToDetail(Number($('#footProgressBar').val()));
 	}
 	
-	function playFoot() {
-		footPlayer.play();
+	function playFoot(start) {
+		if(arguments.length == 0) {
+			footPlayer.play();
+		} else if(arguments.length == 1) {
+			footPlayer.play(start)
+		} else {
+			console.log('playFoot Error');
+		}
 	}
 	
 	function pauseFoot() {
@@ -106,12 +102,25 @@
 		return footMusic;
 	}
 	
-	function setIsSyncTrue() {
-		isSync = true;
-	}
-	
 	function getFootCurrent() {
 		return footPlayer.getCurrentTime();
+	}
+	
+	function getFootReady() {
+		return footReady;
+	}
+	
+	function seekFoot(number) {
+		console.log(number);
+		footPlayer.seekTo(number);
+	}
+	
+	function footReload(sq) {
+		footPlayer.stop();
+		footReady = false
+		footMusic = sq
+		footPlayer.load( "${pageContext.request.contextPath }" + "/resources/music/" + footMusic + ".mp3");
+		footDuration = footPlayer.getDuration();
 	}
 </script>
 </body>

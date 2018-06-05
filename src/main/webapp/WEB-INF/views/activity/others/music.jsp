@@ -26,6 +26,9 @@
 	
 	<button onclick="goto('/others/music/302')">302</button>
 	<button onclick="goto('/others/music/303')">303</button>
+	<button onclick="seekTest()">seekTest()</button>
+	<button onclick="test(302)">test(302)</button>
+	<button onclick="test(303)">test(303)</button>
 	
 <script type="text/javascript">
 	var detailPlayer;
@@ -35,19 +38,15 @@
 	function initDetail() {
 		detailMusic = $('#music_sq').val();
 		
-		var ctx = document.createElement('canvas').getContext('2d');
-		var linGrad = ctx.createLinearGradient(0, 64, 0, 200);
-		linGrad.addColorStop(0.5, 'rgba(116, 116, 116, 1.000)');
-		linGrad.addColorStop(0.5, 'rgba(183, 183, 183, 1.000)');
-		
 		detailPlayer = WaveSurfer.create({
 		container : '#detailWaveform',
-		waveColor : linGrad,
-		//progressColor : 'purple',
-		barWidth : 3,
-		barHeight : 3,
-		height : 200,
-		reflection : true
+	    waveColor: '#D2EDD4',
+	    progressColor: '#46B54D',
+		barWidth : 5,
+		barHeight : 1,
+		height : 100,
+		barRadius : 6,
+		responsive : 10
 		});
 		
 		detailPlayer.load( "${pageContext.request.contextPath }" + "/resources/music/" + detailMusic + ".mp3");
@@ -70,10 +69,14 @@
 	    $('#detailDuration').text( formatTime(detailPlayer.getDuration()) );
 	    
 		if(footPlayer.isPlaying()) {
-			progressSync(detailMusic);
+			progressSync();
 		}
 	});
 	
+	detailPlayer.on('seek', function (e) {
+	    seekDetailToFoot(e);
+	});
+
 	function playDetail(start) {
 		if(arguments.length == 0) {
 			detailPlayer.play();
@@ -86,6 +89,26 @@
 	
 	function pauseDetail() {
 		detailPlayer.pause();
+	}
+	
+	function getDetailMusic() {
+		return detailMusic;
+	}
+	
+	function getDetailCurrent() {
+		return detailPlayer.getCurrentTime();
+	}
+	
+	function seekDetail(number) {
+		detailPlayer.seekTo(number);
+	}
+	
+	function getDetailDuration() {
+		return detailPlayer.getDuration();
+	}
+	
+	function test(sq) {
+		detailPlayer.load( "${pageContext.request.contextPath }" + "/resources/music/" + sq + ".mp3")
 	}
 </script>
 </body>
