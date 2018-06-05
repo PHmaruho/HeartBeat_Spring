@@ -18,17 +18,18 @@ public class CommonDaoImpl implements CommonDao {
 	// SqlSession
 	@Autowired private SqlSession session;
 
-	
+	//JAN
 	@Override
 	public List<Album> selectAlbumArriveList(Album album) {
 		// TODO Auto-generated method stub
 		return session.selectList("arriveList", album);
 	}
 
-
+	//JAN
 	@Override
 	public List<Album> mainList() {
 		logger.info("CommonDaoImpl mainList before");
 		return session.selectList("mainList");
 	}
+
 }

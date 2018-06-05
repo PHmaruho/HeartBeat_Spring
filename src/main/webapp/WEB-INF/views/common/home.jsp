@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <head>
-<link rel="stylesheet" href="bootstrap.css" type="text/css">
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript">
 
@@ -47,11 +46,26 @@ $.ajax({
 
 .glul {
 	list-style: none;
-	margin: 0;
+	margin-top: 3%;
 	padding: 0;
 	border-style: none;
 	width: 100%;
-	height: 300px;
+	height: 200px;
+}
+.glul li {
+	width: 13%;
+	height: 100%;
+	margin-left: 5%;
+	margin-bottom : 5%;
+	display: inline-block;
+	/* 	border-style: solid;
+	border-width: 1px; */
+}
+
+.glul li img {
+	width: 80%;
+	height: 100%;
+	margin-left: 10%;
 }
 
 </style>
@@ -70,21 +84,22 @@ $.ajax({
 		<c:forEach var="home" items="${list }"  varStatus="i">
 			<li>
 				<%-- <a href="${pageContext.request.contextPath }/resources/img/album/${home.album_sq}"> --%>
-				<img src="${pageContext.request.contextPath }/resources/img/album/${home.img_path}.jpg" width="120px" height="110px" id="mainList">
+				<img src="${pageContext.request.contextPath }/resources/img/album/${home.img_path}.jpg"  id="mainList">
 				<p align="center">
 				<%-- <a href="${pageContext.request.contextPath }/resources/img/album/${home.album_sq}"> --%>
-			${home.album_nm }
+				${home.album_nm }
 			<br>
 				<%-- <a href="${pageContext.request.contextPath }/resources/img/album/${home.album_sq}"> --%>
-				${home.member_sq }<br>
+				${home.member_sq }<br><br><br>
 			</p></li>
 		</c:forEach>
 	</ul>
 		<form name="like" method="post" action="${pageContext.request.contextPath }/my/likeTest">
 			<input type="hidden" name="music_like_sq" value="${home.album_sq }" id="album_sq${i.index }">
-				<img src="${pageContext.request.contextPath }/resources/img/profile/like.png" width="30px" height="30" id="like_img">
+				<img src="${pageContext.request.contextPath }/resources/img/profile/like.png" width="20px" height="20px" id="like_img">
 			<input type="button" value="like" onclick="like_func('music_like_sq${i.index}');" class="btn">
 		
 		</form>
 	</div>
+	
 </body>

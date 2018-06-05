@@ -24,14 +24,14 @@ public class CommonServiceImpl implements CommonService {
 	@Autowired private ExploreDao exploreDao;
 	@Autowired private MemberDao memberDao;
 	
-	
+	//JAN 최신 컨텐츠 목록
 	@Override
 	public List<Album> selectAlbumArriveList(Album album) {
 		// TODO Auto-generated method stub
 		return commonDao.selectAlbumArriveList(album);
 	}
 
-	//메인 컨텐츠 목록
+	//JAN 메인 컨텐츠 목록
 	@Override
 	public List<Album> mainList() {
 		logger.info("CommonServiceImpl mainList before");

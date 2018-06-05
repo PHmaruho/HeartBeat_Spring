@@ -15,7 +15,7 @@
 		<result property="album_type" column="album_type"/>
 	</resultMap>
 	
-	
+	<!-- JAN -->
 	<select id="mainList" resultType="Album">
 	select *
 	From Album
@@ -31,6 +31,7 @@
 		open_yn AS openYn,
 		album_type AS albumType
 	 -->
+	 <!-- JAN -->
 	<select id="arriveList" parameterType="Album" resultMap="AlbumResult">
 		select * from Album
 	</select>
