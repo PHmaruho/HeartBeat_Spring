@@ -1,6 +1,7 @@
 package com.zero.heartbeat.controller;
 
 import java.util.Locale;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,6 +18,7 @@ import com.zero.heartbeat.model.Member;
 import com.zero.heartbeat.service.ActivityService;
 import com.zero.heartbeat.service.CommonService;
 import com.zero.heartbeat.service.ExploreService;
+import com.zero.heartbeat.service.MailService;
 import com.zero.heartbeat.service.MemberService;
 
 @Controller
@@ -29,6 +31,7 @@ public class MemberController {
 	@Autowired private CommonService commonService;
 	@Autowired private ExploreService exploreService;
 	@Autowired private MemberService memberService;
+	@Autowired private MailService mailService;
 	
 	@RequestMapping("/loginForm")
 	public String loginForm(Model model, Locale locale) {
@@ -37,8 +40,16 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/emailCertify")
-	public String emailCertify(Model model,Member member) {
+	public String emailCertify(Model model,Member member,HttpSession session) {
 		logger.info(member.getEmail());
+		boolean check = false;
+		int ran = new Random().nextInt(100000) + 10000; // 10000 ~ 99999
+        String joinCode = String.valueOf(ran);
+        session.setAttribute("joinCode", joinCode);
+        String subject = "회원가입 인증 코드 발급 안내 입니다.";
+        StringBuilder sb = new StringBuilder();
+        sb.append("귀하의 인증 코드는 " + joinCode + " 입니다.");
+        check = mailService.send(subject, sb.toString(), "kimmuradin@gmail.com", member.getEmail(), null);
 		return "member/emailCertify";
 	}
 	
