@@ -44,59 +44,60 @@ public class ExploreRestController {
 	//JSY
 	@RequestMapping("/discoverList")
 	public ModelAndView selectAllSearchList(String val) {
-		String tag= ""; 
-		String artist=""; 
-		String title= ""; 
-		String[] tagCheck1
-		= {"#@","#*","##","@@","@*","@#","**","*@","*#","!","$","%","^","&","#","@","*"};
-		String[] tagCheck2= {"#","@","*"};
+		List<String> tag= new ArrayList<String>(); 
+		List<String> artist=new ArrayList<String>();
+		List<String> title= new ArrayList<String>(); 
 		
 		List<SearchList> discoverList= new ArrayList<SearchList>();
 		ModelAndView model= new ModelAndView();
 		SearchKeyword dto=new SearchKeyword();
 		String[] arr1=val.split(" ");
-		/*ArrayList<String> arrList=new ArrayList<String>(); 
 		
-		for(int i=0;i<arr1.length;i++){
-			for(int m=0;m<tagCheck1.length;m++){
-				int v=arr1[i].lastIndexOf(tagCheck1[m]);
-				logger.info("arr1["+i+"]:"+arr1[i]+"/tagCheck["+m+"]:"+tagCheck1[m]+"/lastIndexOf:"+v);
-				if((v!=-1)&& (v==0)) {
-					for(int n=0;n<tagCheck2.length;n++) {
-						int len2=arr1[i].lastIndexOf(tagCheck2[n]);
-						if((len2!=-1)&& (len2==0)) {
-						logger.info("========arr1["+i+"]:"+arr1[i]+"/tagCheck["+m+"]:"+tagCheck1[m]+"=======");
-						arrList.add(arr1[i]);
-						}
-					}
-				}
-			}
-		}
-		
-		for(int i=0;i<arrList.size();i++) {
-			logger.info("arrList: "+s);
-		}*/
 		for(String s:arr1) {
 			if(s.contains("#")&&!s.equals("#")) {
 				String[] splitTag=s.split("#");
-						tag+=splitTag[1]+" ";
+						tag.add(splitTag[1]);
 						logger.info("#ArrTag:"+tag);
 			}
 			else if(s.contains("@")&&!s.equals("@")) {
 				String[] splitArtist=s.split("@");
-				artist+=splitArtist[1]+" ";
+				artist.add(splitArtist[1]);
 				logger.info("@ArrArtist:"+artist);
 			}
 			else if(s.contains("*")&&!s.equals("*")) {
 				String[] splitTitle=s.split("\\*");
-						title+=splitTitle[1]+" ";
+						title.add(splitTitle[1]);
 						logger.info("*ArrTitle:"+title);
 			}
 		}
+		
+		if(tag.isEmpty()|| tag.size()==0||tag.contains(" ")) tag.add("전체");
+		if(artist.isEmpty()|| artist.size()==0|| artist.contains(" ")) artist.add("전체");
+		if(title.isEmpty()|| title.size()==0|| title.contains(" ")) title.add("전체");
+		
+		if(artist.contains("전체")&& title.contains("전체")&&tag.contains("전체")) {
+			discoverList=null;
+		}else {
+			dto.setArrArtist(artist);
+			dto.setArrTag(tag);
+			dto.setArrTitle(title);
+			discoverList= exploreService.selectAllSearchList(dto);
+		}
+		
+		logger.info("artist: "+artist.size());
+		logger.info("title: "+title.size());
+		logger.info("tag: "+tag.size());
+		model.addObject("discoverList", discoverList);
+		model.addObject("artist",dto.getArrArtist());
+		model.addObject("tag",dto.getArrTag());
+		model.addObject("title",dto.getArrTitle());
+		
+		model.setViewName("explore/discoverList");
+		
 		/*logger.info("Total tag:"+tag);
 		logger.info("Total artist:"+artist);
 		logger.info("Total title:"+title);*/
-		
+		/*
 		if(tag.isEmpty()|| tag.length()==0||tag.equals(" ")) tag="all";
 		if(artist.isEmpty()|| artist.length()==0|| artist.equals(" ")) artist="all";
 		if(title.isEmpty()|| title.length()==0|| title.equals(" ")) title="all";
@@ -129,7 +130,7 @@ public class ExploreRestController {
 		model.addObject("word_title", word_title);
 		
 		model.addObject("discoverList", discoverList);
-		model.setViewName("explore/discoverList");
+		model.setViewName("explore/discoverList");*/
 		logger.info("ExploreRestController selectAllSearchList working");
 		return model;
 	}

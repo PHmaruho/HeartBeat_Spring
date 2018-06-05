@@ -27,15 +27,22 @@
 	
 	<c:if test="${ discoverList!=null }">
 		<p>
-			Result With 
-				/ @ 가수 [${word_art }]
-				/ * 곡명 [${word_title }]
-				/ # 태그 [${word_tag  }]
+			Result With @가수 [ 
+				<c:forEach var="art" items="${ artist}">
+					/${art }
+				</c:forEach>
+				] *곡명 [
+				<c:forEach var="tit" items="${title }">
+					/${tit }
+				</c:forEach>
+				] #태그 [
+				<c:forEach var="tag" items="${tag }">
+					/${tag}
+				</c:forEach>
+				]
 		<p>
 		<table border="1">
 		<c:forEach var="list" items="${discoverList}" varStatus="i">
-		
-			
 			<tr>
 				<td colspan="8">
 					<a href="/others/music/${list.url}">
