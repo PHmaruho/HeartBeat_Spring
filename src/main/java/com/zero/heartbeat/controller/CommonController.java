@@ -70,7 +70,7 @@ public class CommonController {
 			List<Album> arriveList = commonService.selectAlbumArriveList(album);
 			model.addAttribute("arriveList", arriveList);
 			logger.debug("인터셉터 테스트");
-			return "arrive";
+			return "common/arrive";
 	}
 	
 	@RequestMapping("/test2")
@@ -94,18 +94,6 @@ public class CommonController {
 		logger.info("CommonController selectAlbumMainList working");
 		return "common/mainList";
 	}
-	
-	
-	
-	@RequestMapping("/arrive")
-	public String arriveList(Album album, Model model) throws Exception {
-		List<Album> arriveList = commonService.selectAlbumArriveList(album);
-		model.addAttribute("arriveList", arriveList);
-		logger.debug("인터셉터 테스트");
-		return "arrive";
-	}
-		
-	
 	
 	
 	@RequestMapping("/head")

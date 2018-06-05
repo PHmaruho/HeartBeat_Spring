@@ -78,6 +78,7 @@ $.ajax({
 	
 <%-- 	${kkk}<p>
 	<img src="${pageContext.request.contextPath }/resources/img/album/${kkk}"> --%>
+<form name="like" method="post" action="${pageContext.request.contextPath }/my/likeTest">
 <div class="a">
 	<ul class="glul">
 		<c:forEach var="home" items="${list }"  varStatus="i">
@@ -89,17 +90,16 @@ $.ajax({
 				${home.album_nm }
 			<br>
 				<%-- <a href="${pageContext.request.contextPath }/resources/img/album/${home.album_sq}"> --%>
-				${home.member_sq }<br><br><br>
+				${home.member_sq }<br>
+				<input type="hidden" name="music_like_sq" value="${home.album_sq }" id="album_sq${i.index }">
+				<input type="button" value="like" onclick="like_func('album_sq${i.index}');" class="btn">
+<%-- 					<img src="${pageContext.request.contextPath }/resources/img/profile/dislike.png" width="20px" height="20px" id="like_img">
+ --%>				<br><br>
 			</p></li>
 		</c:forEach>
 	</ul>
-		<form name="like" method="post" action="${pageContext.request.contextPath }/my/likeTest">
-			<input type="hidden" name="music_like_sq" value="${home.album_sq }" id="album_sq${i.index }">
-				<img src="${pageContext.request.contextPath }/resources/img/profile/like.png" width="20px" height="20px" id="like_img">
-			<input type="button" value="like" onclick="like_func('music_like_sq${i.index}');" class="btn">
-		
-		</form>
 	</div>
+</form>
 	<button onclick="goto('/others/music/302')">음악상세</button>
 	<form id="form">
 		<input type="text" name="txt">
