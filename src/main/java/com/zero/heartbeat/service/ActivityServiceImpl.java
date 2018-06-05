@@ -1,6 +1,7 @@
 package com.zero.heartbeat.service;
 
 import java.util.List;
+import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,8 @@ import com.zero.heartbeat.dao.CommonDao;
 import com.zero.heartbeat.dao.ExploreDao;
 import com.zero.heartbeat.dao.MemberDao;
 import com.zero.heartbeat.model.MusicLike;
+import com.zero.heartbeat.model.Code;
+import com.zero.heartbeat.model.Music;
 
 @Service
 public class ActivityServiceImpl implements ActivityService {
@@ -54,8 +57,16 @@ public class ActivityServiceImpl implements ActivityService {
 		return activityDao.likeList(member_sq);
 	}
 	
+	// PHmaruho
+	@Override
+	public List<Code> selectAlbumType() {
+		// TODO Auto-generated method stub
+		return activityDao.selectAlbumType();
+	}
 	
-
-	
-	
+	// 최우일
+	@Override
+	public HashMap<String, Object> selectMusicDetail(int sq) {
+		return activityDao.selectMusicDetail(sq);
+	}
 }

@@ -1,5 +1,7 @@
 package com.zero.heartbeat.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -12,6 +14,7 @@ import com.zero.heartbeat.dao.CommonDao;
 import com.zero.heartbeat.dao.ExploreDao;
 import com.zero.heartbeat.dao.MemberDao;
 import com.zero.heartbeat.model.Album;
+import com.zero.heartbeat.model.MainList;
 
 @Service
 public class CommonServiceImpl implements CommonService {
@@ -24,7 +27,15 @@ public class CommonServiceImpl implements CommonService {
 	@Autowired private ExploreDao exploreDao;
 	@Autowired private MemberDao memberDao;
 	
-	//JAN 최신 컨텐츠 목록
+	
+	// JSY
+	public List<MainList> selectAlbumMainList(int startNum) {
+		List<MainList> list= new ArrayList<MainList>();
+		list= commonDao.selectAlbumMainList(startNum);
+		logger.info("CommonServiceImpl selectAlbumMainList working");
+		return list;
+	}
+
 	@Override
 	public List<Album> selectAlbumArriveList(Album album) {
 		// TODO Auto-generated method stub

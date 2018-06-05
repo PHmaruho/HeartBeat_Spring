@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <head>
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script type="text/javascript">
 
 function like_func() {
@@ -73,7 +72,7 @@ $.ajax({
 <body>
 	<button onclick="goto('/test2')">to test2</button>
 	<button onclick="goto('/test3')">to test3</button>
-	
+	<button onclick="goto('/loginForm')">to login</button>
 	<button onclick="goto('/arrive')" >최신음악</button>
 	<a href="goto('/trend')">인기음악</a>
 	
@@ -101,5 +100,11 @@ $.ajax({
 		
 		</form>
 	</div>
+	<button onclick="goto('/others/music/302')">음악상세</button>
+	<form id="form">
+		<input type="text" name="txt">
+		<input type="password" name="pw">
+		<input type="button" value="/test3" onclick="toform('/test3', 'form')">
+	</form>
 	
 </body>

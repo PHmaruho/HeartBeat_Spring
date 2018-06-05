@@ -1,5 +1,7 @@
 package com.zero.heartbeat.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.zero.heartbeat.model.Album;
+import com.zero.heartbeat.model.MainList;
 import com.zero.heartbeat.service.ActivityService;
 import com.zero.heartbeat.service.CommonService;
 import com.zero.heartbeat.service.ExploreService;
@@ -77,12 +80,41 @@ public class CommonController {
 	
 	@RequestMapping("/test3")
 	public String test3(Model model, String txt, String pw) {
-		logger.info(txt);
-		logger.info(pw);
-		
 		return "test3";
+	}
+	
+	
+	// JSY
+	@RequestMapping("/mainList")
+	public String selectAlbumMainList(Model model) {
+		List<MainList> list= new ArrayList<MainList>();
+		int startNum=0;
+		list= commonService.selectAlbumMainList(startNum);
+		model.addAttribute("list", list);
+		logger.info("CommonController selectAlbumMainList working");
+		return "common/mainList";
+	}
+	
+	
+	
+	@RequestMapping("/arrive")
+	public String arriveList(Album album, Model model) throws Exception {
+		List<Album> arriveList = commonService.selectAlbumArriveList(album);
+		model.addAttribute("arriveList", arriveList);
+		logger.debug("인터셉터 테스트");
+		return "arrive";
 	}
 		
 	
 	
+	
+	@RequestMapping("/head")
+	public String head(Model model) {
+		return "common/head";
+	}
+	
+	@RequestMapping("/foot")
+	public String foot(Model model) {
+		return "common/foot";
+	}
 }
