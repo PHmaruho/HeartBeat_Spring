@@ -3,5 +3,54 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Explore">
+	<!-- JSY -->
+	<select id="selectAllSearchList" parameterType="SearchKeyword" resultType="SearchList">
+		select * from (
+				(		select a.album_sq, a.img_path, a.album_nm, a.release_dt
+								,m.music_sq, m.music_nm, m.music_no, m.music_like
+								, m.music_share, m.url
+								from music m, album a 
+								where m.album_sq=a.album_sq 
+								and a.open_yn=m.open_yn 
+								and a.open_yn='Y'
+								  <if test="!arrTitle.contains('전체')">
+								  	<foreach collection="arrTitle" item="aTitle" open="" close="" separator=" ">
+										and music_nm like '%'||#{aTitle}||'%'
+									</foreach>
+								  </if>
+				  				order by album_sq,music_no
+	  				)
+					join 
+								(		select artist_sq,music_sq,nick 
+										from artist a, member m 
+										where a.member_sq=m.member_sq 
+										
+									 	<if test="!arrArtist.contains('전체')">
+										 	<foreach collection="arrArtist" item="aArtist" open="" close="" separator=" ">
+												and nick like '%'||#{aArtist}||'%'
+											</foreach>
+									  	</if>
+										
+					) using(music_sq)) 
+					join 
+								(		select distinct music_sq 
+										from music_tag mt, tag t 
+										where mt.tag_cd=t.tag_cd 
+										<if test="!arrTag.contains('전체')">
+											<foreach collection="arrTag" item="aTag" open="" close="" separator=" ">
+												and t.tag_meaning like '%'||#{aTag}||'%'
+											</foreach>
+										</if>	
+										) using (music_sq)
+	</select>
+	<select id="getKeywordTag" parameterType="String" resultType="Tag">
+		select tag_meaning from tag where tag_meaning like '%'||#{searchWord}||'%'
+	</select>
+	<select id="getKeywordArtist" parameterType="String" resultType="Member">
+		select nick from member where nick like '%'||#{searchWord}||'%'
+	</select>
+	<select id="getKeywordTitle" parameterType="String" resultType="Music">
+		select music_nm from music where music_nm like '%'||#{searchWord}||'%'
+	</select>
 
 </mapper>

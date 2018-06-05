@@ -25,6 +25,7 @@ function goto(link) {
 
 function toform(link, id) {
 	var data = $(id).serialize();
+	alert(data);
 	
 	if (swapContent(link + "?r=1&" + data)) {
 		history.pushState(null, null, processUrl() + link);
