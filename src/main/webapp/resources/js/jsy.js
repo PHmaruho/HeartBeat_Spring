@@ -1,5 +1,6 @@
 /**
  * JSY's Javascript File
+	주석은 해당 jsp 페이지!
  */
 
 /*common- discover, explore- discoverList */
@@ -24,7 +25,8 @@ function searchList(){
 	var arr= keyword.split(" ");
 	var con=["#","@","*"];
 	var con2=["#@","#*","##","@@","@*","@#","**","*@","*#"];
-	var con3=["!","$","%","^","&","+","-","=","-","_","|"];
+	var con3
+	=["!","$","%","^","&","+","-","=","-","_","|","[","]",":",";","\'","<",">",".","{","}","?",",","\"","||"];
 	var count1=0;
 	var count2=0;
 	var count3=0;
@@ -101,6 +103,9 @@ function searchList(){
 		});	
 }
 
+
+
+
 /*common- mainList*/
 function mainListShare(str){
 	var mainList_id='music_sq'+str;
@@ -115,4 +120,17 @@ function mainListShare(str){
 			alert('공유되었습니다.');
 		}
 	});
+}
+
+/* member - memberAlarmList */
+function alarmContentShow(){
+	$('#alarmContent').toggle();
+}
+function getMemberAlarmList(v){
+	$.ajax({
+		url:'/heartbeat/do/readMemberAlarm',
+		data:{
+			
+		}
+	})
 }

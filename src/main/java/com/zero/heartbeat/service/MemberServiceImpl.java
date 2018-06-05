@@ -1,5 +1,8 @@
 package com.zero.heartbeat.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,8 @@ import com.zero.heartbeat.dao.ActivityDao;
 import com.zero.heartbeat.dao.CommonDao;
 import com.zero.heartbeat.dao.ExploreDao;
 import com.zero.heartbeat.dao.MemberDao;
+import com.zero.heartbeat.model.Alarm;
+import com.zero.heartbeat.model.Member;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -26,5 +31,9 @@ public class MemberServiceImpl implements MemberService {
 		memberDao.insertAlarmShareMusic(id,music_sq);
 		logger.info("MemberServiceImpl mainListShare working");
 		
+	}
+	public List<Alarm> selectAlarmMemberList(Member dto) {
+		logger.info("MemberServiceImpl selectAlarmMemberList working");
+		return memberDao.selectAlarmMemberList(dto);
 	}
 }
