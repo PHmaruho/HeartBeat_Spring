@@ -36,6 +36,12 @@ public class MemberController {
 		return "member/loginForm";
 	}
 	
+	@RequestMapping("/emailCertify")
+	public String emailCertify(Model model,Member member) {
+		logger.info(member.getEmail());
+		return "member/emailCertify";
+	}
+	
 	@RequestMapping("/loginPro")
 	public String loginPro(Model model,String email,String pw,HttpSession session) {
 		String returnString = "";

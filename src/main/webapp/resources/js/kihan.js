@@ -28,6 +28,10 @@ function kkhcheck() {
 									if (data.status == "A2") {
 										document.getElementById("msg").innerHTML = "재재된 계정입니다.";
 									}
+									if (data.status == "A0") {
+										
+										location.href = "/heartbeat/emailCertify?email="+data.email;
+									}
 								}
 							}
 						});
@@ -66,6 +70,7 @@ $(document).ready(function(){
 });
 
 function kkhjoin(){
+	var emailex = /([\da-z_-]+)@([\da-z_-]+)\.([a-z\.]{2,6})/;
 	var Vemail = $('#email').val();
 	var Vpw = $('#pw').val();
 	var Vre_pw = $('#re_pw').val();
@@ -75,6 +80,7 @@ function kkhjoin(){
 	document.getElementById("repw_msg").innerHTML="";
 	document.getElementById("nick_msg").innerHTML="";
 	if(Vemail != null && Vemail != ""){
+		if(emailex.test(Vemail)){
 		if(Vpw != null && Vpw != ""){
 			if(Vre_pw != null && Vre_pw != ""){
 				if(Vnick != null && Vnick != ""){
@@ -101,6 +107,7 @@ function kkhjoin(){
 			}
 		}else{
 			document.getElementById("pw_msg").innerHTML="비밀번호를 입력해주세요.";
+		}
 		}
 	}else{
 		document.getElementById("email_msg").innerHTML="이메일을 입력해주세요";

@@ -21,7 +21,7 @@
   					 select nvl(max(member_sq),0)+1 
   					 from member
   					 )
-  					 ,#{email},#{pw},#{nick},'A1',sysdate,sysdate
+  					 ,#{email},#{pw},#{nick},'A0',sysdate,sysdate
 		)
 	</select>
 </mapper>
