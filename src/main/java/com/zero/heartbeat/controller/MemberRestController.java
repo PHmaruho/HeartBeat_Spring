@@ -39,4 +39,33 @@ public class MemberRestController {
 		
 		return list;
 	}
+	
+	@RequestMapping("/loginRest")
+	public Member loginRest(String email,String pw) {
+		Member member = new Member();
+		member.setEmail(email);
+		member.setPw(pw);
+		
+		Member result = memberService.loginRest(member);
+		if(result.getEmail() == null || result.getEmail() == "") {
+			result.setEmail("");
+		}
+		return result;
+	}
+	
+	@RequestMapping("/login")
+	public int login(String email,String pw) {
+		Member member = new Member();
+		member.setEmail(email);
+		member.setPw(pw);
+		
+		int result = memberService.login(member);
+		return result;
+	}
+	
+	@RequestMapping("/emailCheck")
+	public int emailCheck(String email) {
+		int result = memberService.emailCheck(email);
+		return result;
+	}
 }

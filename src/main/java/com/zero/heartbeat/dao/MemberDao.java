@@ -13,4 +13,14 @@ public interface MemberDao {
 
 	// PHmaruho
 	public List<Member> searchArtist(String keyword);
+	int login(Member member);
+
+	Member loginRest(Member member);
+
+	int emailCheck(String email);
+
+	void join(Member member);
+
+	
+
 }

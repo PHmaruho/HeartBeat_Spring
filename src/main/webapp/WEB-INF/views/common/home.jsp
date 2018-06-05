@@ -87,4 +87,10 @@ $.ajax({
 		
 		</form>
 	</div>
+	<form id="form">
+		<input type="text" name="txt">
+		<input type="password" name="pw">
+		<input type="button" value="/test3" onclick="toform('/test3', 'form')">
+	</form>
+	<button onclick="goto('/loginForm')">to login</button>
 </body>

@@ -39,4 +39,29 @@ public class MemberDaoImpl implements MemberDao {
 		// TODO Auto-generated method stub
 		return session.selectList("selectMemberArtist", keyword);
 	}
+
+	@Override
+	public int login(Member member) {
+		// TODO Auto-generated method stub
+		return session.selectOne("login",member);
+	}
+
+	@Override
+	public Member loginRest(Member member) {
+		// TODO Auto-generated method stub
+		return session.selectOne("loginRest",member);
+	}
+
+	@Override
+	public int emailCheck(String email) {
+		// TODO Auto-generated method stub
+		return session.selectOne("emailCheck",email);
+	}
+
+	@Override
+	public void join(Member member) {
+		// TODO Auto-generated method stub
+		session.insert("join",member);
+	}
+
 }
