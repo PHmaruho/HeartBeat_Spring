@@ -3,6 +3,20 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Member">
+	<!-- JSY -->
+	<insert id="insertAlarmShareMusic" parameterType="hashmap">
+		insert into alarm values(alarm_sq.nextval,#{id},#{music_sq},'Music','N')
+	</insert>
+		<select id="selectAlarmMemberList" parameterType="Member" resultType="Alarm">
+			<!-- SELECT 	nick, a.* 	from 
+								(SELECT 	alarm_sq,member_sq,target_sq
+						 					,alarm_type, status
+				          					FROM alarm, member 
+				          					WHERE status='N' 
+				          					and member_sq=#{member_sq}) a 
+				          		inner join member
+				          		on a.target_sq=member.member_sq -->
+		</select>
 	<!-- PHmaruho -->
 	<select id="selectMemberArtist" parameterType="java.lang.String" resultType="Member">
 		SELECT member_sq, nick, email

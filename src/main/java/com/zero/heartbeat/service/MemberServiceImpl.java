@@ -1,5 +1,6 @@
 package com.zero.heartbeat.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ import com.zero.heartbeat.dao.ActivityDao;
 import com.zero.heartbeat.dao.CommonDao;
 import com.zero.heartbeat.dao.ExploreDao;
 import com.zero.heartbeat.dao.MemberDao;
+import com.zero.heartbeat.model.Alarm;
 import com.zero.heartbeat.model.Member;
 
 @Service
@@ -23,6 +25,17 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired private CommonDao commonDao;
 	@Autowired private ExploreDao exploreDao;
 	@Autowired private MemberDao memberDao;
+	
+	// JSY
+	public void insertAlarmShareMusic(String id,String music_sq) {
+		memberDao.insertAlarmShareMusic(id,music_sq);
+		logger.info("MemberServiceImpl mainListShare working");
+		
+	}
+	public List<Alarm> selectAlarmMemberList(Member dto) {
+		logger.info("MemberServiceImpl selectAlarmMemberList working");
+		return memberDao.selectAlarmMemberList(dto);
+	}
 	
 	// PHmaruho
 	@Override

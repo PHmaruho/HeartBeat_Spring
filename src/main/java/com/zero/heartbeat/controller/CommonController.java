@@ -1,5 +1,8 @@
 package com.zero.heartbeat.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.zero.heartbeat.model.Album;
+import com.zero.heartbeat.model.MainList;
 import com.zero.heartbeat.service.ActivityService;
 import com.zero.heartbeat.service.CommonService;
 import com.zero.heartbeat.service.ExploreService;
@@ -60,4 +65,18 @@ public class CommonController {
 		
 		return "test3";
 	}
+	
+	
+	// JSY
+	@RequestMapping("/mainList")
+	public String selectAlbumMainList(Model model) {
+		List<MainList> list= new ArrayList<MainList>();
+		int startNum=0;
+		list= commonService.selectAlbumMainList(startNum);
+		model.addAttribute("list", list);
+		logger.info("CommonController selectAlbumMainList working");
+		return "common/mainList";
+	}
+	
+	
 }
