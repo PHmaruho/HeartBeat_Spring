@@ -71,9 +71,6 @@ public class CommonController {
 	
 	@RequestMapping("/test3")
 	public String test3(Model model, String txt, String pw) {
-		logger.info(txt);
-		logger.info(pw);
-		
 		return "test3";
 	}
 	
@@ -101,4 +98,14 @@ public class CommonController {
 		
 	
 	
+	
+	@RequestMapping("/head")
+	public String head(Model model) {
+		return "common/head";
+	}
+	
+	@RequestMapping("/foot")
+	public String foot(Model model) {
+		return "common/foot";
+	}
 }

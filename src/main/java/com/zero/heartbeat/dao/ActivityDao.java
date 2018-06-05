@@ -5,6 +5,10 @@ import java.util.List;
 import com.zero.heartbeat.model.MusicLike;
 
 import com.zero.heartbeat.model.Code;
+import java.util.HashMap;
+
+import com.zero.heartbeat.model.Music;
+
 public interface ActivityDao {
 
 	int likeCount(int music_like_sq, int member_sq);
@@ -14,4 +18,8 @@ public interface ActivityDao {
 
 	// PHmaruho
 	public List<Code> selectAlbumType();
+	
+	// 최우일
+	HashMap<String, Object> selectMusicDetail(int sq);
+
 }

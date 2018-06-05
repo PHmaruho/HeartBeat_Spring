@@ -7,8 +7,7 @@
 <title>Heart Beat</title>
 </head>
 <body>
-<script type="text/javascript">
-	location.href="/heartbeat";
-</script>
+	<a href="/heartbeat">홈페이지</a>
+	<a href="/heartbeat/others/music/302">음악상세</a>
 </body>
 </html>
