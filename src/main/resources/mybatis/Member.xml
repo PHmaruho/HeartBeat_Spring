@@ -3,5 +3,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Member">
-
+	<!-- PHmaruho -->
+	<select id="selectMemberArtist" parameterType="java.lang.String" resultType="Member">
+		SELECT member_sq, nick, email
+		FROM member
+		WHERE email like '%' || #{keyword} || '%'
+		   OR nick  like '%' || #{keyword} || '%'
+		ORDER BY nick desc, email desc
+	</select>
 </mapper>

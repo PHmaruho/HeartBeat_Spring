@@ -39,8 +39,6 @@ public class ActivityController {
 	public String uploadAlbum(Model model) {
 		List<Code> type = activityService.selectAlbumType();
 		
-		logger.info(type + "");
-		
 		model.addAttribute("album_type", type);
 		
 		return "activity/my/uploadAlbum";
