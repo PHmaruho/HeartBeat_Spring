@@ -3,5 +3,47 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Member">
-
+	<!-- JSY -->
+	<insert id="insertAlarmShareMusic" parameterType="hashmap">
+		insert into alarm values(alarm_sq.nextval,#{id},#{music_sq},'Music','N')
+	</insert>
+		<!-- <select id="selectAlarmMemberList" parameterType="Member" resultType="Alarm">
+			SELECT 	nick, a.* 	from 
+								(SELECT 	alarm_sq,member_sq,target_sq
+						 					,alarm_type, status
+				          					FROM alarm, member 
+				          					WHERE status='N' 
+				          					and member_sq=#{member_sq}) a 
+				          		inner join member
+				          		on a.target_sq=member.member_sq
+		</select> -->
+	<!-- PHmaruho -->
+	<select id="selectMemberArtist" parameterType="java.lang.String" resultType="Member">
+		SELECT member_sq, nick, email
+		FROM member
+		WHERE email like '%' || #{keyword} || '%'
+		   OR nick  like '%' || #{keyword} || '%'
+		ORDER BY nick desc, email desc
+	</select>
+	<select id="login" parameterType="Member" resultType="int">
+		select count(*) from member where email=#{email} and pw=#{pw}
+	</select>
+	
+	<select id="loginRest" parameterType="Member" resultType="Member">
+		select * from member where email=#{email} and pw=#{pw}
+	</select>
+	
+	<select id="emailCheck" parameterType="Member" resultType="int">
+		select count(*) from member where email=#{email}
+	</select>
+	
+	<select id="join" parameterType="Member">
+		insert into member values(
+  					(
+  					 select nvl(max(member_sq),0)+1 
+  					 from member
+  					 )
+  					 ,#{email},#{pw},#{nick},'A0',sysdate,sysdate
+		)
+	</select>
 </mapper>

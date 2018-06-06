@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>Heart Beat</title>
 <link href="${pageContext.request.contextPath }/resources/css/bootstrap.css" rel="stylesheet" type="text/css">
 <script src="${pageContext.request.contextPath }/resources/js/jquery.3.3.1.js"></script>
@@ -57,6 +57,7 @@
 		<c:import url="/foot"></c:import>
 	</div>
 	<input type="hidden" value="${packageName }" id="packageName">
+<script src="${pageContext.request.contextPath }/resources/js/kihan.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/js/main.js"></script>
 	<script src="${pageContext.request.contextPath }/resources/js/musicControl.js"></script>
 </body>

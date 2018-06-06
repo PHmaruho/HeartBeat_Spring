@@ -1,11 +1,15 @@
 package com.zero.heartbeat.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.zero.heartbeat.model.Member;
 import com.zero.heartbeat.service.ActivityService;
 import com.zero.heartbeat.service.CommonService;
 import com.zero.heartbeat.service.ExploreService;
@@ -22,5 +26,46 @@ public class MemberRestController {
 	@Autowired private CommonService commonService;
 	@Autowired private ExploreService exploreService;
 	@Autowired private MemberService memberService;
+
+	// PHmaruho
+	// searchArtist
+	@RequestMapping(value="/searchArtist")
+	public List<Member> searchArtist(String keyword) {
+		List<Member> list = memberService.searchArtist(keyword);
+		
+		if(list == null) {
+			return null;
+		}
+		
+		return list;
+	}
 	
+	@RequestMapping("/loginRest")
+	public Member loginRest(String email,String pw) {
+		Member member = new Member();
+		member.setEmail(email);
+		member.setPw(pw);
+		
+		Member result = memberService.loginRest(member);
+		if(result.getEmail() == null || result.getEmail() == "") {
+			result.setEmail("");
+		}
+		return result;
+	}
+	
+	@RequestMapping("/login")
+	public int login(String email,String pw) {
+		Member member = new Member();
+		member.setEmail(email);
+		member.setPw(pw);
+		
+		int result = memberService.login(member);
+		return result;
+	}
+	
+	@RequestMapping("/emailCheck")
+	public int emailCheck(String email) {
+		int result = memberService.emailCheck(email);
+		return result;
+	}
 }

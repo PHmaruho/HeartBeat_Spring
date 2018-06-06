@@ -3,6 +3,7 @@ package com.zero.heartbeat.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,4 +23,14 @@ public class CommonRestController {
 	@Autowired private CommonService commonService;
 	@Autowired private ExploreService exploreService;
 	@Autowired private MemberService memberService;
+	
+	//JSY
+	@RequestMapping("/mainListShare")
+	public void insertAlarmShareMusic(Model model,String music_sq) {
+		logger.info(music_sq);
+		/*String id="708";
+		memberService.insertAlarmShareMusic(id,music_sq);*/
+		logger.info("CommonRestController mainListShare working");
+		
+	}
 }

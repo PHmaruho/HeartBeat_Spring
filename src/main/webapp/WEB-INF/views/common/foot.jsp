@@ -3,7 +3,7 @@
 <head>
 <style type="text/css">
 	.foot {
-		background-color: yellow;
+		background-color: black;
 		height: 80px;
 	}
 	
