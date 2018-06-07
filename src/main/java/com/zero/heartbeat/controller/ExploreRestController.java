@@ -138,6 +138,7 @@ public class ExploreRestController {
 	public Map<String,List<Tag>> getKeywordTag(String searchWord) {
 		List<Tag> list=new ArrayList<Tag>();
 		list= exploreService.getKeywordTag(searchWord);
+		logger.info("exploreRestController keyword Tag: "+searchWord);
 		Map<String,List<Tag>> map=new HashMap<String,List<Tag>>();
 		map.put("list", list);
 		logger.info("ExploreRestController getKeywordTag working");

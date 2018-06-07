@@ -9,66 +9,6 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/js/jquery-ui.css">
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jsy.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-	$("#detailText").autocomplete({
-		focus:function(event,ui){
-			$(this).val(ui.item.label);
-			return false;
-		},
-		minlength:1,
-		source:function(request,response){
-			var keyword=($('#cat').val()==null)? "":$('#cat').val();
-			$.ajax({
-				url: "/heartbeat/do/getKeyword/"+keyword,
-				dataType:"json",
-				data:{
-					searchWord:request.term
-				},
-				success:function(data){
-					if(keyword=='tag'){
-						response($.map(data.list,function(item){
-							return{
-								label:item.tag_meaning,
-								value:item.tag_meaning
-							};
-						}))	
-					}
-					else if(keyword=='artist'){
-						response($.map(data.list,function(item){
-							return{
-								label:item.nick,
-								value:item.nick
-							};
-						}))	
-					}
-					else if(keyword=='title'){
-						response($.map(data.list,function(item){
-							return{
-								label:item.music_nm,
-								value:item.music_nm
-							};
-						}))	
-					}
-				},
-			})
-		},
-		select:function(event,ui){
-			var cat=$('#cat').val();
-			var det= $('#detailText').val();
-			
-			if(cat=='title'){
-				$('#searchBox').val($('#searchBox').val()+'*'+det+' ');
-			}else if(cat=='artist'){
-				$('#searchBox').val($('#searchBox').val()+'@'+det+' ');
-			}else if(cat=='tag'){
-				$('#searchBox').val($('#searchBox').val()+'#'+det+' ');
-			} 
-		}
-	})
-})
-
-</script>
 </head>
 <body>
 	<div id="placeHolder">
@@ -84,7 +24,7 @@ $(document).ready(function(){
 		<input type="button" value="title" onclick="searchDetailShowKeyword(this)">
 
 		<div id="detailTextSpace" style="display: none;">
-			<input type="hidden" id="cat"> 
+			<input type="text" id="cat" style="display:none;"readonly> 
 			상세검색: <input type="text" id="detailText"> 
 		</div>
 	</div>

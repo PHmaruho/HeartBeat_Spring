@@ -37,6 +37,7 @@ public class ExploreServiceImpl implements ExploreService {
 	}
 	public List<Tag> getKeywordTag(String searchWord) {
 		List<Tag> tag=exploreDao.getKeywordTag(searchWord);
+		logger.info("ExploreServiceImpl keyword Tag: "+searchWord);
 		logger.info("ExploreServiceImpl getKeywordTag working");
 		return tag;
 	}

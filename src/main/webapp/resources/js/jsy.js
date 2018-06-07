@@ -12,6 +12,7 @@ function searchDetailShowKeyword(category){
 	var r=category.value;
 	$('#cat').val("");
 	$('#cat').val(r);
+	$('#cat').show;
 	$('#detailTextSpace').show();
 }
 
@@ -22,6 +23,7 @@ function clickdetailText(){
 
 function searchList(){
 	var keyword=document.getElementById('searchBox').value.trim();
+	//alert('keyword: '+keyword)
 	var arr= keyword.split(" ");
 	var con=["#","@","*"];
 	var con2=["#@","#*","##","@@","@*","@#","**","*@","*#"];
@@ -102,7 +104,63 @@ function searchList(){
 			}
 		});	
 }
-
+$(document).ready(function(){
+	$("#detailText").autocomplete({
+		focus:function(event,ui){
+			$(this).val(ui.item.label);
+			return false;
+		},
+		minlength:1,
+		source:function(request,response){
+			var keyword=($('#cat').val()==null)? "":$('#cat').val();
+			$.ajax({
+				url: "/heartbeat/do/getKeyword/"+keyword,
+				dataType:"json",
+				data:{
+					searchWord:request.term
+				},
+				success:function(data){
+					if(keyword=='tag'){
+						response($.map(data.list,function(item){
+							return{
+								label:item.tag_meaning,
+								value:item.tag_meaning
+							};
+						}))	
+					}
+					else if(keyword=='artist'){
+						response($.map(data.list,function(item){
+							return{
+								label:item.nick,
+								value:item.nick
+							};
+						}))	
+					}
+					else if(keyword=='title'){
+						response($.map(data.list,function(item){
+							return{
+								label:item.music_nm,
+								value:item.music_nm
+							};
+						}))	
+					}
+				},
+			})
+		},
+		select:function(event,ui){
+			var cat=$('#cat').val();
+			var det= $('#detailText').val();
+			
+			if(cat=='title'){
+				$('#searchBox').val($('#searchBox').val()+'*'+det+' ');
+			}else if(cat=='artist'){
+				$('#searchBox').val($('#searchBox').val()+'@'+det+' ');
+			}else if(cat=='tag'){
+				$('#searchBox').val($('#searchBox').val()+'#'+det+' ');
+			} 
+		}
+	})
+})
 
 
 
