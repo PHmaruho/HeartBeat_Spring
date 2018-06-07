@@ -105,13 +105,33 @@ public class MemberController {
 		System.out.println(member.getPw());
 		int loginSession =  memberService.login(member);
 		if(loginSession != 0) {
-			session.setAttribute("loginSession", loginSession);
-			returnString =  "member/loginPro";
+			session.setAttribute("loginSession", email);
+			returnString =  "common/home";
 		}else {
 			returnString = "member/loginForm";
 		}
 		return returnString;
 	}	
+	
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "/common/home";
+	}
+	
+	@RequestMapping("/memberInfoChangeForm")
+	public String memberInfoChangeForm(Model model,HttpSession session) {
+		Member member = new Member();
+		member = memberService.getMemberInfo(session.getAttribute("loginSession")+"");
+		model.addAttribute("member",member);
+		return "member/memberInfoChangeForm";
+	}
+	
+	@RequestMapping("/memberInfoChangePro")
+	public String memberInfoChangePro(Member member,Model model) {
+		model.addAttribute("member",member);
+		return "member/memberInfoChangePro";
+	}
 	
 	@RequestMapping("/joinForm")
 	public String joinForm(Model model) {

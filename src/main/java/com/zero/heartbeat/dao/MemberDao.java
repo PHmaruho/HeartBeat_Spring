@@ -22,6 +22,8 @@ public interface MemberDao {
 	void join(Member member);
 
 	void turnMemberActivity(String email);
+	
+	Member getMemberInfo(String string);
 
 	
 

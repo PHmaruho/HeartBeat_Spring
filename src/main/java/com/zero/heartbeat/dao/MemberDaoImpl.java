@@ -69,5 +69,11 @@ public class MemberDaoImpl implements MemberDao {
 		// TODO Auto-generated method stub
 		session.update("turnMemberActivity",email);
 	}
+	
+	@Override
+	public Member getMemberInfo(String string) {
+		// TODO Auto-generated method stub
+		return session.selectOne("getMemberInfo",string);
+	}
 
 }

@@ -50,4 +50,8 @@
 	<update id="turnMemberActivity" parameterType="java.lang.String">
 		update member set status = 'A1' where email = #{email}
 	</update>
+	
+	<select id="getMemberInfo" parameterType="java.lang.String" resultType="Member">
+		select * from member where email = #{string}
+	</select>
 </mapper>

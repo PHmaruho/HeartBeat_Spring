@@ -79,5 +79,12 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		memberDao.turnMemberActivity(email);
 	}
+	
+	@Override
+	public Member getMemberInfo(String string) {
+		// TODO Auto-generated method stub
+		return memberDao.getMemberInfo(string);
+	}
+
 
 }

@@ -24,6 +24,7 @@ public interface MemberService {
 	void join(Member member);
 
 	void turnMemberActivity(String email);
-
-
+	
+	Member getMemberInfo(String string);
+	
 }
