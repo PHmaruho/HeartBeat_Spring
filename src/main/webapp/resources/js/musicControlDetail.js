@@ -11,7 +11,7 @@ var maxDetailNum = $('#maxDetailNum').val();
 //			console.log(i + '번째 : ' + getFootMusicSq());
 //		}
 	}
-	console.log(musicMain.getFootReady());
+//	console.log(musicMain.getFootReady());
 //		while(!musicMain.getFootReady()) {
 //			setTimeout(function () {
 //				console.log(!musicMain.getFootReady());
@@ -54,6 +54,48 @@ function loadDetail(detailNum, sq) {
 	detailPlayer[detailNum].load( "/heartbeat/resources/music/" + sq + ".mp3");
 }
 
+function playDetail(detailNum) {
+	pauseDetail();
+	if (detailPlayer[detailNum].sq == footPlayer.sq) {
+		playAll(detailNum);
+	} else {
+		loadFoot(detailPlayer[detailNum].sq);
+		checkFootReady(playAll, detailNum);
+	}
+}
+
+function pauseDetail() {
+	for (var i = 0; i <= maxDetailNum; i++) {
+		detailPlayer[i].pause();
+	}
+}
+
+function checkFootReady(callback, parameter) {
+	var repeat = setInterval(isReady, 50);
+	var params = arguments.length;
+	
+	function isReady() {
+		if(musicMain.getFootReady() == true) {
+			clearInterval(repeat);
+			if (typeof callback === "function") {
+				if(params == 1) {
+					callback();
+				} else if(params == 2) {
+					callback(parameter);
+				} else {
+					console.log('checkFootReady parameter error');
+				}
+			} else {
+				console.log('checkFootReady callback error');
+			}
+		}
+	}
+}
+
+function playAll(detailNum) {
+	footPlayer.play();
+	detailPlayer[detailNum].play();
+}
 //
 //
 //

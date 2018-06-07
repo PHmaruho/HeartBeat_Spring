@@ -15,8 +15,8 @@
 
 <body>
 	<div class="foot">
-	<button onclick="musicMain.getMusicPage()">getMusicPage</button>
-	<button onclick="musicMain.setMusicPage(true)">setMusicPage(true)</button>
+	<button onclick="checkFootReady()">checkFootReady()1</button>
+	<button onclick="musicMain.getFootReady()">getFootReady()</button>
 	
 		<input type="button" value="play" onclick="footPlayer.play()">
 		<input type="button" value="pause" onclick="footPlayer.pause()">

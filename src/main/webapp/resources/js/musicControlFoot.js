@@ -23,8 +23,8 @@ function initFoot(sq) {
 
 
 function loadFoot(sq) {
-	footPlayer.load( "/heartbeat/resources/music/" + sq + ".mp3");
 	musicMain.setFootReady(false);
+	footPlayer.load( "/heartbeat/resources/music/" + sq + ".mp3");
 }
 
 function switchFootProgress() {

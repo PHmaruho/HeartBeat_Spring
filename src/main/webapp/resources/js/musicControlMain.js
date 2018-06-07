@@ -32,13 +32,3 @@ var musicMain = (function() {
 		setFootReady : setFootReady
 	};
 })();
-
-function checkFootReady() {
-	while(!musicMain.getFootReady()) {
-		setTimeout(function () {
-			console.log(!musicMain.getFootReady());
-		}, 100);
-	}
-	
-	return true;
-}
