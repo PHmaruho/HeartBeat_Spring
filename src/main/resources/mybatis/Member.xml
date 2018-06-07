@@ -24,4 +24,8 @@
   					 ,#{email},#{pw},#{nick},'A0',sysdate,sysdate
 		)
 	</select>
+	
+	<update id="turnMemberActivity" parameterType="java.lang.String">
+		update member set status = 'A1' where email = #{email}
+	</update>
 </mapper>

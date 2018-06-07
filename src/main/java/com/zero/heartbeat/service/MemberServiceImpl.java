@@ -52,4 +52,10 @@ public class MemberServiceImpl implements MemberService {
 		memberDao.join(member);
 	}
 
+	@Override
+	public void turnMemberActivity(String email) {
+		// TODO Auto-generated method stub
+		memberDao.turnMemberActivity(email);
+	}
+
 }

@@ -40,4 +40,10 @@ public class MemberDaoImpl implements MemberDao {
 		session.insert("join",member);
 	}
 
+	@Override
+	public void turnMemberActivity(String email) {
+		// TODO Auto-generated method stub
+		session.update("turnMemberActivity",email);
+	}
+
 }

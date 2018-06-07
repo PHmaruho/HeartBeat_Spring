@@ -41,7 +41,8 @@ public class MemberController {
 	
 	@RequestMapping("/emailCertify")
 	public String emailCertify(Model model,Member member,HttpSession session) {
-		logger.info(member.getEmail());
+		String returnString = "";
+		logger.info("여기에요 여기"+member.getEmail());
 		boolean check = false;
 		int ran = new Random().nextInt(100000) + 10000; // 10000 ~ 99999
         String joinCode = String.valueOf(ran);
@@ -50,7 +51,25 @@ public class MemberController {
         StringBuilder sb = new StringBuilder();
         sb.append("귀하의 인증 코드는 " + joinCode + " 입니다.");
         check = mailService.send(subject, sb.toString(), "kimmuradin@gmail.com", member.getEmail(), null);
-		return "member/emailCertify";
+        if(check == true) {
+        	model.addAttribute("joinCode",joinCode);
+        	returnString = "member/emailCertify";
+        }else {
+        	//이메일 보내기 실패시
+        }
+		return returnString;
+	}
+	
+	@RequestMapping("/emailServiceSuccess")
+	public String emailServiceSuccess(Model model,Member member) {
+		logger.info("emailServiceSuccess"+member.getEmail());
+		try {
+			memberService.turnMemberActivity(member.getEmail());
+			return "member/emailServiceSuccess";
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	@RequestMapping("/loginPro")
