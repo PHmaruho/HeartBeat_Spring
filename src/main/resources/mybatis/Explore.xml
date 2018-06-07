@@ -117,8 +117,6 @@
 	  				 			</choose>
 	  				 		</if>	
 						)
-					
-										
 	</select>
 	<select id="getKeywordTag" parameterType="String" resultType="Tag">
 		select tag_meaning from tag where tag_meaning like '%'||#{searchWord}||'%'

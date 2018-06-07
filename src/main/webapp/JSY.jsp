@@ -12,11 +12,11 @@
 	// location.href="/heartbeat/mainList";
 	
 	/* Search Page */
-	location.href="/heartbeat/discover";
+	//location.href="/heartbeat/discover";
 	// location.href="/heartbeat";
 
 	/* Alarm Page */
-	 //location.href="/heartbeat/memberAlarmList";
+	 location.href="/heartbeat/memberAlarmList";
 </script>
 </body>
 </html>

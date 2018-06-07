@@ -1,9 +1,11 @@
 package com.zero.heartbeat.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,7 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.zero.heartbeat.model.Alarm;
+import com.zero.heartbeat.model.AlarmList;
 import com.zero.heartbeat.model.Member;
 import com.zero.heartbeat.service.ActivityService;
 import com.zero.heartbeat.service.CommonService;
@@ -35,17 +37,17 @@ public class MemberController {
 	@Autowired private MemberService memberService;
 	
 	//JSY
-	@RequestMapping("/memberAlarmList")
+	@RequestMapping(value="/memberAlarmList",method=RequestMethod.GET)
 	public String selectAlarmMemberList(Model model) {
-		int id2=709;
-		Member dto=new Member();
-		dto.setMember_sq(id2);
-		List<Alarm> list=new ArrayList<Alarm>();
-		list=memberService.selectAlarmMemberList(dto);
-		for(int i=0;i<list.size();i++) {
-			logger.info(i+"번째 변수: "+"alarm_sq["+list.get(i).getAlarm_sq()+"]");
-		}
+		int id2=708;
+		HashMap<String,Object> map=new HashMap<String,Object>();
+		map.put("member_sq", id2);
+		memberService.selectAlarmMemberList(map);
 		
+		List<AlarmList> list=new ArrayList<AlarmList>();
+		
+		list= (ArrayList<AlarmList>) map.get("alarmList");
+		logger.info("list.size:"+list.size());
 		model.addAttribute("list", list);
 		logger.info("MemberController selectAlarmMemberList working");
 		return "member/memberAlarmList";

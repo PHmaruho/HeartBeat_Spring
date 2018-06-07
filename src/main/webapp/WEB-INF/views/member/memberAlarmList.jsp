@@ -14,16 +14,29 @@
 	<p>
 	<input type="button" value="알람" onclick="alarmContentShow()">
 	<br>
-	<div id="alarmContent" style="height:150px;weight:200px;display:none;">
+	<div id="alarmContent" style="height:150px;weight:200px;display:show;">
 		div id="alarmContent"<p>
 		==================================<br>
-		<c:if test="${list==null }">
+		<c:if test="${list==null|| list.size()==0 }">
 			새로운 알람이 없습니다.
 		</c:if>
 		
 		<c:if test="${list!=null }">
 			<c:forEach var="alarm" items="${ list}">
 			
+				<table border="1">
+					<tr>
+						<td>alarm_sq: ${alarm.alarm_sq }<td>
+						<td>alarm_type: ${alarm.alarm_type }<td>
+						<td>status: ${alarm.status }<td>
+						<td>nick: ${alarm.nick }<td>
+						<td>reply_level: ${alarm.reply_level }<td>
+						<td>album_nm: ${alarm.album_nm }<td>
+						<td>music_nm: ${alarm.music_nm }<td>
+						
+					</tr>
+				</table>
+			<%-- 
 			<input type="hidden" name="alarm_sq" value="${alarm.alarm_sq }">
 			<input type="hidden" name="member_sq" value="${alarm.member_sq }">
 				
@@ -33,7 +46,7 @@
 				target_sq: ${alarm.target_sq }<br>
 				alarm_type: ${alarm.alarm_type }<br>
 				alarm_status: ${alarm.status }<br>
-				===========================<br>	
+				===========================<br>	 --%>
 			
 			</c:forEach>
 		</c:if>

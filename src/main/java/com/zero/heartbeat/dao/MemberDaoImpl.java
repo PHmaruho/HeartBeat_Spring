@@ -27,10 +27,10 @@ public class MemberDaoImpl implements MemberDao {
 		map.put("music_sq", music_sq);
 		session.insert("insertAlarmShareMusic", map);
 	}
-	public List<Alarm> selectAlarmMemberList(Member dto) {
+	public void selectAlarmMemberList(HashMap<String, Object> map) {
 		logger.info("MemberDaoImpl selectAlarmMemberList working");
-		logger.info("dto id: "+dto.getMember_sq());
-		return session.selectList("selectAlarmMemberList",dto);
+
+		session.selectOne("selectAlarmMemberList",map);
 	}
 
 	// PHmaruho

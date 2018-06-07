@@ -1,6 +1,7 @@
 package com.zero.heartbeat.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -32,9 +33,9 @@ public class MemberServiceImpl implements MemberService {
 		logger.info("MemberServiceImpl mainListShare working");
 		
 	}
-	public List<Alarm> selectAlarmMemberList(Member dto) {
+	public void selectAlarmMemberList(HashMap<String, Object> map) {
 		logger.info("MemberServiceImpl selectAlarmMemberList working");
-		return memberDao.selectAlarmMemberList(dto);
+		memberDao.selectAlarmMemberList(map);
 	}
 	
 	// PHmaruho
