@@ -45,7 +45,7 @@ $.ajax({
 
 .glul {
 	list-style: none;
-	margin-top: 3%;
+	margin-top: 10%;
 	padding: 0;
 	border-style: none;
 	width: 100%;
@@ -55,7 +55,7 @@ $.ajax({
 	width: 13%;
 	height: 100%;
 	margin-left: 5%;
-	margin-bottom : 5%;
+	margin-bottom : 10%;
 	display: inline-block;
 	/* 	border-style: solid;
 	border-width: 1px; */
@@ -70,6 +70,7 @@ $.ajax({
 </style>
 </head>
 <body>
+<br>
 	<button onclick="goto('/test2')">to test2</button>
 	<button onclick="goto('/test3')">to test3</button>
 	<button onclick="goto('/loginForm')">to login</button>

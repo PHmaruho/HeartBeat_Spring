@@ -8,7 +8,6 @@
 <title>Insert title here</title>
 
 <link rel="stylesheet" href="menu.css" type="text/css">
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -33,8 +32,6 @@
 	        </div>
 			<input type="text" class="form-control" placeholder="Search">
 	      	</div>
-	      	
-	      	
 	      	
 	      
 	      <div class="col-sm-4 text-center">
@@ -72,9 +69,9 @@
     	
     </div>
 </nav>
-<!-- 
+ 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
- -->
+
 </body>
 </html>
