@@ -62,5 +62,14 @@ public class ActivityController {
 		model.addAttribute("music", map);
 		return "activity/others/music";
 	}
+	
+	// 최우일
+	@RequestMapping("/others/artist/{sq}")
+	public String othersArtist(Model model, @PathVariable int sq) {
+		int[] list = {302,303,304,305,306,307};
+		
+		model.addAttribute("list", list);
+		return "activity/others/artist";
+	}
 
 }

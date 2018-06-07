@@ -3,6 +3,7 @@ function supports_history_api() {
 }
 
 function swapContent(link) {
+	musicMain.setMusicPage(false);
 	if(link == "/foot?r=1" || link == "/head?r=1") {
 		var newPath = link.replace('/', '').split('?')[0];
 		$('#' + newPath +  'Div').load(processUrl() + link);

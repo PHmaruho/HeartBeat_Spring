@@ -55,6 +55,7 @@ $.ajax({
 </style>
 </head>
 <body>
+	<button onclick="goto('/others/artist/0')">아티스트</button>
 	<button onclick="goto('/test2')">to test2</button>
 	<button onclick="goto('/test3')">to test3</button>
 	<button onclick="goto('/loginForm')">to login</button>
