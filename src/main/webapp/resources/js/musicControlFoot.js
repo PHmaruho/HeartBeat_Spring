@@ -9,12 +9,19 @@ function initFoot(sq) {
 	});
 	
 	loadFoot(sq);
-	footPlayer.sq = sq;
 	
 	footPlayer.on('ready', function () {
 		footPlayer.duration = footPlayer.getDuration();
 		$('#footDuration').text(formatTime(footPlayer.duration));
 		$('#footProgress').text( formatTime(0));
+		
+		if (musicMain.getMusicPage()) {
+			for(var i = 0; i <= maxDetailNum; i++) {
+				if (detailPlayer[i].sq == footPlayer.sq) {
+					musicMain.setDetailNum(i);
+				}
+			}
+		}
 		musicMain.setFootReady(true);
 	});
 	
@@ -23,7 +30,9 @@ function initFoot(sq) {
 
 
 function loadFoot(sq) {
+	footPlayer.sq = sq;
 	musicMain.setFootReady(false);
+	musicMain.setDetailNum(-1);
 	footPlayer.load( "/heartbeat/resources/music/" + sq + ".mp3");
 }
 
@@ -45,8 +54,25 @@ function footProgress()  {
 
 function changeFootProgress() {
 	$('#footProgress').text( formatTime($('#footProgressBar').val() * footPlayer.duration) );
+	
+	var num = musicMain.getDetailNum();
+	if (num != -1) {
+		detailPlayer[num].seekTo(Number($('#footProgressBar').val()));
+	}
 }
 
-function getFootMusicSq() {
-	return footPlayer.sq;
+function playFromFoot() {
+	var num = musicMain.getDetailNum();
+	if (num != -1) {
+		detailPlayer[num].play();
+	}
+	footPlayer.play();
+}
+
+function pauseFromFoot() {
+	var num = musicMain.getDetailNum();
+	if (num != -1) {
+		detailPlayer[num].pause();
+	}
+	footPlayer.pause();
 }

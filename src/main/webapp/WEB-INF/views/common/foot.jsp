@@ -15,11 +15,8 @@
 
 <body>
 	<div class="foot">
-	<button onclick="checkFootReady()">checkFootReady()1</button>
-	<button onclick="musicMain.getFootReady()">getFootReady()</button>
-	
-		<input type="button" value="play" onclick="footPlayer.play()">
-		<input type="button" value="pause" onclick="footPlayer.pause()">
+		<input type="button" value="play" onclick="playFromFoot()">
+		<input type="button" value="pause" onclick="pauseFromFoot()">
 		
 		<span id="footProgress"></span>
 		<input type="range" id="footProgressBar" value="0" min="0.0" max="1.0" step="0.0001"

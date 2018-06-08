@@ -3,9 +3,9 @@ package com.zero.heartbeat.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -104,8 +104,12 @@ public class CommonController {
 		return "common/head";
 	}
 	
+	// 최우일
 	@RequestMapping("/foot")
-	public String foot(Model model) {
+	public String foot(Model model, HttpServletRequest requset) {
+		int sessionSq = 703;
+		
+		List<HashMap<String, Object>> list = commonService.selectPlaylistFoot(sessionSq);
 		return "common/foot";
 	}
 }

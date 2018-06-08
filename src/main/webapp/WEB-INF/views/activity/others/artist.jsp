@@ -3,12 +3,12 @@
 <head>
 </head>
 <body>
-	
+	<button onclick="goto('/')">홈으로</button><br>
 	<c:forEach var="music" items="${list }" varStatus="status">
 		sq : ${music }
 		<input type="hidden" id="detailMusicSq${status.index }" value="${music }">
-		<button onclick="playDetail(${status.index })">play</button>
-		<button onclick="pauseDetail()">pause</button>
+		<button onclick="playFromDetail(${status.index })">play</button>
+		<button onclick="pauseFromDetail(${status.index })">pause</button>
 		<span id="detailProgress${status.index }"></span>
 		<span id="detailDuration${status.index }"></span>
 		<div id="detailWaveForm${status.index }"></div>

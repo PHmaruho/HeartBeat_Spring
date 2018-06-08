@@ -6,17 +6,7 @@ var maxDetailNum = $('#maxDetailNum').val();
 	musicMain.setMusicPage(true);
 	for (var i = 0; i <= maxDetailNum; i++) {
 		initDetail(i, $('#detailMusicSq' + i).val());
-		
-//		if(detailPlayer[i].sq == getFootMusicSq()) {
-//			console.log(i + '번째 : ' + getFootMusicSq());
-//		}
 	}
-//	console.log(musicMain.getFootReady());
-//		while(!musicMain.getFootReady()) {
-//			setTimeout(function () {
-//				console.log(!musicMain.getFootReady());
-//			}, 100);
-//		}
 })();
 
 function initDetail(detailNum, sq) {
@@ -30,7 +20,8 @@ function initDetail(detailNum, sq) {
 		barHeight : 1,
 		height : 100,
 		barRadius : 6,
-		responsive : 10
+		responsive : 10,
+		hideScrollbar : true
 	});
 	
 	loadDetail(detailNum, sq)
@@ -42,11 +33,20 @@ function initDetail(detailNum, sq) {
 	    $('#detailDuration' + detailNum).text( formatTime(detailPlayer[detailNum].getDuration()) );
 	    $('#detailProgress' + detailNum).text( formatTime(0));
 	    detailPlayer[detailNum].ready = true;
+	    
+	    if (maxDetailNum >= 1) {
+	    	checkFootReady(checkSameDetailNum, detailNum)
+	    }
 	});
 	
 	detailPlayer[detailNum].on('audioprocess', function () {
 	    $('#detailProgress' + detailNum).text( formatTime(detailPlayer[detailNum].getCurrentTime()) );
 	    detailPlayer[detailNum].ready = false;
+	});
+	
+	detailPlayer[detailNum].on('seek', function (e) {
+		var num = detailNum;
+		seekFromDetail(e, num);
 	});
 }
 
@@ -54,19 +54,37 @@ function loadDetail(detailNum, sq) {
 	detailPlayer[detailNum].load( "/heartbeat/resources/music/" + sq + ".mp3");
 }
 
-function playDetail(detailNum) {
-	pauseDetail();
+function playFromDetail(detailNum) {
+	pauseAllDetail();
 	if (detailPlayer[detailNum].sq == footPlayer.sq) {
-		playAll(detailNum);
 	} else {
 		loadFoot(detailPlayer[detailNum].sq);
-		checkFootReady(playAll, detailNum);
+	}
+	checkFootReady(playAll, detailNum);
+}
+
+function playAll(detailNum) {
+	var e = detailPlayer[detailNum].getCurrentTime();
+	footPlayer.play(e);
+	detailPlayer[detailNum].play();
+}
+
+function pauseAllDetail() {
+	for (var i = 0; i <= maxDetailNum; i++) {
+		detailPlayer[i].pause();
 	}
 }
 
-function pauseDetail() {
-	for (var i = 0; i <= maxDetailNum; i++) {
-		detailPlayer[i].pause();
+function pauseFromDetail(detailNum) {
+	detailPlayer[detailNum].pause();
+	footPlayer.pause();
+}
+
+function seekFromDetail(e, detailNum) {
+	if (musicMain.getDetailNum() == detailNum) {
+		$('#footProgressBar').val(e)
+		$('#footProgress').text( formatTime(footPlayer.duration * e) );
+		footPlayer.seekTo(e);
 	}
 }
 
@@ -92,9 +110,15 @@ function checkFootReady(callback, parameter) {
 	}
 }
 
-function playAll(detailNum) {
-	footPlayer.play();
-	detailPlayer[detailNum].play();
+
+function checkSameDetailNum(j) {
+	if (detailPlayer[j].sq == footPlayer.sq) {
+		musicMain.setDetailNum(j);
+		if (footPlayer.isPlaying()) {
+			detailPlayer[j].seekTo(Number($('#footProgressBar').val()));
+			detailPlayer[j].play();
+		}
+	}
 }
 //
 //

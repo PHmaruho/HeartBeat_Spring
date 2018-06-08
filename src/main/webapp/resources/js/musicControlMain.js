@@ -8,6 +8,7 @@ var formatTime = function (time) {
 var musicMain = (function() {
 	var isMusicPage = false;
 	var isFootReady = false;
+	var detailNum = -1;
 	
 	function getMusicPage() {
 		return isMusicPage;
@@ -25,10 +26,20 @@ var musicMain = (function() {
 		isFootReady = bool;
 	};
 	
+	function getDetailNum() {
+		return detailNum;
+	};
+	
+	function setDetailNum(num) {
+		detailNum = num;
+	};
+	
 	return {
 		getMusicPage : getMusicPage,
 		setMusicPage : setMusicPage,
 		getFootReady : getFootReady,
-		setFootReady : setFootReady
+		setFootReady : setFootReady,
+		getDetailNum : getDetailNum,
+		setDetailNum : setDetailNum
 	};
 })();

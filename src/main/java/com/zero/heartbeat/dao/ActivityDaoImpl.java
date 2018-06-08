@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.zero.heartbeat.model.MusicLike;
 import com.zero.heartbeat.model.Code;
+import com.zero.heartbeat.model.Member;
 import com.zero.heartbeat.model.Music;
 
 @Repository
@@ -60,10 +61,14 @@ public class ActivityDaoImpl implements ActivityDao {
 		return session.selectList("selectAlbumType");
 	}
 
-	// 최우일
 	@Override
-	public HashMap<String, Object> selectMusicDetail(int sq) {
+	public HashMap<String, Object> selectMusicDetail(int sq) {	// 최우일
 		return session.selectOne("selectMusicDetail", sq);
+	}
+
+	@Override
+	public List<Member> selectMusicArtists(int sq) {	// 최우일
+		return session.selectList("selectMusicArtists", sq);
 	}
 
 }

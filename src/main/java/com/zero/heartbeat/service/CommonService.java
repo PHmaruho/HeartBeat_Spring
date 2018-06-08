@@ -14,4 +14,7 @@ public interface CommonService {
 
 	List<Album> selectAlbumArriveList(Album album);
 	List<Album> mainList();
+
+
+	List<HashMap<String, Object>> selectPlaylistFoot(int sessionSq);	// 최우일
 }

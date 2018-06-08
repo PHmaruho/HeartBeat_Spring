@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.zero.heartbeat.model.Code;
+import com.zero.heartbeat.model.Member;
 import com.zero.heartbeat.service.ActivityService;
 import com.zero.heartbeat.service.CommonService;
 import com.zero.heartbeat.service.ExploreService;
@@ -56,10 +57,11 @@ public class ActivityController {
 	// 최우일
 	@RequestMapping("/others/music/{sq}")
 	public String othersMusic(Model model, @PathVariable int sq) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map = activityService.selectMusicDetail(sq);
+		HashMap<String, Object> map = activityService.selectMusicDetail(sq);
+		List<Member> list= activityService.selectMusicArtists(sq);
 		
 		model.addAttribute("music", map);
+		model.addAttribute("artist", list);
 		return "activity/others/music";
 	}
 	
