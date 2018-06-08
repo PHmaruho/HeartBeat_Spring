@@ -2,15 +2,14 @@ package com.zero.heartbeat.model;
 
 public class AlarmList {
 
-	private int			alarm_sq;
-	private String		alarm_type;
-	private String		status;
-	private String nick;
-
-	private int reply_level;
-	
+	private int		alarm_sq;
+	private String	alarm_type;
 	private String album_nm;
+	private String music_like_type;
 	private String music_nm;
+	private String nick;
+	private int reply_level;
+
 	
 	public int getAlarm_sq() {
 		return alarm_sq;
@@ -23,12 +22,6 @@ public class AlarmList {
 	}
 	public void setAlarm_type(String alarm_type) {
 		this.alarm_type = alarm_type;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
 	}
 	public String getNick() {
 		return nick;
@@ -53,6 +46,12 @@ public class AlarmList {
 	}
 	public void setMusic_nm(String music_nm) {
 		this.music_nm = music_nm;
+	}
+	public String getMusic_like_type() {
+		return music_like_type;
+	}
+	public void setMusic_like_type(String music_like_type) {
+		this.music_like_type = music_like_type;
 	}
 	
 	

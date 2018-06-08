@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.zero.heartbeat.model.Alarm;
 import com.zero.heartbeat.model.AlarmList;
 import com.zero.heartbeat.model.Member;
 import com.zero.heartbeat.service.ActivityService;
@@ -37,21 +38,11 @@ public class MemberController {
 	@Autowired private MemberService memberService;
 	
 	//JSY
-	@RequestMapping(value="/memberAlarmList",method=RequestMethod.GET)
-	public String selectAlarmMemberList(Model model) {
-		int id2=708;
-		HashMap<String,Object> map=new HashMap<String,Object>();
-		map.put("member_sq", id2);
-		memberService.selectAlarmMemberList(map);
-		
-		List<AlarmList> list=new ArrayList<AlarmList>();
-		
-		list= (ArrayList<AlarmList>) map.get("alarmList");
-		logger.info("list.size:"+list.size());
-		model.addAttribute("list", list);
-		logger.info("MemberController selectAlarmMemberList working");
-		return "member/memberAlarmList";
+	@RequestMapping("/alarmTest")
+	public String alarmTest(Model model,Locale locale) {
+		return "member/alarmTest";
 	}
+	
 	
 	@RequestMapping("/loginForm")
 	public String loginForm(Model model, Locale locale) {

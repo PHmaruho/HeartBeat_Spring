@@ -3,8 +3,21 @@
 	주석은 해당 jsp 페이지!
  */
 
-/*common- discover, explore- discoverList */
- function showDetailSearch(){
+// Common- mainList
+function mainListShare(v){
+	var c=$('#music_sq'+v).val();
+	$.ajax({
+		url:'/heartbeat/do/mainListShare',
+		data:{
+			music_sq:c
+		},
+		success:function(){
+			alert('공유되었습니다.');
+		}
+	})
+}
+//common- discover, explore- discoverList
+function showDetailSearch(){
 	$('#detailSearchCategory').toggle();
 }
 
@@ -104,91 +117,41 @@ function searchList(){
 			}
 		});	
 }
-$(document).ready(function(){
-	$("#detailText").autocomplete({
-		focus:function(event,ui){
-			$(this).val(ui.item.label);
-			return false;
-		},
-		minlength:1,
-		source:function(request,response){
-			var keyword=($('#cat').val()==null)? "":$('#cat').val();
-			$.ajax({
-				url: "/heartbeat/do/getKeyword/"+keyword,
-				dataType:"json",
-				data:{
-					searchWord:request.term
-				},
-				success:function(data){
-					if(keyword=='tag'){
-						response($.map(data.list,function(item){
-							return{
-								label:item.tag_meaning,
-								value:item.tag_meaning
-							};
-						}))	
-					}
-					else if(keyword=='artist'){
-						response($.map(data.list,function(item){
-							return{
-								label:item.nick,
-								value:item.nick
-							};
-						}))	
-					}
-					else if(keyword=='title'){
-						response($.map(data.list,function(item){
-							return{
-								label:item.music_nm,
-								value:item.music_nm
-							};
-						}))	
-					}
-				},
-			})
-		},
-		select:function(event,ui){
-			var cat=$('#cat').val();
-			var det= $('#detailText').val();
-			
-			if(cat=='title'){
-				$('#searchBox').val($('#searchBox').val()+'*'+det+' ');
-			}else if(cat=='artist'){
-				$('#searchBox').val($('#searchBox').val()+'@'+det+' ');
-			}else if(cat=='tag'){
-				$('#searchBox').val($('#searchBox').val()+'#'+det+' ');
-			} 
-		}
-	})
-})
-
-
-
-/*common- mainList*/
-function mainListShare(str){
-	var mainList_id='music_sq'+str;
-	var mainList_value=document.getElementById(mainList_id).value.trim();
-	
-	$.ajax({
-		url:'/heartbeat/do/mainListShare',
-		data:{
-			music_sq:mainList_value
-			},
-		success:function(){
-			alert('공유되었습니다.');
-		}
-	});
-}
 
 /* member - memberAlarmList */
-function alarmContentShow(){
-	$('#alarmContent').toggle();
-}
 function getMemberAlarmList(v){
+	var v="ㅇㅅㅇ";
+	//alert('getMembreAlarmList: '+v);
+	$(document).ready(function(){
+		setInterval(
+				alarmContentShow(v),1000)
+	});
+}
+function alarmContentShow(v){
+	//alert('alarmContentShow ok');
+	//$('#alarmContent').toggle();
+	//alert('v: '+v);
 	$.ajax({
-		url:'/heartbeat/do/readMemberAlarm',
+		url:'/heartbeat/do/memberAlarmList',
 		data:{
-			
+			id:711
+		},
+		success:function(data){
+			$('#alarmContent').html("");
+			$('#alarmContent').html(data);
+		}
+	})
+}
+function updateAlarmStatus(v){
+	var c=$('#alarm_sq'+v).val();
+	//alert('alarm_sq: '+c);
+	$.ajax({
+		url:'/heartbeat/do/updateAlarmStatus',
+		data:{
+			alarmSq:c
+		},
+		success:function(){
+			alert('읽음 ok');
 		}
 	})
 }

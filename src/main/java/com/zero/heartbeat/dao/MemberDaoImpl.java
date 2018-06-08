@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.zero.heartbeat.model.Alarm;
+import com.zero.heartbeat.model.AlarmList;
 import com.zero.heartbeat.model.Member;
 
 @Repository
@@ -29,9 +30,14 @@ public class MemberDaoImpl implements MemberDao {
 	}
 	public void selectAlarmMemberList(HashMap<String, Object> map) {
 		logger.info("MemberDaoImpl selectAlarmMemberList working");
-
 		session.selectOne("selectAlarmMemberList",map);
 	}
+	public void updateAlarmStatus(int alarm_sq) {
+		logger.info("MemberDaoImpl updateAlarmStatus working");
+		session.update("updateAlarmStatus",alarm_sq);
+		
+	}
+	
 
 	// PHmaruho
 	@Override
@@ -63,5 +69,5 @@ public class MemberDaoImpl implements MemberDao {
 		// TODO Auto-generated method stub
 		session.insert("join",member);
 	}
-
+	
 }

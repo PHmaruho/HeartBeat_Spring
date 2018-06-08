@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.zero.heartbeat.model.Alarm;
+import com.zero.heartbeat.model.AlarmList;
 import com.zero.heartbeat.model.Member;
 
 public interface MemberDao {
@@ -11,6 +12,7 @@ public interface MemberDao {
 	// JSY
 	void insertAlarmShareMusic(String id,String music_sq);
 	void selectAlarmMemberList(HashMap<String, Object> map);
+	void updateAlarmStatus(int alarm_sq);
 
 	// PHmaruho
 	public List<Member> searchArtist(String keyword);
