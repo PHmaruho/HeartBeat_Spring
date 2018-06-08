@@ -9,6 +9,7 @@ import com.zero.heartbeat.model.Music;
 
 public interface ActivityService {
 
+	//JAN
 	int likeCount(int music_like_sq, int member_sq);
 	void likeCancel(int music_like_sq);
 	void insertLike(MusicLike like);

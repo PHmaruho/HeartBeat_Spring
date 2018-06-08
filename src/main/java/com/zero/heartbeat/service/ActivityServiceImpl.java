@@ -28,7 +28,7 @@ public class ActivityServiceImpl implements ActivityService {
 	@Autowired private MemberDao memberDao;
 	
 	
-
+	//JAN
 	@Override
 	public int likeCount(int music_like_sq, int member_sq) {
 		// TODO Auto-generated method stub
@@ -36,21 +36,21 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 
 	
-	// 이미 좋아요 목록에 있는 시퀀스의 캔슬메소드
+	//JAN 이미 좋아요 목록에 있는 시퀀스의 캔슬메소드
 	@Override
 	public void likeCancel(int music_like_sq) {
 		// TODO Auto-generated method stub
 		activityDao.likeCancel(music_like_sq);
 	}
 
-
+	//JAN
 	@Override
 	public void insertLike(MusicLike like) {
 		// TODO Auto-generated method stub
 		activityDao.insertLike(like);
 	}
 
-
+	//JAN
 	@Override
 	public List<MusicLike> likeList(int member_sq) {
 		// TODO Auto-generated method stub

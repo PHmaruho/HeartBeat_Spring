@@ -84,18 +84,14 @@ $.ajax({
 	<ul class="glul">
 		<c:forEach var="home" items="${list }"  varStatus="i">
 			<li>
-				<%-- <a href="${pageContext.request.contextPath }/resources/img/album/${home.album_sq}"> --%>
 				<img src="${pageContext.request.contextPath }/resources/img/album/${home.img_path}.jpg"  id="mainList">
 				<p align="center">
-				<%-- <a href="${pageContext.request.contextPath }/resources/img/album/${home.album_sq}"> --%>
 				${home.album_nm }
 			<br>
-				<%-- <a href="${pageContext.request.contextPath }/resources/img/album/${home.album_sq}"> --%>
-				${home.member_sq }<br>
+				${home.nick }<br>
 				<input type="hidden" name="music_like_sq" value="${home.album_sq }" id="album_sq${i.index }">
 				<input type="button" value="like" onclick="like_func('album_sq${i.index}');" class="btn">
-<%-- 					<img src="${pageContext.request.contextPath }/resources/img/profile/dislike.png" width="20px" height="20px" id="like_img">
- --%>				<br><br>
+				<br><br>
 			</p></li>
 		</c:forEach>
 	</ul>

@@ -16,9 +16,12 @@
 	</resultMap>
 	
 	<!-- JAN -->
-	<select id="mainList" resultType="Album">
-	select *
-	From Album
+	<select id="mainList" resultType="SearchList">
+	select * 
+	FROM (select a.album_sq,a.album_nm,a.img_path
+		,m.nick,m.member_sq
+    FROM album a, member m
+    WHERE a.member_sq = m.member_sq and a.open_yn='Y') am
 	</select>
 	
 	  <!-- album_sq AS albumSq,
@@ -37,7 +40,7 @@
 	</select>
 	
 	
-	
+	<!--JAN  -->
 	<select id="total" resultType="int">
 		select count(*) from Album
 	</select>

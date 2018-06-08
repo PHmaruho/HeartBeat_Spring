@@ -42,8 +42,9 @@ public class ActivityRestController {
 	@Autowired private ExploreService exploreService;
 	@Autowired private MemberService memberService;
 	
+	//JAN
 	@RequestMapping("/do/like")
-	public String likeCheck (@ModelAttribute Member member, MusicLike like, HttpSession session , @RequestParam int music_like_sq ) {
+	public String selectMusicLikeCheck (@ModelAttribute Member member, MusicLike like, HttpSession session , @RequestParam int music_like_sq ) {
 		int member_sq = (Integer) session.getAttribute("member_sq");
 		like.setMember_sq(member_sq);
 		//동일 라이크가 있는지 검사
@@ -59,9 +60,9 @@ public class ActivityRestController {
 
 	}
 	
-	//likeList
+	//JAN
 	@RequestMapping("/my/like")
-	public ModelAndView likeList(ModelAndView mav, HttpSession session) {
+	public ModelAndView selectMusicLikeList(ModelAndView mav, HttpSession session) {
 		int member_sq = (Integer) session.getAttribute("member_sq");
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<MusicLike> list = activityService.likeList(member_sq);
