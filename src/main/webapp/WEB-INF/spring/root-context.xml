@@ -48,8 +48,7 @@
 			</props>
 		</property>
 	</bean>
-<!-- 	<bean id="mailService" class="com.zero.heartbeat.service.MailServiceImpl">
-		<property name="javaMailSender" ref="javaMailSender" />
-	</bean> -->
+	<!-- <bean id="mailService" class="com.zero.heartbeat.service.MailServiceImpl"> 
+		<property name="javaMailSender" ref="javaMailSender" /> </bean> -->
 
 </beans>
