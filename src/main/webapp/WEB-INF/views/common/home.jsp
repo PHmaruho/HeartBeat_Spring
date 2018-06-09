@@ -67,6 +67,8 @@ $.ajax({
 	margin-left: 10%;
 }
 
+
+
 </style>
 </head>
 <body>
