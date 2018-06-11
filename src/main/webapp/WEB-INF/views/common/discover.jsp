@@ -68,6 +68,7 @@ $(document).ready(function(){
 	})
 })
 
+
 </script>
 </head>
 <body>
@@ -84,7 +85,7 @@ $(document).ready(function(){
 		<input type="button" value="title" onclick="searchDetailShowKeyword(this)">
 
 		<div id="detailTextSpace" style="display: none;">
-			<input type="hidden" id="cat"> 
+			<input type="text" id="cat" style="display:none;"readonly> 
 			상세검색: <input type="text" id="detailText"> 
 		</div>
 	</div>

@@ -32,6 +32,7 @@ public class ExploreDaoImpl implements ExploreDao {
 	}
 	public List<Tag> getKeywordTag(String searchWord) {
 		logger.info("ExploreDaoImpl getKeywordTag working");
+		logger.info("ExploreDaoImpl keyword Tag: "+searchWord);
 		return session.selectList("getKeywordTag",searchWord);
 	}
 	public List<Member> getKeywordArtist(String searchWord) {

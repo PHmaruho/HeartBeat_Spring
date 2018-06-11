@@ -10,6 +10,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 public class RefreshInterceptor extends HandlerInterceptorAdapter {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+	// 최우일
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {

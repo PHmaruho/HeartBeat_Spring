@@ -17,6 +17,7 @@ import com.zero.heartbeat.model.Album;
 import com.zero.heartbeat.model.MainList;
 import com.zero.heartbeat.model.Member;
 import com.zero.heartbeat.model.Music;
+import com.zero.heartbeat.model.SearchList;
 
 @Service
 public class CommonServiceImpl implements CommonService {
@@ -31,28 +32,36 @@ public class CommonServiceImpl implements CommonService {
 	
 	
 	// JSY
-	public List<MainList> selectAlbumMainList(int startNum) {
+	public List<MainList> selectAlbumMainListLike(int startNum) {
 		List<MainList> list= new ArrayList<MainList>();
-		list= commonDao.selectAlbumMainList(startNum);
+		list= commonDao.selectAlbumMainListLike(startNum);
 		logger.info("CommonServiceImpl selectAlbumMainList working");
 		return list;
 	}
+	public List<MainList> selectAlbumMainListNew(int startNum) {
+		List<MainList> list= new ArrayList<MainList>();
+		list= commonDao.selectAlbumMainListNew(startNum);
+		logger.info("CommonServiceImpl selectAlbumMainListNew working");
+		return list;
+	}
 
+	// JAN
 	@Override
 	public List<Album> selectAlbumArriveList(Album album) {
 		// TODO Auto-generated method stub
 		return commonDao.selectAlbumArriveList(album);
 	}
 
-	//메인 컨텐츠 목록
+	//JAN 메인 컨텐츠 목록
 	@Override
-	public List<Album> mainList() {
+	public List<SearchList> mainList() {
 		logger.info("CommonServiceImpl mainList before");
 		return commonDao.mainList();
 	}
 
+	// 최우일
 	@Override
-	public List<Music> selectPlaylistFoot(int sessionSq) {	// 최우일
+	public List<Music> selectPlaylistFoot(int sessionSq) {
 		return commonDao.selectPlaylistFoot(sessionSq);
 	}
 }
