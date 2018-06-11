@@ -99,4 +99,11 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return memberDao.getMemberInfo(string);
 	}
+	@Override
+	public String getMemberSq(Member member) {
+		// TODO Auto-generated method stub
+		return memberDao.getMemberSq(member);
+	}
+
+
 }

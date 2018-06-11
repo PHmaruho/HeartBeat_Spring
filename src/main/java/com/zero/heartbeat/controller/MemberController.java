@@ -90,7 +90,8 @@ public class MemberController {
 		System.out.println(member.getPw());
 		int loginSession = memberService.login(member);
 		if (loginSession != 0) {
-			session.setAttribute("loginSession", email);
+			String member_sq = memberService.getMemberSq(member);
+			session.setAttribute("loginSession", member_sq);
 			returnString = "common/home";
 		} else {
 			returnString = "member/loginForm";
