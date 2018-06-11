@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.zero.heartbeat.model.Album;
 import com.zero.heartbeat.model.MainList;
 import com.zero.heartbeat.model.Music;
+import com.zero.heartbeat.model.SearchList;
 import com.zero.heartbeat.service.ActivityService;
 import com.zero.heartbeat.service.CommonService;
 import com.zero.heartbeat.service.ExploreService;
@@ -55,7 +56,7 @@ public class CommonController {
 	@RequestMapping("/home")
 	public String home(Model model) {
 		logger.info("home start");
-		List<Album> list = null;
+		List<SearchList> list = null;
 		logger.info("home start");
 		list = commonService.mainList();
 		logger.info("home mainList size ->"+list.size());

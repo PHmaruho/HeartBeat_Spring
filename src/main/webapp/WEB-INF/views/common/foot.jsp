@@ -4,11 +4,18 @@
 <style type="text/css">
 	.foot {
 		background-color: yellow;
+		width: 100%;
 		height: 80px;
+		display: inline-block;
 	}
 	
 	#footProgressBar {
-		width: 50%
+		width: 50%;
+		margin: 0px;
+	}
+	
+	#footVoulume {
+		width: 10%;
 	}
 	
 	.cwi-foot-playlist {
@@ -60,7 +67,7 @@
 								artist : ${artistList.nick }
 							</c:forEach>
 						</td>	
-					</tr>
+<!-- 					</tr> -->
 				</c:forEach>
 			</table>
 		</div>

@@ -17,6 +17,7 @@ import com.zero.heartbeat.model.Album;
 import com.zero.heartbeat.model.MainList;
 import com.zero.heartbeat.model.Member;
 import com.zero.heartbeat.model.Music;
+import com.zero.heartbeat.model.SearchList;
 
 @Service
 public class CommonServiceImpl implements CommonService {
@@ -52,7 +53,7 @@ public class CommonServiceImpl implements CommonService {
 
 	//JAN 메인 컨텐츠 목록
 	@Override
-	public List<Album> mainList() {
+	public List<SearchList> mainList() {
 		logger.info("CommonServiceImpl mainList before");
 		return commonDao.mainList();
 	}

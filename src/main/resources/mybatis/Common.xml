@@ -16,12 +16,6 @@
 	</resultMap>
 	
 	<!-- JAN -->
-	<select id="mainList" resultType="SearchList">
-	select * 
-	FROM (select a.album_sq,a.album_nm,a.img_path
-		,m.nick,m.member_sq
-    FROM album a, member m
-    WHERE a.member_sq = m.member_sq and a.open_yn='Y') am
 	<!-- 최우일 -->
 	<resultMap id="Playlist" type="Music">
 		<result property="list_sq" column="list_sq"/>
@@ -40,11 +34,13 @@
 		<result property="nick" column="nick"/>
 	</resultMap>
 	
-	
-	<select id="mainList" resultType="Album">
-	select *
-	From Album
-	</select>
+	<select id="mainList" resultType="SearchList">
+	select * 
+	FROM (select a.album_sq,a.album_nm,a.img_path
+		,m.nick,m.member_sq
+    FROM album a, member m
+    WHERE a.member_sq = m.member_sq and a.open_yn='Y') am
+    </select>
 	
 	  <!-- album_sq AS albumSq,
 		album_nm AS albumMm,

@@ -120,8 +120,4 @@ window.onfocus=function(){
 		<input type="password" name="pw">
 		<input type="button" value="/test3" onclick="toform('/test3', 'form')">
 	</form>
-<<<<<<< HEAD
-=======
-	
->>>>>>> develop
 </body>
