@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.zero.heartbeat.model.MusicLike;
+import com.zero.heartbeat.model.Tag;
 import com.zero.heartbeat.model.Code;
 import com.zero.heartbeat.model.Music;
 
@@ -59,7 +60,13 @@ public class ActivityDaoImpl implements ActivityDao {
 		// TODO Auto-generated method stub
 		return session.selectList("selectAlbumType");
 	}
-
+	
+	@Override
+	public List<Tag> searchTag() {
+		// TODO Auto-generated method stub
+		return session.selectList("selectMusicTag");
+	}
+	
 	// 최우일
 	@Override
 	public HashMap<String, Object> selectMusicDetail(int sq) {

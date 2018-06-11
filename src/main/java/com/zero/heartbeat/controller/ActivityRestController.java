@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.zero.heartbeat.model.Member;
 import com.zero.heartbeat.model.MusicLike;
+import com.zero.heartbeat.model.Tag;
 import com.zero.heartbeat.service.ActivityService;
 import com.zero.heartbeat.service.CommonService;
 import com.zero.heartbeat.service.ExploreService;
@@ -72,8 +73,5 @@ public class ActivityRestController {
 		mav.addObject("map",map);
 		return mav;
 	}
-	
-	
-
 	
 }

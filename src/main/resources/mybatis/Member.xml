@@ -17,6 +17,7 @@
 				          		inner join member
 				          		on a.target_sq=member.member_sq
 		</select> -->
+		
 	<!-- PHmaruho -->
 	<select id="selectMemberArtist" parameterType="java.lang.String" resultType="Member">
 		SELECT member_sq, nick, email
@@ -25,6 +26,7 @@
 		   OR nick  like '%' || #{keyword} || '%'
 		ORDER BY nick desc, email desc
 	</select>
+	
 	<select id="login" parameterType="Member" resultType="int">
 		select count(*) from member where email=#{email} and pw=#{pw}
 	</select>
