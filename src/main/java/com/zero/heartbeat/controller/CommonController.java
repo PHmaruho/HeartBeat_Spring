@@ -52,11 +52,11 @@ public class CommonController {
 	}
 	//JAN
 	@RequestMapping("/home")
-	public String home(Model model) {
+	public String MainList(Model model) {
 		logger.info("home start");
-		List<Album> list = null;
-		logger.info("home start");
-		list = commonService.mainList();
+		List<MainList> list= new ArrayList<MainList>();
+		int startNum=0;
+		list = commonService.mainList(startNum);
 		logger.info("home mainList size ->"+list.size());
 		model.addAttribute("list",list);
 		//model.addAttribute("kkk","100.png");

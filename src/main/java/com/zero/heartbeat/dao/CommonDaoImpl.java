@@ -38,9 +38,9 @@ public class CommonDaoImpl implements CommonDao {
 
 	//JAN
 	@Override
-	public List<Album> mainList() {
+	public List<MainList> mainList(int startNum) {
 		logger.info("CommonDaoImpl mainList before");
-		return session.selectList("mainList");
+		return session.selectList("mainList",startNum);
 	}
 
 }

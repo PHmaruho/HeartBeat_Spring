@@ -44,8 +44,10 @@ public class CommonServiceImpl implements CommonService {
 
 	//JAN 메인 컨텐츠 목록
 	@Override
-	public List<Album> mainList() {
+	public List<MainList> mainList(int startNum) {
+		List<MainList> list= new ArrayList<MainList>();
+		list= commonDao.mainList(startNum);
 		logger.info("CommonServiceImpl mainList before");
-		return commonDao.mainList();
+		return list;
 	}
 }

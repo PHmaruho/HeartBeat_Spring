@@ -11,7 +11,7 @@ public interface CommonService {
 	// JSY
 	List<MainList> selectAlbumMainList(int startNum);
 	
-
+	//JAN
 	List<Album> selectAlbumArriveList(Album album);
-	List<Album> mainList();
+	List<MainList> mainList(int startNum);
 }

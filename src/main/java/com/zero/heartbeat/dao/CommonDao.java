@@ -7,8 +7,9 @@ import com.zero.heartbeat.model.Album;
 import com.zero.heartbeat.model.MainList;
 public interface CommonDao {
 
+	//JAN
 	List<Album> selectAlbumArriveList(Album album);
-	List<Album> mainList();
+	List<MainList> mainList(int startNum);
 
 	// JSY
 	List<MainList> selectAlbumMainList(int startNum);
