@@ -24,7 +24,7 @@ public class ActivityDaoImpl implements ActivityDao {
 	// SqlSession
 	@Autowired private SqlSession session;
 
-	// 1. 좋아요 동일한 시퀀스 레코드 확인
+	//JAN 1. 좋아요 동일한 시퀀스 레코드 확인
 	@Override
 	public int likeCount(int music_like_sq, int member_sq) {
 		// TODO Auto-generated method stub
@@ -34,21 +34,22 @@ public class ActivityDaoImpl implements ActivityDao {
 		return session.selectOne("activity.likeCount",map);
 	}
 
-	//unlike 메소드
+	//JANunlike 메소드
 	@Override
 	public void likeCancel(int music_like_sq) {
 		// TODO Auto-generated method stub
 		session.delete("activity.likeCancel",music_like_sq);
 	}
 	
-	//like 추가
+	//JAN like 추가
 	@Override
 	public void insertLike(MusicLike like) {
 		// TODO Auto-generated method stub
 		session.insert("activity.insertLike",like);
 		
 	}
-
+	
+	//JAN
 	@Override
 	public List<MusicLike> likeList(int member_sq) {
 		// TODO Auto-generated method stub

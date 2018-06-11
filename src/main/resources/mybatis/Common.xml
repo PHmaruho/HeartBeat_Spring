@@ -15,6 +15,13 @@
 		<result property="album_type" column="album_type"/>
 	</resultMap>
 	
+	<!-- JAN -->
+	<select id="mainList" resultType="SearchList">
+	select * 
+	FROM (select a.album_sq,a.album_nm,a.img_path
+		,m.nick,m.member_sq
+    FROM album a, member m
+    WHERE a.member_sq = m.member_sq and a.open_yn='Y') am
 	<!-- 최우일 -->
 	<resultMap id="Playlist" type="Music">
 		<result property="list_sq" column="list_sq"/>
@@ -49,12 +56,13 @@
 		open_yn AS openYn,
 		album_type AS albumType
 	 -->
+	 <!-- JAN -->
 	<select id="arriveList" parameterType="Album" resultMap="AlbumResult">
 		select * from Album
 	</select>
 	
 	
-	
+	<!--JAN  -->
 	<select id="total" resultType="int">
 		select count(*) from Album
 	</select>

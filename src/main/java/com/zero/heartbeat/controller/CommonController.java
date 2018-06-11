@@ -51,7 +51,7 @@ public class CommonController {
 		
 		return "main";
 	}
-	
+	//JAN
 	@RequestMapping("/home")
 	public String home(Model model) {
 		logger.info("home start");
@@ -60,9 +60,18 @@ public class CommonController {
 		list = commonService.mainList();
 		logger.info("home mainList size ->"+list.size());
 		model.addAttribute("list",list);
-		model.addAttribute("kkk","100.png");
+		//model.addAttribute("kkk","100.png");
 		logger.info("home start mainList after");
 		return "common/home";
+	}
+	
+	//JAN
+		@RequestMapping("/arrive")
+		public String arriveList(Album album, Model model) throws Exception {
+			List<Album> arriveList = commonService.selectAlbumArriveList(album);
+			model.addAttribute("arriveList", arriveList);
+			logger.debug("인터셉터 테스트");
+			return "common/arrive";
 	}
 	
 	@RequestMapping("/test2")
@@ -89,18 +98,6 @@ public class CommonController {
 		logger.info("CommonController selectAlbumMainList working");
 		return "common/mainList";
 	}
-	
-	
-	
-	@RequestMapping("/arrive")
-	public String arriveList(Album album, Model model) throws Exception {
-		List<Album> arriveList = commonService.selectAlbumArriveList(album);
-		model.addAttribute("arriveList", arriveList);
-		logger.debug("인터셉터 테스트");
-		return "arrive";
-	}
-		
-	
 	
 	
 	@RequestMapping("/head")

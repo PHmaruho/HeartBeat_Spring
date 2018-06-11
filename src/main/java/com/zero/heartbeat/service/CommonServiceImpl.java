@@ -50,7 +50,7 @@ public class CommonServiceImpl implements CommonService {
 		return commonDao.selectAlbumArriveList(album);
 	}
 
-	//메인 컨텐츠 목록
+	//JAN 메인 컨텐츠 목록
 	@Override
 	public List<Album> mainList() {
 		logger.info("CommonServiceImpl mainList before");
