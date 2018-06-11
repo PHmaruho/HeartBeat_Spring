@@ -75,9 +75,9 @@ public class MemberRestController {
 	
 	// JSY
 	@RequestMapping("/memberAlarmList")
-	public ModelAndView selectAlarmMemberList(ModelAndView mv,int id) {
-		id=711;
-	
+	public ModelAndView selectAlarmMemberList(ModelAndView mv,String member_id) {
+		
+		int id=Integer.parseInt(member_id);
 		List<AlarmList> list=new ArrayList<AlarmList>();
 		HashMap<String,Object> map=new HashMap<String, Object>();
 		map.put("member_sq", id);

@@ -4,12 +4,14 @@
  */
 
 // Common- mainList
-function mainListShare(v){
+function musicShare(v){
+	var member_id='<%=Session["id"]%>';
 	var c=$('#music_sq'+v).val();
 	$.ajax({
 		url:'/heartbeat/do/mainListShare',
 		data:{
-			music_sq:c
+			music_sq:c,
+			id:member_id
 		},
 		success:function(){
 			alert('공유되었습니다.');
@@ -133,12 +135,13 @@ function getMemberAlarmList(v){
 }
 function alarmContentShow(v){
 	//alert('alarmContentShow ok');
-	//$('#alarmContent').toggle();
+	$('#alarmContent').toggle();
+	var mId='<%=Session["id"]%>';
 	//alert('v: '+v);
 	$.ajax({
 		url:'/heartbeat/do/memberAlarmList',
 		data:{
-			id:711
+			member_id:711
 		},
 		success:function(data){
 			$('#alarmContent').html("");
@@ -152,10 +155,11 @@ function updateAlarmStatus(v){
 	$.ajax({
 		url:'/heartbeat/do/updateAlarmStatus',
 		data:{
-			alarmSq:c
+			alarmSq:c,
 		},
 		success:function(){
 			alert('읽음 ok');
+			location.reload();
 		}
 	})
 }

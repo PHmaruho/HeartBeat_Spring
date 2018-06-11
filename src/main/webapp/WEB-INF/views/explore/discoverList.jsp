@@ -45,23 +45,23 @@
 		<c:forEach var="list" items="${discoverList}" varStatus="i">
 			<tr>
 				<td colspan="8">
-					<a href="/others/music/${list.url}">
+					<a href="/others/music/${list.music_sq}">
 					<img src="resources/img/album/${ list.img_path }.jpg"></a><br>
-						img_path: ${ list.img_path }<Br>
+						<%-- img_path: ${ list.img_path }<Br> --%>
 						album_nm[앨범명]: ${list.album_nm }<br>
 				</td>
 	
 				<td>
-					music_sq[음악PK]: ${list.music_sq}<br>
-					nick[가수]: ${list.nick }<br>
-					노래제목: ${list.music_nm }<br>
+					music_sq: ${list.music_sq}<br>
+					nick: ${list.nick }<br>
+					제목: ${list.music_nm }<br>
 					equalizer??  <br>
 					발매일: 
 						<fmt:formatDate value="${list.release_dt }" pattern="yyyy.MM.dd"/>
-					<br>
-					<input type="button" value="공유" onClick="discoverMusicShare(${list.music_sq})">  
+					<br>								<!-- musicShare로 바꾸기!!!!! -->
+					<input type="button" value="공유" onclick="discoverMusicShare(${list.music_sq})">  
 					<button onclick="goto('/others/song/${list.music_sq }')">댓글</button>		
-					좋아요: ${list.music_like }
+					<img src="resources/img/profile/like.png" style="width:20px;">${list.music_like }
 				</td>
 			</tr>
 			<p>

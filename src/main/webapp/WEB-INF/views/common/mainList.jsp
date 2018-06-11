@@ -39,7 +39,7 @@
 						
 						<tr>
 							<td colspan="2">music_like: ${album.music_like }
-							<%-- <input type="button" value="공유" onclick="mainListShare(${i.index})"></td> --%>
+							<%-- <input type="button" value="공유" onclick="musicShare(${i.index})"></td> --%>
 						</tr>
 						
 				</table>

@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jsy.js"></script>
+<!-- <link rel="stylesheet" href="resources/js/bootstrap.min.css"> -->
 </head>
 <body>
 
