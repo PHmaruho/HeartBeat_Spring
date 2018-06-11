@@ -1,6 +1,7 @@
 package com.zero.heartbeat.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import com.zero.heartbeat.dao.CommonDao;
 import com.zero.heartbeat.dao.ExploreDao;
 import com.zero.heartbeat.dao.MemberDao;
 import com.zero.heartbeat.model.Alarm;
+import com.zero.heartbeat.model.AlarmList;
 import com.zero.heartbeat.model.Member;
 
 @Service
@@ -32,11 +34,16 @@ public class MemberServiceImpl implements MemberService {
 		logger.info("MemberServiceImpl mainListShare working");
 		
 	}
-	public List<Alarm> selectAlarmMemberList(Member dto) {
+	public void selectAlarmMemberList(HashMap<String, Object> map) {
 		logger.info("MemberServiceImpl selectAlarmMemberList working");
-		return memberDao.selectAlarmMemberList(dto);
+		memberDao.selectAlarmMemberList(map);
 	}
-	
+	public void updateAlarmStatus(int alarm_sq) {
+		logger.info("MemberServiceImpl updateAlarmStatus working");
+		memberDao.updateAlarmStatus(alarm_sq);
+		
+	}
+
 	// PHmaruho
 	@Override
 	public List<Member> searchArtist(String keyword) {
@@ -69,5 +76,6 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		memberDao.join(member);
 	}
+	
 
 }

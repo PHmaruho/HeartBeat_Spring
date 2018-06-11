@@ -23,9 +23,13 @@ public class CommonDaoImpl implements CommonDao {
 
 	
 	// JSY
-	public List<MainList> selectAlbumMainList(int startNum) {
+	public List<MainList> selectAlbumMainListLike(int startNum) {
 		logger.debug("CommonDaoImpl selectAlbumMainList working");
-		return session.selectList("selectAlbumMainList",startNum);
+		return session.selectList("selectAlbumMainListLike",startNum);
+	}
+	public List<MainList> selectAlbumMainListNew(int startNum) {
+		logger.debug("CommonDaoImpl selectAlbumMainList working");
+		return session.selectList("selectAlbumMainListNew",startNum);
 	}
 
 

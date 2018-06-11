@@ -9,9 +9,12 @@ import com.zero.heartbeat.model.MainList;
 public interface CommonService {
 
 	// JSY
-	List<MainList> selectAlbumMainList(int startNum);
+	List<MainList> selectAlbumMainListLike(int startNum);
+	List<MainList> selectAlbumMainListNew(int startNum);
 	
 
 	List<Album> selectAlbumArriveList(Album album);
 	List<Album> mainList();
+
+
 }
