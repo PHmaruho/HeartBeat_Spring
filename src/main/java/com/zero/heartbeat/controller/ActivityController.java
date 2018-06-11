@@ -2,6 +2,9 @@ package com.zero.heartbeat.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,8 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.zero.heartbeat.model.Code;
+import com.zero.heartbeat.model.MusicLike;
 import com.zero.heartbeat.service.ActivityService;
 import com.zero.heartbeat.service.CommonService;
 import com.zero.heartbeat.service.ExploreService;
@@ -61,6 +66,17 @@ public class ActivityController {
 		
 		model.addAttribute("music", map);
 		return "activity/others/music";
+	}
+	
+	//JAN
+	@RequestMapping(value="/my/like")
+	public String selectMusicLikeList(Model model, HttpSession session) {
+		int member_sq = (Integer) session.getAttribute("member_sq");
+		List<MusicLike> list = activityService.likeList(member_sq);
+		
+		logger.info("likeList : " + list);
+		model.addAttribute("likeList",list);
+		return "activity/my/likeTest";
 	}
 
 }

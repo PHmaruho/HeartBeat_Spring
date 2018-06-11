@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.zero.heartbeat.model.Follow;
 import com.zero.heartbeat.model.Member;
 import com.zero.heartbeat.model.MusicLike;
 import com.zero.heartbeat.service.ActivityService;
@@ -56,25 +57,20 @@ public class ActivityRestController {
 		} else {
 			activityService.likeCancel(music_like_sq);
 		}
-		return "redirect:/activity/my/likeTest";
+		return "/activity/do/like";
 
 	}
-	
-	//JAN
-	@RequestMapping("/my/like")
-	public ModelAndView selectMusicLikeList(ModelAndView mav, HttpSession session) {
-		int member_sq = (Integer) session.getAttribute("member_sq");
-		Map<String, Object> map = new HashMap<String, Object>();
-		List<MusicLike> list = activityService.likeList(member_sq);
+	/* //JAN
+	@RequestMapping("/do/follow")
+	public String selectFollowCheck(Model model) {
+		List<Follow> follower = activityService.selectFollowerCount();
+		model.addAttribute("follower",follower);
 		
-		map.put("list", list);
-		map.put("count", list.size());
-		mav.setViewName("my/likeTest");
-		mav.addObject("map",map);
-		return mav;
+		//int count = activityService.followerCount(Follow.getTarget_sq(),member_sq);
+		return "activity/";
+		
 	}
-	
-	
+	*/
 
 	
 }

@@ -34,6 +34,16 @@ $.ajax({
 	}
 });
 }
+
+window.onfocus=function(){
+	}
+	window.onload=function(){
+	 window.focus(); // 현재 window 즉 익스플러러를 윈도우 최상단에 위치
+	window.moveTo(0,0); // 웹 페이지의 창 위치를 0,0 (왼쪽 최상단) 으로 고정
+	window.resizeTo(1280,800); // 웹페이지의 크기를 가로 1280 , 세로 800 으로 고정(확장 및 축소)
+	window.scrollTo(0,250); // 페이지 상단 광고를 바로 볼 수 있게 스크롤 위치를 조정
+	}
+
 </script>
 <style type="text/css">
 .a {
@@ -67,8 +77,6 @@ $.ajax({
 	margin-left: 10%;
 }
 
-
-
 </style>
 </head>
 <body>
@@ -77,7 +85,7 @@ $.ajax({
 	<button onclick="goto('/test3')">to test3</button>
 	<button onclick="goto('/loginForm')">to login</button>
 	<button onclick="goto('/arrive')" >최신음악</button>
-	<a href="goto('/trend')">인기음악</a>
+	<button onclick="goto('/my/likeTest')">like</button>
 	
 <%-- 	${kkk}<p>
 	<img src="${pageContext.request.contextPath }/resources/img/album/${kkk}"> --%>
