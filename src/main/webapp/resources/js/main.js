@@ -3,12 +3,15 @@ function supports_history_api() {
 }
 
 function swapContent(link) {
+	musicMain.setMusicPage(false);
+	musicMain.setDetailNum(-1);
 	if(link == "/foot?r=1" || link == "/head?r=1") {
 		var newPath = link.replace('/', '').split('?')[0];
 		$('#' + newPath +  'Div').load(processUrl() + link);
 		return false;
 	} else {
-		if (link == "/" + $('#packageName').val() + "/?r=1") {
+		console.log('link : ' + link);
+		if (link == '/?r=1') {
 			$('#contentDiv').load(processUrl() + '/home?r=1');
 		} else {
 			$('#contentDiv').load(processUrl() + link);

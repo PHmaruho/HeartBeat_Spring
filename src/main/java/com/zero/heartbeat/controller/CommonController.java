@@ -3,9 +3,9 @@ package com.zero.heartbeat.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.zero.heartbeat.model.Album;
 import com.zero.heartbeat.model.MainList;
+import com.zero.heartbeat.model.Music;
 import com.zero.heartbeat.service.ActivityService;
 import com.zero.heartbeat.service.CommonService;
 import com.zero.heartbeat.service.ExploreService;
@@ -50,7 +51,7 @@ public class CommonController {
 		
 		return "main";
 	}
-	
+	//JAN
 	@RequestMapping("/home")
 	public String home(Model model) {
 		logger.info("home start");
@@ -59,9 +60,18 @@ public class CommonController {
 		list = commonService.mainList();
 		logger.info("home mainList size ->"+list.size());
 		model.addAttribute("list",list);
-		model.addAttribute("kkk","100.png");
+		//model.addAttribute("kkk","100.png");
 		logger.info("home start mainList after");
 		return "common/home";
+	}
+	
+	//JAN
+		@RequestMapping("/arrive")
+		public String arriveList(Album album, Model model) throws Exception {
+			List<Album> arriveList = commonService.selectAlbumArriveList(album);
+			model.addAttribute("arriveList", arriveList);
+			logger.debug("인터셉터 테스트");
+			return "common/arrive";
 	}
 	
 	@RequestMapping("/test2")
@@ -90,25 +100,19 @@ public class CommonController {
 	}
 	
 	
-	
-	@RequestMapping("/arrive")
-	public String arriveList(Album album, Model model) throws Exception {
-		List<Album> arriveList = commonService.selectAlbumArriveList(album);
-		model.addAttribute("arriveList", arriveList);
-		logger.debug("인터셉터 테스트");
-		return "arrive";
-	}
-		
-	
-	
-	
 	@RequestMapping("/head")
 	public String head(Model model) {
 		return "common/head";
 	}
 	
+	// 최우일
 	@RequestMapping("/foot")
-	public String foot(Model model) {
+	public String foot(Model model, HttpServletRequest requset) {
+		int sessionSq = 703;
+		
+		List<Music> list = commonService.selectPlaylistFoot(sessionSq);
+		model.addAttribute("playlist", list);
+		
 		return "common/foot";
 	}
 }

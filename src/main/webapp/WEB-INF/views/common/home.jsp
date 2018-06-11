@@ -34,6 +34,16 @@ $.ajax({
 	}
 });
 }
+
+window.onfocus=function(){
+	}
+	window.onload=function(){
+	 window.focus(); // 현재 window 즉 익스플러러를 윈도우 최상단에 위치
+	window.moveTo(0,0); // 웹 페이지의 창 위치를 0,0 (왼쪽 최상단) 으로 고정
+	window.resizeTo(1280,800); // 웹페이지의 크기를 가로 1280 , 세로 800 으로 고정(확장 및 축소)
+	window.scrollTo(0,250); // 페이지 상단 광고를 바로 볼 수 있게 스크롤 위치를 조정
+	}
+
 </script>
 <style type="text/css">
 .a {
@@ -45,51 +55,73 @@ $.ajax({
 
 .glul {
 	list-style: none;
-	margin: 0;
+	margin-top: 10%;
 	padding: 0;
 	border-style: none;
 	width: 100%;
-	height: 300px;
+	height: 200px;
+}
+.glul li {
+	width: 13%;
+	height: 100%;
+	margin-left: 5%;
+	margin-bottom : 10%;
+	display: inline-block;
+	/* 	border-style: solid;
+	border-width: 1px; */
+}
+
+.glul li img {
+	width: 80%;
+	height: 100%;
+	margin-left: 10%;
 }
 
 </style>
 </head>
 <body>
+	<c:if test="${!empty loginSession }">
+		<button onclick="goto('/logout')">logout</button>
+		<button onclick="goto('/memberInfoChangeForm')">개인정보수정</button>
+	</c:if>
+	<button onclick="goto('/others/artist/0')">아티스트</button>
+<br>
 	<button onclick="goto('/test2')">to test2</button>
 	<button onclick="goto('/test3')">to test3</button>
-	<button onclick="goto('/loginForm')">to login</button>
+	<c:if test="${empty loginSession }">
+	<button onclick="goto('/loginForm')">to login</button>	
+	</c:if>
 	<button onclick="goto('/arrive')" >최신음악</button>
-	<a href="goto('/trend')">인기음악</a>
+	<button onclick="goto('/my/likeTest')">like</button>
 	
 <%-- 	${kkk}<p>
 	<img src="${pageContext.request.contextPath }/resources/img/album/${kkk}"> --%>
+<form name="like" method="post" action="${pageContext.request.contextPath }/my/likeTest">
 <div class="a">
 	<ul class="glul">
 		<c:forEach var="home" items="${list }"  varStatus="i">
 			<li>
-				<%-- <a href="${pageContext.request.contextPath }/resources/img/album/${home.album_sq}"> --%>
-				<img src="${pageContext.request.contextPath }/resources/img/album/${home.img_path}.jpg" width="120px" height="110px" id="mainList">
+				<img src="${pageContext.request.contextPath }/resources/img/album/${home.img_path}.jpg"  id="mainList">
 				<p align="center">
-				<%-- <a href="${pageContext.request.contextPath }/resources/img/album/${home.album_sq}"> --%>
-			${home.album_nm }
+				${home.album_nm }
 			<br>
-				<%-- <a href="${pageContext.request.contextPath }/resources/img/album/${home.album_sq}"> --%>
-				${home.member_sq }<br>
+				${home.nick }<br>
+				<input type="hidden" name="music_like_sq" value="${home.album_sq }" id="album_sq${i.index }">
+				<input type="button" value="like" onclick="like_func('album_sq${i.index}');" class="btn">
+				<br><br>
 			</p></li>
 		</c:forEach>
 	</ul>
-		<form name="like" method="post" action="${pageContext.request.contextPath }/my/likeTest">
-			<input type="hidden" name="music_like_sq" value="${home.album_sq }" id="album_sq${i.index }">
-				<img src="${pageContext.request.contextPath }/resources/img/profile/like.png" width="30px" height="30" id="like_img">
-			<input type="button" value="like" onclick="like_func('music_like_sq${i.index}');" class="btn">
-		
-		</form>
 	</div>
+</form>
 	<button onclick="goto('/others/music/302')">음악상세</button>
 	<form id="form">
 		<input type="text" name="txt">
 		<input type="password" name="pw">
 		<input type="button" value="/test3" onclick="toform('/test3', 'form')">
 	</form>
+<<<<<<< HEAD
+=======
 	
+>>>>>>> develop
 </body>

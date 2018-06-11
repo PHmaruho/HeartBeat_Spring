@@ -36,6 +36,7 @@
 		   OR nick  like '%' || #{keyword} || '%'
 		ORDER BY nick desc, email desc
 	</select>
+	
 	<select id="login" parameterType="Member" resultType="int">
 		select count(*) from member where email=#{email} and pw=#{pw}
 	</select>
@@ -56,5 +57,13 @@
   					 )
   					 ,#{email},#{pw},#{nick},'A0',sysdate,sysdate
 		)
+	</select>
+	
+	<update id="turnMemberActivity" parameterType="java.lang.String">
+		update member set status = 'A1' where email = #{email}
+	</update>
+	
+	<select id="getMemberInfo" parameterType="java.lang.String" resultType="Member">
+		select * from member where email = #{string}
 	</select>
 </mapper>
