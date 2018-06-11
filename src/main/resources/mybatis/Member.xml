@@ -37,6 +37,7 @@
 		ORDER BY nick desc, email desc
 	</select>
 	
+	<!-- KKH -->
 	<select id="login" parameterType="Member" resultType="int">
 		select count(*) from member where email=#{email} and pw=#{pw}
 	</select>

@@ -18,14 +18,11 @@ public interface MemberDao {
 	public List<Member> searchArtist(String keyword);
 	int login(Member member);
 
+	// KKH
 	Member loginRest(Member member);
-
 	int emailCheck(String email);
-
 	void join(Member member);
-
 	void turnMemberActivity(String email);
-	
 	Member getMemberInfo(String string);
 
 	

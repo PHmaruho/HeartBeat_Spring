@@ -84,10 +84,7 @@ window.onfocus=function(){
 		<button onclick="goto('/logout')">logout</button>
 		<button onclick="goto('/memberInfoChangeForm')">개인정보수정</button>
 	</c:if>
-	<button onclick="goto('/others/artist/0')">아티스트</button>
 <br>
-	<button onclick="goto('/test2')">to test2</button>
-	<button onclick="goto('/test3')">to test3</button>
 	<c:if test="${empty loginSession }">
 	<button onclick="goto('/loginForm')">to login</button>	
 	</c:if>
@@ -114,10 +111,4 @@ window.onfocus=function(){
 	</ul>
 	</div>
 </form>
-	<button onclick="goto('/others/music/302')">음악상세</button>
-	<form id="form">
-		<input type="text" name="txt">
-		<input type="password" name="pw">
-		<input type="button" value="/test3" onclick="toform('/test3', 'form')">
-	</form>
 </body>
