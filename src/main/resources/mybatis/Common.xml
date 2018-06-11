@@ -22,7 +22,27 @@
 		,m.nick,m.member_sq
     FROM album a, member m
     WHERE a.member_sq = m.member_sq and a.open_yn='Y') am
-	</select>
+    </select>
+    
+	<!-- 최우일 -->
+	<resultMap id="Playlist" type="Music">
+		<result property="list_sq" column="list_sq"/>
+		<result property="album_sq" column="album_sq"/>
+		<result property="music_sq" column="music_sq"/>
+		<result property="music_nm" column="music_nm"/>
+		<result property="play_time" column="play_time"/>
+		<result property="list_no" column="list_no"/>
+		
+		<collection property="artistList" javaType="java.util.ArrayList" resultMap="playlistArtistResult"/>
+	</resultMap>
+	
+	<!-- 최우일 -->
+	<resultMap id="playlistArtistResult" type="Member">
+		<id property="member_sq" column="member_sq"/>
+		<result property="nick" column="nick"/>
+	</resultMap>
+	
+
 	
 	  <!-- album_sq AS albumSq,
 		album_nm AS albumMm,
@@ -50,7 +70,7 @@
 
 
 	<!-- JSY -->
-	<select id="selectAlbumMainList" parameterType="int" resultType="MainList">
+	<select id="selectAlbumMainListLike" parameterType="int" resultType="MainList">
 	<![CDATA[ 
 	select rownum as rn, am.* from
 	(select a.album_sq,a.album_nm,a.img_path
@@ -60,5 +80,27 @@
 	where rownum>#{startNum} and rownum<=#{startNum}+5
 	order by music_like
 	]]>
+	</select>
+	<select id="selectAlbumMainListNew" parameterType="int" resultType="MainList">
+	<![CDATA[ 
+	select rownum as rn, am.* from
+	(select a.album_sq,a.album_nm,a.img_path
+		,m.music_sq,m.music_nm,m.music_like
+	from album a, music m
+	where a.album_sq=m.album_sq and m.open_yn='Y'
+	order by a.release_dt) am 
+	where rownum>#{startNum} and rownum<=#{startNum}+5
+	]]>
+	</select>
+	
+	<!-- 최우일 -->
+	<select id="selectPlaylistFoot" parameterType="int" resultMap="Playlist">
+		select p.list_sq, musics.*, m.nick, p.list_no
+		from (
+			select m.album_sq, m.music_sq, m.music_nm, m.play_time, artist.member_sq 
+		  	from album a, music m, artist
+		  	where a.open_yn = 'Y' and m.open_yn = 'Y' and a.album_sq = m.album_sq and m.music_sq = artist.music_sq) musics,
+		playlist p, member m
+		where p.member_sq = #{sessionSq} and musics.music_sq = p.music_sq and musics.member_sq = m.member_sq
 	</select>
 </mapper>

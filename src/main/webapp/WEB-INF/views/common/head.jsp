@@ -2,15 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <head>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 
 <!-- <link rel="stylesheet" href="menu.css" type="text/css"> -->
- <style type="text/css">
-img.left {
-	float:left;
-}
-</style>
+
 <script type="text/javascript">
 $(document).ready(function(){
     $(".dropdown").hover(            
@@ -53,8 +47,6 @@ $(document).ready( function() {
 </head>
 <body>
 
-    <!-- End Carousel -->
-</div>
 
-<!-- </div> -->
+
 </body>
