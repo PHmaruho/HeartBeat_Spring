@@ -20,6 +20,7 @@ import com.zero.heartbeat.dao.MemberDao;
 import com.zero.heartbeat.model.MusicLike;
 import com.zero.heartbeat.model.Tag;
 import com.zero.heartbeat.model.Code;
+import com.zero.heartbeat.model.Member;
 import com.zero.heartbeat.model.Music;
 
 @Service
@@ -106,9 +107,14 @@ public class ActivityServiceImpl implements ActivityService {
 		
 	}
 	
-	// 최우일
 	@Override
-	public HashMap<String, Object> selectMusicDetail(int sq) {
+	public HashMap<String, Object> selectMusicDetail(int sq) {	// 최우일
 		return activityDao.selectMusicDetail(sq);
+	}
+
+
+	@Override
+	public List<Member> selectMusicArtists(int sq) {	// 최우일
+		return activityDao.selectMusicArtists(sq);
 	}
 }

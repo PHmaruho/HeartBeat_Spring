@@ -5,14 +5,15 @@
 <html>
 <head>
 <title>Heart Beat</title>
-<link href="${pageContext.request.contextPath }/resources/css/bootstrap.css" rel="stylesheet" type="text/css">
-<script src="${pageContext.request.contextPath }/resources/js/jquery.3.3.1.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/wavesurfer.js"></script>
+<link href="${pageContext.request.contextPath }/resources/css/bootstrap.css?v=<%=System.currentTimeMillis() %>" rel="stylesheet" type="text/css">
+<script src="${pageContext.request.contextPath }/resources/js/jquery.3.3.1.js?v=<%=System.currentTimeMillis() %>"></script>
+<script src="${pageContext.request.contextPath }/resources/js/wavesurfer.js?v=<%=System.currentTimeMillis() %>"></script>
+<script src="${pageContext.request.contextPath }/resources/js/musicControlMain.js?v=<%=System.currentTimeMillis() %>"></script>
 <style type="text/css">
 	.headDiv {
 		height: 80px;
 		width:100%;
-		/* background-color: yellow; */
+		background-color: yellow;
 		position: fixed;
 		top: 0px;
 		z-index: 999;
@@ -57,8 +58,7 @@
 		<c:import url="/foot"></c:import>
 	</div>
 	<input type="hidden" value="${packageName }" id="packageName">
-<script src="${pageContext.request.contextPath }/resources/js/kihan.js"></script>
-	<script src="${pageContext.request.contextPath }/resources/js/main.js"></script>
-	<script src="${pageContext.request.contextPath }/resources/js/musicControl.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/js/kihan.js?v=<%=System.currentTimeMillis() %>"></script>
+	<script src="${pageContext.request.contextPath }/resources/js/main.js?v=<%=System.currentTimeMillis() %>"></script>
 </body>
 </html>

@@ -59,6 +59,7 @@ $.ajax({
 		<button onclick="goto('/logout')">logout</button>
 		<button onclick="goto('/memberInfoChangeForm')">개인정보수정</button>
 	</c:if>
+	<button onclick="goto('/others/artist/0')">아티스트</button>
 	<button onclick="goto('/test2')">to test2</button>
 	<button onclick="goto('/test3')">to test3</button>
 	<c:if test="${empty loginSession }">

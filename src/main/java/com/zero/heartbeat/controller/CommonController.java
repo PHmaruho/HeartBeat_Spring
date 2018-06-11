@@ -3,9 +3,9 @@ package com.zero.heartbeat.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.zero.heartbeat.model.Album;
 import com.zero.heartbeat.model.MainList;
+import com.zero.heartbeat.model.Music;
 import com.zero.heartbeat.service.ActivityService;
 import com.zero.heartbeat.service.CommonService;
 import com.zero.heartbeat.service.ExploreService;
@@ -107,8 +108,14 @@ public class CommonController {
 		return "common/head";
 	}
 	
+	// 최우일
 	@RequestMapping("/foot")
-	public String foot(Model model) {
+	public String foot(Model model, HttpServletRequest requset) {
+		int sessionSq = 703;
+		
+		List<Music> list = commonService.selectPlaylistFoot(sessionSq);
+		model.addAttribute("playlist", list);
+		
 		return "common/foot";
 	}
 }
