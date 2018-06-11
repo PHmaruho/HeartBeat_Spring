@@ -64,8 +64,20 @@
 		WHERE CODE_CATEGORY = 'AT'
 	</select>
 	
+	<select id="selectMusicTag" resultType="Tag">
+		select *
+		from tag
+		start with TAG_CATEGORY is null
+		CONNECT BY PRIOR TAG_CD = TAG_CATEGORY
+	</select>
+	
 	<!-- 최우일 -->
 	<select id="selectMusicDetail" parameterType="int" resultType="hashMap">
 		select m.*, a.*, a.music_sq album_music_sq from music m, album a where m.music_sq = #{sq} and m.album_sq = a.album_sq
+	</select>
+	
+	<!-- 최우일 -->
+	<select id="selectMusicArtists" parameterType="int" resultType="Member">
+		select m.* from artist a, member m where a.music_sq = #{sq} and a.member_sq = m.member_sq
 	</select>
 </mapper>

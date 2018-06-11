@@ -15,6 +15,24 @@
 		<result property="album_type" column="album_type"/>
 	</resultMap>
 	
+	<!-- 최우일 -->
+	<resultMap id="Playlist" type="Music">
+		<result property="list_sq" column="list_sq"/>
+		<result property="album_sq" column="album_sq"/>
+		<result property="music_sq" column="music_sq"/>
+		<result property="music_nm" column="music_nm"/>
+		<result property="play_time" column="play_time"/>
+		<result property="list_no" column="list_no"/>
+		
+		<collection property="artistList" javaType="java.util.ArrayList" resultMap="playlistArtistResult"/>
+	</resultMap>
+	
+	<!-- 최우일 -->
+	<resultMap id="playlistArtistResult" type="Member">
+		<id property="member_sq" column="member_sq"/>
+		<result property="nick" column="nick"/>
+	</resultMap>
+	
 	<!-- JAN -->
 	<select id="mainList" resultType="SearchList">
 	select * 

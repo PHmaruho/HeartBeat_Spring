@@ -8,11 +8,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,9 +21,6 @@ import com.zero.heartbeat.service.ActivityService;
 import com.zero.heartbeat.service.CommonService;
 import com.zero.heartbeat.service.ExploreService;
 import com.zero.heartbeat.service.MemberService;
-
-import scala.util.parsing.json.JSONArray;
-import scala.util.parsing.json.JSONObject;
 
 @RestController
 @RequestMapping(value="/do")
@@ -134,15 +127,20 @@ public class ExploreRestController {
 		logger.info("ExploreRestController selectAllSearchList working");
 		return model;
 	}
+	
+	//JSY
 	@RequestMapping("/getKeyword/tag")
 	public Map<String,List<Tag>> getKeywordTag(String searchWord) {
 		List<Tag> list=new ArrayList<Tag>();
 		list= exploreService.getKeywordTag(searchWord);
+		logger.info("exploreRestController keyword Tag: "+searchWord);
 		Map<String,List<Tag>> map=new HashMap<String,List<Tag>>();
 		map.put("list", list);
 		logger.info("ExploreRestController getKeywordTag working");
 		return map;
 	}
+	
+	//JSY
 	@RequestMapping("/getKeyword/artist")
 	public Map<String,List<Member>> getKeywordArtist(String searchWord) {
 		List<Member> list=new ArrayList<Member>();
@@ -152,6 +150,8 @@ public class ExploreRestController {
 		logger.info("ExploreRestController getKeywordTag working");
 		return map;
 	}
+	
+	//JSY
 	@RequestMapping("/getKeyword/title")
 	public Map<String,List<Music>> getKeywordTitle(String searchWord) {
 		List<Music> list=new ArrayList<Music>();

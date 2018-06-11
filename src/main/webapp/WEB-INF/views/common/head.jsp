@@ -20,9 +20,9 @@ $(document).ready(function(){
 });
 
 $(document).ready( function() {
-    $('#myCarousel').carousel({
+/*     $('#myCarousel').carousel({
         interval:   4000
-	});
+	}); */
 	
 	var clickEvent = false;
 	$('#myCarousel').on('click', '.nav a', function() {

@@ -80,10 +80,14 @@ window.onfocus=function(){
 </style>
 </head>
 <body>
+	<c:if test="${!empty loginSession }">
+		<button onclick="goto('/logout')">logout</button>
+		<button onclick="goto('/memberInfoChangeForm')">개인정보수정</button>
+	</c:if>
 <br>
-	<button onclick="goto('/test2')">to test2</button>
-	<button onclick="goto('/test3')">to test3</button>
-	<button onclick="goto('/loginForm')">to login</button>
+	<c:if test="${empty loginSession }">
+	<button onclick="goto('/loginForm')">to login</button>	
+	</c:if>
 	<button onclick="goto('/arrive')" >최신음악</button>
 	<button onclick="goto('/my/likeTest')">like</button>
 	

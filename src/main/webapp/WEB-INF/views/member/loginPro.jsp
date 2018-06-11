@@ -9,4 +9,5 @@
 333 
 ${email }
 <%=pw %>
+${loginSession }
 </body>
