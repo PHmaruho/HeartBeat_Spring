@@ -19,12 +19,11 @@
 	bottom: 20px;
 }
 
-.cwi-player-wave {
+.cwi-player-wave-wrapper {
 	width: 60%;
 	position: absolute;
 	left: 20px;
 	bottom: 20px;
-	background-color: black;
 }
 </style>
 </head>
@@ -46,12 +45,16 @@
 			<img src="${pageContext.request.contextPath }/resources/img/album/${music.MUSIC_SQ }.png">
 		</div>
 		<span class="cwi-player-button">
-			<button onclick="playFromDetail(0)">play</button>
+			<button onclick="playFromDetail(0)">play1</button>
 			<button onclick="pauseFromDetail(0)">pause</button>
+			<button onclick="getDetailComments(0)">getDetailComments()</button>
 		</span>
 		<span id="detailProgress0"></span>
 		<span id="detailDuration0"></span>
-		<div id="detailWaveForm0" class="cwi-player-wave"></div>
+		<div class="cwi-player-wave-wrapper">
+			<div id="detailWaveForm0" class="cwi-player-wave"></div>
+			<div id="detailComments0"></div>
+		</div>
 	</div>
 	
 	<input type="hidden" id="detailMusicSq0" value="${music.MUSIC_SQ }">

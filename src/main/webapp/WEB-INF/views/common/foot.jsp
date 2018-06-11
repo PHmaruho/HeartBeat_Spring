@@ -73,7 +73,6 @@
 		</div>
 	</div>
 	
-	
 	<script src="${pageContext.request.contextPath }/resources/js/musicControlFoot.js?v=<%=System.currentTimeMillis() %>"></script>
 	<script type="text/javascript">
 		var playlistTest = false;
@@ -89,7 +88,5 @@
 				playlistTest = false;
 			}
 		}
-		
-		console.log(1);
 	</script>
 </body>

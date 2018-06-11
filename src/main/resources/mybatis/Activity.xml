@@ -10,6 +10,15 @@
 		<result property="member_sq" column="member_sq"/>
 		<result property="music_like_type" column="music_like_type"/>
 	</resultMap>
+	
+	<!-- 최우일 -->
+	<resultMap type="hashMap" id="replyMap">
+		<id property="time_stamp" column="time_stamp"/>
+		<result property="reply_sq" column="reply_sq" />
+		<result property="member_sq" column="member_sq" />
+		<result property="nick" column="nick" />
+		<result property="reply_comment" column="reply_comment" />
+	</resultMap>
 
 
 	<!--JAN 1. 좋아요 눌렀을때 실행되는 메소드 -->
@@ -79,5 +88,20 @@
 	<!-- 최우일 -->
 	<select id="selectMusicArtists" parameterType="int" resultType="Member">
 		select m.* from artist a, member m where a.music_sq = #{sq} and a.member_sq = m.member_sq
+	</select>
+	
+	<!-- 최우일 -->
+	<select id="selectReplyAtMusic" parameterType="int" resultMap="replyMap">
+		select r2.time_stamp, member_sq, nick, reply_comment
+		from (
+		  select min(reply_sq) reply_sq, time_stamp
+		  from reply
+		  where music_sq = #{sq} group by time_stamp) r1, (
+		  
+		  select r.reply_sq, r.time_stamp, m.member_sq, m.nick, r.reply_comment
+		  from member m, reply r
+		  where r.music_sq = #{sq} and r.member_sq = m.member_sq) r2
+		where r1.reply_sq = r2.reply_sq
+		order by r2.time_stamp
 	</select>
 </mapper>

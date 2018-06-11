@@ -33,6 +33,7 @@ function initDetail(detailNum, sq) {
 	    $('#detailDuration' + detailNum).text( formatTime(detailPlayer[detailNum].getDuration()) );
 	    $('#detailProgress' + detailNum).text( formatTime(0));
 	    detailPlayer[detailNum].ready = true;
+	    getDetailComments(detailNum);
 	    
 	    if (maxDetailNum >= 1) {
 	    	checkFootReady(checkSameDetailNum, detailNum)
@@ -88,29 +89,6 @@ function seekFromDetail(e, detailNum) {
 	}
 }
 
-function checkFootReady(callback, parameter) {
-	var repeat = setInterval(isReady, 50);
-	var params = arguments.length;
-	
-	function isReady() {
-		if(musicMain.getFootReady() == true) {
-			clearInterval(repeat);
-			if (typeof callback === "function") {
-				if(params == 1) {
-					callback();
-				} else if(params == 2) {
-					callback(parameter);
-				} else {
-					console.log('checkFootReady parameter error');
-				}
-			} else {
-				console.log('checkFootReady callback error');
-			}
-		}
-	}
-}
-
-
 function checkSameDetailNum(j) {
 	if (detailPlayer[j].sq == footPlayer.sq) {
 		musicMain.setDetailNum(j);
@@ -120,9 +98,35 @@ function checkSameDetailNum(j) {
 		}
 	}
 }
-//
-//
-//
-//detailPlayer.on('seek', function (e) {
-//    seekDetailToFoot(e);
-//});
+
+function getDetailComments(detailNum) {
+	$.ajax({
+		type : 'GET',
+		url : '/heartbeat/do/getDetailComments/' + detailPlayer[detailNum].sq,
+		dataType : 'json',
+		success : function(data) {
+			detailPlayer[detailNum].comments = data;
+			showDetailComments(detailNum);
+		},
+		error:function(request,status,error){
+		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
+
+	});
+}
+
+function showDetailComments(detailNum) {
+//	var commentsLength = detailPlayer[detailNum].comments.length;
+	var commentsIcon = "";
+	
+	console.log(5);
+	console.log(detailPlayer[detailNum]);
+	console.log(detailPlayer[detailNum].comments[100]);
+	console.log(detailPlayer[detailNum].comments[100].nick);
+	
+//	for (var i = 0; i < commentsLength; i++) {
+//		var leftPos = detailPlayer[detailNum].comments[i].TIME_STAMP / detailPlayer[detailNum].duration * $('#detailComments' + detailNum).width();
+//		commentsIcon = commentsIcon + '<img src="/heartbeat/resources/img/profile/302.png" style=' +
+//			'"position: absolute; width: 15px; height: 15px; left: ' + leftPos + 'px;">'
+//	}
+//	$('#detailComments' + detailNum).html(commentsIcon);
+}

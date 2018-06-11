@@ -1,6 +1,7 @@
 package com.zero.heartbeat.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -120,5 +121,16 @@ public class ActivityServiceImpl implements ActivityService {
 	@Override
 	public List<Member> selectMusicArtists(int sq) {
 		return activityDao.selectMusicArtists(sq);
+	}
+
+//	// 최우일
+//	@Override
+//	public List<HashMap<String, Object>> selectReplyAtMusic(int sq) {
+//		return activityDao.selectReplyAtMusic(sq);
+//	}
+	// 최우일
+	@Override
+	public Map<Integer, HashMap<String, Object>> selectReplyAtMusic(int sq) {
+		return activityDao.selectReplyAtMusic(sq);
 	}
 }

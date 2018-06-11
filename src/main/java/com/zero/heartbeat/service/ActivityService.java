@@ -2,6 +2,7 @@ package com.zero.heartbeat.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -28,4 +29,6 @@ public interface ActivityService {
 	
 	HashMap<String, Object> selectMusicDetail(int sq); // 최우일
 	List<Member> selectMusicArtists(int sq); // 최우일
+//	List<HashMap<String, Object>> selectReplyAtMusic(int sq);	// 최우일
+	Map<Integer, HashMap<String, Object>> selectReplyAtMusic(int sq);	// 최우일
 }

@@ -9,9 +9,11 @@
 		<input type="hidden" id="detailMusicSq${status.index }" value="${music }">
 		<button onclick="playFromDetail(${status.index })">play</button>
 		<button onclick="pauseFromDetail(${status.index })">pause</button>
+		<button onclick="getDetailComments(${status.index })">getDetailComments()</button>
 		<span id="detailProgress${status.index }"></span>
 		<span id="detailDuration${status.index }"></span>
 		<div id="detailWaveForm${status.index }"></div>
+		<div id="detailComments${status.index }"></div>
 		<c:set var="maxNum" value="${status.index }"></c:set><br>
 	</c:forEach>
 	<input type="hidden" id="maxDetailNum" value="${maxNum }">

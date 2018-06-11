@@ -81,4 +81,14 @@ public class ActivityDaoImpl implements ActivityDao {
 	public List<Member> selectMusicArtists(int sq) {
 		return session.selectList("selectMusicArtists", sq);
 	}
+	
+//	@Override
+//	public Map<String, HashMap<String, Object>> selectReplyAtMusic(int sq) {
+//		return session.selectMap("selectReplyAtMusic", sq, "time_stamp");
+//	}
+
+	@Override
+	public Map<Integer, HashMap<String, Object>> selectReplyAtMusic(int sq) {
+		return session.selectMap("selectReplyAtMusic", sq, "time_stamp");
+	}
 }

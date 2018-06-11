@@ -76,3 +76,25 @@ function pauseFromFoot() {
 	}
 	footPlayer.pause();
 }
+
+function checkFootReady(callback, parameter) {
+	var repeat = setInterval(isReady, 50);
+	var params = arguments.length;
+	
+	function isReady() {
+		if(musicMain.getFootReady() == true) {
+			clearInterval(repeat);
+			if (typeof callback === "function") {
+				if(params == 1) {
+					callback();
+				} else if(params == 2) {
+					callback(parameter);
+				} else {
+					console.log('checkFootReady parameter error');
+				}
+			} else {
+				console.log('checkFootReady callback error');
+			}
+		}
+	}
+}
