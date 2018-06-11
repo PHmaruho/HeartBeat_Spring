@@ -9,11 +9,11 @@
 <body>
 <script type="text/javascript">
 	/* MainList Page */
-	// location.href="/heartbeat/mainList";
+	 //location.href="/heartbeat/mainList";
 	
 	/* Search Page */
 	//location.href="/heartbeat/discover";
-	// location.href="/heartbeat";
+	 //location.href="/heartbeat";
 
 	/* Alarm Page */
 	 location.href="/heartbeat/alarmTest";
