@@ -11,6 +11,7 @@ public interface CommonDao {
 	List<Album> mainList();
 
 	// JSY
-	List<MainList> selectAlbumMainList(int startNum);
+	List<MainList> selectAlbumMainListLike(int startNum);
+	List<MainList> selectAlbumMainListNew(int startNum);
 
 }

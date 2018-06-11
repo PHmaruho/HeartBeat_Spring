@@ -59,6 +59,7 @@ function searchList(){
 		for(var c3=0;c3<con3.length;c3++){
 			var result=arr[i].indexOf(con3[c3]);
 			var result2=arr[i].lastIndexOf(con3[c3]);
+			//alert('result1:'+result+'/result2:'+result2);
 			if((result==-1)&&(result2==-1)) continue;
 			else count3++;
 		}
@@ -83,16 +84,19 @@ function searchList(){
 					var result2= arr[i].lastIndexOf(con[c]);
 					//alert('1 / arr[i]:'+arr[i]+'/con[c]:'+con[c]+'/result:'+result+'/result2: '+result2);
 					
-					if((result==0)&&(result2==0)&&(result==result2)){
+					if((result==0)&(result2==0)&(result==result2)){
 						var arr2=arr[i].split(con[c]);
 						for(var c1=0;c1<con.length;c1++){
 							var result=arr2[1].indexOf(con[c1]);
 							var result2= arr2[1].lastIndexOf(con[c1]);
+							var result3=arr2[1].length;
 							//alert('2 / arr2[1]:'+arr2[1]+'/con[c]:'+con[c1]+'/result:'+result+'/result2: '+result2);
-								if((result==-1)&& (result2==-1)) {
-									count1+=-1;
-									//alert('2 count: '+count1);
-								}
+								if(result3!=0){
+									if((result==-1)&& (result2==-1)) {
+										count1+=-1;
+										//alert('2 count: '+count1);
+									}
+								}else count1=0;
 							}
 					}
 				}

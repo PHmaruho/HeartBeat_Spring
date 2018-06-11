@@ -78,10 +78,13 @@ public class CommonController {
 	// JSY
 	@RequestMapping("/mainList")
 	public String selectAlbumMainList(Model model) {
-		List<MainList> list= new ArrayList<MainList>();
+		List<MainList> likeList= new ArrayList<MainList>();
+		List<MainList> newList= new ArrayList<MainList>();
 		int startNum=0;
-		list= commonService.selectAlbumMainList(startNum);
-		model.addAttribute("list", list);
+		likeList= commonService.selectAlbumMainListLike(startNum);
+		newList=commonService.selectAlbumMainListNew(startNum);
+		model.addAttribute("likeList", likeList);
+		model.addAttribute("newList", newList);
 		logger.info("CommonController selectAlbumMainList working");
 		return "common/mainList";
 	}

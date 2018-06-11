@@ -29,10 +29,16 @@ public class CommonServiceImpl implements CommonService {
 	
 	
 	// JSY
-	public List<MainList> selectAlbumMainList(int startNum) {
+	public List<MainList> selectAlbumMainListLike(int startNum) {
 		List<MainList> list= new ArrayList<MainList>();
-		list= commonDao.selectAlbumMainList(startNum);
+		list= commonDao.selectAlbumMainListLike(startNum);
 		logger.info("CommonServiceImpl selectAlbumMainList working");
+		return list;
+	}
+	public List<MainList> selectAlbumMainListNew(int startNum) {
+		List<MainList> list= new ArrayList<MainList>();
+		list= commonDao.selectAlbumMainListNew(startNum);
+		logger.info("CommonServiceImpl selectAlbumMainListNew working");
 		return list;
 	}
 
@@ -48,4 +54,6 @@ public class CommonServiceImpl implements CommonService {
 		logger.info("CommonServiceImpl mainList before");
 		return commonDao.mainList();
 	}
+
+	
 }

@@ -8,7 +8,7 @@
 <title>MainList</title>
 <style>
 	img{
-		width:33%;
+		width:150px;
 	}
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jsy.js"></script>
@@ -20,12 +20,13 @@
 	|| Image root checking 용<Br>
 	
 		<form id="mainListShare">
-			<c:forEach var="album" items="${list }" varStatus="i">
+			<h2>LikeList</h2>
+			<c:forEach var="album" items="${likeList }" varStatus="i">
 				<table border="1">
 						<tr>
 							<td colspan="2"><a href="goto('/others/music/${album.music_sq}')">
 								<input type="hidden" id="music_sq${i.index }" value="${album.music_sq}">
-								<img src="resources/${album.img_path }.jpg"></a></td>
+								<img src="resources/img/album/${album.img_path }.jpg"></a></td>
 						</tr>
 						
 						<tr>
@@ -38,13 +39,42 @@
 						
 						<tr>
 							<td colspan="2">music_like: ${album.music_like }
-							<input type="button" value="공유" onclick="mainListShare(${i.index})"></td>
+							<%-- <input type="button" value="공유" onclick="mainListShare(${i.index})"></td> --%>
 						</tr>
 						
 				</table>
 				<br>
 			===========================================================<br>
 			</c:forEach>
+			<p>
+			<h2>NewList</h2>
+						<c:forEach var="album" items="${newList}" varStatus="i">
+				<table border="1">
+						<tr>
+							<td colspan="2"><a href="goto('/others/music/${album.music_sq}')">
+								<input type="hidden" id="music_sq${i.index }" value="${album.music_sq}">
+								<img src="resources/img/album/${album.img_path }.jpg"></a></td>
+						</tr>
+						
+						<tr>
+							<td>album.music_nm: ${album.music_nm }</td>
+						</tr>
+						
+						<tr>
+							<td>album.music_sq: ${album.music_sq }</td>
+						</tr>
+						
+						<tr>
+							<td colspan="2">music_like: ${album.music_like }
+							<%-- <input type="button" value="공유" onclick="mainListShare(${i.index})"></td> --%>
+						</tr>
+						
+				</table>
+				<br>
+			===========================================================<br>
+			</c:forEach>
+			
+			
 		</form>
 </body>
 </html>
