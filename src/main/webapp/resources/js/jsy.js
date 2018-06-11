@@ -19,9 +19,9 @@ function musicShare(v){
 	})
 }
 //common- discover, explore- discoverList
-function showDetailSearch(){
+/*function showDetailSearch(){
 	$('#detailSearchCategory').toggle();
-}
+}*/
 
 function searchDetailShowKeyword(category){
 	var r=category.value;
@@ -36,7 +36,53 @@ function clickdetailText(){
 	var d=document.getElementById('detailText').value.trim().split(' ');
 }
 
+function deleteArtistAll(){
+	$('#artist').val("");
+	$('.keyword-artist-added').remove();
+	$('.addArtist-hidden').remove();
+}
+
+function deleteTitleAll(){
+	$('#title').val("");
+	$('.keyword-title-added').remove();
+	$('.addTitle-hidden').remove();
+}
+
+function deleteTagAll(){
+	$('#tag').val("");
+	$('.keyword-tag-added').remove();
+	$('.addTag-hidden').remove();
+}
+
+function deleteKeywordTag(v){
+	let val=$(v);
+	//alert('val: '+val);
+	let pLi= val.closest('li'); // 삭제 대상 keyword
+	let pUl= pLi.closest('ul'); // 삭제 대상 부모 name
+	let i= $('.keyword-tag').index(pUl);
+	
+	let sTag=$('#tag').val().split(",");
+	let str="";
+	
+	$('#tag').val("");
+	for(let item in sTag){
+		if(pLi.find('.addTag-hidden').val()!= sTag[item]){
+			if(str.length==0) str+=sTag[item];
+			else str+=","+sTag[item];
+		}
+	}
+	
+	$('#tag').val(str);
+	pLi.remove();
+	
+}
+
 function searchList(){
+	var art=$('#artist').val().trim;
+	var tit=$('#title').val().trim;
+	var tag=$('#tag').val().trim;
+	var c=$('#cat').val().length;
+	/*
 	var keyword=document.getElementById('searchBox').value.trim();
 	//alert('keyword: '+keyword)
 	var arr= keyword.split(" ");
@@ -48,12 +94,20 @@ function searchList(){
 	var count2=0;
 	var count3=0;
 	var noCategory=0;
+	*/
 	
-	if(keyword.length==0){
+	if(c==0) alert('항목을 선택하고 검색어를 입력해주세요.');
+	else if(tit.length==0 & tag.length==0 & art.length==0 ){
 		alert('검색어를 입력해주세요');
 		return false;
 	}
-	
+	if(art.length==0 || art==null || art=='' || art==' ') art='all';
+	if(title.length==0 || title==null || tag==''|| title==' ') title='all';
+	if(tag.length==0 || tag==null || tag=='' || tag==' ') tag='all';
+	alert('art:'+art);
+	alert('tag:'+tag);
+	alert('title:'+title);
+	/*
 	for(var i=0;i<arr.length;i++){
 		count1=0;
 		//alert('arr['+i+']:'+arr[i]);
@@ -109,13 +163,15 @@ function searchList(){
 			alert('검색어 분류 또는 빈칸을 확인해주세요.');
 			return false;
 		}
-	}
-	
+	}*/
 		$.ajax({
 			type:'POST',
 			url:'/heartbeat/do/discoverList',
 			data:{
-					val:keyword
+					
+					kArtist:art,
+					kTitle:tit,
+					kTag:tag
 				},
 			success:function(data){
 				$('#keywordList').html("");

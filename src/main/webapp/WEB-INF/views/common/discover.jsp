@@ -56,14 +56,72 @@ $(document).ready(function(){
 		select:function(event,ui){
 			var cat=$('#cat').val();
 			var det= $('#detailText').val();
+			//alert('det: '+det);
 			
-			if(cat=='title'){
+			if(cat=='tag'){
+				var v=$('#tag').val().indexOf(det);
+				var len= $('#tag').val().length;
+				//alert('v: '+v);
+				if(v==-1){
+					//alert('else');
+					var str="<li class='keyword-tag-added'>"
+							+det
+							+"<input type='button' class='deleteTag' onclick='deleteKeywordTag(this)'>"
+							+"<input type='hidden' value='"+det+"' class='addTag-hidden'>"
+							+"</li>";
+							
+					$('.keyword-tag').append(str);
+					if(len==0) 	$('#tag').val($('#tag').val()+''+det+'');
+					else 		$('#tag').val($('#tag').val()+','+det+'');
+				}else{
+					alert('존재하는 검색어입니다.');
+				}
+			}else if(cat=='artist'){
+				var v=$('#artist').val().indexOf(det);
+				var len= $('#artist').val().length;
+				//alert('v: '+v);
+				if(v==-1){
+					//alert('else');
+					var str="<li class='keyword-artist-added'>"
+							+det
+							+"<input type='button' class='deleteArtist' onclick='deleteKeywordArtist(this)'>"
+							+"<input type='hidden' value='"+det+"' class='addArtist-hidden'>"
+							+"</li>";
+							
+					$('.keyword-artist').append(str);
+					if(len==0) 	$('#artist').val($('#artist').val()+''+det+'');
+					else 		$('#artist').val($('#artist').val()+','+det+'');
+				}else{
+					alert('존재하는 검색어입니다.');
+				}
+			}else if(cat=='title'){
+				var v=$('#tag').val().indexOf(det);
+				var len= $('#title').val().length;
+				//alert('v: '+v);
+				if(v==-1){
+					//alert('else');
+					var str="<li class='keyword-title-added'>"
+							+det
+							+"<input type='button' class='deleteTitle' onclick='deleteKeywordTitle(this)'>"
+							+"<input type='hidden' value='"+det+"' class='addTitle-hidden'>"
+							+"</li>";
+							
+					$('.keyword-title').append(str);
+					
+					if(len==0) 	$('#title').val($('#title').val()+''+det+'');
+					else 		$('#title').val($('#title').val()+','+det+'');
+				}else{
+					alert('존재하는 검색어입니다.');
+				}
+			}
+			
+			/* if(cat=='title'){
 				$('#searchBox').val($('#searchBox').val()+'*'+det+' ');
 			}else if(cat=='artist'){
 				$('#searchBox').val($('#searchBox').val()+'@'+det+' ');
 			}else if(cat=='tag'){
 				$('#searchBox').val($('#searchBox').val()+'#'+det+' ');
-			} 
+			}  */
 		}
 	})
 })
@@ -72,22 +130,38 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-	<div id="placeHolder">
+	<!-- <div id="placeHolder">
 		가수는 @, 곡명은 *를, 태그는 #을 붙이고 단어마다 스페이스바를 해주세요! ex)@가수 *곡명 #태그
-	</div>
-	검색: <input type="text" id="searchBox">
+	</div> -->
+	 <!-- 검색: <input type="text" id="searchBox"> -->
+	가수: 
+	<input type="hidden" id="artist" value="" >
+		<input type="button" onclick="deleteArtistAll()" value="리셋">
+		<ul class="keyword-artist">
+		</ul>
+	곡명: 
+	<input type="hidden" id="title" value="" >
+		<input type="button" onclick="deleteTitleAll()" value="리셋">
+		<ul class="keyword-title">
+		</ul>
+	태그: 
+	<input type="hidden" id ="tag" value="" >
+		<input type="button" onclick="deleteTagAll()" value="리셋">
+		<ul class="keyword-tag">
+		</ul>
 	<input type="button" id="searchAll" value="검색" onclick="searchList()">
-	<input type="button" id="detailSearch" onclick="showDetailSearch()" value="상세검색">
+	<!-- <input type="button" id="detailSearch" onclick="showDetailSearch()" value="상세검색"> -->
 	
-	<div id="detailSearchCategory" style="display: none;">
+	<div id="detailSearchCategory">
 		<input type="button" value="tag" onclick="searchDetailShowKeyword(this)">
 		<input type="button" value="artist" onclick="searchDetailShowKeyword(this)">
 		<input type="button" value="title" onclick="searchDetailShowKeyword(this)">
 
-		<div id="detailTextSpace" style="display: none;">
-			<input type="text" id="cat" style="display:none;"readonly> 
+		<!-- <div id="detailTextSpace" style="display: none;"> -->
+			<input type="text" id="cat" readonly> 
 			상세검색: <input type="text" id="detailText"> 
-		</div>
+			<div class="keword-selected"></div>
+		<!-- </div> -->
 	</div>
 	
 	<div id="keywordList">

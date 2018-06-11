@@ -43,7 +43,7 @@ public class ExploreRestController {
 	
 	//JSY
 	@RequestMapping("/discoverList")
-	public ModelAndView selectAllSearchList(String val) {
+	public ModelAndView selectAllSearchList(String kArtist,String kTitle,String kTag) {
 		List<String> tag= new ArrayList<String>(); 
 		List<String> artist=new ArrayList<String>();
 		List<String> title= new ArrayList<String>(); 
@@ -51,9 +51,24 @@ public class ExploreRestController {
 		List<SearchList> discoverList= new ArrayList<SearchList>();
 		ModelAndView model= new ModelAndView();
 		SearchKeyword dto=new SearchKeyword();
-		String[] arr1=val.split(" ");
+		String[] arrArt=kArtist.split(",");
+		String[] arrTitle=kTitle.split(",");
+		String[] arrTag=kTag.split(",");
 		
-		for(String s:arr1) {
+		for(String s:arrArt) {
+			if(s.contains("all")) artist.add("전체");
+			else artist.add(s);
+		}
+		for(String s:arrTitle) {
+			if(s.contains("all")) title.add("전체");
+			else title.add(s);
+		}
+		for(String s:arrTag) {
+			if(s.contains("all")) tag.add("전체");
+			else tag.add(s);
+		}
+		
+		/*for(String s:arr1) {
 			if(s.contains("#")&&!s.equals("#")) {
 				String[] splitTag=s.split("#");
 						tag.add(splitTag[1]);
@@ -70,7 +85,7 @@ public class ExploreRestController {
 						logger.info("*ArrTitle:"+title);
 			}
 		}
-		
+		*/
 		if(tag.isEmpty()|| tag.size()==0||tag.contains(" ")) tag.add("전체");
 		if(artist.isEmpty()|| artist.size()==0|| artist.contains(" ")) artist.add("전체");
 		if(title.isEmpty()|| title.size()==0|| title.contains(" ")) title.add("전체");
