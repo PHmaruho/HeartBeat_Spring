@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.zero.heartbeat.model.Album;
 import com.zero.heartbeat.model.MainList;
+import com.zero.heartbeat.model.Music;
 import com.zero.heartbeat.service.ActivityService;
 import com.zero.heartbeat.service.CommonService;
 import com.zero.heartbeat.service.ExploreService;
@@ -109,7 +110,9 @@ public class CommonController {
 	public String foot(Model model, HttpServletRequest requset) {
 		int sessionSq = 703;
 		
-		List<HashMap<String, Object>> list = commonService.selectPlaylistFoot(sessionSq);
+		List<Music> list = commonService.selectPlaylistFoot(sessionSq);
+		model.addAttribute("playlist", list);
+		
 		return "common/foot";
 	}
 }

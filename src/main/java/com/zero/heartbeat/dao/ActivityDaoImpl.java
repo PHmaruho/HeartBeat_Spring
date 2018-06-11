@@ -70,5 +70,4 @@ public class ActivityDaoImpl implements ActivityDao {
 	public List<Member> selectMusicArtists(int sq) {	// 최우일
 		return session.selectList("selectMusicArtists", sq);
 	}
-
 }

@@ -11,7 +11,6 @@
 		<result property="music_like_type" column="music_like_type"/>
 	</resultMap>
 
-
 	<!-- 1. 좋아요 눌렀을때 실행되는 메소드 -->
 	<insert id="like">
 		INSERT INTO music_like(

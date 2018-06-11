@@ -16,6 +16,7 @@ import com.zero.heartbeat.dao.MemberDao;
 import com.zero.heartbeat.model.Album;
 import com.zero.heartbeat.model.MainList;
 import com.zero.heartbeat.model.Member;
+import com.zero.heartbeat.model.Music;
 
 @Service
 public class CommonServiceImpl implements CommonService {
@@ -51,9 +52,7 @@ public class CommonServiceImpl implements CommonService {
 	}
 
 	@Override
-	public List<HashMap<String, Object>> selectPlaylistFoot(int sessionSq) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		List<Member> list = a
-		return null;
+	public List<Music> selectPlaylistFoot(int sessionSq) {	// 최우일
+		return commonDao.selectPlaylistFoot(sessionSq);
 	}
 }

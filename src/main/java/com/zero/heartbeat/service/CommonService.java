@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.zero.heartbeat.model.Album;
 import com.zero.heartbeat.model.MainList;
+import com.zero.heartbeat.model.Music;
 
 public interface CommonService {
 
@@ -16,5 +17,5 @@ public interface CommonService {
 	List<Album> mainList();
 
 
-	List<HashMap<String, Object>> selectPlaylistFoot(int sessionSq);	// 최우일
+	List<Music> selectPlaylistFoot(int sessionSq);	// 최우일
 }

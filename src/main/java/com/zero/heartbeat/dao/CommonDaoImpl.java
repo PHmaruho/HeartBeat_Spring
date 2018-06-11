@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.zero.heartbeat.model.Album;
 import com.zero.heartbeat.model.MainList;
+import com.zero.heartbeat.model.Music;
 
 @Repository
 public class CommonDaoImpl implements CommonDao {
@@ -41,5 +42,11 @@ public class CommonDaoImpl implements CommonDao {
 	public List<Album> mainList() {
 		logger.info("CommonDaoImpl mainList before");
 		return session.selectList("mainList");
+	}
+
+	@Override
+	public List<Music> selectPlaylistFoot(int sessionSq) {	// 최우일
+		logger.info("CommonDaoImpl selectPlaylistFoot");
+		return session.selectList("selectPlaylistFoot", sessionSq);
 	}
 }
