@@ -15,7 +15,6 @@
 		<result property="album_type" column="album_type"/>
 	</resultMap>
 	
-	<!-- JAN -->
 	<!-- 최우일 -->
 	<resultMap id="Playlist" type="Music">
 		<result property="list_sq" column="list_sq"/>
@@ -34,6 +33,7 @@
 		<result property="nick" column="nick"/>
 	</resultMap>
 	
+	<!-- JAN -->
 	<select id="mainList" resultType="SearchList">
 	select * 
 	FROM (select a.album_sq,a.album_nm,a.img_path

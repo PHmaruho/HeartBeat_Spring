@@ -35,7 +35,7 @@ public class CommonDaoImpl implements CommonDao {
 	}
 
 
-	
+	// JAN
 	@Override
 	public List<Album> selectAlbumArriveList(Album album) {
 		// TODO Auto-generated method stub
@@ -49,8 +49,9 @@ public class CommonDaoImpl implements CommonDao {
 		return session.selectList("mainList");
 	}
 
+	// 최우일
 	@Override
-	public List<Music> selectPlaylistFoot(int sessionSq) {	// 최우일
+	public List<Music> selectPlaylistFoot(int sessionSq) {
 		logger.info("CommonDaoImpl selectPlaylistFoot");
 		return session.selectList("selectPlaylistFoot", sessionSq);
 	}

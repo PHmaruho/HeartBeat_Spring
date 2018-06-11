@@ -9,6 +9,7 @@ import com.zero.heartbeat.model.Music;
 import com.zero.heartbeat.model.SearchList;
 public interface CommonDao {
 
+	// JAN
 	List<Album> selectAlbumArriveList(Album album);
 	List<SearchList> mainList();
 

@@ -110,14 +110,15 @@ public class ActivityServiceImpl implements ActivityService {
 		
 	}
 	
+	// 최우일
 	@Override
-	public HashMap<String, Object> selectMusicDetail(int sq) {	// 최우일
+	public HashMap<String, Object> selectMusicDetail(int sq) {
 		return activityDao.selectMusicDetail(sq);
 	}
 
-
+	// 최우일
 	@Override
-	public List<Member> selectMusicArtists(int sq) {	// 최우일
+	public List<Member> selectMusicArtists(int sq) {
 		return activityDao.selectMusicArtists(sq);
 	}
 }
