@@ -26,10 +26,10 @@ public class CommonRestController {
 	
 	//JSY
 	@RequestMapping("/mainListShare")
-	public void insertAlarmShareMusic(Model model,String music_sq) {
+	public void insertAlarmShareMusic(Model model,String music_sq,String id) {
 		logger.info(music_sq);
-		/*String id="708";
-		memberService.insertAlarmShareMusic(id,music_sq);*/
+		/*String id="708";*/
+		memberService.insertAlarmShareMusic(id,music_sq);
 		logger.info("CommonRestController mainListShare working");
 		
 	}

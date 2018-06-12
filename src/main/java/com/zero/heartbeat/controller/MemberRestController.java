@@ -1,14 +1,17 @@
 package com.zero.heartbeat.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.zero.heartbeat.model.AlarmList;
 import com.zero.heartbeat.model.Member;
 import com.zero.heartbeat.service.ActivityService;
 import com.zero.heartbeat.service.CommonService;
@@ -68,4 +71,30 @@ public class MemberRestController {
 		int result = memberService.emailCheck(email);
 		return result;
 	}
+	
+	// JSY
+	@RequestMapping("/memberAlarmList")
+	public ModelAndView selectAlarmMemberList(ModelAndView mv,String member_id) {
+		
+		int id=Integer.parseInt(member_id);
+		List<AlarmList> list=new ArrayList<AlarmList>();
+		HashMap<String,Object> map=new HashMap<String, Object>();
+		map.put("member_sq", id);
+		memberService.selectAlarmMemberList(map);
+		list=(List<AlarmList>) map.get("resultList");
+		logger.info("list.size:"+list.size());
+		mv.addObject("list", list);
+		mv.setViewName("member/memberAlarmList");
+		logger.info("MemberController selectAlarmMemberList working");
+		return mv;
+	}
+	@RequestMapping("/updateAlarmStatus")
+	public void updateAlarmStatus(String alarmSq) {
+		logger.info("alarmSq: "+alarmSq);
+		int alarm_sq=Integer.parseInt(alarmSq);
+		logger.info("alarm_sq: "+alarm_sq);
+		logger.info("MemberController updateAlarmStatus working");
+		memberService.updateAlarmStatus(alarm_sq);
+	}
+	
 }

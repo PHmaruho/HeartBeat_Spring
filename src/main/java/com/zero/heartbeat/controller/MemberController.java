@@ -1,27 +1,18 @@
 package com.zero.heartbeat.controller;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import java.util.Locale;
 import java.util.Random;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.zero.heartbeat.model.Alarm;
 import com.zero.heartbeat.model.Member;
 import com.zero.heartbeat.service.ActivityService;
 import com.zero.heartbeat.service.CommonService;
@@ -35,34 +26,19 @@ public class MemberController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	// Autowired
-	@Autowired
-	private ActivityService activityService;
-	@Autowired
-	private CommonService commonService;
-	@Autowired
-	private ExploreService exploreService;
-	@Autowired
-	private MemberService memberService;
-	@Autowired
-	private MailService mailService;
-
-	// JSY
-	@RequestMapping("/memberAlarmList")
-	public String selectAlarmMemberList(Model model) {
-		int id2 = 709;
-		Member dto = new Member();
-		dto.setMember_sq(id2);
-		List<Alarm> list = new ArrayList<Alarm>();
-		list = memberService.selectAlarmMemberList(dto);
-		for (int i = 0; i < list.size(); i++) {
-			logger.info(i + "번째 변수: " + "alarm_sq[" + list.get(i).getAlarm_sq() + "]");
-		}
-
-		model.addAttribute("list", list);
-		logger.info("MemberController selectAlarmMemberList working");
-		return "member/memberAlarmList";
+	@Autowired private MailService mailService;
+	@Autowired private ActivityService activityService;
+	@Autowired private CommonService commonService;
+	@Autowired private ExploreService exploreService;
+	@Autowired private MemberService memberService;
+	
+	//JSY
+	@RequestMapping("/alarmTest")
+	public String alarmTest(Model model,Locale locale) {
+		return "member/alarmTest";
 	}
-
+	
+	
 	@RequestMapping("/loginForm")
 	public String loginForm(Model model, Locale locale) {
 
@@ -114,7 +90,8 @@ public class MemberController {
 		System.out.println(member.getPw());
 		int loginSession = memberService.login(member);
 		if (loginSession != 0) {
-			session.setAttribute("loginSession", email);
+			String member_sq = memberService.getMemberSq(member);
+			session.setAttribute("loginSession", member_sq);
 			returnString = "common/home";
 		} else {
 			returnString = "member/loginForm";

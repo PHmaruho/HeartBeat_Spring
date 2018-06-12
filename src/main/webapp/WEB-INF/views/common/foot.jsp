@@ -3,21 +3,51 @@
 <head>
 <style type="text/css">
 	.foot {
-		background-color: black;
+		background-color: yellow;
+		width: 100%;
 		height: 80px;
+		display: inline-block;
 	}
 	
 	#footProgressBar {
-	width: 50%
+		width: 50%;
+		margin: 0px;
+	}
+	
+	#footVoulume {
+		width: 10%;
+	}
+	
+	.cwi-foot-playlist {
+		background-color: gray;
+		position: absolute;
+		bottom: 100%;
+		right: 20%;
+		display: none;
+	}
+	
+	.cwi-foot-playlist:hover {
+		cursor: pointer;
+	}
+	
+	.cwi-foot-display-none {
+		display: none;
+	}
+	
+	.cwi-foot-display-block {
+		display: block;
+	}
+	
+	.cwi-foot-playlist-table {
+		border: 1px solid black;
 	}
 </style>
 </head>
 
 <body>
 	<div class="foot">
-	asd1
-		<input type="button" value="play" onclick="fromFoot()">
-		<input type="button" value="pause" onclick="pauseAll()">
+		<input type="button" value="play" onclick="playFromFoot()">
+		<input type="button" value="pause" onclick="pauseFromFoot()">
 		
 		<span id="footProgress"></span>
 		<input type="range" id="footProgressBar" value="0" min="0.0" max="1.0" step="0.0001"
@@ -26,101 +56,40 @@
 		<input id="footVoulume" type="range" min="0.0" max="1.0" step="0.01" value="0.5"
 			oninput="footPlayer.setVolume(this.value)" onchange="footPlayer.setVolume(this.value)">	
 		<div hidden="true" id="footWaveform"></div>	
-			
-		<input type="button" value="exTest()" onclick="exTest()">
+		<input type="button" value="playlist" onclick="playlistClick()">
+		<div id="playlist" class="cwi-foot-playlist">
+			<table class="cwi-foot-playlist-table">
+				<c:forEach var="playlist" items="${playlist}">
+					<tr onclick="loadFoot(${playlist.music_sq}); alert(${playlist.music_sq} + '로 음악 변경, 임시기능이기에 직접 play 바람, 동기화 미지원')">
+						<td>sq : ${playlist.music_sq} </td>
+						<td>
+							<c:forEach var="artistList" items="${playlist.artistList}">
+								artist : ${artistList.nick }
+							</c:forEach>
+						</td>	
+<!-- 					</tr> -->
+				</c:forEach>
+			</table>
+		</div>
 	</div>
 	
-<script type="text/javascript">
-	var footPlayer;
-	var footDuration;
-	var footMusic;
-	var footProgressFlag = 0;
-	var footReady = false;
 	
-	var formatTime = function (time) {
-	    return [
-	        Math.floor((time % 3600) / 60), // minutes
-	        ('00' + Math.floor(time % 60)).slice(-2) // seconds
-	    ].join(':');
-	};
-	
-	initFoot(302);
-	
-	function initFoot(sq) {
-		footMusic = sq;
-		footPlayer = WaveSurfer.create({
-		container : '#footWaveform',
-		});
+	<script src="${pageContext.request.contextPath }/resources/js/musicControlFoot.js?v=<%=System.currentTimeMillis() %>"></script>
+	<script type="text/javascript">
+		var playlistTest = false;
 		
-		footPlayer.load( "${pageContext.request.contextPath }" + "/resources/music/" + footMusic + ".mp3");
-	}
-	
-	footPlayer.on('ready', function () {
-		footDuration = footPlayer.getDuration();
-	    $('#footDuration').text(formatTime(footDuration));
-	    footPlayer.on('audioprocess', footProgress);
-		$('#footProgress').text( formatTime(0));
-		footReady = true;
-	});
-	
-	function switchFootProgress() {
-		if (footProgressFlag == 0) {
-			footProgressFlag = 1;
-		} else {
-			footProgressFlag = 0;
-			footPlayer.seekTo(Number($('#footProgressBar').val()));
+		function playlistClick() {
+			var o = document.getElementById('playlist');
+			
+			if (playlistTest == false) {
+				o.style.display = 'block';
+				playlistTest = true;
+			} else {
+				o.style.display = 'none';
+				playlistTest = false;
+			}
 		}
-	}
-	
-	function footProgress()  {
-		if (footProgressFlag == 0) {
-			$('#footProgress').text( formatTime(footPlayer.getCurrentTime()) );
-		    $('#footProgressBar').val(footPlayer.getCurrentTime()/footDuration);
-		}
-	}
-	
-	function changeFootProgress() {
-		$('#footProgress').text( formatTime($('#footProgressBar').val() * footDuration) );
-		seekFootToDetail(Number($('#footProgressBar').val()));
-	}
-	
-	function playFoot(start) {
-		if(arguments.length == 0) {
-			footPlayer.play();
-		} else if(arguments.length == 1) {
-			footPlayer.play(start)
-		} else {
-			console.log('playFoot Error');
-		}
-	}
-	
-	function pauseFoot() {
-		footPlayer.pause();
-	}
-	
-	function getFootMusic() {
-		return footMusic;
-	}
-	
-	function getFootCurrent() {
-		return footPlayer.getCurrentTime();
-	}
-	
-	function getFootReady() {
-		return footReady;
-	}
-	
-	function seekFoot(number) {
-		console.log(number);
-		footPlayer.seekTo(number);
-	}
-	
-	function footReload(sq) {
-		footPlayer.stop();
-		footReady = false
-		footMusic = sq
-		footPlayer.load( "${pageContext.request.contextPath }" + "/resources/music/" + footMusic + ".mp3");
-		footDuration = footPlayer.getDuration();
-	}
-</script>
+		
+		console.log(1);
+	</script>
 </body>

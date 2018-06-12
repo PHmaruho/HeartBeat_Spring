@@ -1,5 +1,7 @@
 package com.zero.heartbeat.model;
 
+import java.util.List;
+
 public class Music {
 	private int			music_sq;
 	private int			album_sq;
@@ -12,6 +14,29 @@ public class Music {
 	private int			music_share;
 	private String		open_yn;
 	
+	// 최우일 - 한 곡에 대한 여러 작업자들
+	private List<Member>	artistList;
+	private int			list_sq;
+	private int			list_no;
+	
+	public int getList_sq() {
+		return list_sq;
+	}
+	public void setList_sq(int list_sq) {
+		this.list_sq = list_sq;
+	}
+	public int getList_no() {
+		return list_no;
+	}
+	public void setList_no(int list_no) {
+		this.list_no = list_no;
+	}
+	public List<Member> getArtistList() {
+		return artistList;
+	}
+	public void setArtistList(List<Member> artistList) {
+		this.artistList = artistList;
+	}
 	public int getMusic_sq() {
 		return music_sq;
 	}
