@@ -37,16 +37,19 @@ public class CommonDaoImpl implements CommonDao {
 
 	// JAN
 	@Override
-	public List<Album> selectAlbumArriveList(Album album) {
+	public List<MainList> selectAlbumArriveList(int startNum) {
 		// TODO Auto-generated method stub
-		return session.selectList("arriveList", album);
+		return session.selectList("arriveList", startNum);
 	}
 
 	//JAN
 	@Override
-	public List<MainList> mainList(int startNum) {
+	public List<MainList> mainListLike(int startNum) {
 		logger.info("CommonDaoImpl mainList before");
-		return session.selectList("mainList",startNum);
+		return session.selectList("mainListLike",startNum);
+	}
+	public List<MainList> mainListNew(int startNum) {
+		return session.selectList("mainListNew",startNum);
 	}
 
 	// 최우일
@@ -55,4 +58,5 @@ public class CommonDaoImpl implements CommonDao {
 		logger.info("CommonDaoImpl selectPlaylistFoot");
 		return session.selectList("selectPlaylistFoot", sessionSq);
 	}
+	
 }

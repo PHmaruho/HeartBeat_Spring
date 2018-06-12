@@ -10,8 +10,10 @@ import com.zero.heartbeat.model.SearchList;
 public interface CommonDao {
 
 	//JAN
-	List<Album> selectAlbumArriveList(Album album);
-	List<MainList> mainList(int startNum);
+	List<MainList> mainListLike(int startNum);
+	List<MainList> mainListNew(int startNum);
+	List<MainList> selectAlbumArriveList(int startNum);
+
 
 	// JSY
 	List<MainList> selectAlbumMainListLike(int startNum);
