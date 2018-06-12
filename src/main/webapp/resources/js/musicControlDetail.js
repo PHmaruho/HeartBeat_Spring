@@ -32,7 +32,6 @@ function initDetail(detailNum, sq) {
 		detailPlayer[detailNum].duration = detailPlayer[detailNum].getDuration();
 	    $('#detailDuration' + detailNum).text( formatTime(detailPlayer[detailNum].getDuration()) );
 	    $('#detailProgress' + detailNum).text( formatTime(0));
-	    detailPlayer[detailNum].ready = true;
 	    getDetailComments(detailNum);
 	    
 	    if (maxDetailNum >= 1) {
@@ -42,7 +41,6 @@ function initDetail(detailNum, sq) {
 	
 	detailPlayer[detailNum].on('audioprocess', function () {
 	    $('#detailProgress' + detailNum).text( formatTime(detailPlayer[detailNum].getCurrentTime()) );
-	    detailPlayer[detailNum].ready = false;
 	});
 	
 	detailPlayer[detailNum].on('seek', function (e) {
@@ -103,7 +101,6 @@ function getDetailComments(detailNum) {
 	$.ajax({
 		type : 'GET',
 		url : '/heartbeat/do/getDetailComments/' + detailPlayer[detailNum].sq,
-		dataType : 'json',
 		success : function(data) {
 			detailPlayer[detailNum].comments = data;
 			showDetailComments(detailNum);
@@ -117,16 +114,41 @@ function getDetailComments(detailNum) {
 function showDetailComments(detailNum) {
 //	var commentsLength = detailPlayer[detailNum].comments.length;
 	var commentsIcon = "";
+	var comments = detailPlayer[detailNum].comments;
 	
-	console.log(5);
-	console.log(detailPlayer[detailNum]);
-	console.log(detailPlayer[detailNum].comments[100]);
-	console.log(detailPlayer[detailNum].comments[100].nick);
+	for (var i in comments) {
+		var leftPos = comments[i].time_stamp / detailPlayer[detailNum].duration * $('#detailComments' + detailNum).width();
+		var newHtml = '<img src="/heartbeat/resources/img/profile/302.png" class="cwi-detail-player-comments" ' +
+		'style= "left: ' + leftPos + 'px;" id="commentsIcon' + detailNum + '-' + i + '">';
+		commentsIcon = commentsIcon + newHtml;
+	}
+	$('#detailComments' + detailNum).html(commentsIcon);
 	
-//	for (var i = 0; i < commentsLength; i++) {
-//		var leftPos = detailPlayer[detailNum].comments[i].TIME_STAMP / detailPlayer[detailNum].duration * $('#detailComments' + detailNum).width();
-//		commentsIcon = commentsIcon + '<img src="/heartbeat/resources/img/profile/302.png" style=' +
-//			'"position: absolute; width: 15px; height: 15px; left: ' + leftPos + 'px;">'
-//	}
-//	$('#detailComments' + detailNum).html(commentsIcon);
+	$('#detailComments' + detailNum).on('mouseover', function(e) {
+		var target = $(e.target);
+		if (target.is('img')) {
+			target.toggleClass('cwi-commnets-on');
+			var iconHtml = '<img src="/heartbeat/resources/img/profile/302.png" class="cwi-detail-player-comments">';
+			var nickHtml = 'a';
+			var replyHtml = 'asdfasdfasdf';
+			console.log(target.position().left);
+			$('#detailCommentsOn' + detailNum).css({'left' : target.position().left, 'position' : 'absolute'});
+			$('#detailCommentsIcon' + detailNum).html(iconHtml);
+			$('#detailCommentsNick' + detailNum).html(nickHtml);
+			$('#detailCommentsReply' + detailNum).html(replyHtml);
+		}
+	});
+	
+	$('#detailComments' + detailNum).on('mouseout', function(e) {
+		var target = $(e.target);
+		if (target.is('img')) {
+			target.toggleClass('cwi-commnets-on');
+			$('#detailCommentsIcon' + detailNum).html();
+			$('#detailCommentsNick' + detailNum).html();
+			$('#detailCommentsReply' + detailNum).html();
+		}
+	});
+	
 }
+
+
