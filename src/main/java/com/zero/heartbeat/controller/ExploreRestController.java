@@ -146,9 +146,7 @@ public class ExploreRestController {
 		model.setViewName("explore/discoverList");*/
 		logger.info("ExploreRestController selectAllSearchList working");
 		return model;
-	}
-	
-	//JSY
+	}//JSY
 	@RequestMapping("/getKeyword/tag")
 	public Map<String,List<Tag>> getKeywordTag(String searchWord) {
 		List<Tag> list=new ArrayList<Tag>();
@@ -158,27 +156,23 @@ public class ExploreRestController {
 		map.put("list", list);
 		logger.info("ExploreRestController getKeywordTag working");
 		return map;
-	}
-	
-	//JSY
+	}//JSY
 	@RequestMapping("/getKeyword/artist")
 	public Map<String,List<Member>> getKeywordArtist(String searchWord) {
 		List<Member> list=new ArrayList<Member>();
 		list= exploreService.getKeywordArtist(searchWord);
 		Map<String,List<Member>> map=new HashMap<String,List<Member>>();
 		map.put("list", list);
-		logger.info("ExploreRestController getKeywordTag working");
+		logger.info("ExploreRestController getKeywordArtist working");
 		return map;
-	}
-	
-	//JSY
+	}//JSY
 	@RequestMapping("/getKeyword/title")
 	public Map<String,List<Music>> getKeywordTitle(String searchWord) {
 		List<Music> list=new ArrayList<Music>();
 		list= exploreService.getKeywordTitle(searchWord);
 		Map<String,List<Music>> map=new HashMap<String,List<Music>>();
 		map.put("list", list);
-		logger.info("ExploreRestController getKeywordTag working");
+		logger.info("ExploreRestController getKeywordTitle working");
 		return map;
 	}
 }

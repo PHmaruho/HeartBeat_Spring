@@ -85,15 +85,15 @@ public class MemberRestController {
 		logger.info("list.size:"+list.size());
 		mv.addObject("list", list);
 		mv.setViewName("member/memberAlarmList");
-		logger.info("MemberController selectAlarmMemberList working");
+		logger.info("MemberRestController selectAlarmMemberList working");
 		return mv;
-	}
+	}//JSY
 	@RequestMapping("/updateAlarmStatus")
 	public void updateAlarmStatus(String alarmSq) {
 		logger.info("alarmSq: "+alarmSq);
 		int alarm_sq=Integer.parseInt(alarmSq);
 		logger.info("alarm_sq: "+alarm_sq);
-		logger.info("MemberController updateAlarmStatus working");
+		logger.info("MemberRestController updateAlarmStatus working");
 		memberService.updateAlarmStatus(alarm_sq);
 	}
 	

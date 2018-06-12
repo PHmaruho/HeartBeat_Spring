@@ -72,21 +72,28 @@
 	<![CDATA[ 
 	select rownum as rn, am.* from
 	(select a.album_sq,a.album_nm,a.img_path
-		,m.music_sq,m.music_nm,m.music_like
-	from album a, music m
-	where a.album_sq=m.album_sq and m.open_yn='Y') am 
+      		,m.nick, m.member_sq
+      		, ml.music_like_type,count(distinct ml.target_sq) as album_like
+	FROM album a, member m, music_like ml 
+	WHERE a.member_sq=m.member_sq 
+	AND a.album_sq=ml.target_sq
+	GROUP BY a.album_sq, a.album_nm, a.img_path
+        	, m.nick, m.member_sq, ml.music_like_type) am 
 	where rownum>#{startNum} and rownum<=#{startNum}+5
-	order by music_like
+	order by album_like
 	]]>
 	</select>
 	<select id="selectAlbumMainListNew" parameterType="int" resultType="MainList">
 	<![CDATA[ 
 	select rownum as rn, am.* from
 	(select a.album_sq,a.album_nm,a.img_path
-		,m.music_sq,m.music_nm,m.music_like
-	from album a, music m
-	where a.album_sq=m.album_sq and m.open_yn='Y'
-	order by a.release_dt) am 
+      		,m.nick, m.member_sq
+      		, ml.music_like_type,count(distinct ml.target_sq) as album_like
+	FROM album a, member m, music_like ml 
+	WHERE a.member_sq=m.member_sq 
+	AND a.album_sq=ml.target_sq
+	GROUP BY a.album_sq, a.album_nm, a.img_path
+        	, m.nick, m.member_sq, ml.music_like_type) am 
 	where rownum>#{startNum} and rownum<=#{startNum}+5
 	]]>
 	</select>

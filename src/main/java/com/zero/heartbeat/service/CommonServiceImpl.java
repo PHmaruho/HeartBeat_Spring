@@ -37,7 +37,7 @@ public class CommonServiceImpl implements CommonService {
 		list= commonDao.selectAlbumMainListLike(startNum);
 		logger.info("CommonServiceImpl selectAlbumMainList working");
 		return list;
-	}
+	}//JSY
 	public List<MainList> selectAlbumMainListNew(int startNum) {
 		List<MainList> list= new ArrayList<MainList>();
 		list= commonDao.selectAlbumMainListNew(startNum);

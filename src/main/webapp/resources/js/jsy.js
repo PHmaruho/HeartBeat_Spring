@@ -382,18 +382,8 @@ function searchList(){
 
 
 /* member - memberAlarmList */
-function getMemberAlarmList(id){
-	var id="<%=session.getAttribute('example')%>";
-	//alert('getMembreAlarmList: '+v);
-	$(document).ready(function(){
-		$('#alarmContent').toggle();
-		setTimeout(alarmContentShow(v),1000);
-		});
-}
-function alarmContentShow(v){
-	//alert('alarmContentShow ok');
-	var id=v;
-	//alert('v: '+v);
+function getMemberAlarmList(){
+	var id='<%=session.getAttribute("loginSession")%>';
 	$.ajax({
 		url:'/heartbeat/do/memberAlarmList',
 		data:{
@@ -404,7 +394,25 @@ function alarmContentShow(v){
 			$('#alarmContent').html(data);
 		}
 	})
+	//alert('getMembreAlarmList: '+v);
+	/*$(document).ready(function(){
+		$('#alarmContent').toggle();
+		setTimeout(alarmContentShow(id),1000);
+		});*/
 }
+/*function alarmContentShow(v){
+	var id=v;
+	$.ajax({
+		url:'/heartbeat/do/memberAlarmList',
+		data:{
+			member_id:711// id
+		},
+		success:function(data){
+			$('#alarmContent').html("");
+			$('#alarmContent').html(data);
+		}
+	})
+}*/
 function updateAlarmStatus(v){
 	var c=$('#alarm_sq'+v).val();
 	//alert('alarm_sq: '+c);
