@@ -66,7 +66,7 @@ $(document).ready(function(){
 					//alert('else');
 					var str="<li class='keyword-tag-added'>"
 							+det
-							+"<input type='button' class='deleteTag' onclick='deleteKeywordTag(this)'>"
+							+"<input type='button' class='deleteTag' onclick='deleteKeywordTag(this)' value='x'>"
 							+"<input type='hidden' value='"+det+"' class='addTag-hidden'>"
 							+"</li>";
 							
@@ -84,7 +84,7 @@ $(document).ready(function(){
 					//alert('else');
 					var str="<li class='keyword-artist-added'>"
 							+det
-							+"<input type='button' class='deleteArtist' onclick='deleteKeywordArtist(this)'>"
+							+"<input type='button' class='deleteArtist' onclick='deleteKeywordArtist(this)' value='x'>"
 							+"<input type='hidden' value='"+det+"' class='addArtist-hidden'>"
 							+"</li>";
 							
@@ -102,7 +102,7 @@ $(document).ready(function(){
 					//alert('else');
 					var str="<li class='keyword-title-added'>"
 							+det
-							+"<input type='button' class='deleteTitle' onclick='deleteKeywordTitle(this)'>"
+							+"<input type='button' class='deleteTitle' onclick='deleteKeywordTitle(this)' value='x'>"
 							+"<input type='hidden' value='"+det+"' class='addTitle-hidden'>"
 							+"</li>";
 							
