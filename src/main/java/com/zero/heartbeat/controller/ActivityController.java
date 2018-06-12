@@ -65,9 +65,7 @@ public class ActivityController {
 	public String uploadAlbumPro(Model model, HttpServletRequest request,
 									MultipartHttpServletRequest mhsr) {
 		
-	
 		activityService.uploadAlbumPro(mhsr, request);
-		
 		
 //		try {
 //			File dir = new File(savePath);
