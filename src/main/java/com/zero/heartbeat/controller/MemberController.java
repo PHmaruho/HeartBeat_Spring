@@ -1,8 +1,12 @@
 package com.zero.heartbeat.controller;
 
+import java.io.File;
+import java.util.Iterator;
 import java.util.Locale;
 import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -12,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.zero.heartbeat.model.Member;
 import com.zero.heartbeat.service.ActivityService;
@@ -31,14 +36,13 @@ public class MemberController {
 	@Autowired private CommonService commonService;
 	@Autowired private ExploreService exploreService;
 	@Autowired private MemberService memberService;
-	
-	//JSY
+
+	// JSY
 	@RequestMapping("/alarmTest")
-	public String alarmTest(Model model,Locale locale) {
+	public String alarmTest(Model model, Locale locale) {
 		return "member/alarmTest";
 	}
-	
-	
+
 	@RequestMapping("/loginForm")
 	public String loginForm(Model model, Locale locale) {
 
@@ -92,9 +96,9 @@ public class MemberController {
 		if (loginSession != 0) {
 			String member_sq = memberService.getMemberSq(member);
 			session.setAttribute("loginSession", member_sq);
-			returnString = "common/home";
+			returnString = "forward:/home";
 		} else {
-			returnString = "member/loginForm";
+			returnString = "forward:/loginForm";
 		}
 		return returnString;
 	}
@@ -102,7 +106,7 @@ public class MemberController {
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "/common/home";
+		return "forward:/home";
 	}
 
 	@RequestMapping("/memberInfoChangeForm")
@@ -120,11 +124,38 @@ public class MemberController {
 	}
 
 	@RequestMapping("/memberInfoChangePro2")
-	public String memberInfoChangePro2(MultipartFile file) {
-		logger.info("하 쉬운게 하나 없네");
-		logger.info(file.getOriginalFilename());
-		logger.info(file.getSize()+"");
-		return "member/loginPro";
+	public String memberInfoChangePro2(HttpServletRequest req, HttpServletResponse res, HttpSession session) {
+		String path = "c://aaa";
+		try {
+			MultipartHttpServletRequest mhsr = (MultipartHttpServletRequest) req;
+			Iterator<String> iter = mhsr.getFileNames();
+			MultipartFile mfile = null;
+			String fieldName = "";
+			
+			File dir = new File(path);
+			if (!dir.isDirectory()) {
+				dir.mkdirs();
+			}
+			
+			while (iter.hasNext()) {
+				fieldName = iter.next();
+				mfile = mhsr.getFile(fieldName);
+				String origName;
+				origName = new String(mfile.getOriginalFilename().getBytes("8859_1"), "UTF-8");
+				
+				if ("".equals(origName)) {
+					continue;
+				}
+				
+				String ext = ".png";
+				String saveFileName = session.getAttribute("loginSession") + ext;
+				File serverFile = new File(path + File.separator + saveFileName);
+				mfile.transferTo(serverFile);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return "/common/home";
 	}
 
 	@RequestMapping("/joinForm")
@@ -139,6 +170,6 @@ public class MemberController {
 		member.setPw(pw);
 		member.setNick(nick);
 		memberService.join(member);
-		return "member/joinPro";
+		return "/common/home";
 	}
 }
