@@ -23,6 +23,155 @@ function musicShare(v){
 	$('#detailSearchCategory').toggle();
 }*/
 
+function autoSearch(){
+	$("#detailText").autocomplete({
+		focus:function(event,ui){
+			$(this).val(ui.item.label);
+			return false;
+		},
+		minlength:1,
+		source:function(request,response){
+			var keyword=($('#cat').val()==null)? "":$('#cat').val();
+			$.ajax({
+				url: "/heartbeat/do/getKeyword/"+keyword,
+				dataType:"json",
+				data:{
+					searchWord:request.term
+				},
+				success:function(data){
+					if(keyword=='tag'){
+						response($.map(data.list,function(item){
+							return{
+								label:item.tag_meaning,
+								value:item.tag_meaning
+							};
+						}))	
+					}
+					else if(keyword=='artist'){
+						response($.map(data.list,function(item){
+							return{
+								label:item.nick,
+								value:item.nick
+							};
+						}))	
+					}
+					else if(keyword=='title'){
+						response($.map(data.list,function(item){
+							return{
+								label:item.music_nm,
+								value:item.music_nm
+							};
+						}))	
+					}
+				},
+			})
+		},
+		select:function(event,ui){
+			if(event.keyCode==13){searchKeywordUsers();}
+			else searchKeywordUsers();
+		}
+	})
+}
+
+function searchKeywordUsers(){
+	
+		var cat=$('#cat').val();
+		var det= $('#detailText').val();
+		
+		//alert('입력할 단어: '+det);
+		if(cat=='tag'){
+			var v=$('#tag').val().split(",");
+			var res=0;
+			//alert('tag in');
+			for(var i in v){
+				//alert('v['+i+']:'+v[i]);
+				if(v[i]==det){
+					res=1;
+					//alert('v['+i+']==det res:'+res);
+					break;
+				}
+			}
+			var len= $('#tag').val().length;
+			//alert('v: '+v);
+			if(res==0){
+				//alert('else');
+				var str="<li class='keyword-tag-added'>"
+						+det
+						+"<input type='button' class='deleteTag' onclick='deleteKeywordTag(this)' value='x'>"
+						+"<input type='hidden' value='"+det+"' class='addTag-hidden'>"
+						+"</li>";
+						
+				$('.keyword-tag').append(str);
+				if(len==0) 	$('#tag').val($('#tag').val()+''+det+'');
+				else 		$('#tag').val($('#tag').val()+','+det+'');
+			}else if(len==0){
+				alert('검색어를 입력해주세요.')
+			}else{
+				alert('존재하는 검색어입니다.');
+			}
+	}else if(cat=='artist'){
+			var v=$('#artist').val().split(",");
+			var res=0;
+			//alert('tag in');
+			for(var i in v){
+				//alert('v['+i+']:'+v[i]);
+				if(v[i]==det){
+					res=1;
+					//alert('v['+i+']==det res:'+res);
+					break;
+				}
+			}
+			var len= $('#artist').val().length;
+			//alert('v: '+v);
+			if(res==0){
+				//alert('else');
+				var str="<li class='keyword-artist-added'>"
+						+det
+						+"<input type='button' class='deleteArtist' onclick='deleteKeywordArtist(this)' value='x'>"
+						+"<input type='hidden' value='"+det+"' class='addArtist-hidden'>"
+						+"</li>";
+						
+				$('.keyword-artist').append(str);
+				if(len==0) 	$('#artist').val($('#artist').val()+''+det+'');
+				else 		$('#artist').val($('#artist').val()+','+det+'');
+			}else if(len==0){
+				alert('검색어를 입력해주세요.')
+			}else{
+				alert('존재하는 검색어입니다.');
+			}
+		}else if(cat=='title'){
+			var v=$('#title').val().split(",");
+			var res=0;
+			//alert('tag in');
+			for(var i in v){
+				//alert('v['+i+']:'+v[i]);
+				if(v[i]==det){
+					res=1;
+					//alert('v['+i+']==det res:'+res);
+					break;
+				}
+			}
+			var len= $('#title').val().length;
+			//alert('v: '+v);
+			if(res==0){
+				//alert('else');
+				var str="<li class='keyword-title-added'>"
+						+det
+						+"<input type='button' class='deleteTitle' onclick='deleteKeywordTitle(this)' value='x'>"
+						+"<input type='hidden' value='"+det+"' class='addTitle-hidden'>"
+						+"</li>";
+						
+				$('.keyword-title').append(str);
+				
+				if(len==0) 	$('#title').val($('#title').val()+''+det+'');
+				else 		$('#title').val($('#title').val()+','+det+'');
+			}else if(len==0){
+				alert('검색어를 입력해주세요.')
+			}else{
+				alert('존재하는 검색어입니다.');
+			}
+		}
+}
 function searchDetailShowKeyword(category){
 	var r=category.value;
 	$('#cat').val("");
@@ -76,11 +225,54 @@ function deleteKeywordTag(v){
 	pLi.remove();
 	
 }
-
+function deleteKeywordArtist(v){
+	let val=$(v);
+	//alert('val: '+val);
+	let pLi= val.closest('li'); // 삭제 대상 keyword
+	let pUl= pLi.closest('ul'); // 삭제 대상 부모 name
+	let i= $('.keyword-artist').index(pUl);
+	
+	let sTag=$('#artist').val().split(",");
+	let str="";
+	
+	$('#artist').val("");
+	for(let item in sTag){
+		if(pLi.find('.addArtist-hidden').val()!= sTag[item]){
+			if(str.length==0) str+=sTag[item];
+			else str+=","+sTag[item];
+		}
+	}
+	
+	$('#artist').val(str);
+	pLi.remove();
+	
+}
+function deleteKeywordTitle(v){
+	let val=$(v);
+	//alert('val: '+val);
+	let pLi= val.closest('li'); // 삭제 대상 keyword
+	let pUl= pLi.closest('ul'); // 삭제 대상 부모 name
+	let i= $('.keyword-title').index(pUl);
+	
+	let sTag=$('#title').val().split(",");
+	let str="";
+	
+	$('#title').val("");
+	for(let item in sTag){
+		if(pLi.find('.addTitle-hidden').val()!= sTag[item]){
+			if(str.length==0) str+=sTag[item];
+			else str+=","+sTag[item];
+		}
+	}
+	
+	$('#title').val(str);
+	pLi.remove();
+	
+}
 function searchList(){
-	var art=$('#artist').val().trim;
-	var tit=$('#title').val().trim;
-	var tag=$('#tag').val().trim;
+	var art=$('#artist').val().trim();
+	var tit=$('#title').val().trim();
+	var tag=$('#tag').val().trim();
 	var c=$('#cat').val().length;
 	/*
 	var keyword=document.getElementById('searchBox').value.trim();
@@ -94,19 +286,27 @@ function searchList(){
 	var count2=0;
 	var count3=0;
 	var noCategory=0;
-	*/
-	
-	if(c==0) alert('항목을 선택하고 검색어를 입력해주세요.');
-	else if(tit.length==0 & tag.length==0 & art.length==0 ){
-		alert('검색어를 입력해주세요');
-		return false;
-	}
-	if(art.length==0 || art==null || art=='' || art==' ') art='all';
-	if(title.length==0 || title==null || tag==''|| title==' ') title='all';
-	if(tag.length==0 || tag==null || tag=='' || tag==' ') tag='all';
+	alert('val trim');
 	alert('art:'+art);
 	alert('tag:'+tag);
-	alert('title:'+title);
+	alert('title:'+tit);
+	*/
+	if(c==0){
+		alert('항목을 선택하고 검색어를 입력해주세요.');
+		return false;
+	}
+	else if(tit.length==0 && tag.length==0 && art.length==0 ){
+		alert('검색어를 입력해주세요');
+		return false;
+	}else{
+		if(art.length==0 || art==null || art=='' || art==' ') art='all';
+		if(tit.length==0 || tit==null || tit==''|| tit==' ') tit='all';
+		if(tag.length==0 || tag==null || tag=='' || tag==' ') tag='all';
+		/*alert('필터 후');
+		alert('art:'+art);
+		alert('tag:'+tag);
+		alert('title:'+tit);*/
+	}
 	/*
 	for(var i=0;i<arr.length;i++){
 		count1=0;
@@ -180,24 +380,24 @@ function searchList(){
 		});	
 }
 
+
 /* member - memberAlarmList */
-function getMemberAlarmList(v){
-	var v="ㅇㅅㅇ";
+function getMemberAlarmList(id){
+	var id="<%=session.getAttribute('example')%>";
 	//alert('getMembreAlarmList: '+v);
 	$(document).ready(function(){
-		setInterval(
-				alarmContentShow(v),1000)
-	});
+		$('#alarmContent').toggle();
+		setTimeout(alarmContentShow(v),1000);
+		});
 }
 function alarmContentShow(v){
 	//alert('alarmContentShow ok');
-	$('#alarmContent').toggle();
-	var mId='<%=Session["id"]%>';
+	var id=v;
 	//alert('v: '+v);
 	$.ajax({
 		url:'/heartbeat/do/memberAlarmList',
 		data:{
-			member_id:711
+			member_id:711// id
 		},
 		success:function(data){
 			$('#alarmContent').html("");

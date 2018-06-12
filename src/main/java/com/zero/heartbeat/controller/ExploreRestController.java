@@ -51,14 +51,17 @@ public class ExploreRestController {
 		for(String s:arrArt) {
 			if(s.contains("all")) artist.add("전체");
 			else artist.add(s);
+			logger.info("arrArt: "+s);
 		}
 		for(String s:arrTitle) {
 			if(s.contains("all")) title.add("전체");
 			else title.add(s);
+			logger.info("arrTitle: "+s);
 		}
 		for(String s:arrTag) {
 			if(s.contains("all")) tag.add("전체");
 			else tag.add(s);
+			logger.info("arrTag: "+s);
 		}
 		
 		/*for(String s:arr1) {
@@ -83,6 +86,10 @@ public class ExploreRestController {
 		if(artist.isEmpty()|| artist.size()==0|| artist.contains(" ")) artist.add("전체");
 		if(title.isEmpty()|| title.size()==0|| title.contains(" ")) title.add("전체");
 		
+		logger.info("artist: "+artist.size());
+		logger.info("title: "+title.size());
+		logger.info("tag: "+tag.size());
+		
 		if(artist.contains("전체")&& title.contains("전체")&&tag.contains("전체")) {
 			discoverList=null;
 		}else {
@@ -92,9 +99,7 @@ public class ExploreRestController {
 			discoverList= exploreService.selectAllSearchList(dto);
 		}
 		
-		logger.info("artist: "+artist.size());
-		logger.info("title: "+title.size());
-		logger.info("tag: "+tag.size());
+		
 		model.addObject("discoverList", discoverList);
 		model.addObject("artist",dto.getArrArtist());
 		model.addObject("tag",dto.getArrTag());

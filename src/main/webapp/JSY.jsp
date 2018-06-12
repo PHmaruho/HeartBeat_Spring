@@ -12,8 +12,7 @@
 	 //location.href="/heartbeat/mainList";
 	
 	/* Search Page */
-	location.href="/heartbeat/discover";
-	 //location.href="/heartbeat";
+	//location.href="/heartbeat/discover";
 
 	/* Alarm Page */
 	 //location.href="/heartbeat/alarmTest";

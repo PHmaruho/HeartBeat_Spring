@@ -1,0 +1,7 @@
+@charset "UTF-8";
+
+.keyword-tag-added,.keyword-artist-added,.keyword-title-added{
+	list-style-type:none;
+	border:1px solid;
+	float:left;
+}

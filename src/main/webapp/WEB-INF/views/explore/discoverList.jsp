@@ -20,27 +20,27 @@
 </head>
 <body>
 	<h2>discover List</h2>
+	<p>
+			Result With 가수 [ 
+				<c:forEach var="art" items="${ artist}">
+					/${art }
+				</c:forEach>
+				] 곡명 [
+				<c:forEach var="tit" items="${title }">
+					/${tit }
+				</c:forEach>
+				] 태그 [
+				<c:forEach var="tag" items="${tag }">
+					/${tag}
+				</c:forEach>
+				]
+		<p>
 	
 	<c:if test="${discoverList==null || discoverList.size()==0}">
 		검색 결과가 없습니다.
 	</c:if>
 	
 	<c:if test="${ discoverList!=null }">
-		<p>
-			Result With @가수 [ 
-				<c:forEach var="art" items="${ artist}">
-					/${art }
-				</c:forEach>
-				] *곡명 [
-				<c:forEach var="tit" items="${title }">
-					/${tit }
-				</c:forEach>
-				] #태그 [
-				<c:forEach var="tag" items="${tag }">
-					/${tag}
-				</c:forEach>
-				]
-		<p>
 		<table border="1">
 		<c:forEach var="list" items="${discoverList}" varStatus="i">
 			<tr>
