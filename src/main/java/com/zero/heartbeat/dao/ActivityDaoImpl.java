@@ -63,6 +63,7 @@ public class ActivityDaoImpl implements ActivityDao {
 		return session.selectList("selectAlbumType");
 	}
 	
+	// JSY
 	@Override
 	public List<Tag> searchTag() {
 		// TODO Auto-generated method stub
@@ -71,12 +72,13 @@ public class ActivityDaoImpl implements ActivityDao {
 	
 	// 최우일
 	@Override
-	public HashMap<String, Object> selectMusicDetail(int sq) {	// 최우일
+	public HashMap<String, Object> selectMusicDetail(int sq) {
 		return session.selectOne("selectMusicDetail", sq);
 	}
 
+	// 최우일
 	@Override
-	public List<Member> selectMusicArtists(int sq) {	// 최우일
+	public List<Member> selectMusicArtists(int sq) {
 		return session.selectList("selectMusicArtists", sq);
 	}
 }

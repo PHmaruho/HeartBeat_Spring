@@ -45,6 +45,7 @@ public class CommonServiceImpl implements CommonService {
 		return list;
 	}
 
+	// JAN
 	@Override
 	public List<Album> selectAlbumArriveList(Album album) {
 		// TODO Auto-generated method stub
@@ -58,8 +59,9 @@ public class CommonServiceImpl implements CommonService {
 		return commonDao.mainList();
 	}
 
+	// 최우일
 	@Override
-	public List<Music> selectPlaylistFoot(int sessionSq) {	// 최우일
+	public List<Music> selectPlaylistFoot(int sessionSq) {
 		return commonDao.selectPlaylistFoot(sessionSq);
 	}
 }

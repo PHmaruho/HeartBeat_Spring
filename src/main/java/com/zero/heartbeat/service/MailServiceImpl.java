@@ -17,6 +17,7 @@ public class MailServiceImpl implements MailService {
 	@Autowired
 	private JavaMailSender javaMailSender;
 
+	// KKH
 	@Override
 	public boolean send(String subject, String string, String string2, String email, Object object) {
 		logger.info("mailserviceImpl");

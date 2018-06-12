@@ -14,9 +14,10 @@ public interface CommonService {
 	List<MainList> selectAlbumMainListLike(int startNum);
 	List<MainList> selectAlbumMainListNew(int startNum);
 	
-
+	// JAN
 	List<Album> selectAlbumArriveList(Album album);
 	List<SearchList> mainList();
 
-	List<Music> selectPlaylistFoot(int sessionSq);	// 최우일
+	// 최우일
+	List<Music> selectPlaylistFoot(int sessionSq);
 }
