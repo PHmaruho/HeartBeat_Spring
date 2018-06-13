@@ -118,21 +118,27 @@ function showDetailComments(detailNum) {
 	
 	for (var i in comments) {
 		var leftPos = comments[i].time_stamp / detailPlayer[detailNum].duration * $('#detailComments' + detailNum).width();
-		var newHtml = '<img src="/heartbeat/resources/img/profile/302.png" class="cwi-detail-player-comments" ' +
-		'style= "left: ' + leftPos + 'px;" id="commentsIcon' + detailNum + '-' + i + '">';
+		
+		var newHtml = 
+			'<img class="cwi-detail-player-comments" style= "position:absolute; left:' + leftPos + 'px;" '+
+			'src = "/heartbeat/resources/img/profile/' + comments[i].member_sq + '.png"' +
+			'id="commentsIcon' + detailNum + '-' + i + '" alt="' + i + '">';
 		commentsIcon = commentsIcon + newHtml;
 	}
 	$('#detailComments' + detailNum).html(commentsIcon);
 	
 	$('#detailComments' + detailNum).on('mouseover', function(e) {
+		var selected = comments[e.target.alt];
 		var target = $(e.target);
+		
 		if (target.is('img')) {
 			target.toggleClass('cwi-commnets-on');
-			var iconHtml = '<img src="/heartbeat/resources/img/profile/302.png" class="cwi-detail-player-comments">';
-			var nickHtml = 'a';
-			var replyHtml = 'asdfasdfasdf';
-			console.log(target.position().left);
-			$('#detailCommentsOn' + detailNum).css({'left' : target.position().left, 'position' : 'absolute'});
+			var iconHtml =
+				'<img src="/heartbeat/resources/img/profile/' + selected.member_sq + '.png" class="cwi-detail-player-comments">';
+			var nickHtml = selected.nick + ' : ';
+			var replyHtml = selected.reply_comment;
+			
+			$('#detailCommentsOn' + detailNum).css({'left' : target.position().left});
 			$('#detailCommentsIcon' + detailNum).html(iconHtml);
 			$('#detailCommentsNick' + detailNum).html(nickHtml);
 			$('#detailCommentsReply' + detailNum).html(replyHtml);
