@@ -122,20 +122,41 @@ public class ActivityController {
 	
 	@RequestMapping("/my/likeTest")
 	public ModelAndView selectAllLikeList(String id) {
-		id = "709";
+		id = "704";
 		int member_sq = Integer.parseInt(id);
 		
 		ModelAndView mav = new ModelAndView();
 		
 		List<AllLikeList> list = new ArrayList<AllLikeList>();
+		List<AllLikeList> unlist = new ArrayList<AllLikeList>();
 		list = activityService.selectAllLikeList(id);
+		unlist = activityService.selectUnLikeList(id);
 		logger.info("selectAllLikeList Controller "+list.get(0).getAlbumLikeCount());
 		logger.info("selectAllLikeList Controller "+list.get(0).getAlbumLikeCount());
 		logger.info("selectAllLikeList Controller ");
 
 		mav.addObject("list",list);
+		mav.addObject("unlist",unlist);
 		mav.setViewName("activity/my/likeTest");
 		return mav;
+	}
+	
+
+	//JAN
+	@RequestMapping("/my/followList")
+	public String followList(Model model) {
+		List<Member> following = new ArrayList<Member>();
+		List<Member> follower = new ArrayList<Member>();
+		
+		int id = 703;
+		
+		following = activityService.selectFollowing(id);
+		follower = activityService.selectFollower(id);
+		
+		model.addAttribute("following",following);
+		model.addAttribute("follower",follower);
+		
+		return "activity/my/followList";
 	}
 
 }

@@ -19,10 +19,10 @@
 .box {
 	margin-left: 7%;
 	margin-right: 7%;
+	overflow: hidden;
 }
 
 .banner {
-	background-color: black;
 	padding-left: 20%;
 	
 }
@@ -31,6 +31,7 @@
 	width: 1000px;
 	height : 698px;
 }
+
 
 .contents {
  	margin-bottom : 25%;
@@ -85,9 +86,6 @@
 	
 }
 
-.box > .banner > div > bannerimg {
-	max-width: inherit;
-}
 
 </style>
 </head>
@@ -101,7 +99,8 @@
 	<button onclick="goto('/loginForm')">to login</button>	
 	</c:if>
 	<button onclick="goto('/arrive')" >최신음악</button>
-	<button onclick="goto('/my/likeTest')">like</button>
+	<button onclick="goto('/my/likeTest')">내가좋아하는게뭐게</button>
+	<button onclick="goto('/my/followList')">FollowList</button>
 	
 <%-- 	${kkk}<p>
 	<img src="${pageContext.request.contextPath }/resources/img/album/${kkk}"> --%>
@@ -126,21 +125,15 @@
 </form> --%>
 <br><br>
 <div class="box">
-<div class="banner">
-	<div style="display:block;">
-<!-- <h2> Main List Testing</h2> -->
-	<img src="resources/img/profile/mainBanner4.jpg" class="bannerimg" id="slide">
-</div>
-	<div style="display:none;">
-		<img src="${pageContext.request.contextPath }/resources/img/profile/mainBanner1.jpg" class="bannerimg">
+	<div class="banner" id="sliderFrame">
+	<div id="slider">
+	<!-- <h2> Main List Testing</h2> -->
+		<img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner4.jpg" class="bannerimg" id="slide">
+		<img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner1.jpg" class="bannerimg" >
+		<img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner2.jpg" class="bannerimg" >
+		<img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner3.jpg" class="bannerimg" >
 	</div>
-	<div style="display:none;">
-		<img src="${pageContext.request.contextPath }/resources/img/profile/mainBanner2.jpg" class="bannerimg">
-	</div>
-	<div style="display:none;">
-		<img src="${pageContext.request.contextPath }/resources/img/profile/mainBanner3.jpg" class="bannerimg">
-	</div>
-</div> 
+	</div> 
 
 <br><br><br><br>
 <div class="contents">
@@ -154,6 +147,12 @@
 			<img src="resources/img/album/${album.img_path }.jpg" class="albumImg" ></a>
 				<br>
 				<br>
+				${album.music_sq}<br>
+				${album.album_sq}
+				<br>
+				<a href="#">
+					<img src="${pageContext.request.contextPath }/resources/img/profile/dislike.png" class="glul-img" onclick="likeAlbum(${album.album_sq}, 704)">
+				</a>
 				${album.album_nm }<br>
 				${album.nick }<br>
 			</li>

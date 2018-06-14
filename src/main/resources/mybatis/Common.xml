@@ -103,9 +103,10 @@
  	<![CDATA[ 
 	select rownum as rn, am.* from
 	(select a.album_sq,a.album_nm,a.img_path
-		,b.nick, m.music_sq,m.music_nm
+			,b.nick, m.music_sq,m.music_nm
 	from album a, music m, member b 
 	where a.album_sq=m.album_sq and m.open_yn='Y'
+ 	 and a.member_sq=b.member_sq
 	order by a.release_dt) am
 	where rownum>#{startNum} and rownum<=#{startNum}+10
 	]]>

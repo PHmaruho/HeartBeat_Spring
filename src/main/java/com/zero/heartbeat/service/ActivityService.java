@@ -23,7 +23,15 @@ public interface ActivityService {
 	void insertLike(MusicLike like);
 	List<MusicLike> likeList(int member_sq);
 	List<AllLikeList> selectAllLikeList(String id);
-
+	List<AllLikeList> selectUnLikeList(String id);
+	void clickUnlikeMusic(int unLike);
+	void clickUnlikeAlbum(int unLike);
+	void clickLikeAlbum(int likeAlbum, int id);
+	void clickLikeMusic(int likeMusic, int id);
+	void unLikeCancel(int unLikeCancel, String music_like_type);
+	List<Member> selectFollowing(int id);
+	List<Member> selectFollower(int id);
+	
 
 	// PHmaruho
 	public List<Code> selectAlbumType();
@@ -32,4 +40,5 @@ public interface ActivityService {
 	
 	HashMap<String, Object> selectMusicDetail(int sq); // 최우일
 	List<Member> selectMusicArtists(int sq); // 최우일
+	
 }

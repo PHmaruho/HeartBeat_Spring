@@ -65,7 +65,70 @@ public class ActivityDaoImpl implements ActivityDao {
 		logger.info("selectAllLikeList DaoImpl ");
 		return session.selectList("selectAllLikeList",id);
 	}
+	//JAN
+	@Override
+	public void clickUnlikeMusic(int unLike) {
+		// TODO Auto-generated method stub
+		session.update("clickUnlikeMusic",unLike);
+	}
+	//JAN
+	@Override
+	public void clickUnlikeAlbum(int unLike) {
+		// TODO Auto-generated method stub
+		session.update("clickUnlikeAlbum",unLike);
+	}
+	
+	//JAN
+	@Override
+	public List<AllLikeList> selectUnLikeList(String id) {
+		// TODO Auto-generated method stub
+		return session.selectList("selectUnLikeList",id);
+	}
+	//JAN
+	@Override
+	public void clickLikeAlbum(int likeAlbum, int id) {
+		// TODO Auto-generated method stub
+		Map<String , Object> map = new HashMap<String,Object>();
+		map.put("likeAlbum", likeAlbum);
+		map.put("id", id);
+		session.insert("clickLikeAlbum",map);
+	}
+	//JAN
+	@Override
+	public void clickLikeMusic(int likeMusic, int id) {
+		// TODO Auto-generated method stub
+		Map<String , Object> map = new HashMap<String,Object>();
+		map.put("likeMusic", likeMusic);
+		map.put("id", id);
+		session.insert("clickLikeMusic",map);
+	}
+	
+	//JAN
+	@Override
+	public void unLikeCancel(int unLikeCancel, String music_like_type) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("unLikeCancel", unLikeCancel);
+		map.put("music_like_type", music_like_type);
+		logger.info("unLike:"+map.get("unLikeCancel"));
+		session.update("unLikeCancel",map);
+	}
+	
+	//JAN
+	@Override
+	public List<Member> selectFollowing(int id) {
+		// TODO Auto-generated method stub
+		return session.selectList("selectFollowing",id);
+	}
+	//JAN
+	@Override
+	public List<Member> selectFollower(int id) {
+		// TODO Auto-generated method stub
+		return session.selectList("selectFollower",id);
+	}
 
+	
+	
 	// PHmaruho
 	@Override
 	public List<Code> selectAlbumType() {
@@ -92,4 +155,12 @@ public class ActivityDaoImpl implements ActivityDao {
 		return session.selectList("selectMusicArtists", sq);
 	}
 
+	
+	
+
+
+
+	
+
+	
 }

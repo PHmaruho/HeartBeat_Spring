@@ -58,5 +58,40 @@ public class ActivityRestController {
 	}
 	*/
 
+	//JAN
+	@RequestMapping("/dislike")
+	public void clickUnlike(String music_like_sq, String music_like_type) {
+		int unLike = Integer.parseInt(music_like_sq);
+		logger.info("type:"+music_like_type);
+		if(music_like_type.equals("곡")) {
+			activityService.clickUnlikeMusic(unLike);
+		} else {
+			activityService.clickUnlikeAlbum(unLike);
+		}
+	}
+	
+	//JAN
+	@RequestMapping("/likeAlbum")
+	public void clickLikeAlbum(String album_sq,String member_sq ) {
+		int likeAlbum = Integer.parseInt(album_sq);
+		int id = Integer.parseInt(member_sq);
+		activityService.clickLikeAlbum(likeAlbum,id);
+	}
+	
+	//JAN
+	@RequestMapping("/likeMusic")
+	public void clickLikeMusic(String music_sq,String member_sq ) {
+		int likeMusic = Integer.parseInt(music_sq);
+		int id = Integer.parseInt(member_sq);
+		activityService.clickLikeMusic(likeMusic,id);
+	}
+	
+	//JAN
+	@RequestMapping("/unLikeCancel")
+	public void unLikeCancel(String music_like_sq, String music_like_type) {
+		int unLikeCancel =  Integer.parseInt(music_like_sq);
+		activityService.unLikeCancel(unLikeCancel,music_like_type);
+	}
+	
 	
 }

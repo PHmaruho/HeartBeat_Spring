@@ -30,10 +30,31 @@ displayMultimedia("/xe/flash/"+ list[num],500,140,false); */
 
 
 //Common - mainBanner random
+var sliderOptions =
+{
+    sliderId: "slider",
+    startSlide: 0,
+    effect: "series1",
+    effectRandom: false,
+    pauseTime: 2800,
+    transitionTime: 1200,
+    slices: 14,
+    boxes: 8,
+    hoverPause: 1,
+    autoAdvance: true,
+    thumbnailsWrapperId: "thumb_container_id",
+    m: false,
+    license: "mylicense"
+};
 
-var $imgList = $('.banner>div');			// banner div 안에 있는 div 자식들을 가져옴
+var imageSlider=new mcImgSlider(sliderOptions); 
+/*
+function mcImgSlider(i){for(var I=function(a){return ................}*/
+
+
+/*var $imgList = $('.banner>div');			// banner div 안에 있는 div 자식들을 가져옴
 var nImgCount = $imgList.children().length;	// 위에서 가져온 div 자식들의 개수
-var nDuration = 2000;					// 이미지를 변경할 시간 (3000 = 3초)
+var nDuration = 4000;					// 이미지를 변경할 시간 (3000 = 3초)
 var bAuto = true;						// 자동으로 변경할 지 여부
 var nIndex = 0;						// 변경할 이미지의 Index
 
@@ -42,37 +63,50 @@ if(bAuto == true) {
 }
 
 function autoSlide() {
-	/* 3초마다 이 함수에 들어오게 됨 */
+	 3초마다 이 함수에 들어오게 됨 
 	// % 연산은 나누기를 한 후 나머지 값을 가져오는 연산입니다.
-	 //nImgCount = 4
-	/*
+	 nImgCount = 4
+	
 		nIndex = 0
 		++nIndex = 1
 		(++nIndex % nImageCount) = (1 % 4 = 1)
 		$($imgList.get(0)).fadeOut(1000);	// 0 Index에 있는 이미지를 fadeOut
 		$($imgList.get(1)).fadeIn(1000);	// 1 Index에 있는 이미지를 fadeIn
-	*/
-	/*
+	
+	
 		nIndex = 1
 		++nIndex = 2
 		(++nIndex % nImageCount) = (2 % 4 = 2)
 		$($imgList.get(1)).fadeOut(1000);	// 1 Index에 있는 이미지를 fadeOut
 		$($imgList.get(2)).fadeIn(1000);	// 2 Index에 있는 이미지를 fadeIn
-	*/
+	
 	var next = (++nIndex % nImgCount);
-	$($imgList.get(next - 1)).fadeOut(1000);
-	$($imgList.get(next)).fadeIn(1000);
+	$($imgList.get(next - 1)).fadeOut(2000);
+	$($imgList.get(next)).fadeIn(2000);
 }
-
+*/
 // Common - 상세페이지
-
-function like_func() {
-	var frm_read = $(frm_read);
+function like_func(sq, type) {
+	/*alert("도착ㄱ");
+	alert("타입 :" + type );
+	alert("sq : " + sq);*/
+	$.ajax({
+		url: '/heartbeat/do/dislike',
+		data: {
+			music_like_sq: sq ,
+			music_like_type: type
+		},
+		success: function() {
+			alert("좋아요 취소");
+		}
+	})
+	
+	/*var frm_read = $(frm_read);
 	var target_sq = $('#target_sq',frm_read).val();
 	//var member_sq = $('#member_sq',frm_read).varl();
 	console.log("target_sq, member_sq :"+target_sq+","+member_sq);
 $.ajax({
-	url:"/do/like",
+	url:"/heartbeat/do/like",
 	type: "GET",
 	cache: false,
 	dataType: "json",
@@ -95,7 +129,8 @@ $.ajax({
 	error : function(request,status,error) {
 		alert("code:"+request.status+"|n"+"message:"+request.responseText+"|n"+"error:"+error);
 	}
-});
+});*/
+	
 }
 
 /**
@@ -103,18 +138,53 @@ $.ajax({
 	주석은 해당 jsp 페이지!
  */
 
-// Common- 상세페이지
-function musicShare(v){
-	var member_id='<%=Session["id"]%>';
-	var c=$('#music_sq'+v).val();
+
+// Activity - clickLike
+function likeAlbum(sq, id) {
 	$.ajax({
-		url:'/heartbeat/do/mainListShare',
-		data:{
-			music_sq:c,
-			id:member_id
+		url : '/heartbeat/do/likeAlbum',
+		data: {
+			album_sq :sq,
+			member_sq : id
 		},
-		success:function(){
-			alert('공유되었습니다.');
+		success:function() {
+			alert("♡쪼아효♡");
 		}
+		
 	})
 }
+
+function likeMusic(sq, id) {
+	$.ajax({
+		url : '/heartbeat/do/likeMusic',
+		data: {
+			music_sq :sq,
+			member_sq : id
+		},
+		success:function() {
+			alert("♡쪼아효♡");
+		}
+		
+	})
+}
+
+function unLikeCancel(sq, type) {
+	/*alert("도착ㄱ");
+	alert("타입 :" + type );
+	alert("sq : " + sq);*/
+	
+	$.ajax({
+		url: '/heartbeat/do/unLikeCancel',
+		data: {
+			music_like_sq : sq,
+			music_like_type: type
+		},
+		success : function() {
+			alert("다시 조아요");
+		}
+	})
+	
+}
+
+
+

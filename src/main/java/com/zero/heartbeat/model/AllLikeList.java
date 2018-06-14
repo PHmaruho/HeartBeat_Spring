@@ -14,6 +14,7 @@ public class AllLikeList {
 	private int album_sq;
 	private String album_nm;
 	private int albumLikeCount;
+	private String code_meaning;
 	
 	
 
@@ -94,6 +95,14 @@ public class AllLikeList {
 	}
 	public void setAlbum_sq(int album_sq) {
 		this.album_sq = album_sq;
+	}
+
+	public String getCode_meaning() {
+		return code_meaning;
+	}
+
+	public void setCode_meaning(String code_meaning) {
+		this.code_meaning = code_meaning;
 	}
 	
 	
