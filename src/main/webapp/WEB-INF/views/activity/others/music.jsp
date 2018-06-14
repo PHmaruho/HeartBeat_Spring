@@ -74,15 +74,15 @@
 			<span id="detailProgress0"></span>
 			<span id="detailDuration0"></span>
 			
-			<div id="detailComments0" style="height: 24px;">
-				
+			<div id="detailComments0" style="height: 48px;">
+				<div id="detailCommentIconsLine0" style="height: 24px;"></div>
+				<span id="detailCommentsOn0" style="position: absolute;">
+					<span id="detailCommentsOn0-1"><img></span>
+					<span id="detailCommentsOn0-2"><a></a></span>
+					<span id="detailCommentsOn0-3">...</span>
+				</span>
 			</div>
 			
-			<span id="detailCommentsOn0" style="position: absolute;">
-				<span id="detailCommentsIcon0"><img></span>
-				<span id="detailCommentsNick0"><a></a></span>
-				<span id="detailCommentsReply0">...</span>
-			</span>
 		</div>
 		
 		<input type="hidden" id="detailMusicSq0" value="${music.MUSIC_SQ }">

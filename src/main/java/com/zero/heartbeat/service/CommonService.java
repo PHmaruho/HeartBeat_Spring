@@ -18,6 +18,6 @@ public interface CommonService {
 	List<Album> selectAlbumArriveList(Album album);
 	List<SearchList> mainList();
 
-	// 최우일
-	List<Music> selectPlaylistFoot(int sessionSq);
+	List<Music> selectPlaylistFoot(int sessionSq);	// 최우일
+	Music selectMusicFootLoad(int sq);	// 최우일
 }

@@ -9,6 +9,7 @@ function initFoot(sq) {
 	});
 	
 	loadFoot(sq);
+	getFootLoad(sq);
 	
 	footPlayer.on('ready', function () {
 		footPlayer.duration = footPlayer.getDuration();
@@ -23,6 +24,7 @@ function initFoot(sq) {
 			}
 		}
 		musicMain.setFootReady(true);
+		console.log(footPlayer.info);
 	});
 	
 	footPlayer.on('audioprocess', footProgress);
@@ -97,4 +99,16 @@ function checkFootReady(callback, parameter) {
 			}
 		}
 	}
+}
+
+function getFootLoad(sq) {
+	$.ajax({
+		type : 'GET',
+		url : '/heartbeat/do/footLoad/' + sq,
+		success : function(data) {
+			footPlayer.info = data;
+		},
+		error:function(request,status,error){
+		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
+	});
 }

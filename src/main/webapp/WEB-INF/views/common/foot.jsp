@@ -67,9 +67,15 @@
 								artist : ${artistList.nick }
 							</c:forEach>
 						</td>	
-<!-- 					</tr> -->
+ 					</tr>
 				</c:forEach>
 			</table>
+		</div>
+		
+		<div>
+			<span id="footImage"></span>
+			<span id="footArtists"></span>
+			<span id="footTitle"></span>
 		</div>
 	</div>
 	

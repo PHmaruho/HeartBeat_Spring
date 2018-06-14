@@ -1,5 +1,6 @@
 package com.zero.heartbeat.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.zero.heartbeat.model.Album;
@@ -18,5 +19,6 @@ public interface CommonDao {
 	List<MainList> selectAlbumMainListNew(int startNum);
 	
 	List<Music> selectPlaylistFoot(int sessionSq);	// 최우일
+	Music selectMusicFootLoad(int sq);	// 최우일
 
 }

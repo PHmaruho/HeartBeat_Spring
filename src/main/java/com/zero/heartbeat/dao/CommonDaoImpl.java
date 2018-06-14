@@ -52,7 +52,12 @@ public class CommonDaoImpl implements CommonDao {
 	// 최우일
 	@Override
 	public List<Music> selectPlaylistFoot(int sessionSq) {
-		logger.info("CommonDaoImpl selectPlaylistFoot");
 		return session.selectList("selectPlaylistFoot", sessionSq);
+	}
+	
+	// 최우일
+	@Override
+	public Music selectMusicFootLoad(int sq) {
+		return session.selectOne("selectMusicFootLoad", sq);
 	}
 }

@@ -77,7 +77,6 @@ public class ActivityRestController {
 	public Map<Integer, HashMap<String, Object>> getDetailComments(@PathVariable int sq) {
 		Map<Integer, HashMap<String, Object>> map = null;
 		map = activityService.selectReplyAtMusic(sq);
-		System.out.println("at controller : " + map);
 		
 		return map;
 	}

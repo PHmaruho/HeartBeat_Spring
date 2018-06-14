@@ -64,4 +64,10 @@ public class CommonServiceImpl implements CommonService {
 	public List<Music> selectPlaylistFoot(int sessionSq) {
 		return commonDao.selectPlaylistFoot(sessionSq);
 	}
+	
+	// 최우일
+	@Override
+	public Music selectMusicFootLoad(int sq) {
+		return commonDao.selectMusicFootLoad(sq);
+	}
 }

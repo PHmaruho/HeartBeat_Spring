@@ -1,12 +1,17 @@
 package com.zero.heartbeat.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.zero.heartbeat.model.Music;
 import com.zero.heartbeat.service.ActivityService;
 import com.zero.heartbeat.service.CommonService;
 import com.zero.heartbeat.service.ExploreService;
@@ -32,5 +37,14 @@ public class CommonRestController {
 		memberService.insertAlarmShareMusic(id,music_sq);
 		logger.info("CommonRestController mainListShare working");
 		
+	}
+	
+	// 최우일
+	@RequestMapping("/footLoad/{sq}")
+	public Music footLoad(@PathVariable int sq) {
+		Music music = null;
+		music = commonService.selectMusicFootLoad(sq);
+		
+		return music;
 	}
 }

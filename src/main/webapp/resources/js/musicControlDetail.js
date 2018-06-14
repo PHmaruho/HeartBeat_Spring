@@ -1,6 +1,7 @@
 var detailPlayer = [];
 var maxDetailNum = $('#maxDetailNum').val();
-
+var isCommentsOn = false;
+var spanFlag = false;
 
 (function() {
 	musicMain.setMusicPage(true);
@@ -40,7 +41,16 @@ function initDetail(detailNum, sq) {
 	});
 	
 	detailPlayer[detailNum].on('audioprocess', function () {
-	    $('#detailProgress' + detailNum).text( formatTime(detailPlayer[detailNum].getCurrentTime()) );
+		var time = detailPlayer[detailNum].getCurrentTime();
+		var floorTime = Math.floor(time);
+	    $('#detailProgress' + detailNum).text( formatTime(time) );
+	    
+	    if (!getIsCommentsOn() && detailPlayer[detailNum].comments[floorTime] != undefined &&
+	    		$('#detailCommentsOn' + detailNum).attr('title') != floorTime) {
+	    	commentsMouseover($('#commentsIcon' + detailNum + '-' + floorTime), detailNum);
+	    } else if (!getIsCommentsOn() && detailPlayer[detailNum].comments[floorTime] == undefined) {
+	    	commentsMouseout(detailNum);
+	    }
 	});
 	
 	detailPlayer[detailNum].on('seek', function (e) {
@@ -112,7 +122,6 @@ function getDetailComments(detailNum) {
 }
 
 function showDetailComments(detailNum) {
-//	var commentsLength = detailPlayer[detailNum].comments.length;
 	var commentsIcon = "";
 	var comments = detailPlayer[detailNum].comments;
 	
@@ -125,36 +134,75 @@ function showDetailComments(detailNum) {
 			'id="commentsIcon' + detailNum + '-' + i + '" alt="' + i + '">';
 		commentsIcon = commentsIcon + newHtml;
 	}
-	$('#detailComments' + detailNum).html(commentsIcon);
+	$('#detailCommentIconsLine' + detailNum).html(commentsIcon);
 	
-	$('#detailComments' + detailNum).on('mouseover', function(e) {
-		var selected = comments[e.target.alt];
+	$('#detailComments' + detailNum).on('mousemove', function(e) {
 		var target = $(e.target);
 		
-		if (target.is('img')) {
-			target.toggleClass('cwi-commnets-on');
-			var iconHtml =
-				'<img src="/heartbeat/resources/img/profile/' + selected.member_sq + '.png" class="cwi-detail-player-comments">';
-			var nickHtml = selected.nick + ' : ';
-			var replyHtml = selected.reply_comment;
-			
-			$('#detailCommentsOn' + detailNum).css({'left' : target.position().left});
-			$('#detailCommentsIcon' + detailNum).html(iconHtml);
-			$('#detailCommentsNick' + detailNum).html(nickHtml);
-			$('#detailCommentsReply' + detailNum).html(replyHtml);
+		if (target.parent().is('#detailCommentIconsLine' + detailNum)) {
+			setIsCommentsOn(true);
+			spanFlag = false;
+			if (target.attr('alt') != $('#detailCommentsOn' + detailNum).attr('title')) {
+				commentsMouseover(target, detailNum);
+			}
+		} else if (target.is('span') || target.is('img')) {
+			setIsCommentsOn(true);
+			spanFlag = false;
+		} else {
+			spanFlag = true;
+			setTimeout(function() {
+				if (spanFlag) {
+					commentsMouseout(detailNum);
+				}
+			}, 200);
 		}
 	});
 	
-	$('#detailComments' + detailNum).on('mouseout', function(e) {
-		var target = $(e.target);
-		if (target.is('img')) {
-			target.toggleClass('cwi-commnets-on');
-			$('#detailCommentsIcon' + detailNum).html();
-			$('#detailCommentsNick' + detailNum).html();
-			$('#detailCommentsReply' + detailNum).html();
-		}
+	$('#detailComments' + detailNum).on('mouseleave', function(e) {
+		commentsMouseout(detailNum);
 	});
+	
 	
 }
 
+function commentsMouseover(target, detailNum) {
+	var selected = detailPlayer[detailNum].comments[target.attr('alt')];
+	$('.cwi-commnets-on').removeClass('cwi-commnets-on');
+	target.toggleClass('cwi-commnets-on');
+	var iconHtml =
+		'<img src="/heartbeat/resources/img/profile/' + selected.member_sq + '.png" class="cwi-detail-player-comments">';
+	var nickHtml = selected.nick;
+	var replyHtml = selected.reply_comment;
+	
+	$('#detailCommentsOn' + detailNum).attr('title', selected.time_stamp);
+	$('#detailCommentsOn' + detailNum + '-2').html(nickHtml);
+	
+	if (target.position().left / $('#detailCommentIconsLine' + detailNum).width() < 0.5) {
+		$('#detailCommentsOn' + detailNum).css('right', '');
+		$('#detailCommentsOn' + detailNum).css({'left' : target.position().left});
+		$('#detailCommentsOn' + detailNum + '-1').html(iconHtml);
+		$('#detailCommentsOn' + detailNum + '-3').html(replyHtml);
+	} else {
+		$('#detailCommentsOn' + detailNum).css('left', '');
+		$('#detailCommentsOn' + detailNum).css({'right' : $('#detailComments' + detailNum).width() - target.position().left - 15});
+		$('#detailCommentsOn' + detailNum + '-1').html(replyHtml);
+		$('#detailCommentsOn' + detailNum + '-3').html(iconHtml);
+	}
+}
 
+function commentsMouseout(detailNum) {
+	setIsCommentsOn(false);
+	$('.cwi-commnets-on').removeClass('cwi-commnets-on');
+	$('#detailCommentsOn' + detailNum).attr('title', '');
+	$('#detailCommentsOn' + detailNum + '-1').html('');
+	$('#detailCommentsOn' + detailNum + '-2').html('');
+	$('#detailCommentsOn' + detailNum + '-3').html('');
+}
+
+function getIsCommentsOn() {
+	return isCommentsOn;
+}
+
+function setIsCommentsOn(bool) {
+	isCommentsOn = bool;
+}
