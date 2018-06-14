@@ -6,7 +6,7 @@
 // Common- mainList
 function musicShare(v){
 	var member_id='<%=Session["id"]%>';
-	var c=$('#music_sq'+v).val();
+	var c=v;
 	$.ajax({
 		url:'/heartbeat/do/mainListShare',
 		data:{
@@ -77,6 +77,14 @@ function searchKeywordUsers(){
 	
 		var cat=$('#cat').val();
 		var det= $('#detailText').val();
+		
+		if(cat.length==0){
+			alert('항목을 선택해주세요');
+			return false;
+		}else if(det.length==0){
+			alert('검색어를 입력해주세요.');
+			return false;
+		}
 		
 		//alert('입력할 단어: '+det);
 		if(cat=='tag'){
@@ -383,6 +391,7 @@ function searchList(){
 
 /* member - memberAlarmList */
 function getMemberAlarmList(){
+	$('#alarmContent').toggle();
 	var id='<%=session.getAttribute("loginSession")%>';
 	$.ajax({
 		url:'/heartbeat/do/memberAlarmList',

@@ -7,13 +7,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jsy.js"></script>
+<link href="${pageContext.request.contextPath }/resources/css/jsy/search.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
 	<h2>Member Alarm test</h2>
 	<p>
-		<input type="button" value="알람" onclick="getMemberAlarmList()">
-		<div id="alarmContent" style="height:150px;weight:200px;display:show;">
+		<div id="alarm" class="alarm">
+			<input type="button" value="알람" onclick="getMemberAlarmList()">
+			<div id="alarmContent" class="alarmContent">
+			</div>
 		</div>
 	<br>
 </body>

@@ -15,7 +15,6 @@ $(document).ready(function(){
 	autoSearch();
 })
 
-
 </script>
 </head>
 <body>
@@ -29,10 +28,11 @@ $(document).ready(function(){
 		<input type="button" value="tag" onclick="searchDetailShowKeyword(this)">
 
 		<div id="detailTextSpace">
-			<input type="text" id="cat" readonly> 
-			상세검색: <input type="text" id="detailText" onkeypress="if(event.keyCode==13){searchKeywordUsers();}"> 
-			<div class="keword-selected"></div>
-		</div>
+			카테고리: <input type="text" id="cat" readonly> 
+			상세검색: <input type="text" id="detailText" onkeypress="if(event.keyCode==13){searchKeywordUsers();}">
+					<input type="button" value="검색" onclick="searchKeywordUsers()" >
+			<!-- <div class="keyword-selected"></div>
+			</div> -->
 	</div>
 		 	
 	<div id="artistDiv">

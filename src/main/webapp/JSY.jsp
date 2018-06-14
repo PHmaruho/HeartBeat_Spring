@@ -9,7 +9,7 @@
 <body>
 <script type="text/javascript">
 	/* MainList Page */
-	 location.href="/heartbeat/mainList";
+	// location.href="/heartbeat/mainList";
 	
 	/* Search Page */
 	//location.href="/heartbeat/discover";
@@ -17,7 +17,7 @@
 	
 
 	/* Alarm Page */
-	 //location.href="/heartbeat/alarmTest";
+	 location.href="/heartbeat/alarmTest";
 </script>
 </body>
 </html>

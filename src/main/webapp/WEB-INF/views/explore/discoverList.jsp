@@ -59,7 +59,7 @@
 					발매일: 
 						<fmt:formatDate value="${list.release_dt }" pattern="yyyy.MM.dd"/>
 					<br>								<!-- musicShare로 바꾸기!!!!! -->
-					<input type="button" value="공유" onclick="discoverMusicShare(${list.music_sq})">  
+					<input type="button" value="공유" onclick="musicShare(${list.music_sq})">  
 					<button onclick="goto('/others/song/${list.music_sq }')">댓글</button>		
 					<img src="resources/img/profile/like.png" style="width:20px;">${list.music_like }
 				</td>
