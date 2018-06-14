@@ -1,53 +1,107 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <head>
-
-</script>
 <style type="text/css">
-/* body 공통 속성 */
+.box {
+	margin-left: 7%;
+	margin-right: 7%;
+}
+.box {
+	margin-left: 7%;
+	margin-right: 7%;
+}
 
-	body {margin:0;padding:0; font:normal dotum,'돋움';}
+.banner {
+	padding-left: 15%;
+}
+.bannerimg {
+	width: 1000px;
+	height : 698px;
+}
 
-	ul,ol,dl {list-style:none}
+.contents {
+ 	margin-bottom : 25%;
+ 	
+}
 
-	img {border:0;vertical-align:top;}
+.glul-img {
+	width : 30px;
+	height : 30px;
+}
+.a {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	border-style: none;
+}
 
-	ul {list-style:none; padding:0; margin:0;}
+.glul {
+	list-style: none;
+	padding: 0;
+	border-style: none;
+	width: 100%;
+	height: 200px;
+	
+}
+.glul li {
+	width: 13%;
+	height: 100%;
+	margin-left: 5%;
+	margin-bottom : 8%;
+	display: inline-block;
+	text-align : center;
+/* 	border-style: solid;
+	border-width: 1px; */
+}
 
-	/* 중앙 우측 하단 박스 속성 */
+.subTitle:hover {
+	color : red;
+	text-decoration: underline;
+}
 
-	#ub_box_right {width:215px; height:283px; background:#000; padding:15px; }
+.albumImg {
+	width: 70%;
+	margin-left: 10%;
+	border-style: solid;
+	border-width : 1px;
+	border-color : silver;
+}
 
-	#ub_poll {float:right; width:215px; height:186px; background:#FFF; margin:0 0 15px 0;}
-
-	#ub_notice {float:right; width:215px; height:80px; background:#FFF;}
-
+.albumImg:hover {
+	border-color : red;
+	
+}
 
 </style>
 </head>
 <body>
-<div class="div3">
-<div id="lay_out">
-
-	<div id="ub_top"></div>
-
-	<div id="ub_left">
-
-		<div id="ub_box">
-
-			<div id="ub_main_bn">
-				<c:if test="${music_like_sq ne null}">
-				<a href='javascript: like_func();'>
-				<img src="${pageContext.request.contextPath }/resources/img/album/${img_path}" id='like_img'></a>
-			</c:if>
-			</div>
-
-			<div id="ub_main_comm"></div>
-
-			<div id="ub_main_link"></div>
-		</div>
-		</div>
+<Br><Br>
+<div class="box">
+<div class="contents">
+	<h2 style="text-align:center;" class="subTitle">Likes</h2>
+		<br><br><Br><Br>
+	<ul class="glul">
+		<c:forEach var="like" items="${list}" varStatus="i">
+			<li>
+			<a href="goto('/others/music/${like.music_sq}')">
+				<input type="hidden" id="music_sq${i.index }" value="${like.music_sq}">
+			<img src="${pageContext.request.contextPath }/resources/img/album/${like.img_path }.jpg" class="albumImg" ></a>
+				<br>
+				<br>
+				${like.album_nm }<br>
+				${like.nick }<br>
+				<img src="${pageContext.request.contextPath }/resources/img/profile/like.png" class="glul-img">
+					 ${like.albumLikeCount }<br>
+				</li>
+					<%-- <tr>
+						<input type="button" value="공유" onclick="mainListShare(${i.index})"></td>
+					</tr> --%>
+		</c:forEach>
+	</ul>
 </div>
+
+
 </div>
 
+</div>
 </body>

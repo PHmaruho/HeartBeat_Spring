@@ -1,5 +1,6 @@
 package com.zero.heartbeat.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -15,11 +16,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.zero.heartbeat.model.AllLikeList;
 import com.zero.heartbeat.model.Code;
 import com.zero.heartbeat.model.Tag;
 import com.zero.heartbeat.model.Member;
 import com.zero.heartbeat.model.MusicLike;
+import com.zero.heartbeat.model.SearchList;
 import com.zero.heartbeat.service.ActivityService;
 import com.zero.heartbeat.service.CommonService;
 import com.zero.heartbeat.service.ExploreService;
@@ -106,7 +110,7 @@ public class ActivityController {
 	}
 	
 	//JAN
-	@RequestMapping(value="/my/like")
+	/*@RequestMapping(value="/my/like")
 	public String selectMusicLikeList(Model model, HttpSession session) {
 		int member_sq = (Integer) session.getAttribute("member_sq");
 		List<MusicLike> list = activityService.likeList(member_sq);
@@ -114,6 +118,24 @@ public class ActivityController {
 		logger.info("likeList : " + list);
 		model.addAttribute("likeList",list);
 		return "activity/my/likeTest";
+	}*/
+	
+	@RequestMapping("/my/likeTest")
+	public ModelAndView selectAllLikeList(String id) {
+		id = "709";
+		int member_sq = Integer.parseInt(id);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		List<AllLikeList> list = new ArrayList<AllLikeList>();
+		list = activityService.selectAllLikeList(id);
+		logger.info("selectAllLikeList Controller "+list.get(0).getAlbumLikeCount());
+		logger.info("selectAllLikeList Controller "+list.get(0).getAlbumLikeCount());
+		logger.info("selectAllLikeList Controller ");
+
+		mav.addObject("list",list);
+		mav.setViewName("activity/my/likeTest");
+		return mav;
 	}
 
 }

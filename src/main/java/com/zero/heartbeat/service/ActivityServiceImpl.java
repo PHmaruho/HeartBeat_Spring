@@ -18,7 +18,9 @@ import com.zero.heartbeat.dao.CommonDao;
 import com.zero.heartbeat.dao.ExploreDao;
 import com.zero.heartbeat.dao.MemberDao;
 import com.zero.heartbeat.model.MusicLike;
+import com.zero.heartbeat.model.SearchList;
 import com.zero.heartbeat.model.Tag;
+import com.zero.heartbeat.model.AllLikeList;
 import com.zero.heartbeat.model.Code;
 import com.zero.heartbeat.model.Member;
 import com.zero.heartbeat.model.Music;
@@ -62,6 +64,13 @@ public class ActivityServiceImpl implements ActivityService {
 	public List<MusicLike> likeList(int member_sq) {
 		// TODO Auto-generated method stub
 		return activityDao.likeList(member_sq);
+	}
+	//JAN
+	@Override
+	public List<AllLikeList> selectAllLikeList(String id) {
+		// TODO Auto-generated method stub
+		logger.info("selectAllLikeList ServiceImpl ");
+		return activityDao.selectAllLikeList(id);
 	}
 	
 	// PHmaruho
@@ -121,4 +130,7 @@ public class ActivityServiceImpl implements ActivityService {
 	public List<Member> selectMusicArtists(int sq) {
 		return activityDao.selectMusicArtists(sq);
 	}
+
+
+	
 }

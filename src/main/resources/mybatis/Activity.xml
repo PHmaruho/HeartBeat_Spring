@@ -56,6 +56,32 @@
 		SET music_like_sq = 0
 		WHERE member_sq=#{member_sq} AND target_sq=#{target_sq}
 	</update>
+	
+	<!-- JAN : 0612 LIKE 누른 목록 확인-->
+	<select id="selectAllLikeList" resultType="AllLikeList" parameterType="int">
+		select l.music_like_sq,l.target_sq, l.music_like_type, l.member_sq
+		      , a.album_nm,  a.img_path, m.nick, count(l.target_sq) AlbumLikeCount
+		       , 1 music_sq, 'm' music_nm, 1 music_like, a.album_sq
+		from music_like l, album a, member m
+		where l.member_sq = #{id} and l.music_like_type= 'Album'
+		and l.target_sq = a.album_sq
+		and m.member_sq = a.member_sq
+		group by l.music_like_sq,l.target_sq, l.music_like_type, l.member_sq
+		      , a.album_nm,  a.img_path, m.nick, a.album_sq
+		
+		union all
+		
+		select l.music_like_sq,l.target_sq, l.music_like_type, l.member_sq
+		        ,'a' album_nm, 'a' img_path, b.nick,1 AlbumLikeCount
+		        ,m.music_sq, m.music_nm, m.music_like, 1 album_sq
+		from music_like l, music m, member b, album a
+		where l.member_sq = #{id} and l.music_like_type='Music'
+		and l.target_sq = m.music_sq
+		and b.member_sq = a.member_sq
+		and a.album_sq = m.album_sq
+	</select>
+
+
 
 	<!-- PHmaruho -->
 	<select id="selectAlbumType" resultType="Code">

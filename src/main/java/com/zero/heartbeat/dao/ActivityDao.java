@@ -3,7 +3,9 @@ package com.zero.heartbeat.dao;
 import java.util.List;
 
 import com.zero.heartbeat.model.MusicLike;
+import com.zero.heartbeat.model.SearchList;
 import com.zero.heartbeat.model.Tag;
+import com.zero.heartbeat.model.AllLikeList;
 import com.zero.heartbeat.model.Code;
 import com.zero.heartbeat.model.Member;
 
@@ -18,6 +20,8 @@ public interface ActivityDao {
 	void likeCancel(int music_like_sq);
 	void insertLike(MusicLike like);
 	List<MusicLike> likeList(int member_sq);
+	List<AllLikeList> selectAllLikeList(String id);
+
 
 	// PHmaruho
 	public List<Code> selectAlbumType();
