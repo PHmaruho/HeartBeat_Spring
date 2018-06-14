@@ -72,7 +72,12 @@
 		<table>
 			<tr>
 				<td>
-					<img id="thumbnail" width="100">
+					<img id="thumbnail" width="100" height="100">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="file" id="file" value="업로드" name="file">
 				</td>
 			</tr>
 			<tr>
@@ -98,11 +103,11 @@
 				<td><span id="re_pw_msg"></span></td>
 			</tr>
 			<tr>
-				<td colspan="2">
+				<td>
 					<input type="button" value="수정" onclick="infoChange()">
 				</td>
 				<td>
-					<input type="file" id="file" value="업로드" name="file">
+					<input type="button" value="취소" onclick="goto('/')">
 				</td>
 			</tr>
 		</table>

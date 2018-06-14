@@ -18,6 +18,7 @@ function kkhPwCheck(){
 
 	<input type="password" id="pw" name="pw" required="required">
 	<input type="button" value="확인" onclick="kkhPwCheck()">
+	<input type="button" value="취소" onclick="goto('/')">
 	<br>
 	<input type="hidden" onclick="goto('/memberInfoChangePro?email=${member.email}&nick=${member.nick }&a=1')" id="goto">
 	<span id="msg"></span>
