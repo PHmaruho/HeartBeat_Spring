@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <head>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jsy.js"></script>
+<link href="${pageContext.request.contextPath }/resources/css/jsy/search.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
 
 function like_func() {
@@ -80,16 +82,21 @@ window.onfocus=function(){
 </style>
 </head>
 <body>
+	<div class="menuButton">
 	<c:if test="${!empty loginSession }">
 		<button onclick="goto('/logout')">logout</button>
 		<button onclick="goto('/memberInfoChangeForm')">개인정보수정</button>
+		<button onclick="goto('/my/likeTest')">like</button>
+		<button onclick="getMemberAlarmList(${loginSession })" class="alarm">알람</button>
+			<div id="alarmContent" class="alarmContent">
+			</div>
 	</c:if>
 <br>
 	<c:if test="${empty loginSession }">
-	<button onclick="goto('/loginForm')">to login</button>	
+		<button onclick="goto('/loginForm')">to login</button>	
 	</c:if>
 	<button onclick="goto('/arrive')" >최신음악</button>
-	<button onclick="goto('/my/likeTest')">like</button>
+	</div>
 	
 <%-- 	${kkk}<p>
 	<img src="${pageContext.request.contextPath }/resources/img/album/${kkk}"> --%>

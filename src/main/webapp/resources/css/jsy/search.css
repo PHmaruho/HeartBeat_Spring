@@ -6,21 +6,26 @@
 	float:left;
 }
 
-.alarm{
-	position:relative;
-	top:20px;
-	left:300px;
-	
+
+.menuButton{
+	 position:relative;
+	 height: 100px;
+	 top:0px;
+	 left:0px;
+	 
 }
+
 .alarmContent{
 	position:absoulute;
 	padding-top:15px;
 	padding-bottom:15px;
 	padding-left:15px;
 	padding-right:15px;
-	margin-left:-97px;
+	margin-left:120px;
 	width:250px;
 	height:275px;
+	background-color:#ffffff;
 	box-shadow:0 2px 4px rgba(0,0,0,0.25);
 	display:none;
 }
+

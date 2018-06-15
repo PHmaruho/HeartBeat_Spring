@@ -12,7 +12,6 @@ public class MainList {
 	private int music_sq;
 	private String music_nm;
 	private int music_like;
-	private String nick;
 	
 	public int getRn() {
 		return rn;

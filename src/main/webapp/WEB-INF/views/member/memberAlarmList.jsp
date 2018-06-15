@@ -17,8 +17,6 @@
 		<c:if test="${list!=null }">
 			<c:forEach var="alarm" items="${ list}" varStatus="i">
 				<input type="hidden" id="alarm_sq${i.index }" value="${alarm.alarm_sq }"/>
-				
-				
 						<p>
 						<a href="javascript:void(0);" onclick="updateAlarmStatus(${i.index});" style="text-decoration:none;">
 							<c:if test="${alarm.alarm_type=='팔로우' }">

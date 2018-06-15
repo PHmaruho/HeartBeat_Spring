@@ -21,15 +21,15 @@
 <body>
 	<h2>discover List</h2>
 	<p>
-			Result With 가수 [ 
+			Result With Artist [ 
 				<c:forEach var="art" items="${ artist}">
 					/${art }
 				</c:forEach>
-				] 곡명 [
+				] Title [
 				<c:forEach var="tit" items="${title }">
 					/${tit }
 				</c:forEach>
-				] 태그 [
+				] Tag [
 				<c:forEach var="tag" items="${tag }">
 					/${tag}
 				</c:forEach>
@@ -48,19 +48,19 @@
 					<a href="/others/music/${list.music_sq}">
 					<img src="resources/img/album/${ list.img_path }.jpg"></a><br>
 						<%-- img_path: ${ list.img_path }<Br> --%>
-						album_nm[앨범명]: ${list.album_nm }<br>
+						 앨범명: ${list.album_nm }<br>
 				</td>
 	
 				<td>
-					music_sq: ${list.music_sq}<br>
-					nick: ${list.nick }<br>
-					제목: ${list.music_nm }<br>
-					equalizer??  <br>
+					<!-- music_sq:  ${list.music_sq}<br>-->
+					닉네임: ${list.nick }<br>
+					곡명: ${list.music_nm }<br>
+					<!-- equalizer??  <br> -->
 					발매일: 
 						<fmt:formatDate value="${list.release_dt }" pattern="yyyy.MM.dd"/>
 					<br>								<!-- musicShare로 바꾸기!!!!! -->
-					<input type="button" value="공유" onclick="musicShare(${list.music_sq})">  
-					<button onclick="goto('/others/song/${list.music_sq }')">댓글</button>		
+					<%-- <input type="button" value="공유" onclick="musicShare(${list.music_sq})">  
+					<button onclick="goto('/others/song/${list.music_sq }')">댓글</button> --%>		
 					<img src="resources/img/profile/like.png" style="width:20px;">${list.music_like }
 				</td>
 			</tr>

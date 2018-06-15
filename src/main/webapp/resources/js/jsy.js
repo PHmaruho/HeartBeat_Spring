@@ -390,13 +390,14 @@ function searchList(){
 
 
 /* member - memberAlarmList */
-function getMemberAlarmList(){
+function getMemberAlarmList(v){
 	$('#alarmContent').toggle();
-	var id='<%=session.getAttribute("loginSession")%>';
+	/*var id=<%=session.getAttribute(loginSession)%>;*/
+	//alert('id:'+v);
 	$.ajax({
 		url:'/heartbeat/do/memberAlarmList',
 		data:{
-			member_id:711// id
+			member_id:v
 		},
 		success:function(data){
 			$('#alarmContent').html("");
@@ -431,7 +432,7 @@ function updateAlarmStatus(v){
 			alarmSq:c,
 		},
 		success:function(){
-			alert('읽음 ok');
+			//alert('읽음 ok');
 			location.reload();
 		}
 	})

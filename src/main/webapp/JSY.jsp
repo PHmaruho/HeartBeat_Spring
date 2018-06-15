@@ -8,15 +8,22 @@
 </head>
 <body>
 <script type="text/javascript">
-	/* MainList Page */
-	 location.href="/heartbeat/mainList";
 	
+	//기능 1
+	/* MainList Page */
+	// location.href="/heartbeat/mainList";
+	
+	//기능 2
 	/* Search Page */
 	//location.href="/heartbeat/discover";
-	location.href="/heartbeat";
 	
-
+	//기능 3
 	/* Alarm Page */
+	location.href="/heartbeat";
+	// -> 로그인 하면 알람 버튼 출현
+		
+	
+	
 	 //location.href="/heartbeat/alarmTest";
 </script>
 </body>

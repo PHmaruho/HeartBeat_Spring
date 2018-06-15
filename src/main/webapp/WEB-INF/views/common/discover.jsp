@@ -31,12 +31,10 @@ $(document).ready(function(){
 			카테고리: <input type="text" id="cat" readonly> 
 			상세검색: <input type="text" id="detailText" onkeypress="if(event.keyCode==13){searchKeywordUsers();}">
 					<input type="button" value="검색" onclick="searchKeywordUsers()" >
-			<!-- <div class="keyword-selected"></div>
-			</div> -->
 	</div>
-		 	
+	</div> 	
 	<div id="artistDiv">
-		가수: 
+		Artist: 
 			<input type="hidden" id="artist" value="" >
 			<input type="button" onclick="deleteArtistAll()" value="리셋">
 			<ul class="keyword-artist">
@@ -44,7 +42,7 @@ $(document).ready(function(){
 			<br>
 	</div>
 	<div id="titleDiv">
-		곡명: 
+		Title: 
 		<input type="hidden" id="title" value="" >
 			<input type="button" onclick="deleteTitleAll()" value="리셋">
 			<ul class="keyword-title">
@@ -52,7 +50,7 @@ $(document).ready(function(){
 		<br>
 	</div>
 	<div id="tagDiv">
-		태그: 
+		Tag: 
 		<input type="hidden" id ="tag" value="" >
 			<input type="button" onclick="deleteTagAll()" value="리셋">
 			<ul class="keyword-tag">
