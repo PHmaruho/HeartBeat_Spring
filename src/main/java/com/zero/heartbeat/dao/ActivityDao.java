@@ -29,6 +29,10 @@ public interface ActivityDao {
 	void unLikeCancel(int unLikeCancel, String music_like_type);
 	List<Member> selectFollowing(int id);
 	List<Member> selectFollower(int id);
+	void follow(int mbsq, int ss);
+	int followCheck(int mbsq, int ss);
+	void unfollow(int mbsq, int ss);
+
 	
 	
 	// PHmaruho

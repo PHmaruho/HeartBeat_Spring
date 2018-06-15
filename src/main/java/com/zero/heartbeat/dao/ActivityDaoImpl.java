@@ -15,6 +15,7 @@ import com.zero.heartbeat.model.SearchList;
 import com.zero.heartbeat.model.Tag;
 import com.zero.heartbeat.model.AllLikeList;
 import com.zero.heartbeat.model.Code;
+import com.zero.heartbeat.model.Follow;
 import com.zero.heartbeat.model.Member;
 import com.zero.heartbeat.model.Music;
 
@@ -126,6 +127,47 @@ public class ActivityDaoImpl implements ActivityDao {
 		// TODO Auto-generated method stub
 		return session.selectList("selectFollower",id);
 	}
+	
+	//JAN
+	@Override
+	public void follow(int mbsq, int ss) {
+		// TODO Auto-generated method stub
+		Follow following = new Follow();
+		
+		following.setTarget_sq(mbsq);
+		following.setMember_sq(ss);
+		
+		session.insert("follow",following);
+	}
+	
+	//JAN
+	@Override
+	public void unfollow(int mbsq, int ss) {
+		// TODO Auto-generated method stub
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("member_sq",mbsq);
+		map.put("loginSession", ss);
+		
+			System.out.println("map.get(\"member_sq\")" + map.get("member_sq"));
+			System.out.println("map.get(\"loginSession\")" + map.get("loginSession"));
+		
+		int result = session.delete("unfollow",map);
+		System.out.println(result);
+	}
+
+	
+	
+	//JAN
+	@Override
+	public int followCheck(int mbsq, int ss) {
+		// TODO Auto-generated method stub
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("target_sq", mbsq);
+		map.put("me", ss);
+		
+		return session.selectOne("followCheck",map);
+	}
 
 	
 	
@@ -157,9 +199,6 @@ public class ActivityDaoImpl implements ActivityDao {
 
 	
 	
-
-
-
 	
 
 	

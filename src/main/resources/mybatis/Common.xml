@@ -66,14 +66,7 @@
 	</select>
 	
 	
-	<!--JAN  -->
-	<select id="total" resultType="int">
-		select count(*) from Album
-	</select>
-
-
-
-
+	
 
 	<!-- JSY -->
 <!--<select id="selectAlbumMainListLike" parameterType="int" resultType="MainList"> -->

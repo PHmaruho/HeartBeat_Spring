@@ -144,14 +144,18 @@ public class ActivityController {
 
 	//JAN
 	@RequestMapping("/my/followList")
-	public String followList(Model model) {
+	public String followList(Model model, HttpSession httpSession) {
 		List<Member> following = new ArrayList<Member>();
 		List<Member> follower = new ArrayList<Member>();
+
+
+		int id = Integer.parseInt((String) httpSession.getAttribute("loginSession"));
+		logger.info("id ~ : " + id);
 		
-		int id = 703;
 		
 		following = activityService.selectFollowing(id);
 		follower = activityService.selectFollower(id);
+		
 		
 		model.addAttribute("following",following);
 		model.addAttribute("follower",follower);

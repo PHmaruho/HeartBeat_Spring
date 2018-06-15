@@ -187,4 +187,47 @@ function unLikeCancel(sq, type) {
 }
 
 
+function following(sq,session) {
+	//alert("session : " + session);
+	//alert("sq : " + sq);
+
+	$.ajax({
+		url: '/heartbeat/do/follow',
+		data: {
+			member_sq : sq,
+			loginSession : session
+		},
+		success : function(data) {
+			if(data == 1) alert("팔로잉");
+			else if (data == 0){
+				$('#unfollow').show();
+				//alert("이미 팔로우된 유저");
+			}
+		}
+/*		error : function() {
+			
+		}*/
+	});
+
+}
+
+function unfollow(sq,session) {
+	//alert("session : " + session);
+	//alert("sq : " + sq);
+  alert("dd??")
+	$.ajax({
+		url: '/heartbeat/do/unfollow',
+		data: {
+			member_sq : sq,
+			loginSession : session
+		},
+		success : function(data) {
+			alert("팔로우해제");
+			
+/*		error : function() {
+			
+		}*/
+	}
+	});
+}
 

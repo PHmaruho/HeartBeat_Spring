@@ -17,6 +17,8 @@ import com.zero.heartbeat.service.CommonService;
 import com.zero.heartbeat.service.ExploreService;
 import com.zero.heartbeat.service.MemberService;
 
+import scala.annotation.meta.param;
+
 @RestController
 @RequestMapping(value="/do")
 public class ActivityRestController {
@@ -91,6 +93,40 @@ public class ActivityRestController {
 	public void unLikeCancel(String music_like_sq, String music_like_type) {
 		int unLikeCancel =  Integer.parseInt(music_like_sq);
 		activityService.unLikeCancel(unLikeCancel,music_like_type);
+	}
+	
+	//JAN
+	@RequestMapping("/follow")
+	public int follow(String member_sq, String loginSession) {
+		
+		int result = 0;
+		
+		if (! (member_sq.equals(loginSession))) {
+			int mbsq = Integer.parseInt(member_sq);
+			int ss = Integer.parseInt(loginSession);
+			
+			logger.info("mbsq + ss : "+mbsq+"+"+ss);
+			
+			int followCheck = activityService.followCheck(mbsq,ss);
+			logger.info("followCheck : " + followCheck);
+			if (followCheck == 0) {
+				activityService.follow(mbsq,ss); 
+				result = 1;
+			}
+			logger.info("result : " + result);
+		}
+		return result;
+	}
+	
+	//JAN
+	@RequestMapping("/unfollow")
+	public void unfollow(String member_sq, String loginSession) {
+		System.out.println("컨트롤러에서 member_sq 잘 받고 있냐 -> " + member_sq);
+		System.out.println("컨트롤러에서 loginSession 잘 받고 있냐 -> " + loginSession);
+		int mbsq = Integer.parseInt(member_sq);
+		int ss = Integer.parseInt(loginSession);
+		
+		activityService.unfollow(mbsq,ss);
 	}
 	
 	

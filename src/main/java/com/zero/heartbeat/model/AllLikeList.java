@@ -5,7 +5,7 @@ public class AllLikeList {
 	private int music_like_sq;
 	private int target_sq;
 	private String music_like_type;
-	private int member_sq;
+	private int other_sq;
 	private int music_sq;
 	private String music_nm;
 	private int music_like;
@@ -15,6 +15,7 @@ public class AllLikeList {
 	private String album_nm;
 	private int albumLikeCount;
 	private String code_meaning;
+	private int follow_sq;
 	
 	
 
@@ -53,12 +54,7 @@ public class AllLikeList {
 	public void setMusic_like_type(String music_like_type) {
 		this.music_like_type = music_like_type;
 	}
-	public int getMember_sq() {
-		return member_sq;
-	}
-	public void setMember_sq(int member_sq) {
-		this.member_sq = member_sq;
-	}
+	
 	public int getMusic_sq() {
 		return music_sq;
 	}
@@ -103,6 +99,22 @@ public class AllLikeList {
 
 	public void setCode_meaning(String code_meaning) {
 		this.code_meaning = code_meaning;
+	}
+
+	public int getFollow_sq() {
+		return follow_sq;
+	}
+
+	public void setFollow_sq(int follow_sq) {
+		this.follow_sq = follow_sq;
+	}
+
+	public int getOther_sq() {
+		return other_sq;
+	}
+
+	public void setOther_sq(int other_sq) {
+		this.other_sq = other_sq;
 	}
 	
 	

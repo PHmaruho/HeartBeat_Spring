@@ -101,6 +101,7 @@
 				<img src="${pageContext.request.contextPath }/resources/img/album/mj.jpg" class="albumImg" style="border-radius: 50%;">
 				</a></div>
 			</c:if>
+			follow_sq: ${like.follow_sq }
 				<br>
 				
 				<a href="#">
@@ -110,9 +111,17 @@
 				${like.album_sq}<br>
 				${like.album_nm }<br>
 				${like.nick }<br>
-				${like.member_sq}
-				<a href="goto('/others/artist/${like.member_sq}')"></a><br>
-				<input type="button" value="+follow" onclick="following(${like.member_sq})">	
+				${like.other_sq}
+				<a href="goto('/others/artist/${like.other_sq}')"></a><br>
+					<c:set var="followsq" value="${like.follow_sq }"/> 
+				<c:if test="${like.follow_sq == 0}">
+				<input type="button" value="+follow" onclick="following(${like.other_sq},${loginSession })" id="follow" >
+				
+				</c:if>
+				<c:if test="${like.follow_sq  >0 }">	
+				<input type="button" value="-unfollow" onclick="unfollow(${like.other_sq},${loginSession })"id="unfollow" >
+				</c:if>
+				loginSession!!! ${loginSession }
 				
 				</li>
 					<%-- <tr>
@@ -149,7 +158,7 @@
 					<img src="${pageContext.request.contextPath }/resources/img/profile/dislike.png" class="glul-img"  onclick="unLikeCancel(${unlike.music_like_sq},'${unlike.code_meaning }')" >
 				</a>
 				<br>
-				${unlike.member_sq}
+				${unlike.other_sq}
 				</li>
 					<%-- <tr>
 						<input type="button" value="공유" onclick="mainListShare(${i.index})"></td>

@@ -119,12 +119,35 @@ public class ActivityServiceImpl implements ActivityService {
 		return activityDao.selectFollowing(id);
 	}
 
-
+	//JAN
 	@Override
 	public List<Member> selectFollower(int id) {
 		// TODO Auto-generated method stub
 		return activityDao.selectFollower(id);
 	}
+	
+	//JAN
+	@Override
+	public void follow(int mbsq, int ss) {
+		// TODO Auto-generated method stub
+		activityDao.follow(mbsq,ss);
+	}
+	
+	//JAN
+	@Override
+	public int followCheck(int mbsq, int ss) {
+		// TODO Auto-generated method stub
+		return activityDao.followCheck(mbsq,ss);
+	}
+	
+	//JAN
+	@Override
+	public void unfollow(int mbsq, int ss) {
+		// TODO Auto-generated method stub
+		activityDao.unfollow(mbsq,ss);
+	}
+
+	
 	
 	
 	// PHmaruho
@@ -188,13 +211,7 @@ public class ActivityServiceImpl implements ActivityService {
 
 	
 
-
-
-
-
-
-
-
+	
 	
 
 

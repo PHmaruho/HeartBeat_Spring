@@ -93,14 +93,16 @@
  	<c:if test="${!empty loginSession }">
 		<button onclick="goto('/logout')">logout</button>
 		<button onclick="goto('/memberInfoChangeForm')">개인정보수정</button>
+		<button onclick="goto('/my/followList')">FollowList</button>
+		<button onclick="goto('/my/likeTest')">내가좋아하는게뭐게</button>
+		
+		
 	</c:if>
 <br>
 	<c:if test="${empty loginSession }">
 	<button onclick="goto('/loginForm')">to login</button>	
 	</c:if>
 	<button onclick="goto('/arrive')" >최신음악</button>
-	<button onclick="goto('/my/likeTest')">내가좋아하는게뭐게</button>
-	<button onclick="goto('/my/followList')">FollowList</button>
 	
 <%-- 	${kkk}<p>
 	<img src="${pageContext.request.contextPath }/resources/img/album/${kkk}"> --%>

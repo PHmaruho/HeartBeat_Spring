@@ -76,36 +76,39 @@
 	<select id="selectAllLikeList" resultType="AllLikeList" parameterType="int">
 		select * from(
   (select * from(
-    select l.music_like_sq,l.target_sq, l.music_like_type, l.member_sq
+    select l.music_like_sq,l.target_sq, l.music_like_type,f.follow_sq,f.target_sq as other_sq
 		      , a.album_nm,  a.img_path, m.nick, count(l.target_sq) AlbumLikeCount
 		       , 1 music_sq, 'm' music_nm, 1 music_like, a.album_sq, c.code_meaning
-		from music_like l, album a, member m, code c
+		from music_like l, album a, member m, code c ,follow f
 		where l.member_sq = #{id}
 		and l.target_sq = a.album_sq
 		and m.member_sq = a.member_sq
 		and l.music_like_type = c.code_cd
 		and c.code_meaning = '앨범'
-		group by l.music_like_sq,l.target_sq, l.music_like_type, l.member_sq
-		      , a.album_nm,  a.img_path, m.nick, a.album_sq, c.code_meaning
+    and f.member_sq=#{id}
+		group by l.music_like_sq,l.target_sq, l.music_like_type
+		      , a.album_nm,  a.img_path, m.nick, a.album_sq, c.code_meaning, f.follow_sq,f.target_sq
 		order by l.music_like_sq DESC ))
 		
 		union all
 
     (select * from
     (
-		select l.music_like_sq,l.target_sq, l.music_like_type, l.member_sq
+		select l.music_like_sq,l.target_sq, l.music_like_type, f.follow_sq,f.target_sq as other_sq
 		        ,'a' album_nm, 'a' img_path, b.nick,1 AlbumLikeCount
 		        ,m.music_sq, m.music_nm, m.music_like, 1 album_sq, c.code_meaning
-		from music_like l, music m, member b, album a, code c
+		from music_like l, music m, member b, album a, code c, follow f
 		where l.member_sq = #{id}
 		and l.target_sq = m.music_sq
 		and b.member_sq = a.member_sq
 		and a.album_sq = m.album_sq
 		and l.music_like_type = c.code_cd
 		and c.code_meaning = '곡'
+    and f.member_sq=#{id}
 		order by l.music_like_sq DESC)
     )
     )
+
 	</select>
 	
 	
@@ -113,36 +116,39 @@
 	<select id="selectUnLikeList" resultType="AllLikeList" parameterType="int">
 		select * from(
   (select * from(
-    select l.music_like_sq,l.target_sq, l.music_like_type, l.member_sq
+    select l.music_like_sq,l.target_sq, l.music_like_type,f.follow_sq,f.target_sq as other_sq
 		      , a.album_nm,  a.img_path, m.nick, count(l.target_sq) AlbumLikeCount
 		       , 1 music_sq, 'm' music_nm, 1 music_like, a.album_sq, c.code_meaning
-		from music_like l, album a, member m, code c
+		from music_like l, album a, member m, code c ,follow f
 		where l.member_sq = #{id}
 		and l.target_sq = a.album_sq
 		and m.member_sq = a.member_sq
 		and l.music_like_type = c.code_cd
 		and c.code_meaning = '언라이크앨범'
-		group by l.music_like_sq,l.target_sq, l.music_like_type, l.member_sq
-		      , a.album_nm,  a.img_path, m.nick, a.album_sq, c.code_meaning
+    and f.member_sq=#{id}
+		group by l.music_like_sq,l.target_sq, l.music_like_type
+		      , a.album_nm,  a.img_path, m.nick, a.album_sq, c.code_meaning, f.follow_sq,f.target_sq
 		order by l.music_like_sq DESC ))
 		
 		union all
 
     (select * from
     (
-		select l.music_like_sq,l.target_sq, l.music_like_type, l.member_sq
+		select l.music_like_sq,l.target_sq, l.music_like_type, f.follow_sq,f.target_sq as other_sq
 		        ,'a' album_nm, 'a' img_path, b.nick,1 AlbumLikeCount
 		        ,m.music_sq, m.music_nm, m.music_like, 1 album_sq, c.code_meaning
-		from music_like l, music m, member b, album a, code c
+		from music_like l, music m, member b, album a, code c, follow f
 		where l.member_sq = #{id}
 		and l.target_sq = m.music_sq
 		and b.member_sq = a.member_sq
 		and a.album_sq = m.album_sq
 		and l.music_like_type = c.code_cd
 		and c.code_meaning = '언라이크곡'
+    	and f.member_sq=#{id}
 		order by l.music_like_sq DESC)
     )
     )
+
 	</select>
 	
 	<!-- JAN 팔로잉 내가 팔로우 하는 사람 목록 -->
@@ -165,6 +171,38 @@
 	    order by follow_sq DESC
 	</select>
 	
+	<!-- JAN follow 팔로우 누르면 팔로우됨 -->
+	<insert id="follow" parameterType="Follow" >
+	
+	INSERT all
+	into
+	follow VALUES (
+			follow_sq.NEXTVAL, #{target_sq}, #{member_sq}
+		)
+	into
+	alarm VALUES (
+			alarm_sq.NEXTVAL, #{target_sq},follow_sq.CURRVAL,
+			'팔로우','N'
+	)
+	SELECT *
+      FROM DUAL
+	
+	</insert>
+	<!-- JAN 중복팔로우방지용 팔로우시퀀스 체크쿼리 -->
+	<select id="followCheck" parameterType="java.util.Map" resultType="int">
+		select follow_sq, target_sq, member_sq
+		from follow
+		where member_sq = #{me}
+		and target_sq = #{target_sq} 
+		
+	</select>
+	
+	<!-- JAN 언팔 -->
+	<delete id="unfollow" parameterType="java.util.Map" >
+		DELETE FROM follow
+		WHERE member_sq = #{ss}
+		AND target_sq = #{mbsq}
+	</delete>
 
 	<!-- PHmaruho -->
 	<select id="selectAlbumType" resultType="Code">
