@@ -42,8 +42,7 @@ public class CommonRestController {
 	// 최우일
 	@RequestMapping("/footLoad/{sq}")
 	public Music footLoad(@PathVariable int sq) {
-		Music music = null;
-		music = commonService.selectMusicFootLoad(sq);
+		Music music = commonService.selectMusicFootLoad(sq);
 		
 		return music;
 	}

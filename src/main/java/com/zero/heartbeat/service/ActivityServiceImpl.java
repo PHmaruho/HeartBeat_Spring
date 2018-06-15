@@ -113,7 +113,7 @@ public class ActivityServiceImpl implements ActivityService {
 	
 	// 최우일
 	@Override
-	public HashMap<String, Object> selectMusicDetail(int sq) {
+	public Music selectMusicDetail(int sq) {
 		return activityDao.selectMusicDetail(sq);
 	}
 
@@ -123,14 +123,15 @@ public class ActivityServiceImpl implements ActivityService {
 		return activityDao.selectMusicArtists(sq);
 	}
 
-//	// 최우일
-//	@Override
-//	public List<HashMap<String, Object>> selectReplyAtMusic(int sq) {
-//		return activityDao.selectReplyAtMusic(sq);
-//	}
 	// 최우일
 	@Override
 	public Map<Integer, HashMap<String, Object>> selectReplyAtMusic(int sq) {
 		return activityDao.selectReplyAtMusic(sq);
+	}
+
+	// 최우일
+	@Override
+	public List<Music> selectMusicByArtist(int sq) {
+		return activityDao.selectMusicByArtist(sq);
 	}
 }

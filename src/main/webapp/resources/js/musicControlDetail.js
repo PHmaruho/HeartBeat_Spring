@@ -65,8 +65,7 @@ function loadDetail(detailNum, sq) {
 
 function playFromDetail(detailNum) {
 	pauseAllDetail();
-	if (detailPlayer[detailNum].sq == footPlayer.sq) {
-	} else {
+	if (detailPlayer[detailNum].sq != footPlayer.sq) {
 		loadFoot(detailPlayer[detailNum].sq);
 	}
 	checkFootReady(playAll, detailNum);

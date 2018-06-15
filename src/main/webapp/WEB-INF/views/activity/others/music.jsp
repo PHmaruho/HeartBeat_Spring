@@ -41,10 +41,10 @@
 	<div class="cwi-detail-player-main">
 		<div class="">
 			<a><img></a>
-			<span class="cwi-detail-player-title">title : ${music.MUSIC_NM }</span>
+			<span class="cwi-detail-player-title">title : ${music.music_nm }</span>
 			<span class="cwi-detail-player-artist">
 				artists : 
-				<c:forEach var="artist" items="${artist }" varStatus="status">
+				<c:forEach var="artist" items="${music.artistList }" varStatus="status">
 					${artist.nick}
 					<c:if test="${!status.last }">
 						, 
@@ -55,18 +55,19 @@
 		<span class="cwi-player-button"> <!-- 임시 -->
 			<button onclick="playFromDetail(0)">play1</button>
 			<button onclick="pauseFromDetail(0)">pause</button>
-			<button onclick="getDetailComments(0)">getDetailComments()</button>
 		</span>
 		</div>
 		
 		<span class=""></span>
 		
 		<div class="">
-			<span>...</span>
+			<c:forEach var="tag" items="${music.tagList }" varStatus="status">
+				<span>${tag.tag_meaning}</span>
+			</c:forEach>
 		</div>
 		
 		<span class="cwi-detail-player-img">
-			<img src="${pageContext.request.contextPath }/resources/img/album/${music.ALBUM_SQ }.png">
+			<img src="${pageContext.request.contextPath }/resources/img/album/${music.album_sq }.png">
 		</span>
 		
 		<div class="cwi-detail-player-wave-wrapper">
@@ -85,7 +86,7 @@
 			
 		</div>
 		
-		<input type="hidden" id="detailMusicSq0" value="${music.MUSIC_SQ }">
+		<input type="hidden" id="detailMusicSq0" value="${music.music_sq }">
 		<input type="hidden" id="maxDetailNum" value="0">
 	</div>
 	<div>
