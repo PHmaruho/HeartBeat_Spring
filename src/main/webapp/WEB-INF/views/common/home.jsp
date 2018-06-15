@@ -93,10 +93,10 @@ window.onfocus=function(){
 	
 <%-- 	${kkk}<p>
 	<img src="${pageContext.request.contextPath }/resources/img/album/${kkk}"> --%>
-<form name="like" method="post" action="${pageContext.request.contextPath }/my/likeTest">
+<%-- <form name="like" method="post" action="${pageContext.request.contextPath }/my/likeTest">
 <div class="a">
 	<ul class="glul">
-		<c:forEach var="home" items="${list }"  varStatus="i">
+		<c:forEach var="album" items="${list }"  varStatus="i">
 			<li>
 				<img src="${pageContext.request.contextPath }/resources/img/album/${home.img_path}.jpg"  id="mainList">
 				<p align="center">
@@ -107,8 +107,77 @@ window.onfocus=function(){
 				<input type="button" value="like" onclick="like_func('album_sq${i.index}');" class="btn">
 				<br><br>
 			</p></li>
+			===========================================================<br>
 		</c:forEach>
 	</ul>
 	</div>
-</form>
+</form> --%>
+
+<h2> Main List Testing</h2>
+	<img src="resources/img/profile/mainBanner.jpg" width="" height=""><br>
+	|| Image root checking 용<Br>
+	
+	<form id="mainListShare">
+	<h2>New Product List</h2>
+			<c:forEach var="album" items="${newList}" varStatus="i">
+				<table border="1">
+						<tr>
+							<td colspan="2"><a href="goto('/others/music/${album.music_sq}')">
+								<input type="hidden" id="music_sq${i.index }" value="${album.music_sq}">
+								<img src="resources/img/album/${album.img_path }.jpg"></a></td>
+						</tr>
+						
+						<tr>
+							<td>album.music_nm: ${album.music_nm }</td>
+						</tr>
+						
+						<tr>
+							<td>album.music_sq: ${album.music_sq }</td>
+						</tr>
+						
+						<tr>
+							<td colspan="2">music_like: ${album.music_like }
+							<%-- <input type="button" value="공유" onclick="mainListShare(${i.index})"></td> --%>
+						</tr>
+						
+				</table>
+				<br>
+			===========================================================<br>
+			</c:forEach>
+			<p>
+			<h2>Popular List</h2>
+			<c:forEach var="album" items="${likeList }" varStatus="i">
+				<table border="1">
+						<tr>
+							<td colspan="2"><a href="/others/music/${album.music_sq}">
+								<input type="hidden" id="music_sq${i.index }" name="music_sq${i.index }" value="${album.music_sq}">
+								<img src="resources/${album.img_path }.jpg"></a></td>
+						</tr>
+						
+						<tr>
+							<td>album.music_nm: ${album.music_nm }</td>
+						</tr>
+						
+						<tr>
+							<td>album.music_sq: ${album.music_sq }</td>
+						</tr>
+						
+						<tr>
+							<td colspan="2">music_like: ${album.music_like }
+							<input type="button" value="공유" onclick="mainListShare(${i.index})"></td>
+						</tr>
+						
+				</table>
+				<br>
+			===========================================================<br>
+			</c:forEach>
+		</form>
+
+	<button onclick="goto('/others/music/302')">음악상세</button>
+	<form id="form">
+		<input type="text" name="txt">
+		<input type="password" name="pw">
+		<input type="button" value="/test3" onclick="toform('/test3', 'form')">
+	</form>
+	
 </body>
