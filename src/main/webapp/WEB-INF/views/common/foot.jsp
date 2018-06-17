@@ -48,6 +48,8 @@
 	<div class="foot">
 		<input type="button" value="play" onclick="playFromFoot()">
 		<input type="button" value="pause" onclick="pauseFromFoot()">
+		<input type="button" value="cookieList" onclick="cookieList()">
+		<input type="button" value="deleteCookie" onclick="deleteCookie()">
 		
 		<span id="footProgress"></span>
 		<input type="range" id="footProgressBar" value="0" min="0.0" max="1.0" step="0.0001"

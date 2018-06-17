@@ -8,7 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zero.heartbeat.model.Music;
@@ -45,5 +47,13 @@ public class CommonRestController {
 		Music music = commonService.selectMusicFootLoad(sq);
 		
 		return music;
+	}
+	
+	// 최우일
+	@RequestMapping(value = "/cookieList", method=RequestMethod.POST)
+	public Map<String, Music> cookieList(@RequestBody Map<String, Object> paramMap) {
+		Map<String, Music> map = commonService.selectMusicCookieList(paramMap);
+		
+		return map;
 	}
 }

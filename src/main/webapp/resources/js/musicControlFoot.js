@@ -1,6 +1,7 @@
 var footPlayer;
 var footProgressFlag = 0;
 
+//cookieList();
 initFoot(302);
 
 function initFoot(sq) {
@@ -123,41 +124,66 @@ function getFootLoad(sq) {
 			footPlayer.info = data;
 		},
 		error:function(request,status,error){
-		    alert("code:"+request.status+"\n"+"message:" + request.responseText + "\n"+"error:"+error);
+		    console.log('code : ' + request.status + '\n' + 'message : ' + request.responseText + '\n' + 'error : ' + error);
 	    }
 	});
 }
 
-
-function addCookie(sq) {
-	var max = getMaxCookie() + 1
-	if (max < 51) {
-		var cname = 'cookieOrder' + max;
-		setCookie(cname, sq, 365);
-		console.log(document.cookie);
-	} 
-}
-
-function setCookie(cname, cvalue, exdays) {
+function setCookie(cname, cvalue) {
     var d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    var expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + encodeURI(cvalue) + ";" + expires + ";path=/";
+    d.setTime(d.getTime() + (90 * 24 * 60 * 60 * 1000));	// 90일 * 24시간 * 60분 * 60초 * 1000밀리초
+    var expires = 'expires=' + d.toUTCString();
+    
+    if (arguments.length === 2) {
+    	var cookieName = 'cookieOrder' + cname;
+    	var cookie = {'cookieOrder' : 'cookieOrder', 'cookieOrder1' : cvalue + ''};
+    	
+    	$.ajax({
+    		type : 'POST',
+    		url : '/heartbeat/do/cookieList',
+    		data : JSON.stringify(cookie),
+    		contentType: 'application/json; charset=UTF-8',
+    		success : function(data) {
+    			document.cookie = 'cookieOrder' + cname + '=' + encodeURI(cvalue) + ';' + expires + ';path=/';
+    			footPlayer.cookieList.cookieName = data.cookieName;
+    			console.log(footPlayer.cookieList);
+    		},
+    		error:function(request,status,error){
+    		    console.log('code : ' + request.status + '\n' + 'message : ' + request.responseText + '\n' + 'error : ' + error);
+    	    }
+    	});
+    } else if (arguments.length === 1) {
+    	document.cookie = 'cookieOrder=' + encodeURI(cname) + ';' + expires + ';path=/';
+    } else {
+    	console.log('musicControlFoot setCookie parameter error');
+    }
 }
 
 function getCookie(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
+	var name;
+	var ca = document.cookie.split(';');
+	
+	if (arguments.length === 1) {
+		name = 'cookieOrder' + cname + '=';
+	} else if (arguments.length === 0) {
+		name = 'cookieOrder=';
+	} else {
+		console.log('musicControlFoot getCookie parameter error');
+	}
+    
     for(var i = 0; i < ca.length; i++) {
         var c = ca[i];
+        
         while (c.charAt(0) == ' ') {
             c = c.substring(1);
         }
+        
         if (c.indexOf(name) == 0) {
             return decodeURI(c.substring(name.length, c.length));
         }
     }
-    return "";
+    
+    return '';
 }
 
 function cookieToObject() {
@@ -179,7 +205,32 @@ function cookieToObject() {
 }
 
 function deleteCookie(cname) {
-	document.cookie = cname + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+	var max = getMaxCookie();
+	
+	if (arguments.length === 1) {
+		var cur = getCookie();
+		
+		for (var i = cname; i < max; i++) {
+			setCookie(i, getCookie(i + 1));
+		}
+		document.cookie = 'cookieOrder' + max + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+		delete footPlayer.cookieList['cookieOrder' + max];
+		
+		if (cname == cur) {
+			loadFoot(getCookie(cur));
+		} else if (cname < cur) {
+			setCookie(cur - 1);
+		}
+	} else if (arguments.length === 0) {
+		
+		for (var i = 1; i <= max; i++) {
+			document.cookie = 'cookieOrder' + i + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+		}
+		document.cookie = 'cookieOrder=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+		delete footPlayer.cookieList;
+	} else {
+		console.log('musicControlFoot deleteCookie parameter error');
+	}
 }
 
 function getMaxCookie() {
@@ -193,9 +244,87 @@ function getMaxCookie() {
 	return Math.max.apply(null, arr);
 }
 
-getMaxCookie();
+function cookieFromAdd(sq) {
+	var max = getMaxCookie();
+	
+	if (max >= 100) {
+		var cur = getCookie();
+		
+		for (var i = 1; i < max; i++) {
+			setCookie(i, getCookie(i + 1));
+		}
+		setCookie(max, sq);
+		
+		if (cur == 1) {
+			loadFoot(getCookie(1));
+		}
+	} else if (max == 0) {
+		setCookie(1, sq);
+		setCookie(1);
+	} else {
+		setCookie(max + 1, sq);
+	}
+}
 
-//setCookie('order1', 'con1', 365);
-//setCookie('order2', 'con2', 365);
-//setCookie('order3', 'con3', 365);
-//setCookie('order4', 'con4', 365);
+function cookieFromPlay(sq) {
+	var max = getMaxCookie();
+	var cur = getCookie();
+	
+	if (max >= 100) {
+		for (var i = 1; i < cur; i++) {
+			setCookie(i, getCookie(i + 1));
+		}
+	} else if (max == 0) {
+		setCookie(1, sq);
+		setCookie(1);
+	} else {
+		for (var i = max; i >= cur; i--) {
+			setCookie(i + 1, getCookie(i));
+		}
+	}
+	
+	setCookie(cur, sq);
+	loadFoot(sq);
+}
+
+//for (var i = 1; i <= 100; i++) {
+//	setCookie(i, 302);
+//}
+//setCookie(50);
+//console.log(document.cookie);
+//
+//deleteCookie(1);
+//deleteCookie(1);
+//deleteCookie(1);
+//console.log(document.cookie);
+
+//cookieFromPlay(55555);
+//console.log(document.cookie);
+
+function cookieList() {
+	var cookie = cookieToObject();
+	
+	if (getMaxCookie() != 0) {
+		$.ajax({
+			type : 'POST',
+			url : '/heartbeat/do/cookieList',
+			data : JSON.stringify(cookie),
+			contentType: 'application/json; charset=UTF-8',
+			success : function(data) {
+				footPlayer.cookieList = data;
+			},
+			error:function(request,status,error){
+			    console.log('code : ' + request.status + '\n' + 'message : ' + request.responseText + '\n' + 'error : ' + error);
+		    }
+		});
+	}
+}
+
+//console.log(cookieToObject());
+//deleteCookie(1);
+//console.log(cookieToObject());
+//console.log(footPlayer.cookieList);
+
+deleteCookie();
+cookieFromAdd(302);
+console.log(document.cookie);

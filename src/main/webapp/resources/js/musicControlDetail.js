@@ -205,3 +205,4 @@ function getIsCommentsOn() {
 function setIsCommentsOn(bool) {
 	isCommentsOn = bool;
 }
+

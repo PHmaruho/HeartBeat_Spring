@@ -3,6 +3,7 @@ package com.zero.heartbeat.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,5 +70,10 @@ public class CommonServiceImpl implements CommonService {
 	@Override
 	public Music selectMusicFootLoad(int sq) {
 		return commonDao.selectMusicFootLoad(sq);
+	}
+	@Override
+	public Map<String, Music> selectMusicCookieList(Map<String, Object> paramMap) {
+		// TODO Auto-generated method stub
+		return commonDao.selectMusicCookieList(paramMap);
 	}
 }
