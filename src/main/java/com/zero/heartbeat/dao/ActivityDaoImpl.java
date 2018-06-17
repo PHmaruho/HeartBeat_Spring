@@ -62,6 +62,17 @@ public class ActivityDaoImpl implements ActivityDao {
 		// TODO Auto-generated method stub
 		return session.selectList("selectAlbumType");
 	}
+	@Override
+	public int uploadAlbumPro_album(HashMap<String, Object> album_map) {
+		// TODO Auto-generated method stub
+		return session.insert("insertAlbum", album_map);
+	}
+	
+	@Override
+	public int selectAlbumSeq(int member_sq) {
+		// TODO Auto-generated method stub
+		return session.selectOne("selectAlbumSeq", member_sq);
+	}
 	
 	// JSY
 	@Override

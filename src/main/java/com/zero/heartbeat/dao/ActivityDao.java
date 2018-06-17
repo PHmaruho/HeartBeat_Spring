@@ -22,6 +22,8 @@ public interface ActivityDao {
 	// PHmaruho
 	public List<Code> selectAlbumType();
 	public List<Tag> searchTag();
+	public int uploadAlbumPro_album(HashMap<String, Object> album_map);
+	public int selectAlbumSeq(int member_sq);
 	
 	
 	HashMap<String, Object> selectMusicDetail(int sq);	// 최우일

@@ -64,15 +64,7 @@ public class ActivityController {
 		
 		activityService.uploadAlbumPro(mhsr, request);
 		
-//		try {
-//			File dir = new File(savePath);
-//			if(!dir.isDirectory()) {
-//				dir.mkdir();
-//			}
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//			logger.debug("없다규!@@@@@@ " + savePath);
-//		}
+		
 		return "activity/my/uploadAlbum";
 	}
 

@@ -64,11 +64,34 @@
 		WHERE CODE_CATEGORY = 'AT'
 	</select>
 	
+	<!-- PHmaruho -->
 	<select id="selectMusicTag" resultType="Tag">
 		select *
 		from tag
 		start with TAG_CATEGORY is null
 		CONNECT BY PRIOR TAG_CD = TAG_CATEGORY
+	</select>
+	
+	<!-- PHmaruho -->
+	<insert id="insertAlbum" parameterType="HashMap">
+		INSERT INTO album
+		VALUES (
+			ALBUM_SQ.NEXTVAL,
+			#{album_nm},
+			#{title_music},
+			#{member_sq},
+			#{album_comment},
+			SYSDATE,
+			ALBUM_SQ.CURRVAL,
+			#{album_open_yn},
+			#{album_type})
+	</insert>
+	
+	<!-- PHmaruho -->
+	<select id="selectAlbumSeq" parameterType="int" resultType="int">
+		SELECT MAX(album_sq)
+		FROM album
+		WHERE member_sq = #{member_sq}
 	</select>
 	
 	<!-- 최우일 -->
