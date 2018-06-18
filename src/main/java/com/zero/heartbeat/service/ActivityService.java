@@ -22,8 +22,8 @@ public interface ActivityService {
 	void likeCancel(int music_like_sq);
 	void insertLike(MusicLike like);
 	List<MusicLike> likeList(int member_sq);
-	List<AllLikeList> selectAllLikeList(String id);
-	List<AllLikeList> selectUnLikeList(String id);
+	List<AllLikeList> selectAllLikeList(int id);
+	List<AllLikeList> selectUnLikeList(int id);
 	void clickUnlikeMusic(int unLike);
 	void clickUnlikeAlbum(int unLike);
 	void clickLikeAlbum(int likeAlbum, int id);
@@ -33,7 +33,7 @@ public interface ActivityService {
 	List<Member> selectFollower(int id);
 	void follow(int mbsq, int ss);
 	int followCheck(int mbsq, int ss);
-	void unfollow(int mbsq, int ss);
+	void unfollow(int memberSq, int targetSq);
 	
 	
 

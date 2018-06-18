@@ -67,7 +67,7 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 	//JAN
 	@Override
-	public List<AllLikeList> selectAllLikeList(String id) {
+	public List<AllLikeList> selectAllLikeList(int id) {
 		// TODO Auto-generated method stub
 		logger.info("selectAllLikeList ServiceImpl ");
 		return activityDao.selectAllLikeList(id);
@@ -87,7 +87,7 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 	//JAN
 	@Override
-	public List<AllLikeList> selectUnLikeList(String id) {
+	public List<AllLikeList> selectUnLikeList(int id) {
 		// TODO Auto-generated method stub
 		return activityDao.selectUnLikeList(id);
 	}
@@ -142,9 +142,9 @@ public class ActivityServiceImpl implements ActivityService {
 	
 	//JAN
 	@Override
-	public void unfollow(int mbsq, int ss) {
+	public void unfollow(int memberSq, int targetSq) {
 		// TODO Auto-generated method stub
-		activityDao.unfollow(mbsq,ss);
+		activityDao.unfollow(memberSq, targetSq);
 	}
 
 	

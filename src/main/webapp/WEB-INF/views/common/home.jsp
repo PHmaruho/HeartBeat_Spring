@@ -102,6 +102,7 @@
 	<c:if test="${empty loginSession }">
 	<button onclick="goto('/loginForm')">to login</button>	
 	</c:if>
+	<button onclick="goto('/discover')">검색</button>	
 	<button onclick="goto('/arrive')" >최신음악</button>
 	
 <%-- 	${kkk}<p>

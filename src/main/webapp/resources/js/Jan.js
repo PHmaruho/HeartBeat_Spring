@@ -87,7 +87,8 @@ function autoSlide() {
 */
 // Common - 상세페이지
 function like_func(sq, type) {
-	/*alert("도착ㄱ");
+	/*alert('like_func')
+	alert("도착ㄱ");
 	alert("타입 :" + type );
 	alert("sq : " + sq);*/
 	$.ajax({
@@ -98,6 +99,7 @@ function like_func(sq, type) {
 		},
 		success: function() {
 			alert("좋아요 취소");
+			location.reload();
 		}
 	})
 	
@@ -149,6 +151,7 @@ function likeAlbum(sq, id) {
 		},
 		success:function() {
 			alert("♡쪼아효♡");
+			location.reload();
 		}
 		
 	})
@@ -163,13 +166,15 @@ function likeMusic(sq, id) {
 		},
 		success:function() {
 			alert("♡쪼아효♡");
+			location.reload();
 		}
 		
 	})
 }
 
 function unLikeCancel(sq, type) {
-	/*alert("도착ㄱ");
+	/*alert('unLikeCancel')
+	alert("도착ㄱ");
 	alert("타입 :" + type );
 	alert("sq : " + sq);*/
 	
@@ -181,6 +186,7 @@ function unLikeCancel(sq, type) {
 		},
 		success : function() {
 			alert("다시 조아요");
+			location.reload();
 		}
 	})
 	
@@ -190,7 +196,7 @@ function unLikeCancel(sq, type) {
 function following(sq,session) {
 	//alert("session : " + session);
 	//alert("sq : " + sq);
-
+	if(sq==session) alert('본인을 팔로우 할 수 없습니다.');
 	$.ajax({
 		url: '/heartbeat/do/follow',
 		data: {
@@ -199,35 +205,32 @@ function following(sq,session) {
 		},
 		success : function(data) {
 			if(data == 1) alert("팔로잉");
-			else if (data == 0){
-				$('#unfollow').show();
-				//alert("이미 팔로우된 유저");
-			}
-		}
-/*		error : function() {
+			else if (data == 0) alert("이미 팔로우된 유저");
+			location.reload();
 			
-		}*/
-	});
-
+		}
+	})
 }
 
-function unfollow(sq,session) {
+
+function unfollow(targetSq,memberSq) {
 	//alert("session : " + session);
 	//alert("sq : " + sq);
-  alert("dd??")
-	$.ajax({
-		url: '/heartbeat/do/unfollow',
-		data: {
-			member_sq : sq,
-			loginSession : session
-		},
-		success : function(data) {
-			alert("팔로우해제");
-			
-/*		error : function() {
-			
-		}*/
+	if(targetSq== memberSq) alert('본인을 팔로우할 수 없습니다.')
+	else{
+		$.ajax({
+			url: '/heartbeat/do/unfollow',
+			data: {
+				member_sq : memberSq,
+				target_sq:targetSq
+			},
+			success : function() {
+				alert("팔로우해제");
+				location.reload();
+				
+			}
+		});
+		
 	}
-	});
 }
 

@@ -121,22 +121,22 @@ public class ActivityController {
 	}*/
 	
 	@RequestMapping("/my/likeTest")
-	public ModelAndView selectAllLikeList(String id) {
-		id = "704";
+	public ModelAndView selectAllLikeList(HttpSession session) {
+		String id = (String) session.getAttribute("loginSession");
 		int member_sq = Integer.parseInt(id);
 		
 		ModelAndView mav = new ModelAndView();
 		
 		List<AllLikeList> list = new ArrayList<AllLikeList>();
-		List<AllLikeList> unlist = new ArrayList<AllLikeList>();
-		list = activityService.selectAllLikeList(id);
-		unlist = activityService.selectUnLikeList(id);
-		logger.info("selectAllLikeList Controller "+list.get(0).getAlbumLikeCount());
-		logger.info("selectAllLikeList Controller "+list.get(0).getAlbumLikeCount());
+		List<AllLikeList> unList = new ArrayList<AllLikeList>();
+		list = activityService.selectAllLikeList(member_sq);
+		unList = activityService.selectUnLikeList(member_sq);
 		logger.info("selectAllLikeList Controller ");
-
+		logger.info("list size: "+ list.size());
+		logger.info("unList size: "+ unList.size());
+		
 		mav.addObject("list",list);
-		mav.addObject("unlist",unlist);
+		mav.addObject("unList",unList);
 		mav.setViewName("activity/my/likeTest");
 		return mav;
 	}

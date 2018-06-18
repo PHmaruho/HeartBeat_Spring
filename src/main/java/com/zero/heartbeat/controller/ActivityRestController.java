@@ -66,8 +66,10 @@ public class ActivityRestController {
 		int unLike = Integer.parseInt(music_like_sq);
 		logger.info("type:"+music_like_type);
 		if(music_like_type.equals("곡")) {
+			logger.info("music_like_type:곡");
 			activityService.clickUnlikeMusic(unLike);
 		} else {
+			logger.info("music_like_type:앨범");
 			activityService.clickUnlikeAlbum(unLike);
 		}
 	}
@@ -100,8 +102,9 @@ public class ActivityRestController {
 	public int follow(String member_sq, String loginSession) {
 		
 		int result = 0;
-		
-		if (! (member_sq.equals(loginSession))) {
+		boolean b=member_sq.equals(loginSession);
+		logger.info("b: "+b);
+		if (!b) {
 			int mbsq = Integer.parseInt(member_sq);
 			int ss = Integer.parseInt(loginSession);
 			
@@ -110,6 +113,7 @@ public class ActivityRestController {
 			int followCheck = activityService.followCheck(mbsq,ss);
 			logger.info("followCheck : " + followCheck);
 			if (followCheck == 0) {
+				logger.info("followCheck 없음-> 팔로우합니다");
 				activityService.follow(mbsq,ss); 
 				result = 1;
 			}
@@ -120,13 +124,13 @@ public class ActivityRestController {
 	
 	//JAN
 	@RequestMapping("/unfollow")
-	public void unfollow(String member_sq, String loginSession) {
+	public void unfollow(String member_sq,String target_sq) {
 		System.out.println("컨트롤러에서 member_sq 잘 받고 있냐 -> " + member_sq);
-		System.out.println("컨트롤러에서 loginSession 잘 받고 있냐 -> " + loginSession);
-		int mbsq = Integer.parseInt(member_sq);
-		int ss = Integer.parseInt(loginSession);
+		System.out.println("컨트롤러에서 loginSession 잘 받고 있냐 -> " + target_sq);
+		int memberSq= Integer.parseInt(member_sq);
+		int targetSq = Integer.parseInt(target_sq);
 		
-		activityService.unfollow(mbsq,ss);
+		activityService.unfollow(memberSq, targetSq);
 	}
 	
 	

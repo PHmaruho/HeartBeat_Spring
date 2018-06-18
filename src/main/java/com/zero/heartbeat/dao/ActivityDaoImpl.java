@@ -61,7 +61,7 @@ public class ActivityDaoImpl implements ActivityDao {
 	
 	//JAN
 	@Override
-	public List<AllLikeList> selectAllLikeList(String id) {
+	public List<AllLikeList> selectAllLikeList(int id) {
 		// TODO Auto-generated method stub
 		logger.info("selectAllLikeList DaoImpl ");
 		return session.selectList("selectAllLikeList",id);
@@ -81,7 +81,7 @@ public class ActivityDaoImpl implements ActivityDao {
 	
 	//JAN
 	@Override
-	public List<AllLikeList> selectUnLikeList(String id) {
+	public List<AllLikeList> selectUnLikeList(int id) {
 		// TODO Auto-generated method stub
 		return session.selectList("selectUnLikeList",id);
 	}
@@ -142,17 +142,13 @@ public class ActivityDaoImpl implements ActivityDao {
 	
 	//JAN
 	@Override
-	public void unfollow(int mbsq, int ss) {
+	public void unfollow(int memberSq, int targetSq) {
 		// TODO Auto-generated method stub
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("member_sq",mbsq);
-		map.put("loginSession", ss);
+		map.put("member_sq",memberSq);
+		map.put("target_sq", targetSq);
 		
-			System.out.println("map.get(\"member_sq\")" + map.get("member_sq"));
-			System.out.println("map.get(\"loginSession\")" + map.get("loginSession"));
-		
-		int result = session.delete("unfollow",map);
-		System.out.println(result);
+		session.delete("unfollow",map);
 	}
 
 	
