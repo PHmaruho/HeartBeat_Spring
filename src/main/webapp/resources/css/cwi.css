@@ -35,7 +35,7 @@
 	z-index: 999;
 }
 
-.cwi-foot-detail-main {
+.cwi-detail-under-main {
 	position: relative;
 	width: 70%;
 	margin: auto;
@@ -62,18 +62,14 @@
 }
 
 .cwi-artist-info {
-	width: 80%;
+	width: 70%;
 	position: relative;
 	margin: auto;
 }
 
 #footProgressBar {
 	width: 30%;
-	margin: 0px;
-}
-
-#footVoulume {
-	width: 5%;
+	vertical-align: middle;
 }
 
 .cwi-foot-playlist {
@@ -101,8 +97,14 @@
 }
 
 .cwi-foot-player-info {
+	display: inline-block;
 	position: absolute;
 	right: 10%;
+}
+
+.cwi-foot-player-info span {
+	margin-left: 8px;
+	font-size: 12px;
 }
 
 .cwi-foot-player-buttons a{
@@ -133,13 +135,15 @@ input[type='range']::-webkit-slider-thumb {
 }
 
 #footVoulume {
-	    background-image: -webkit-gradient(
-        linear,
-        left top,
-        right top,
-        color-stop(0.5, #FF0000),
-        color-stop(0.5, #C5C5C5)
-    );
+	background-image: -webkit-gradient(
+	    linear,
+	    left top,
+	    right top,
+	    color-stop(0.5, #FF0000),
+	    color-stop(0.5, #C5C5C5)
+	);
+	margin-left: 32px;
+	vertical-align: middle;
 }
 
 .cwi-detail-progress {
@@ -175,11 +179,11 @@ input[type='range']::-webkit-slider-thumb {
 
 .cwi-detail-rotate {
     position: absolute;
-    top: 0%;
-    left: 0%;
+    top: 50%;
+    left: 50%;
     width: 128px;
     height: 128px;
-    margin:-64px 0 0 -64px;
+    margin:-64px 0 0 -128px;
     -webkit-animation:spin 1s linear infinite;
     -moz-animation:spin 1s linear infinite;
     animation:spin 1s linear infinite;
@@ -198,5 +202,61 @@ input[type='range']::-webkit-slider-thumb {
 	margin: auto;
 	position: relative;
 	min-width: 1050px;
-	vertical-align: middle;
+}
+
+a.cwi-cursor-pointer : hover {
+	cursor: pointer;
+}
+
+.cwi-foot-player-bar {
+	margin-left: 32px;
+}
+
+#footImage {
+	margin: 0 0 0 0;
+}
+
+.cwi-detail-player-etc {
+	width: 70%;
+	margin: auto;
+	position: relative;
+	min-width: 1050px;
+}
+
+.cwi-artist-player-main {
+	background-color: rgba(0, 0, 0, 0.7);
+	width: 70%;
+	height: 300px;
+	margin: auto;
+	position: relative;
+	min-width: 1050px;
+	margin-bottom: 50px;
+}
+
+.cwi-artist-player-img img {
+	width: 300px;
+	height: 300px;
+	float: left;
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+}
+
+.cwi-artist-player-wave-wrapper {
+	width: 60%;
+	min-width: 500px;
+	max-width: 750px;
+	position: absolute;
+	left: 320px;
+	bottom: 10px;	
+}
+
+.cwi-artist-player-info {
+	position: absolute;
+	top: 20px;
+	left: 320px;	
+}
+
+.cwi-detail-player-info td span {
+	margin: 10px 10px 10px 10px
 }

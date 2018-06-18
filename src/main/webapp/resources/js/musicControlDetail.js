@@ -66,6 +66,7 @@ function loadDetail(detailNum, sq) {
 
 function playFromDetail(detailNum) {
 	pauseAllDetail();
+	pauseDisplayButton();
 	if (detailPlayer[detailNum].sq != footPlayer.sq) {
 		loadFoot(detailPlayer[detailNum].sq);
 	}

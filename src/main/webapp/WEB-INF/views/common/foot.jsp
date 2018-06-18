@@ -27,10 +27,10 @@
 				<a id="footRepeatBtn"><img src="${pageContext.request.contextPath }/resources/img/icon/001-refresh.png"></a>
 			</span>
 			<span class="cwi-foot-player-bar"> 
-				<span id="footProgress"></span>
+				<span id="footProgress">0:00</span>
 				<input type="range" id="footProgressBar" value="0" min="0.0" max="1.0" step="0.0001"
 					onmousedown="switchFootProgress()" onmouseup="switchFootProgress()" oninput="changeFootProgress()">
-				<span id="footDuration"></span>
+				<span id="footDuration">0:00</span>
 			</span>
 			<input id="footVoulume" type="range" min="0.0" max="1.0" step="0.01" value="0.5"
 				oninput="footPlayer.setVolume(this.value)" onchange="footPlayer.setVolume(this.value)">	
@@ -51,11 +51,15 @@
 				</table>
 			</div> --%>
 			
-			<span class="cwi-foot-player-info">
-				<span id="footImage"></span>
-				<span id="footArtists"></span>
-				<span id="footTitle"></span>
-			</span>
+			<table class="cwi-foot-player-info">
+				<tr>
+					<td rowspan="2"><span id="footImage"></span></td>
+					<td><span id="footArtists"></span></td>
+				</tr>
+				<tr>
+					<td><span id="footTitle"></span></td>
+				</tr>
+			</table>
 		</div>
 	</div>
 	
