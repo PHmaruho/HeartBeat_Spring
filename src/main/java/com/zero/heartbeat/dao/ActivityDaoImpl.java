@@ -72,7 +72,7 @@ public class ActivityDaoImpl implements ActivityDao {
 	
 	// 최우일
 	@Override
-	public HashMap<String, Object> selectMusicDetail(int sq) {
+	public Music selectMusicDetail(int sq) {
 		return session.selectOne("selectMusicDetail", sq);
 	}
 
@@ -80,5 +80,23 @@ public class ActivityDaoImpl implements ActivityDao {
 	@Override
 	public List<Member> selectMusicArtists(int sq) {
 		return session.selectList("selectMusicArtists", sq);
+	}
+
+	// 최우일
+	@Override
+	public Map<Integer, HashMap<String, Object>> selectReplyAtMusic(int sq) {
+		return session.selectMap("selectReplyAtMusic", sq, "time_stamp");
+	}
+
+	// 최우일
+	@Override
+	public List<Music> selectMusicByArtist(int sq) {
+		return session.selectList("selectMusicByArtist", sq);
+	}
+
+	// 최우일
+	@Override
+	public Member selectMemberArtist(int sq) {
+		return session.selectOne("selectMemberArtistCwi", sq);
 	}
 }
