@@ -103,10 +103,10 @@ function searchKeywordUsers(){
 			//alert('v: '+v);
 			if(res==0){
 				//alert('else');
-				var str="<li class='keyword-tag-added'>"
+					var str="<li class='keyword-tag-added'>"
 						+det
 						+"<input type='button' class='deleteTag' onclick='deleteKeywordTag(this)' value='x'>"
-						+"<input type='hidden' value='"+det+"' class='addTag-hidden'>"
+						+"<input type='hidden' value="+det+" class='addTag-hidden'>"
 						+"</li>";
 						
 				$('.keyword-tag').append(str);
@@ -136,7 +136,7 @@ function searchKeywordUsers(){
 				var str="<li class='keyword-artist-added'>"
 						+det
 						+"<input type='button' class='deleteArtist' onclick='deleteKeywordArtist(this)' value='x'>"
-						+"<input type='hidden' value='"+det+"' class='addArtist-hidden'>"
+						+"<input type='hidden' value="+det+" class='addArtist-hidden'>"
 						+"</li>";
 						
 				$('.keyword-artist').append(str);
@@ -166,7 +166,7 @@ function searchKeywordUsers(){
 				var str="<li class='keyword-title-added'>"
 						+det
 						+"<input type='button' class='deleteTitle' onclick='deleteKeywordTitle(this)' value='x'>"
-						+"<input type='hidden' value='"+det+"' class='addTitle-hidden'>"
+						+"<input type='hidden' value="+det+" class='addTitle-hidden'>"
 						+"</li>";
 						
 				$('.keyword-title').append(str);
@@ -220,7 +220,6 @@ function deleteKeywordTag(v){
 	
 	let sTag=$('#tag').val().split(",");
 	let str="";
-	
 	$('#tag').val("");
 	for(let item in sTag){
 		if(pLi.find('.addTag-hidden').val()!= sTag[item]){
@@ -242,12 +241,15 @@ function deleteKeywordArtist(v){
 	
 	let sTag=$('#artist').val().split(",");
 	let str="";
-	
 	$('#artist').val("");
 	for(let item in sTag){
 		if(pLi.find('.addArtist-hidden').val()!= sTag[item]){
-			if(str.length==0) str+=sTag[item];
-			else str+=","+sTag[item];
+			if(str.length==0) {
+				str+=sTag[item];
+			}
+			else{
+				str+=","+sTag[item];
+			}
 		}
 	}
 	
