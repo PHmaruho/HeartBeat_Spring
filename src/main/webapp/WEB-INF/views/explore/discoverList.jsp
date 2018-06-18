@@ -45,8 +45,8 @@
 		<c:forEach var="list" items="${discoverList}" varStatus="i">
 			<tr>
 				<td colspan="8">
-					<a href="/others/music/${list.music_sq}">
-					<img src="resources/img/album/${ list.img_path }.jpg"></a><br>
+					<a href="/heartbeat/others/music/${list.music_sq}">
+					<img src="${pageContext.request.contextPath }/resources/img/album/${ list.img_path }.jpg"></a><br>
 						<%-- img_path: ${ list.img_path }<Br> --%>
 						 앨범명: ${list.album_nm }<br>
 				</td>
@@ -61,7 +61,7 @@
 					<br>								<!-- musicShare로 바꾸기!!!!! -->
 					<%-- <input type="button" value="공유" onclick="musicShare(${list.music_sq})">  
 					<button onclick="goto('/others/song/${list.music_sq }')">댓글</button> --%>		
-					<img src="resources/img/profile/like.png" style="width:20px;">${list.music_like }
+					<img src="${pageContext.request.contextPath }/resources/img/profile/like.png" style="width:20px;">${list.music_like }
 				</td>
 			</tr>
 			<p>
