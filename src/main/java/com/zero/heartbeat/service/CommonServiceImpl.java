@@ -81,6 +81,8 @@ public class CommonServiceImpl implements CommonService {
 	public Music selectMusicFootLoad(int sq) {
 		return commonDao.selectMusicFootLoad(sq);
 	}
+	
+	// 최우일
 	@Override
 	public Map<String, Music> selectMusicCookieList(Map<String, Object> paramMap) {
 		// TODO Auto-generated method stub

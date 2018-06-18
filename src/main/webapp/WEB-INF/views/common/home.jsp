@@ -216,7 +216,7 @@ window.onfocus=function(){
 			<c:forEach var="album" items="${newList}" varStatus="i">
 				<table border="1">
 						<tr>
-							<td colspan="2"><a href="goto('/others/music/${album.music_sq}')">
+							<td colspan="2"><a onclick="goto('/others/music/${album.music_sq}')">
 								<input type="hidden" id="music_sq${i.index }" value="${album.music_sq}">
 								<img src="resources/img/album/${album.img_path }.jpg"></a></td>
 						</tr>
@@ -243,7 +243,7 @@ window.onfocus=function(){
 			<c:forEach var="album" items="${likeList }" varStatus="i">
 				<table border="1">
 						<tr>
-							<td colspan="2"><a href="/others/music/${album.music_sq}">
+							<td colspan="2"><a onclick="/others/music/${album.music_sq}">
 								<input type="hidden" id="music_sq${i.index }" name="music_sq${i.index }" value="${album.music_sq}">
 								<img src="resources/${album.img_path }.jpg"></a></td>
 						</tr>
