@@ -15,17 +15,17 @@
 				<a><img></a>
 				<table class="cwi-detail-player-info">
 				<tr>
-					<td><button onclick="playFromDetail(0)">play</button></td>
+					<td><button onclick="playFromDetail(${status.index })">play</button></td>
 					<td><span class="cwi-detail-player-title">title : ${music.music_nm }</span></td>
 				</tr>
 				<tr>
-					<td><button onclick="pauseFromDetail(0)">pause</button></td>
+					<td><button onclick="pauseFromDetail(${status.index })">pause</button></td>
 					<td>
 						<span class="cwi-detail-player-artist">
 							artists : 
-							<c:forEach var="artist" items="${music.artistList }" varStatus="status">
+							<c:forEach var="artist" items="${music.artistList }" varStatus="artistStatus">
 								<a onclick="goto('/others/artist/${artist.member_sq}')">${artist.nick}</a>
-								<c:if test="${!status.last }">
+								<c:if test="${!artistStatus.last }">
 									, 
 								</c:if>
 							</c:forEach>

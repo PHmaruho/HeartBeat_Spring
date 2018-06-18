@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 
 function like_func() {
@@ -77,26 +79,118 @@ window.onfocus=function(){
 	margin-left: 10%;
 }
 
+#joinBtn{
+	display:none;
+}
+
+#modalBtnLogin{
+	display:none;
+}
 </style>
 </head>
 <body>
-	<c:if test="${!empty loginSession }">
-		<button onclick="goto('/logout')">logout</button>
-		<button onclick="goto('/memberInfoChangeForm')">개인정보수정</button>
-	</c:if>
-<br>
 	<c:if test="${empty loginSession }">
-	<button onclick="goto('/loginForm')">to login</button>	
+	<button data-toggle="modal" data-target="#myModal" id="modalBtnLogin">로그인</button>
+	<div id="myModal" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <!-- <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">Modal Header</h4>
+	      </div> -->
+	      <div class="modal-body">
+	        <form action="/heartbeat/loginPro" method="post" id="log_kkhform">
+				<table>
+					<tr>
+						<td>이메일</td>
+						<td><input type="text" id="log_email" name="email"
+							required="required"></td>
+							<td>
+								<span id="log_email_msg"></span>
+							</td>
+					</tr>
+					<tr>
+						<td>비밀번호</td>
+						<td><input type="password" id="log_pw" name="pw"
+							required="required"></td>
+							<td>
+								<span id="log_pw_msg"></span>
+							</td>
+					</tr>
+					<tr>
+						<td colspan="2"><span id="log_msg"></span></td>
+					</tr>
+					<tr>
+						<td colspan="2"><input type="button" value="로그인" onclick="kkhcheck()">
+						<input type="button" value="취소" onclick="location.href='/heartbeat'">
+						</td>
+					</tr>
+				</table>
+			</form>
+	      </div>
+	      <!-- <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div> -->
+	    </div>
+	  </div>
+	</div>	
+	
+	<input type="button" value="회원가입" data-toggle="modal" data-target="#myModal2" id="joinBtn">
+		<div id="myModal2" class="modal fade" role="dialog">
+		  <div class="modal-dialog">
+		    <!-- Modal content-->
+		    <div class="modal-content">      
+		      <div class="modal-body">
+		        <form action="/heartbeat/joinPro" method="post" id="kkhform">
+					<table>
+						<tr>
+							<th>이메일</th>
+							<td><input type="text" name="email" id="email" required="required"></td>
+							<td><span id="email_msg"></span></td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<span id="email_validate"></span>
+							</td>
+						</tr>
+						<tr>
+							<th>비밀번호</th>
+							<td><input type="password" name="pw" id="pw" required="required"></td>
+							<td><span id="pw_msg"></span></td>
+						</tr>
+						<tr>
+							<th>비밀번호확인</th>
+							<td><input type="password" id="re_pw" required="required"></td>
+							<td><span id="repw_msg"></span></td>
+						</tr>
+						<tr>
+							<th>별명</th>
+							<td><input type="text" name="nick" id="nick" required="required"></td>
+							<td><span id="nick_msg"></span></td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<input type="button" id="join_btn" value="회원가입" onclick="kkhjoin()">
+								<input type="button" value="취소" onclick="location.href='/heartbeat'"> 
+							</td>
+						</tr>
+					</table>
+				</form>
+		      </div>	      
+		    </div>	
+		  </div>
+		</div>
 	</c:if>
 	<button onclick="goto('/arrive')" >최신음악</button>
 	<button onclick="goto('/my/likeTest')">like</button>
 	
 <%-- 	${kkk}<p>
 	<img src="${pageContext.request.contextPath }/resources/img/album/${kkk}"> --%>
-<form name="like" method="post" action="${pageContext.request.contextPath }/my/likeTest">
+<%-- <form name="like" method="post" action="${pageContext.request.contextPath }/my/likeTest">
 <div class="a">
 	<ul class="glul">
-		<c:forEach var="home" items="${list }"  varStatus="i">
+		<c:forEach var="album" items="${list }"  varStatus="i">
 			<li>
 				<img src="${pageContext.request.contextPath }/resources/img/album/${home.img_path}.jpg"  id="mainList">
 				<p align="center">
@@ -107,8 +201,77 @@ window.onfocus=function(){
 				<input type="button" value="like" onclick="like_func('album_sq${i.index}');" class="btn">
 				<br><br>
 			</p></li>
+			===========================================================<br>
 		</c:forEach>
 	</ul>
 	</div>
-</form>
+</form> --%>
+
+<h2> Main List Testing</h2>
+	<img src="resources/img/profile/mainBanner.jpg" width="" height=""><br>
+	|| Image root checking 용<Br>
+	
+	<form id="mainListShare">
+	<h2>New Product List</h2>
+			<c:forEach var="album" items="${newList}" varStatus="i">
+				<table border="1">
+						<tr>
+							<td colspan="2"><a onclick="goto('/others/music/${album.music_sq}')">
+								<input type="hidden" id="music_sq${i.index }" value="${album.music_sq}">
+								<img src="resources/img/album/${album.img_path }.jpg"></a></td>
+						</tr>
+						
+						<tr>
+							<td>album.music_nm: ${album.music_nm }</td>
+						</tr>
+						
+						<tr>
+							<td>album.music_sq: ${album.music_sq }</td>
+						</tr>
+						
+						<tr>
+							<td colspan="2">music_like: ${album.music_like }
+							<%-- <input type="button" value="공유" onclick="mainListShare(${i.index})"></td> --%>
+						</tr>
+						
+				</table>
+				<br>
+			===========================================================<br>
+			</c:forEach>
+			<p>
+			<h2>Popular List</h2>
+			<c:forEach var="album" items="${likeList }" varStatus="i">
+				<table border="1">
+						<tr>
+							<td colspan="2"><a onclick="/others/music/${album.music_sq}">
+								<input type="hidden" id="music_sq${i.index }" name="music_sq${i.index }" value="${album.music_sq}">
+								<img src="resources/${album.img_path }.jpg"></a></td>
+						</tr>
+						
+						<tr>
+							<td>album.music_nm: ${album.music_nm }</td>
+						</tr>
+						
+						<tr>
+							<td>album.music_sq: ${album.music_sq }</td>
+						</tr>
+						
+						<tr>
+							<td colspan="2">music_like: ${album.music_like }
+							<input type="button" value="공유" onclick="mainListShare(${i.index})"></td>
+						</tr>
+						
+				</table>
+				<br>
+			===========================================================<br>
+			</c:forEach>
+		</form>
+
+	<button onclick="goto('/others/music/302')">음악상세</button>
+	<form id="form">
+		<input type="text" name="txt">
+		<input type="password" name="pw">
+		<input type="button" value="/test3" onclick="toform('/test3', 'form')">
+	</form>
+	
 </body>

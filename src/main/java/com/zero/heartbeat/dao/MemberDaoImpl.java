@@ -87,5 +87,10 @@ public class MemberDaoImpl implements MemberDao {
 		// TODO Auto-generated method stub
 		return session.selectOne("getMemberInfo",string);
 	}
+	@Override
+	public String getMemberSq(Member member) {
+		// TODO Auto-generated method stub
+		return session.selectOne("getMemberSq",member);
+	}
 
 }

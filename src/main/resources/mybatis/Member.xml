@@ -65,6 +65,10 @@
 	</update>
 	
 	<select id="getMemberInfo" parameterType="java.lang.String" resultType="Member">
-		select * from member where email = #{string}
+		select * from member where member_sq = #{string}
+	</select>
+	
+	<select id="getMemberSq" parameterType="Member" resultType="java.lang.String">
+		select member_sq from member where email=#{email}
 	</select>
 </mapper>

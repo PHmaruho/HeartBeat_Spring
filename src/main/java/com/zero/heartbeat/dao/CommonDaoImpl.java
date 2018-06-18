@@ -38,16 +38,19 @@ public class CommonDaoImpl implements CommonDao {
 
 	// JAN
 	@Override
-	public List<Album> selectAlbumArriveList(Album album) {
+	public List<MainList> selectAlbumArriveList(int startNum) {
 		// TODO Auto-generated method stub
-		return session.selectList("arriveList", album);
+		return session.selectList("arriveList", startNum);
 	}
 
 	//JAN
 	@Override
-	public List<SearchList> mainList() {
+	public List<MainList> mainListLike(int startNum) {
 		logger.info("CommonDaoImpl mainList before");
-		return session.selectList("mainList");
+		return session.selectList("mainListLike",startNum);
+	}
+	public List<MainList> mainListNew(int startNum) {
+		return session.selectList("mainListNew",startNum);
 	}
 
 	// 최우일

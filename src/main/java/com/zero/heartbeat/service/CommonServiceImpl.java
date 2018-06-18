@@ -48,16 +48,26 @@ public class CommonServiceImpl implements CommonService {
 
 	// JAN
 	@Override
-	public List<Album> selectAlbumArriveList(Album album) {
+	public List<MainList> selectAlbumArriveList(int startNum) {
 		// TODO Auto-generated method stub
-		return commonDao.selectAlbumArriveList(album);
+		List<MainList> list= new ArrayList<MainList>();
+		list= commonDao.selectAlbumArriveList(startNum);
+		return list;
 	}
 
 	//JAN 메인 컨텐츠 목록
 	@Override
-	public List<SearchList> mainList() {
+	public List<MainList> mainListLike(int startNum) {
+		List<MainList> list= new ArrayList<MainList>();
+		list= commonDao.mainListLike(startNum);
 		logger.info("CommonServiceImpl mainList before");
-		return commonDao.mainList();
+		return list;
+	}
+	//JAN
+	public List<MainList> mainListNew(int startNum) {
+		List<MainList> list = new ArrayList<MainList>();
+		list= commonDao.mainListNew(startNum);
+		return list;
 	}
 
 	// 최우일
@@ -71,6 +81,8 @@ public class CommonServiceImpl implements CommonService {
 	public Music selectMusicFootLoad(int sq) {
 		return commonDao.selectMusicFootLoad(sq);
 	}
+	
+	// 최우일
 	@Override
 	public Map<String, Music> selectMusicCookieList(Map<String, Object> paramMap) {
 		// TODO Auto-generated method stub

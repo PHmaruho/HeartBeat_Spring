@@ -26,4 +26,6 @@ public interface MemberService {
 	void turnMemberActivity(String email);
 	Member getMemberInfo(String string);
 	
+	String getMemberSq(Member member);
+	
 }
