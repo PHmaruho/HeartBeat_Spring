@@ -15,14 +15,15 @@ function initDetail(detailNum, sq) {
 	
 	detailPlayer[detailNum] = WaveSurfer.create({
 		container : waveContainer,
-		waveColor: '#D2EDD4',
-		progressColor: '#46B54D',
+		waveColor: 'rgba(229, 216, 92, 1.0)',
+		progressColor: 'rgba(255, 0, 0, 0.7)',
 		barWidth : 5,
 		barHeight : 3,
 		height : 100,
 		barRadius : 6,
 		responsive : 10,
-		hideScrollbar : true
+		hideScrollbar : true,
+		cursorColor : 'rgba(0,0,0,0.0)'
 	});
 	
 	loadDetail(detailNum, sq)
@@ -69,6 +70,7 @@ function playFromDetail(detailNum) {
 		loadFoot(detailPlayer[detailNum].sq);
 	}
 	checkFootReady(playAll, detailNum);
+	playDisplayButton();
 }
 
 function playAll(detailNum) {
@@ -86,6 +88,7 @@ function pauseAllDetail() {
 function pauseFromDetail(detailNum) {
 	detailPlayer[detailNum].pause();
 	footPlayer.pause();
+	pauseDisplayButton();
 }
 
 function seekFromDetail(e, detailNum) {
@@ -206,3 +209,8 @@ function setIsCommentsOn(bool) {
 	isCommentsOn = bool;
 }
 
+function resizeComment() {
+	for (var i = 0; i <= maxDetailNum; i++) {
+		showDetailComments(i)
+	}
+}
