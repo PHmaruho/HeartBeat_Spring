@@ -143,4 +143,11 @@
 		where r1.reply_sq = r2.reply_sq
 		order by r2.time_stamp
 	</select>
+	
+	<!-- 최우일 -->
+	<select id="selectMemberArtistCwi" parameterType="int" resultType="Member">
+		select nick, member_sq
+		from member
+		where member_sq = #{sq}
+	</select>
 </mapper>

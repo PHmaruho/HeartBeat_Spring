@@ -1,67 +1,49 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <head>
-<style type="text/css">
-.cwi-detail-player-main {
-	background-color: silver;
-	width: 80%;
-	height: 400px;
-	margin: auto;
-	position: relative;
-}
 
-.cwi-detail-player-img img {
-	width: 360px;
-	height: 360px;
-	float: right;
-	position: absolute;
-	right: 20px;
-	bottom: 20px;
-}
-
-.cwi-detail-player-wave-wrapper {
-	width: 60%;
-	position: absolute;
-	left: 20px;
-	bottom: 20px;
-}
-
-.cwi-detail-player-comments {
-	width: 15px;
-	height: 15px;
-	z-index: 998;
-}
-
-.cwi-commnets-on {
-	z-index: 999;
-}
-</style>
 </head>
 <body>
+	<div class="cwi-artist-info">
+		<img width="200" height="200" src="${pageContext.request.contextPath }/resources/img/profile/${member.member_sq }.png">
+		nick : ${member.nick }
+	</div>
+
 	<c:forEach var="music" items="${list }" varStatus="status">
 		<div class="cwi-detail-player-main">
 			<div class="">
 				<a><img></a>
-				<span class="cwi-detail-player-title">title : ${music.music_nm }</span>
-				<span class="cwi-detail-player-artist">
-					artists : 
-					<c:forEach var="artist" items="${music.artistList }" varStatus="artistStatus">
-						${artist.nick}
-						<c:if test="${!artistStatus.last }">
-							, 
-						</c:if>
-					</c:forEach>
-				</span>
-				
-			<span class="cwi-player-button"> <!-- 임시 -->
-				<button onclick="playFromDetail(${status.index })">play1</button>
-				<button onclick="pauseFromDetail(${status.index })">pause</button>
+				<table class="cwi-detail-player-info">
+				<tr>
+					<td><button onclick="playFromDetail(0)">play</button></td>
+					<td><span class="cwi-detail-player-title">title : ${music.music_nm }</span></td>
+				</tr>
+				<tr>
+					<td><button onclick="pauseFromDetail(0)">pause</button></td>
+					<td>
+						<span class="cwi-detail-player-artist">
+							artists : 
+							<c:forEach var="artist" items="${music.artistList }" varStatus="status">
+								<a onclick="goto('/others/artist/${artist.member_sq}')">${artist.nick}</a>
+								<c:if test="${!status.last }">
+									, 
+								</c:if>
+							</c:forEach>
+						</span>
+					</td>
+				</tr>
+			</table>
+			
+			
+		<span class="cwi-player-button"> <!-- 임시 -->
+			
+			
 			</span>
 			</div>
 			
 			<span class=""></span>
 			
-			<div class="">
+			<div class="cwi-detail-player-tags">
 				<c:forEach var="tag" items="${music.tagList }">
 					<span>${tag.tag_meaning}</span>
 				</c:forEach>
@@ -88,7 +70,7 @@
 			</div>
 			
 		</div>
-		<div>
+		<%-- <div>
 			<div>
 				<span><img>좋아요</span>
 				<span><img>공유</span>
@@ -104,7 +86,7 @@
 				<input type="text">
 				<input type="button">
 			</div>
-		</div>
+		</div> --%>
 		<input type="hidden" id="detailMusicSq${status.index }" value="${music.music_sq }">
 		<c:set var="maxNum" value="${status.index }"/>
 	</c:forEach>

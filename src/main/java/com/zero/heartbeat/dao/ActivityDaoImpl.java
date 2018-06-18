@@ -93,4 +93,10 @@ public class ActivityDaoImpl implements ActivityDao {
 	public List<Music> selectMusicByArtist(int sq) {
 		return session.selectList("selectMusicByArtist", sq);
 	}
+
+	// 최우일
+	@Override
+	public Member selectMemberArtist(int sq) {
+		return session.selectOne("selectMemberArtistCwi", sq);
+	}
 }

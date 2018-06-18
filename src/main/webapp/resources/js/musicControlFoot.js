@@ -325,6 +325,6 @@ function cookieList() {
 //console.log(cookieToObject());
 //console.log(footPlayer.cookieList);
 
-deleteCookie();
-cookieFromAdd(302);
-console.log(document.cookie);
+//deleteCookie();
+//cookieFromAdd(302);
+//console.log(document.cookie);

@@ -5,7 +5,7 @@
 	.foot {
 		background-color: yellow;
 		width: 100%;
-		height: 80px;
+		height: 100%;
 		display: inline-block;
 	}
 	
@@ -41,6 +41,11 @@
 	.cwi-foot-playlist-table {
 		border: 1px solid black;
 	}
+	
+	.cwi-foot-player-info {
+		position: absolute;
+		right: 10%;
+	}
 </style>
 </head>
 
@@ -48,8 +53,6 @@
 	<div class="foot">
 		<input type="button" value="play" onclick="playFromFoot()">
 		<input type="button" value="pause" onclick="pauseFromFoot()">
-		<input type="button" value="cookieList" onclick="cookieList()">
-		<input type="button" value="deleteCookie" onclick="deleteCookie()">
 		
 		<span id="footProgress"></span>
 		<input type="range" id="footProgressBar" value="0" min="0.0" max="1.0" step="0.0001"
@@ -58,7 +61,7 @@
 		<input id="footVoulume" type="range" min="0.0" max="1.0" step="0.01" value="0.5"
 			oninput="footPlayer.setVolume(this.value)" onchange="footPlayer.setVolume(this.value)">	
 		<div hidden="true" id="footWaveform"></div>	
-		<input type="button" value="playlist" onclick="playlistClick()">
+		<%-- <input type="button" value="playlist" onclick="playlistClick()">
 		<div id="playlist" class="cwi-foot-playlist">
 			<table class="cwi-foot-playlist-table">
 				<c:forEach var="playlist" items="${playlist}">
@@ -72,13 +75,13 @@
  					</tr>
 				</c:forEach>
 			</table>
-		</div>
+		</div> --%>
 		
-		<div>
+		<span class="cwi-foot-player-info">
 			<span id="footImage"></span>
 			<span id="footArtists"></span>
 			<span id="footTitle"></span>
-		</div>
+		</span>
 	</div>
 	
 	<script src="${pageContext.request.contextPath }/resources/js/musicControlFoot.js?v=<%=System.currentTimeMillis() %>"></script>

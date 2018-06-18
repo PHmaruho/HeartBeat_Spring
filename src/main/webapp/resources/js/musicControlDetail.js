@@ -18,7 +18,7 @@ function initDetail(detailNum, sq) {
 		waveColor: '#D2EDD4',
 		progressColor: '#46B54D',
 		barWidth : 5,
-		barHeight : 1,
+		barHeight : 3,
 		height : 100,
 		barRadius : 6,
 		responsive : 10,

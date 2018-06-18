@@ -134,4 +134,10 @@ public class ActivityServiceImpl implements ActivityService {
 	public List<Music> selectMusicByArtist(int sq) {
 		return activityDao.selectMusicByArtist(sq);
 	}
+
+	// 최우일
+	@Override
+	public Member selectMemberArtist(int sq) {
+		return activityDao.selectMemberArtist(sq);
+	}
 }

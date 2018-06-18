@@ -99,7 +99,9 @@ public class ActivityController {
 	@RequestMapping("/others/artist/{sq}")
 	public String othersArtist(Model model, @PathVariable int sq) {
 		List<Music> list = activityService.selectMusicByArtist(sq);
+		Member member = activityService.selectMemberArtist(sq);
 		
+		model.addAttribute("member", member);
 		model.addAttribute("list", list);
 		return "activity/others/artist";
 	}

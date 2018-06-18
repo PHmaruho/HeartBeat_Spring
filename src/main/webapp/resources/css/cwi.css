@@ -1,0 +1,102 @@
+.cwi-detail-player-main {
+	background-color: silver;
+	width: 80%;
+	height: 400px;
+	margin: auto;
+	position: relative;
+}
+
+.cwi-detail-player-img img {
+	width: 360px;
+	height: 360px;
+	float: right;
+	position: absolute;
+	right: 20px;
+	bottom: 20px;
+}
+
+.cwi-detail-player-wave-wrapper {
+	width: 60%;
+	position: absolute;
+	left: 20px;
+	bottom: 20px;
+}
+
+.cwi-detail-player-comments {
+	width: 15px;
+	height: 15px;
+	z-index: 998;
+}
+
+.cwi-commnets-on {
+	z-index: 999;
+}
+
+.cwi-foot-detail-main {
+	position: relative;
+	width: 80%;
+	margin: auto;
+	height: 500px;
+	top: 50px;
+	background-color: silver;
+}
+
+.cwi-detail-player-info {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+}
+
+.cwi-detail-player-tags {
+	position: absolute;
+	right: 400px;
+	top: 20px;
+}
+
+.cwi-detail-player-info td span {
+	margin: 5px 5px 5px 5px
+}
+
+.cwi-artist-info {
+	width: 80%;
+	position: relative;
+	margin: auto;
+}
+
+#footProgressBar {
+	width: 50%;
+	margin: 0px;
+}
+
+#footVoulume {
+	width: 10%;
+}
+
+.cwi-foot-playlist {
+	background-color: gray;
+	position: absolute;
+	bottom: 100%;
+	right: 20%;
+	display: none;
+}
+
+.cwi-foot-playlist:hover {
+	cursor: pointer;
+}
+
+.cwi-foot-display-none {
+	display: none;
+}
+
+.cwi-foot-display-block {
+	display: block;
+}
+
+.cwi-foot-playlist-table {
+	border: 1px solid black;
+}
+
+.cwi-foot-player-info {
+	position: absolute;
+	right: 10%;
+}
