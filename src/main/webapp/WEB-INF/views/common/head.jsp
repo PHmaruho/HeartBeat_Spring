@@ -4,15 +4,7 @@
 <head>
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
-<style>
-	.modal-backdrop{
-		z-index:990;
-	}
-	
-	/* .modal-content{
-		z-index:1010;
-	} */
-</style>
+
 <script type="text/javascript">
 $(document).ready(function(){
     $(".dropdown").hover(            
@@ -66,6 +58,8 @@ function modaljoinBtn(){
 		<button onclick="goto('/logout')">logout</button>
 		<button onclick="goto('/memberInfoChangeForm')">개인정보수정</button>
 	</c:if>
-<button id="modalBtnLogin1" onclick="modalBtnLogin()">로그인</button>
-<button id="joinBtn1" onclick="modaljoinBtn()">회원가입</button>
+	<c:if test="${empty loginSession }">
+		<button id="modalBtnLogin1" onclick="modalBtnLogin()">로그인</button>
+		<button id="joinBtn1" onclick="modaljoinBtn()">회원가입</button>
+	</c:if>
 </body>
