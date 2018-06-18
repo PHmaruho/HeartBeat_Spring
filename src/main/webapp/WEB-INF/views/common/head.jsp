@@ -54,9 +54,10 @@ function modaljoinBtn(){
 
 </head>
 <body>
+	<input type="hidden" value="${loginSession }" id="loginss">
 	<c:if test="${!empty loginSession }">
-		<button onclick="goto('/logout')">logout</button>
-		<button onclick="goto('/memberInfoChangeForm')">개인정보수정</button>
+		<button onclick="goto('/logout');goto('/head')">logout</button>
+		<button onclick="goto('/memberInfoChangeForm');goto('/head')">개인정보수정</button>
 	</c:if>
 	<c:if test="${empty loginSession }">
 		<button id="modalBtnLogin1" onclick="modalBtnLogin()">로그인</button>

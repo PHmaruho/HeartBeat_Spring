@@ -48,6 +48,15 @@
 		display:none;
 	}
 </style>
+<script type="text/javascript">
+$(document).ready(function(){
+	var i=0;
+	if(i==0){
+		goto("/head");
+		i++;
+	}
+});
+</script>
 </head>
 <body>
 	<div class="headDiv" id="headDiv">
