@@ -11,9 +11,9 @@ function initFoot(sq) {
 	
 	loadFoot(sq);
 	getFootLoad(sq);
-	musicMain.setFootReady(true);
 	
 	footPlayer.on('ready', function () {
+		musicMain.setFootReady(true);
 		footPlayer.duration = footPlayer.getDuration();
 		$('#footDuration').text(formatTime(footPlayer.duration));
 		$('#footProgress').text( formatTime(0));
@@ -47,6 +47,8 @@ function initFoot(sq) {
 
 
 function loadFoot(sq) {
+	pauseDisplayButton();
+	console.log('load1111111Foot : ' + sq);
 	footPlayer.sq = sq;
 	musicMain.setFootReady(false);
 	musicMain.setDetailNum(-1);
@@ -64,8 +66,16 @@ function switchFootProgress() {
 
 function footProgress()  {
 	if (footProgressFlag == 0) {
+		var val = footPlayer.getCurrentTime()/footPlayer.duration;
 		$('#footProgress').text( formatTime(footPlayer.getCurrentTime()) );
-	    $('#footProgressBar').val(footPlayer.getCurrentTime()/footPlayer.duration);
+	    $('#footProgressBar').val(val);
+	    
+	    $('#footProgressBar').css('background-image',
+                '-webkit-gradient(linear, left top, right top, '
+                + 'color-stop(' + val + ', #FF0000), '
+                + 'color-stop(' + val + ', #C5C5C5)'
+                + ')'
+        );
 	}
 }
 
@@ -84,6 +94,8 @@ function playFromFoot() {
 		detailPlayer[num].play();
 	}
 	footPlayer.play();
+	
+	playDisplayButton();
 }
 
 function pauseFromFoot() {
@@ -92,6 +104,8 @@ function pauseFromFoot() {
 		detailPlayer[num].pause();
 	}
 	footPlayer.pause();
+	
+	pauseDisplayButton();
 }
 
 function checkFootReady(callback, parameter) {
@@ -328,3 +342,31 @@ function cookieList() {
 //deleteCookie();
 //cookieFromAdd(302);
 //console.log(document.cookie);
+$('input[type="range"]').change(function () {
+    var val = ($(this).val() - $(this).attr('min')) / ($(this).attr('max') - $(this).attr('min'));
+    
+    $(this).css('background-image',
+                '-webkit-gradient(linear, left top, right top, '
+                + 'color-stop(' + val + ', #FF0000), '
+                + 'color-stop(' + val + ', #C5C5C5)'
+                + ')'
+                );
+});
+
+function playDisplayButton() {
+	console.log('playDisplayButton');
+	$('#footPlayBtn').addClass('cwi-foot-display-none');
+	$('#detailPlayBtn' + musicMain.getDetailNum()).addClass('cwi-foot-display-none');
+	$('#footPauseBtn').removeClass('cwi-foot-display-none');
+	$('#detailPauseBtn' + musicMain.getDetailNum()).removeClass('cwi-foot-display-none');
+	$('#detailRotateBtn' + musicMain.getDetailNum()).addClass('cwi-detail-rotate');
+}
+
+function pauseDisplayButton() {
+	console.log('pauseDisplayButton');
+	$('#footPlayBtn').removeClass('cwi-foot-display-none');
+	$('#detailPlayBtn' + musicMain.getDetailNum()).removeClass('cwi-foot-display-none');
+	$('#footPauseBtn').addClass('cwi-foot-display-none');
+	$('#detailPauseBtn' + musicMain.getDetailNum()).addClass('cwi-foot-display-none');
+	$('#detailRotateBtn' + musicMain.getDetailNum()).removeClass('cwi-detail-rotate');
+}
