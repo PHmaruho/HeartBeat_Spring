@@ -440,7 +440,7 @@ function updateAlarmStatus(v){
 		},
 		success:function(){
 			//alert('읽음 ok');
-			location.reload();
+		/*	location.reload();*/
 		}
 	})
 }

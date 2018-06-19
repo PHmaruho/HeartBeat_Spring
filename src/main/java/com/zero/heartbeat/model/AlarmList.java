@@ -9,8 +9,22 @@ public class AlarmList {
 	private String music_nm;
 	private String nick;
 	private int reply_level;
+	private int music_sq;
+	private String member_sq;
 
 	
+	public String getMember_sq() {
+		return member_sq;
+	}
+	public void setMember_sq(String member_sq) {
+		this.member_sq = member_sq;
+	}
+	public int getMusic_sq() {
+		return music_sq;
+	}
+	public void setMusic_sq(int music_sq) {
+		this.music_sq = music_sq;
+	}
 	public int getAlarm_sq() {
 		return alarm_sq;
 	}
