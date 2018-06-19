@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>disCoverList</title>
 <style type="text/css">
-	img{width:150px;}
+	/* img{width:150px;} */
 	.part{
 		display:inline-block;
 		margin-bottom: 20px;
@@ -47,7 +47,7 @@
 			<div class="searchResult">
 				<div class="part">
 					<a href="/heartbeat/others/music/${list.music_sq}">
-					<img src="${pageContext.request.contextPath }/resources/img/album/${ list.img_path }.jpg"></a><br>
+					<img src="${pageContext.request.contextPath }/resources/img/album/${ list.img_path }.jpg" style="width:100px;"></a><br>
 						<%-- img_path: ${ list.img_path }<Br> --%>
 						 앨범명: ${list.album_nm }<br>
 					<!-- music_sq:  ${list.music_sq}<br>-->
