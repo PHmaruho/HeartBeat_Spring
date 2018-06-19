@@ -42,7 +42,7 @@
 		<c:forEach var="list" items="${discoverList}" varStatus="i">
 			<div class="searchResult">
 				<div class="part">
-					<a href="/heartbeat/others/music/${list.music_sq}">
+					<a onclick="goto('/others/music/${list.music_sq}')">
 					<img src="${pageContext.request.contextPath }/resources/img/album/${ list.img_path }.jpg" style="width:100px;"></a><br>
 						<%-- img_path: ${ list.img_path }<Br> --%>
 						 앨범명: ${list.album_nm }<br>

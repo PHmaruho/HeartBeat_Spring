@@ -70,8 +70,10 @@
 }
 
 #footProgressBar {
-	width: 30%;
+	width: 100%;
 	vertical-align: middle;
+	-webkit-flex: 1;
+	flex: 1;
 }
 
 .cwi-foot-playlist {
@@ -99,14 +101,20 @@
 }
 
 .cwi-foot-player-info {
-	display: inline-block;
+	display: inline;
 	position: absolute;
 	right: 10%;
+	left: 10px;
 }
 
 .cwi-foot-player-info span {
 	margin-left: 8px;
 	font-size: 12px;
+}
+
+.cwi-foot-player-buttons {
+	position: relative;
+	top: 12px;
 }
 
 .cwi-foot-player-buttons a{
@@ -144,8 +152,10 @@ input[type='range']::-webkit-slider-thumb {
 	    color-stop(0.5, #FF0000),
 	    color-stop(0.5, #C5C5C5)
 	);
-	margin-left: 32px;
-	vertical-align: middle;
+	transform: rotate(270deg);
+	position: absolute;
+	left: -50px;
+	top: 70px;
 }
 
 .cwi-detail-progress {
@@ -211,7 +221,10 @@ a.cwi-cursor-pointer : hover {
 }
 
 .cwi-foot-player-bar {
-	margin-left: 32px;
+	position: relative;
+	top: 13px;
+	-webkit-flex: 1;
+	flex: 1;
 }
 
 #footImage {
@@ -275,4 +288,73 @@ a.cwi-cursor-pointer : hover {
 
 .cwi-align-top {
 	vertical-align: top;
+}
+
+.cwi-foot-player-left {
+	position: absolute;
+	width: 60%;
+	height: 100%;
+	left: 0px;
+	display: -webkit-flex;
+	display: flex;
+}
+
+.cwi-foot-player-right {
+	position: absolute;
+	width: 40%;
+	height: 100%;
+	right: 0px;
+}
+
+.cwi-foot-player-volume-contorl {
+	height: 190px;
+	width: 30px;
+	position: relative;
+	right: 10px;
+	top: -140px;
+	-webkit-flex: none;
+	flex: none;
+}
+
+.cwi-foot-player-volume {
+	height: 140px;
+	width: 30px;
+	background-color: white;
+	position: absolute;
+	right: 0px;
+	top: 10px;
+	
+}
+
+.cwi-foot-player-volume-icon {
+	position: absolute;
+	bottom: 14px;
+	left: 9px;
+}
+
+.container {
+  display: -webkit-flex;
+  display: flex;
+}
+.initial {
+  -webkit-flex: initial;
+          flex: initial;
+  width: 200px;
+  min-width: 100px;
+}
+.none {
+-webkit-flex: none;
+flex: none;
+  width: 200px;
+}
+
+.flex1 {
+-webkit-flex: 1;
+flex: 1;
+}
+
+.cwi-foot-current {
+	position: relative;
+	margin: 0 20px 0 20px;
+	margin-top: 14px;
 }
