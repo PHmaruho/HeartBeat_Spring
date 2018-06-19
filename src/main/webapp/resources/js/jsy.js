@@ -396,6 +396,7 @@ function searchList(){
 }
 
 
+
 /* member - memberAlarmList */
 function getMemberAlarmList(){
 	$('#alarmContent').toggle();

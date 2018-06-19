@@ -42,6 +42,7 @@ public class ExploreRestController {
 		List<String> title= new ArrayList<String>(); 
 		
 		List<SearchList> discoverList= new ArrayList<SearchList>();
+		List<SearchList> resultList= new ArrayList<SearchList>();
 		ModelAndView model= new ModelAndView();
 		SearchKeyword dto=new SearchKeyword();
 		String[] arrArt=kArtist.split(",");
@@ -97,8 +98,27 @@ public class ExploreRestController {
 			dto.setArrTag(tag);
 			dto.setArrTitle(title);
 			discoverList= exploreService.selectAllSearchList(dto);
+			for(int i=0;i<discoverList.size();i++) {
+				int v=0;
+				String nick=discoverList.get(i).getNick();
+				for(int n=i+1;n<discoverList.size();n++) {
+					String nick2=discoverList.get(n).getNick();
+					if(discoverList.get(i).getAlbum_nm().equals(discoverList.get(n).getAlbum_nm())) {
+						if(discoverList.get(i).getMusic_sq()==discoverList.get(n).getMusic_sq()) {
+							nick+=", "+nick2;
+							v=1;
+							continue;
+						}// music_sq
+					}// album_nm
+				}
+				logger.info("nick:"+nick);
+				logger.info("v:"+v);
+				discoverList.get(i).setNick(nick);
+				if(v==1) discoverList.remove(i+1);
+				/*else resultList.add(discoverList.get(i));
+				logger.info("resultList:"+resultList.get(0).getNick());*/
+			}// for 전체
 		}
-		
 		
 		model.addObject("discoverList", discoverList);
 		model.addObject("artist",dto.getArrArtist());
