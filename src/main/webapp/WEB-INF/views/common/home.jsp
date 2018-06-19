@@ -103,16 +103,18 @@
 </head>
 <body>
 	<div class="menuButton">
-	<c:if test="${!empty loginSession }">
-		<button onclick="goto('/logout')">logout</button>
-		<button onclick="goto('/memberInfoChangeForm')">개인정보수정</button>
-		<button onclick="goto('/my/followList')">FollowList</button>
-		<button onclick="goto('/my/likeTest')">내가좋아하는게뭐게</button>
-		<button onclick="getMemberAlarmList(${loginSession })" class="alarm">알람</button>
-			<div id="alarmContent" class="alarmContent">
-			</div>
-	</c:if>
-<br>
+		<button onclick="goto('/discover')">검색</button>	
+		<c:if test="${!empty loginSession }">
+			<button onclick="goto('/logout')">logout</button>
+			<button onclick="goto('/memberInfoChangeForm')">개인정보수정</button>
+			<button onclick="goto('/my/followList')">FollowList</button>
+			<button onclick="goto('/my/likeTest')">내가좋아하는게뭐게</button>
+			<!-- <button onclick="goto('/arrive')" >최신음악</button> -->
+			<button onclick="getMemberAlarmList(${loginSession })" class="alarm">알람</button>
+			<div id="alarmContent" class="alarmContent"></div>
+		</c:if>
+	</div>
+	<br>
 	<c:if test="${empty loginSession }">
 	<button data-toggle="modal" data-target="#myModal" id="modalBtnLogin">로그인</button>
 	<div id="myModal" class="modal fade" role="dialog">
@@ -206,10 +208,6 @@
 		  </div>
 		</div>
 	</c:if>
-	<button onclick="goto('/discover')">검색</button>	
-	<button onclick="goto('/arrive')" >최신음악</button>
-	<button onclick="goto('/my/likeTest')">like</button>
-	
 <%-- 	${kkk}<p>
 	<img src="${pageContext.request.contextPath }/resources/img/album/${kkk}"> --%>
 <%-- <form name="like" method="post" action="${pageContext.request.contextPath }/my/likeTest">
