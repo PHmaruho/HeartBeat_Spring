@@ -55,6 +55,8 @@
 	position: absolute;
 	right: 400px;
 	top: 20px;
+	max-width: 240px;
+	text-align: right;
 }
 
 .cwi-detail-player-info td span {
@@ -226,37 +228,51 @@ a.cwi-cursor-pointer : hover {
 .cwi-artist-player-main {
 	background-color: rgba(0, 0, 0, 0.7);
 	width: 70%;
-	height: 300px;
+	height: 240px;
 	margin: auto;
 	position: relative;
 	min-width: 1050px;
-	margin-bottom: 50px;
+	margin-bottom: 16px;
 }
 
 .cwi-artist-player-img img {
-	width: 300px;
-	height: 300px;
+	width: 220px;
+	height: 220px;
 	float: left;
 	position: absolute;
-	left: 0px;
-	bottom: 0px;
+	left: 10px;
+	bottom: 10px;
 }
 
 .cwi-artist-player-wave-wrapper {
-	width: 60%;
-	min-width: 500px;
-	max-width: 750px;
 	position: absolute;
-	left: 320px;
+	width: 100%;
 	bottom: 10px;	
 }
 
 .cwi-artist-player-info {
 	position: absolute;
-	top: 20px;
-	left: 320px;	
+	top: 10px;
+	max-width: 200px;
 }
 
-.cwi-detail-player-info td span {
-	margin: 10px 10px 10px 10px
+.cwi-artist-player-tags {
+	position: absolute;
+	right: 10px;
+	top: 20px;
+	max-width: 200px;
+	text-align: right;
+}
+
+.cwi-artist-second-main {
+	width: 50%;
+	height: 240px;
+	min-width: 400px;
+	max-width: 600px;
+	position: relative;
+	left: 250px;
+}
+
+.cwi-align-top {
+	vertical-align: top;
 }
