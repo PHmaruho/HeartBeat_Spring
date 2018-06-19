@@ -110,7 +110,7 @@
 			<button onclick="goto('/my/followList')">FollowList</button>
 			<button onclick="goto('/my/likeTest')">내가좋아하는게뭐게</button>
 			<!-- <button onclick="goto('/arrive')" >최신음악</button> -->
-			<button onclick="getMemberAlarmList(${loginSession })" class="alarm">알람</button>
+			<button onclick="getMemberAlarmList();" class="alarm">알람</button>
 			<div id="alarmContent" class="alarmContent"></div>
 		</c:if>
 	</div>

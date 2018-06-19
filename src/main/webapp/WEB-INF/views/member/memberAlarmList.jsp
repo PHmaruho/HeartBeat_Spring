@@ -54,7 +54,7 @@
 								님이 앨범 ${alarm.album_nm }을<br>
 								'좋아요' 했습니다.
 							</c:if>
-						<input type="button" onclick="updateAlarmStatus(${i.index});" value="확인" style=""><br>
+						<input type="button" onclick="updateAlarmStatus(${alarm.alarm_sq});" value="확인" style=""><br>
 						<p>
 			</c:forEach>
 		</c:if>
