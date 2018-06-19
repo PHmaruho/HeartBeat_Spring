@@ -76,8 +76,10 @@ function autoSearch(){
 function searchKeywordUsers(){
 	
 		var cat=$('#cat').val();
-		var det= $('#detailText').val();
-		
+		var det= $('#detailText').val().trim();
+		var e=det.replace(/'/g,"따옴표");
+		//alert('det:'+det);
+		//alert('e:'+e);
 		if(cat.length==0){
 			alert('항목을 선택해주세요');
 			return false;
@@ -106,12 +108,12 @@ function searchKeywordUsers(){
 					var str="<li class='keyword-tag-added'>"
 						+det
 						+"<input type='button' class='deleteTag' onclick='deleteKeywordTag(this)' value='x'>"
-						+"<input type='hidden' value="+det+" class='addTag-hidden'>"
+						+"<input type='hidden' value='"+e+"' class='addTag-hidden'>"
 						+"</li>";
 						
 				$('.keyword-tag').append(str);
-				if(len==0) 	$('#tag').val($('#tag').val()+''+det+'');
-				else 		$('#tag').val($('#tag').val()+','+det+'');
+				if(len==0) 	$('#tag').val($('#tag').val()+''+e+'');
+				else 		$('#tag').val($('#tag').val()+','+e+'');
 			}else if(len==0){
 				alert('검색어를 입력해주세요.')
 			}else{
@@ -136,12 +138,12 @@ function searchKeywordUsers(){
 				var str="<li class='keyword-artist-added'>"
 						+det
 						+"<input type='button' class='deleteArtist' onclick='deleteKeywordArtist(this)' value='x'>"
-						+"<input type='hidden' value="+det+" class='addArtist-hidden'>"
+						+"<input type='hidden' value='"+e+"' class='addArtist-hidden'>"
 						+"</li>";
 						
 				$('.keyword-artist').append(str);
-				if(len==0) 	$('#artist').val($('#artist').val()+''+det+'');
-				else 		$('#artist').val($('#artist').val()+','+det+'');
+				if(len==0) 	$('#artist').val($('#artist').val()+''+e+'');
+				else 		$('#artist').val($('#artist').val()+','+e+'');
 			}else if(len==0){
 				alert('검색어를 입력해주세요.')
 			}else{
@@ -166,13 +168,13 @@ function searchKeywordUsers(){
 				var str="<li class='keyword-title-added'>"
 						+det
 						+"<input type='button' class='deleteTitle' onclick='deleteKeywordTitle(this)' value='x'>"
-						+"<input type='hidden' value="+det+" class='addTitle-hidden'>"
+						+"<input type='hidden' value='"+e+"' class='addTitle-hidden'>"
 						+"</li>";
 						
 				$('.keyword-title').append(str);
 				
-				if(len==0) 	$('#title').val($('#title').val()+''+det+'');
-				else 		$('#title').val($('#title').val()+','+det+'');
+				if(len==0) 	$('#title').val($('#title').val()+''+e+'');
+				else 		$('#title').val($('#title').val()+','+e+'');
 			}else if(len==0){
 				alert('검색어를 입력해주세요.')
 			}else{
@@ -284,6 +286,9 @@ function searchList(){
 	var tit=$('#title').val().trim();
 	var tag=$('#tag').val().trim();
 	var c=$('#cat').val().length;
+	art=art.replace(/따옴표/g,"'");
+	tit=tit.replace(/따옴표/g,"'");
+	tag=tag.replace(/따옴표/g,"'");
 	/*
 	var keyword=document.getElementById('searchBox').value.trim();
 	//alert('keyword: '+keyword)
