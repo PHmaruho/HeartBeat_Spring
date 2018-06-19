@@ -10,7 +10,41 @@
 		<result property="member_sq" column="member_sq"/>
 		<result property="music_like_type" column="music_like_type"/>
 	</resultMap>
+	
+	<!-- 최우일 -->
+	<resultMap type="hashMap" id="replyMap">
+		<id property="time_stamp" column="time_stamp"/>
+		<result property="reply_sq" column="reply_sq" />
+		<result property="member_sq" column="member_sq" />
+		<result property="nick" column="nick" />
+		<result property="reply_comment" column="reply_comment" />
+	</resultMap>
 
+	<!-- 최우일 -->
+	<resultMap type="Music" id="musicMap">
+		<result property="list_sq" column="list_sq"/>
+		<result property="album_sq" column="album_sq"/>
+		<result property="music_sq" column="music_sq"/>
+		<result property="music_nm" column="music_nm"/>
+		<result property="play_time" column="play_time"/>
+		<result property="list_no" column="list_no"/>
+		
+		<collection property="artistList" javaType="java.util.ArrayList" resultMap="artistsMap"/>
+		<collection property="tagList" javaType="java.util.ArrayList" resultMap="musicTagMap"/>
+	</resultMap>
+	
+	<!-- 최우일 -->
+	<resultMap type="Member" id="artistsMap">
+		<id property="member_sq" column="member_sq"/>
+		<result property="nick" column="nick"/>
+	</resultMap>
+	
+	<!-- 최우일 -->
+	<resultMap type="MusicTag" id="musicTagMap">
+		<!-- <id property="music_sq" column="music_sq"/> -->
+		<result property="tag_cd" column="tag_cd"/>
+		<result property="tag_meaning" column="tag_meaning"/>
+	</resultMap>
 
 	<!--JAN 1. 좋아요 눌렀을때 실행되는 메소드 -->
 	<insert id="clickLikeAlbum" parameterType="java.util.Map">
@@ -233,12 +267,48 @@
 	</select>
 	
 	<!-- 최우일 -->
-	<select id="selectMusicDetail" parameterType="int" resultType="hashMap">
-		select m.*, a.*, a.music_sq album_music_sq from music m, album a where m.music_sq = #{sq} and m.album_sq = a.album_sq
+	<select id="selectMusicDetail" parameterType="int" resultMap="musicMap">
+		select m.music_sq, m.music_nm, m.album_sq, a.member_sq, member.nick, tag.*
+		from music m, artist a, member, (
+		    select mt.music_sq, t.tag_cd, t.tag_meaning
+		    from music_tag mt, tag t
+		    where mt.tag_cd = t.tag_cd) tag
+		where m.music_sq = #{sq} and m.music_sq = a.music_sq and a.member_sq = member.member_sq and m.music_sq = tag.music_sq
 	</select>
 	
 	<!-- 최우일 -->
-	<select id="selectMusicArtists" parameterType="int" resultType="Member">
-		select m.* from artist a, member m where a.music_sq = #{sq} and a.member_sq = m.member_sq
+	<select id="selectMusicByArtist" parameterType="int" resultMap="musicMap">
+		select m.music_nm, m.album_sq, a.member_sq, member.nick, tag.*
+		from music m, artist a, member, (
+		    select mt.music_sq, t.tag_cd, t.tag_meaning
+		    from music_tag mt, tag t
+		    where mt.tag_cd = t.tag_cd) tag
+		where a.music_sq in (
+		    select music_sq
+		    from artist
+		    where member_sq = 703)
+		and m.music_sq = a.music_sq and a.member_sq = member.member_sq and m.music_sq = tag.music_sq
+	</select>
+	
+	<!-- 최우일 -->
+	<select id="selectReplyAtMusic" parameterType="int" resultMap="replyMap">
+		select r2.time_stamp, member_sq, nick, reply_comment
+		from (
+		  select min(reply_sq) reply_sq, time_stamp
+		  from reply
+		  where music_sq = #{sq} group by time_stamp) r1, (
+		  
+		  select r.reply_sq, r.time_stamp, m.member_sq, m.nick, r.reply_comment
+		  from member m, reply r
+		  where r.music_sq = #{sq} and r.member_sq = m.member_sq) r2
+		where r1.reply_sq = r2.reply_sq
+		order by r2.time_stamp
+	</select>
+	
+	<!-- 최우일 -->
+	<select id="selectMemberArtistCwi" parameterType="int" resultType="Member">
+		select nick, member_sq
+		from member
+		where member_sq = #{sq}
 	</select>
 </mapper>

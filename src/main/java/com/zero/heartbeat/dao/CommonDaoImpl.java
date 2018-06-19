@@ -3,6 +3,7 @@ package com.zero.heartbeat.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -55,8 +56,31 @@ public class CommonDaoImpl implements CommonDao {
 	// 최우일
 	@Override
 	public List<Music> selectPlaylistFoot(int sessionSq) {
-		logger.info("CommonDaoImpl selectPlaylistFoot");
 		return session.selectList("selectPlaylistFoot", sessionSq);
 	}
 	
+	// 최우일
+	@Override
+	public Music selectMusicFootLoad(int sq) {
+		return session.selectOne("selectMusicFootLoad", sq);
+	}
+	
+	// 최우일
+	@Override
+	public Map<String, Music> selectMusicCookieList(Map<String, Object> paramMap) {
+		int len = paramMap.size();
+		List<Integer> list = new ArrayList<Integer>();
+		for (int i = 1; i < len; i++) {
+			list.add(Integer.valueOf((String) (paramMap.get("cookieOrder" + i))));
+		}
+		Map<String, Music> resultMap = new HashMap<String, Music>();
+		Map<Integer, Music> tempMap = session.selectMap("selectMusicCookieList", list, "music_sq");
+		
+		for (int i = 1; i < len; i++) {
+			int key = Integer.valueOf((String) paramMap.get("cookieOrder" + i));
+			resultMap.put("cookieOrder" + i, tempMap.get(key));
+		}
+		
+		return resultMap;
+	}
 }

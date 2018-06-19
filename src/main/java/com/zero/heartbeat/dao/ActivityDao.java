@@ -1,6 +1,7 @@
 package com.zero.heartbeat.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.zero.heartbeat.model.MusicLike;
 import com.zero.heartbeat.model.SearchList;
@@ -40,9 +41,10 @@ public interface ActivityDao {
 	public List<Tag> searchTag();
 	
 	
-	HashMap<String, Object> selectMusicDetail(int sq);	// 최우일
+	Music selectMusicDetail(int sq);	// 최우일
 	List<Member> selectMusicArtists(int sq);	// 최우일
-	
-	
+	Map<Integer, HashMap<String, Object>> selectReplyAtMusic(int sq);	// 최우일
+	List<Music> selectMusicByArtist(int sq);	// 최우일
+	Member selectMemberArtist(int sq);	// 최우일
 
 }

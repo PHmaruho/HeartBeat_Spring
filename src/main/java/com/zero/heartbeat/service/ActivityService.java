@@ -2,6 +2,7 @@ package com.zero.heartbeat.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -42,7 +43,9 @@ public interface ActivityService {
 	public List<Tag> searchTag();
 	public void uploadAlbumPro(MultipartHttpServletRequest mhsr, HttpServletRequest request);
 	
-	HashMap<String, Object> selectMusicDetail(int sq); // 최우일
+	Music selectMusicDetail(int sq); // 최우일
 	List<Member> selectMusicArtists(int sq); // 최우일
-	
+	Map<Integer, HashMap<String, Object>> selectReplyAtMusic(int sq);	// 최우일
+	List<Music> selectMusicByArtist(int sq);	// 최우일
+	Member selectMemberArtist(int sq);	// 최우일
 }

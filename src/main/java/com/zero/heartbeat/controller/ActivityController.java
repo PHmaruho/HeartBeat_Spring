@@ -22,6 +22,7 @@ import com.zero.heartbeat.model.AllLikeList;
 import com.zero.heartbeat.model.Code;
 import com.zero.heartbeat.model.Tag;
 import com.zero.heartbeat.model.Member;
+import com.zero.heartbeat.model.Music;
 import com.zero.heartbeat.model.MusicLike;
 import com.zero.heartbeat.model.SearchList;
 import com.zero.heartbeat.service.ActivityService;
@@ -92,19 +93,19 @@ public class ActivityController {
 	// 최우일
 	@RequestMapping("/others/music/{sq}")
 	public String othersMusic(Model model, @PathVariable int sq) {
-		HashMap<String, Object> map = activityService.selectMusicDetail(sq);
-		List<Member> list= activityService.selectMusicArtists(sq);
+		Music music = activityService.selectMusicDetail(sq);
 		
-		model.addAttribute("music", map);
-		model.addAttribute("artist", list);
+		model.addAttribute("music", music);
 		return "activity/others/music";
 	}
 	
 	// 최우일
 	@RequestMapping("/others/artist/{sq}")
 	public String othersArtist(Model model, @PathVariable int sq) {
-		int[] list = {302,303,304,305,306,307};
+		List<Music> list = activityService.selectMusicByArtist(sq);
+		Member member = activityService.selectMemberArtist(sq);
 		
+		model.addAttribute("member", member);
 		model.addAttribute("list", list);
 		return "activity/others/artist";
 	}

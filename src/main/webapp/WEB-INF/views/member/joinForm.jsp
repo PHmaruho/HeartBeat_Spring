@@ -34,7 +34,7 @@
 			<tr>
 				<td colspan="2">
 					<input type="button" id="join_btn" value="회원가입" onclick="kkhjoin()">
-					<input type="button" value="취소"> 
+					<input type="button" value="취소" onclick="location.href='/heartbeat'"> 
 				</td>
 			</tr>
 		</table>
