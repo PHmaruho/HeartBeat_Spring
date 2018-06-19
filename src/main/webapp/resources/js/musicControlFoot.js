@@ -11,9 +11,9 @@ function initFoot(sq) {
 	
 	loadFoot(sq);
 	getFootLoad(sq);
-	musicMain.setFootReady(true);
 	
 	footPlayer.on('ready', function () {
+		musicMain.setFootReady(true);
 		footPlayer.duration = footPlayer.getDuration();
 		$('#footDuration').text(formatTime(footPlayer.duration));
 		$('#footProgress').text( formatTime(0));
@@ -47,6 +47,8 @@ function initFoot(sq) {
 
 
 function loadFoot(sq) {
+	pauseDisplayButton();
+	console.log('load1111111Foot : ' + sq);
 	footPlayer.sq = sq;
 	musicMain.setFootReady(false);
 	musicMain.setDetailNum(-1);
@@ -352,6 +354,7 @@ $('input[type="range"]').change(function () {
 });
 
 function playDisplayButton() {
+	console.log('playDisplayButton');
 	$('#footPlayBtn').addClass('cwi-foot-display-none');
 	$('#detailPlayBtn' + musicMain.getDetailNum()).addClass('cwi-foot-display-none');
 	$('#footPauseBtn').removeClass('cwi-foot-display-none');
@@ -360,6 +363,7 @@ function playDisplayButton() {
 }
 
 function pauseDisplayButton() {
+	console.log('pauseDisplayButton');
 	$('#footPlayBtn').removeClass('cwi-foot-display-none');
 	$('#detailPlayBtn' + musicMain.getDetailNum()).removeClass('cwi-foot-display-none');
 	$('#footPauseBtn').addClass('cwi-foot-display-none');

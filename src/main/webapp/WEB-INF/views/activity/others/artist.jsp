@@ -14,7 +14,7 @@
 			<table class="cwi-artist-player-info">
 				<tr>
 					<td rowspan="2" style="width: 140px; height: 140px;">
-						<span id="detailRotateBtn${status.index }">
+						<span>
 							<a id="detailPlayBtn${status.index }" onclick="playFromDetail(${status.index })">
 								<img src="${pageContext.request.contextPath }/resources/img/icon/play-button-128.png">
 							</a>

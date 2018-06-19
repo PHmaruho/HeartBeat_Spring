@@ -179,8 +179,8 @@ input[type='range']::-webkit-slider-thumb {
 
 .cwi-detail-rotate {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 0%;
+    left: 0%;
     width: 128px;
     height: 128px;
     margin:-64px 0 0 -128px;

@@ -66,15 +66,15 @@ function loadDetail(detailNum, sq) {
 
 function playFromDetail(detailNum) {
 	pauseAllDetail();
-	pauseDisplayButton();
 	if (detailPlayer[detailNum].sq != footPlayer.sq) {
 		loadFoot(detailPlayer[detailNum].sq);
 	}
 	checkFootReady(playAll, detailNum);
-	playDisplayButton();
 }
 
 function playAll(detailNum) {
+	console.log('playAll');
+	playDisplayButton();
 	var e = detailPlayer[detailNum].getCurrentTime();
 	footPlayer.play(e);
 	detailPlayer[detailNum].play();
