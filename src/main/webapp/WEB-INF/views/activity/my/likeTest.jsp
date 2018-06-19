@@ -64,6 +64,7 @@
 
 .albumImg {
 	width: 70%;
+	height : 150px;
 	margin-left: 10%;
 	border-style: solid;
 	border-width : 1px;
