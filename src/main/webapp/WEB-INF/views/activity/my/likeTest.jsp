@@ -1,52 +1,190 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <head>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/Jan.js"></script>
 
-</script>
 <style type="text/css">
-/* body 공통 속성 */
+.box {
+	margin-left: 7%;
+	margin-right: 7%;
+}
+.box {
+	margin-left: 7%;
+	margin-right: 7%;
+}
 
-	body {margin:0;padding:0; font:normal dotum,'돋움';}
+.banner {
+	padding-left: 15%;
+}
+.bannerimg {
+	width: 1000px;
+	height : 698px;
+}
 
-	ul,ol,dl {list-style:none}
+.contents {
+ 	margin-bottom : 25%;
+ 	
+}
 
-	img {border:0;vertical-align:top;}
+.glul-img {
+	width : 30px;
+	height : 30px;
+}
+.a {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	border-style: none;
+}
 
-	ul {list-style:none; padding:0; margin:0;}
+.glul {
+	list-style: none;
+	padding: 0;
+	border-style: none;
+	width: 100%;
+	height: 200px;
+	
+}
+.glul li {
+	width: 13%;
+	height: 100%;
+	margin-left: 5%;
+	margin-bottom : 8%;
+	display: inline-block;
+	text-align : center;
+/* 	border-style: solid;
+	border-width: 1px; */
+}
 
-	/* 중앙 우측 하단 박스 속성 */
+.subTitle:hover {
+	color : red;
+	text-decoration: underline;
+}
 
-	#ub_box_right {width:215px; height:283px; background:#000; padding:15px; }
+.albumImg {
+	width: 70%;
+	height : 150px;
+	margin-left: 10%;
+	border-style: solid;
+	border-width : 1px;
+	border-color : silver;
+}
 
-	#ub_poll {float:right; width:215px; height:186px; background:#FFF; margin:0 0 15px 0;}
-
-	#ub_notice {float:right; width:215px; height:80px; background:#FFF;}
-
+.albumImg:hover {
+	border-color : red;
+	
+}
 
 </style>
 </head>
 <body>
-<div class="div3">
-<div id="lay_out">
-
-	<div id="ub_top"></div>
-
-	<div id="ub_left">
-
-		<div id="ub_box">
-
-			<div id="ub_main_bn">
-				<c:if test="${music_like_sq ne null}">
-				<a href='javascript: like_func();'>
-				<img src="${pageContext.request.contextPath }/resources/img/album/${img_path}" id='like_img'></a>
+<button onclick="goto('/home')">Home</button>	
+<Br><Br>
+<div class="box">
+<div class="contents">
+	<h2 style="text-align:center;" class="subTitle">Likes</h2><br>
+		<h6 style="color:gray;">Hear the tracks you’ve liked:</h6>
+		<br><br><Br>
+	<ul class="glul">
+			<c:if test="${list==null ||list.size()==0}">
+				리스트가 없습니다.
 			</c:if>
-			</div>
-
-			<div id="ub_main_comm"></div>
-
-			<div id="ub_main_link"></div>
-		</div>
-		</div>
+			
+			<c:if test="${list!=null }">
+				<c:forEach var="like" items="${list}" varStatus="i">
+					<li>
+					<c:if test="${like.code_meaning == '앨범' }">
+						<div class="likeAlbum">
+							<a href="/heartbeat/others/album/${like.album_sq}">
+								<%-- <input type="hidden" id="music_sq${i.index }" value="${like.album_sq}"> --%>
+								<img src="${pageContext.request.contextPath }/resources/img/album/${like.img_path }.jpg" class="albumImg"><br>
+							</a>
+							<a href="#">
+								<img src="${pageContext.request.contextPath }/resources/img/profile/like.png" class="glul-img" onclick="like_func(${like.music_like_sq},'${like.code_meaning }')">
+							</a>
+							${like.like_Count }<br>
+						</div>
+					</c:if>
+					
+					<c:if test="${like.code_meaning == '곡' }">
+						<div class="likeMusic">
+							<a href="/heartbeat/others/music/${like.music_sq}">
+								<%-- <input type="hidden" id="music_sq${i.index }" value="${like.music_sq}"> --%>				
+								<img src="${pageContext.request.contextPath }/resources/img/album/${like.img_path }.jpg" class="albumImg" style="border-radius: 50%;"><br>
+							</a>
+							<a href="#">
+								<img src="${pageContext.request.contextPath }/resources/img/profile/like.png" class="glul-img" onclick="like_func(${like.music_like_sq},'${like.code_meaning }')">
+							</a>
+							${like.like_Count }<br>
+						</div>
+					</c:if>
+					
+						${like.album_nm }<br>
+						<a href="/heartbeat/others/artist/${like.member_sq}">
+							${like.nick }<br>
+						</a>
+						<c:if test="${like.cntFollow== 0}">
+							<input type="button" value="+follow" onclick="following(${like.member_sq},${loginSession })" id="follow" >
+						</c:if>
+						<c:if test="${like.cntFollow>0 }">	
+							<input type="button" value="-unfollow" onclick="unfollow(${like.member_sq},${loginSession })"id="unfollow" >
+						</c:if>
+					</li>
+			</c:forEach>
+		</c:if>
+	</ul>
+</div>
+<div class="contents">
+	<h2 style="text-align:center;" class="subTitle">unLikes</h2><br>
+		<br><br><Br>
+	<ul class="glul">
+		<c:if test="${unList==null ||unList.size()==0}">
+			리스트가 없습니다.
+		</c:if>
+			<c:if test="${unList!=null }">
+			<c:forEach var="unlike" items="${unList}" varStatus="i">
+				<li>
+				<c:if test="${unlike.code_meaning == '언라이크앨범' }">
+					<div class="likeAlbum">
+						<a href="/heartbeat/others/album/${unlike.album_sq}">
+							<%-- <input type="hidden" id="music_sq${i.index }" value="${like.album_sq}"> --%>
+							<img src="${pageContext.request.contextPath }/resources/img/album/${unlike.img_path }.jpg" class="albumImg"><br>
+						</a>
+						<a href="#">
+							<img src="${pageContext.request.contextPath }/resources/img/profile/dislike.png" class="glul-img" onclick="unLikeCancel(${unlike.music_like_sq},'${unlike.code_meaning }')">
+						</a>
+						${unlike.like_Count }<br>
+					</div>
+				</c:if>
+				<c:if test="${unlike.code_meaning == '언라이크곡' }">
+					<div class="likeMusic">
+						<a href="/heartbeat/others/music/${unlike.music_sq}">
+							<%-- <input type="hidden" id="music_sq${i.index }" value="${like.music_sq}"> --%>				
+							<img src="${pageContext.request.contextPath }/resources/img/album/${unlike.img_path }.jpg" class="albumImg" style="border-radius: 50%;"><br>
+						</a>
+						<a href="#">
+							<img src="${pageContext.request.contextPath }/resources/img/profile/dislike.png" class="glul-img" onclick="unLikeCancel(${unlike.music_like_sq},'${unlike.code_meaning }')">
+						</a>
+						${unlike.like_Count }<br>
+					</div>
+				</c:if>
+					
+					${unlike.album_nm }<br>
+					
+					<a href="/heartbeat/others/artist/${unlike.member_sq}">
+						${unlike.nick }<br>
+					</a>
+					<c:if test="${unlike.cntFollow== 0}">
+						<input type="button" value="+follow" onclick="following(${unlike.member_sq},${loginSession })" id="follow" >
+					</c:if>
+					<c:if test="${unlike.cntFollow>0 }">	
+						<input type="button" value="-unfollow" onclick="unfollow(${unlike.member_sq},${loginSession })"id="unfollow" >
+					</c:if>
+				</li>
+			</c:forEach>
+		</c:if>
+	</ul>
 </div>
 </div>
 

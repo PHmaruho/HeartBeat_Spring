@@ -104,4 +104,5 @@ public class CommonController {
 		
 		return "common/foot";
 	}
+	
 }

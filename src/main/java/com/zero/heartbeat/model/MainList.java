@@ -13,6 +13,7 @@ public class MainList {
 	private String music_nm;
 	private int music_like;
 	
+	
 	public int getRn() {
 		return rn;
 	}
@@ -37,24 +38,6 @@ public class MainList {
 	public void setImg_path(String img_path) {
 		this.img_path = img_path;
 	}
-	public int getMusic_sq() {
-		return music_sq;
-	}
-	public void setMusic_sq(int music_sq) {
-		this.music_sq = music_sq;
-	}
-	public String getMusic_nm() {
-		return music_nm;
-	}
-	public void setMusic_nm(String music_nm) {
-		this.music_nm = music_nm;
-	}
-	public int getMusic_like() {
-		return music_like;
-	}
-	public void setMusic_like(int music_like) {
-		this.music_like = music_like;
-	}
 	public String getNick() {
 		return nick;
 	}
@@ -78,6 +61,24 @@ public class MainList {
 	}
 	public void setAlbum_like(int album_like) {
 		this.album_like = album_like;
+	}
+	public int getMusic_sq() {
+		return music_sq;
+	}
+	public void setMusic_sq(int music_sq) {
+		this.music_sq = music_sq;
+	}
+	public String getMusic_nm() {
+		return music_nm;
+	}
+	public void setMusic_nm(String music_nm) {
+		this.music_nm = music_nm;
+	}
+	public int getMusic_like() {
+		return music_like;
+	}
+	public void setMusic_like(int music_like) {
+		this.music_like = music_like;
 	}
 	
 	

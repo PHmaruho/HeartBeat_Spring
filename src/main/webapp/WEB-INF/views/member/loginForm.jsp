@@ -25,15 +25,17 @@ System.out.println("context-->"+context);
 				<td>비밀번호</td>
 				<td><input type="password" id="pw" name="pw"
 					required="required"></td>
-			</tr>
-			<tr>
-				<td colspan="2"><input type="button" value="취소"> <input
-					type="button" value="로그인" onclick="kkhcheck()">
-					<input type="button" value="회원가입" onclick="location.href='/heartbeat/joinForm'">
+					<td>
+						<span id="pw_msg"></span>
 					</td>
 			</tr>
 			<tr>
 				<td colspan="2"><span id="msg"></span></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="button" value="취소" onclick="location.href='/heartbeat'"> <input
+					type="button" value="로그인" onclick="kkhcheck()">
+					</td>
 			</tr>
 		</table>
 	</form>
