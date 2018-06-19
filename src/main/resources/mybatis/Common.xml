@@ -66,20 +66,12 @@
 	</select>
 	
 	
-	<!--JAN  -->
-	<select id="total" resultType="int">
-		select count(*) from Album
-	</select>
-
-
-
-
+	
 
 	<!-- JSY -->
 <!--<select id="selectAlbumMainListLike" parameterType="int" resultType="MainList"> -->
 	<select id="mainListLike" parameterType="int" resultType="MainList">
-	<![CDATA[ 
-	select rownum as rn, am.* from
+	<!-- select rownum as rn, am.* from
 	(select a.album_sq,a.album_nm,a.img_path
       		,m.nick, m.member_sq
       		, ml.music_like_type,count(distinct ml.target_sq) as album_like
@@ -89,7 +81,18 @@
 	GROUP BY a.album_sq, a.album_nm, a.img_path
         	, m.nick, m.member_sq, ml.music_like_type) am 
 	where rownum>#{startNum} and rownum<=#{startNum}+5
-	order by album_like
+	order by music_like -->
+	<![CDATA[
+	select rownum as rn, am.* from
+	(select a.album_sq,a.album_nm,a.img_path
+      ,m.nick, m.member_sq
+      , ml.music_like_type,count(distinct ml.target_sq) as album_like
+	FROM album a, member m, music_like ml 
+	WHERE a.member_sq=m.member_sq 
+	AND a.album_sq=ml.target_sq
+	GROUP BY a.album_sq, a.album_nm, a.img_path
+        , m.nick, m.member_sq, ml.music_like_type) am 
+	where rownum>#{startNum} and rownum<=#{startNum}+10
 	]]>
 	</select>
  <!--<select id="selectAlbumMainListNew" parameterType="int" resultType="MainList">-->
@@ -97,14 +100,12 @@
  	<![CDATA[ 
 	select rownum as rn, am.* from
 	(select a.album_sq,a.album_nm,a.img_path
-      		,m.nick, m.member_sq
-      		, ml.music_like_type,count(distinct ml.target_sq) as album_like
-	FROM album a, member m, music_like ml 
-	WHERE a.member_sq=m.member_sq 
-	AND a.album_sq=ml.target_sq
-	GROUP BY a.album_sq, a.album_nm, a.img_path
-        	, m.nick, m.member_sq, ml.music_like_type) am 
-	where rownum>#{startNum} and rownum<=#{startNum}+5
+			,b.nick, m.music_sq,m.music_nm
+	from album a, music m, member b 
+	where a.album_sq=m.album_sq and m.open_yn='Y'
+ 	 and a.member_sq=b.member_sq
+	order by a.release_dt) am
+	where rownum>#{startNum} and rownum<=#{startNum}+10
 	]]>
 	</select>
 	
