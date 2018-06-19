@@ -17,6 +17,7 @@ public class SearchList {
 	private String nick;
 	private String url;
 	
+	
 
 	public int getMusic_sq() {
 		return music_sq;
@@ -90,6 +91,7 @@ public class SearchList {
 	public void setUrl(String url) {
 		this.url = url;
 	}
+
 
 	
 	

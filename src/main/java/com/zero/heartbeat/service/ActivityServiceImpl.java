@@ -19,7 +19,9 @@ import com.zero.heartbeat.dao.CommonDao;
 import com.zero.heartbeat.dao.ExploreDao;
 import com.zero.heartbeat.dao.MemberDao;
 import com.zero.heartbeat.model.MusicLike;
+import com.zero.heartbeat.model.SearchList;
 import com.zero.heartbeat.model.Tag;
+import com.zero.heartbeat.model.AllLikeList;
 import com.zero.heartbeat.model.Code;
 import com.zero.heartbeat.model.Member;
 import com.zero.heartbeat.model.Music;
@@ -64,6 +66,90 @@ public class ActivityServiceImpl implements ActivityService {
 		// TODO Auto-generated method stub
 		return activityDao.likeList(member_sq);
 	}
+	//JAN
+	@Override
+	public List<AllLikeList> selectAllLikeList(int id) {
+		// TODO Auto-generated method stub
+		logger.info("selectAllLikeList ServiceImpl ");
+		return activityDao.selectAllLikeList(id);
+	}
+	//JAN
+	@Override
+	public void clickUnlikeMusic(int unLike) {
+		// TODO Auto-generated method stub
+		activityDao.clickUnlikeMusic(unLike);
+	}
+
+	//JAN
+	@Override
+	public void clickUnlikeAlbum(int unLike) {
+		// TODO Auto-generated method stub
+		activityDao.clickUnlikeAlbum(unLike);
+	}
+	//JAN
+	@Override
+	public List<AllLikeList> selectUnLikeList(int id) {
+		// TODO Auto-generated method stub
+		return activityDao.selectUnLikeList(id);
+	}
+	//JAN
+	@Override
+	public void clickLikeAlbum(int likeAlbum, int id) {
+		// TODO Auto-generated method stub
+		activityDao.clickLikeAlbum(likeAlbum,id);
+	}
+	
+	//JAN
+	@Override
+	public void clickLikeMusic(int likeMusic, int id) {
+		// TODO Auto-generated method stub
+		activityDao.clickLikeMusic(likeMusic,id);
+	}
+	
+	//JAN
+	@Override
+	public void unLikeCancel(int unLikeCancel, String music_like_type) {
+		// TODO Auto-generated method stub
+		activityDao.unLikeCancel(unLikeCancel,music_like_type);
+	}
+	
+	//JAN
+	@Override
+	public List<Member> selectFollowing(int id) {
+		// TODO Auto-generated method stub
+		return activityDao.selectFollowing(id);
+	}
+
+	//JAN
+	@Override
+	public List<Member> selectFollower(int id) {
+		// TODO Auto-generated method stub
+		return activityDao.selectFollower(id);
+	}
+	
+	//JAN
+	@Override
+	public void follow(int mbsq, int ss) {
+		// TODO Auto-generated method stub
+		activityDao.follow(mbsq,ss);
+	}
+	
+	//JAN
+	@Override
+	public int followCheck(int mbsq, int ss) {
+		// TODO Auto-generated method stub
+		return activityDao.followCheck(mbsq,ss);
+	}
+	
+	//JAN
+	@Override
+	public void unfollow(int memberSq, int targetSq) {
+		// TODO Auto-generated method stub
+		activityDao.unfollow(memberSq, targetSq);
+	}
+
+	
+	
 	
 	// PHmaruho
 	@Override

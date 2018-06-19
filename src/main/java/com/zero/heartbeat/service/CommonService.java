@@ -16,8 +16,6 @@ public interface CommonService {
 	List<MainList> selectAlbumMainListNew(int startNum);
 	
 	// JAN
-//	List<Album> selectAlbumArriveList(Album album);
-//	List<SearchList> mainList();
 	List<MainList> mainListLike(int startNum);
 	List<MainList> mainListNew(int startNum);
 	List<MainList> selectAlbumArriveList(int startNum);

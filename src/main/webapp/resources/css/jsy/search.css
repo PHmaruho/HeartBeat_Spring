@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+.keyword-tag-added,.keyword-artist-added,.keyword-title-added{
+	list-style-type:none;
+	border:1px solid;
+	float:left;
+}
+
+
+.menuButton{
+	 position:relative;
+	 height: 100px;
+	 top:0px;
+	 left:0px;
+	 
+}
+
+.alarmContent{
+	position:absoulute;
+	padding-top:15px;
+	padding-bottom:15px;
+	padding-left:15px;
+	padding-right:15px;
+	margin-left:120px;
+	width:250px;
+	height:275px;
+	background-color:#ffffff;
+	box-shadow:0 2px 4px rgba(0,0,0,0.25);
+	display:none;
+}
+
+.alarmUrl{
+	text-decoration: none;
+}

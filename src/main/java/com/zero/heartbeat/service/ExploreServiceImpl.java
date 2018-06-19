@@ -34,18 +34,17 @@ public class ExploreServiceImpl implements ExploreService {
 		List<SearchList> list= exploreDao.selectAllSearchList(dto);
 		logger.info("ExploreServiceImpl selectAllSearchList working");
 		return list;
-	}
+	}//JSY
 	public List<Tag> getKeywordTag(String searchWord) {
 		List<Tag> tag=exploreDao.getKeywordTag(searchWord);
-		logger.info("ExploreServiceImpl keyword Tag: "+searchWord);
 		logger.info("ExploreServiceImpl getKeywordTag working");
 		return tag;
-	}
+	}//JSY
 	public List<Member> getKeywordArtist(String searchWord) {
 		List<Member> member=exploreDao.getKeywordArtist(searchWord);
 		logger.info("ExploreServiceImpl getKeywordArtist working");
 		return member;
-	}
+	}//JSY
 	public List<Music> getKeywordTitle(String searchWord) {
 		List<Music> title=exploreDao.getKeywordTitle(searchWord);
 		logger.info("ExploreServiceImpl getKeywordTitle working");
