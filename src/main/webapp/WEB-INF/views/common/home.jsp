@@ -3,6 +3,8 @@
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jsy.js"></script>
+<link href="${pageContext.request.contextPath }/resources/css/jsy/search.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
 
 function like_func() {
@@ -89,6 +91,16 @@ window.onfocus=function(){
 </style>
 </head>
 <body>
+	<div class="menuButton">
+	<c:if test="${!empty loginSession }">
+		<button onclick="goto('/logout')">logout</button>
+		<button onclick="goto('/memberInfoChangeForm')">개인정보수정</button>
+		<button onclick="goto('/my/likeTest')">like</button>
+		<button onclick="getMemberAlarmList(${loginSession })" class="alarm">알람</button>
+			<div id="alarmContent" class="alarmContent">
+			</div>
+	</c:if>
+<br>
 	<c:if test="${empty loginSession }">
 	<button data-toggle="modal" data-target="#myModal" id="modalBtnLogin">로그인</button>
 	<div id="myModal" class="modal fade" role="dialog">
@@ -183,7 +195,7 @@ window.onfocus=function(){
 		</div>
 	</c:if>
 	<button onclick="goto('/arrive')" >최신음악</button>
-	<button onclick="goto('/my/likeTest')">like</button>
+	</div>
 	
 <%-- 	${kkk}<p>
 	<img src="${pageContext.request.contextPath }/resources/img/album/${kkk}"> --%>

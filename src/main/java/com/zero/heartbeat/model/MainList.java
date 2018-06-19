@@ -5,10 +5,13 @@ public class MainList {
 	private int album_sq;
 	private String album_nm;
 	private String img_path;
+	private String nick;
+	private int member_sq;
+	private String music_like_type;
+	private int album_like;
 	private int music_sq;
 	private String music_nm;
 	private int music_like;
-	private String nick;
 	
 	public int getRn() {
 		return rn;
@@ -57,6 +60,24 @@ public class MainList {
 	}
 	public void setNick(String nick) {
 		this.nick = nick;
+	}
+	public int getMember_sq() {
+		return member_sq;
+	}
+	public void setMember_sq(int member_sq) {
+		this.member_sq = member_sq;
+	}
+	public String getMusic_like_type() {
+		return music_like_type;
+	}
+	public void setMusic_like_type(String music_like_type) {
+		this.music_like_type = music_like_type;
+	}
+	public int getAlbum_like() {
+		return album_like;
+	}
+	public void setAlbum_like(int album_like) {
+		this.album_like = album_like;
 	}
 	
 	
