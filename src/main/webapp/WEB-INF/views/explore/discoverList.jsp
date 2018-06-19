@@ -49,7 +49,9 @@
 					<!-- music_sq:  ${list.music_sq}<br>-->
 				</div>	
 				<div class="part">
-					닉네임: ${list.nick }<br>
+					닉네임:${list.nick } 
+
+					<br>
 					곡명: ${list.music_nm }<br>
 					<!-- equalizer??  <br> -->
 					발매일: 
