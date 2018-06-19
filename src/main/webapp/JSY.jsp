@@ -15,11 +15,11 @@
 	
 	//기능 2
 	/* Search Page */
-	location.href="/heartbeat/discover";
+	//location.href="/heartbeat/discover";
 	
 	//기능 3
 	/* Alarm Page */
-	//location.href="/heartbeat";
+	location.href="/heartbeat";
 	// -> 로그인 하면 알람 버튼 출현
 		
 	

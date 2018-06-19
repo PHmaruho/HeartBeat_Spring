@@ -397,15 +397,14 @@ function searchList(){
 
 
 /* member - memberAlarmList */
-function getMemberAlarmList(v){
+function getMemberAlarmList(){
 	$('#alarmContent').toggle();
+	//alert('v:'+v);
 	/*var id=<%=session.getAttribute(loginSession)%>;*/
 	//alert('id:'+v);
 	$.ajax({
 		url:'/heartbeat/do/memberAlarmList',
-		data:{
-			member_id:v
-		},
+	
 		success:function(data){
 			$('#alarmContent').html("");
 			$('#alarmContent').html(data);
@@ -431,16 +430,16 @@ function getMemberAlarmList(v){
 	})
 }*/
 function updateAlarmStatus(v){
-	var c=$('#alarm_sq'+v).val();
 	//alert('alarm_sq: '+c);
 	$.ajax({
 		url:'/heartbeat/do/updateAlarmStatus',
 		data:{
-			alarmSq:c,
+			alarmSq:v,
 		},
 		success:function(){
 			//alert('읽음 ok');
 		/*	location.reload();*/
+		getMemberAlarmList();
 		}
 	})
 }
