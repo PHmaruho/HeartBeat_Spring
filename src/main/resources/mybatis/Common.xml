@@ -53,41 +53,59 @@
 		album_type AS albumType
 	 -->
 	 <!-- JAN -->
-	<select id="arriveList" parameterType="Album" resultMap="AlbumResult">
-		select * from Album
-	</select>
-	
-	
-	<!--JAN  -->
-	<select id="total" resultType="int">
-		select count(*) from Album
-	</select>
-
-
-
-
-
-	<!-- JSY -->
-	<select id="selectAlbumMainListLike" parameterType="int" resultType="MainList">
-	<![CDATA[ 
-	select rownum as rn, am.* from
-	(select a.album_sq,a.album_nm,a.img_path
-		,m.music_sq,m.music_nm,m.music_like
-	from album a, music m
-	where a.album_sq=m.album_sq and m.open_yn='Y') am 
-	where rownum>#{startNum} and rownum<=#{startNum}+5
-	order by music_like
-	]]>
-	</select>
-	<select id="selectAlbumMainListNew" parameterType="int" resultType="MainList">
-	<![CDATA[ 
+	<select id="selectAlbumArriveList"  parameterType="int" resultType="MainList">
+ 	<![CDATA[ 
 	select rownum as rn, am.* from
 	(select a.album_sq,a.album_nm,a.img_path
 		,m.music_sq,m.music_nm,m.music_like
 	from album a, music m
 	where a.album_sq=m.album_sq and m.open_yn='Y'
 	order by a.release_dt) am 
+	where rownum>#{startNum} and rownum<=#{startNum}+10
+	]]>
+	</select>
+	
+	
+	
+
+	<!-- JSY -->
+<!--<select id="selectAlbumMainListLike" parameterType="int" resultType="MainList"> -->
+	<select id="mainListLike" parameterType="int" resultType="MainList">
+	<!-- select rownum as rn, am.* from
+	(select a.album_sq,a.album_nm,a.img_path
+      		,m.nick, m.member_sq
+      		, ml.music_like_type,count(distinct ml.target_sq) as album_like
+	FROM album a, member m, music_like ml 
+	WHERE a.member_sq=m.member_sq 
+	AND a.album_sq=ml.target_sq
+	GROUP BY a.album_sq, a.album_nm, a.img_path
+        	, m.nick, m.member_sq, ml.music_like_type) am 
 	where rownum>#{startNum} and rownum<=#{startNum}+5
+	order by music_like -->
+	<![CDATA[
+	select rownum as rn, am.* from
+	(select a.album_sq,a.album_nm,a.img_path
+      ,m.nick, m.member_sq
+      , ml.music_like_type,count(distinct ml.target_sq) as album_like
+	FROM album a, member m, music_like ml 
+	WHERE a.member_sq=m.member_sq 
+	AND a.album_sq=ml.target_sq
+	GROUP BY a.album_sq, a.album_nm, a.img_path
+        , m.nick, m.member_sq, ml.music_like_type) am 
+	where rownum>#{startNum} and rownum<=#{startNum}+10
+	]]>
+	</select>
+ <!--<select id="selectAlbumMainListNew" parameterType="int" resultType="MainList">-->
+ <select id="mainListNew"  parameterType="int" resultType="MainList">	
+ 	<![CDATA[ 
+	select rownum as rn, am.* from
+	(select a.album_sq,a.album_nm,a.img_path
+			,b.nick, m.music_sq,m.music_nm
+	from album a, music m, member b 
+	where a.album_sq=m.album_sq and m.open_yn='Y'
+ 	 and a.member_sq=b.member_sq
+	order by a.release_dt) am
+	where rownum>#{startNum} and rownum<=#{startNum}+10
 	]]>
 	</select>
 	
@@ -100,5 +118,24 @@
 		  	where a.open_yn = 'Y' and m.open_yn = 'Y' and a.album_sq = m.album_sq and m.music_sq = artist.music_sq) musics,
 		playlist p, member m
 		where p.member_sq = #{sessionSq} and musics.music_sq = p.music_sq and musics.member_sq = m.member_sq
+	</select>
+	
+	<!-- 최우일 -->
+	<select id="selectMusicFootLoad" parameterType="int" resultMap="Playlist">
+		select m.music_sq, m.music_nm, m.album_sq, a.member_sq, member.nick, m.play_time
+		from music m, artist a, member
+		where m.music_sq = #{sq} and m.music_sq = a.music_sq and a.member_sq = member.member_sq
+	</select>
+	
+	<!-- 최우일 -->
+	<select id="selectMusicCookieList" parameterType="ArrayList" resultMap="Playlist">
+		select m.music_sq, m.music_nm, m.album_sq, a.member_sq, member.nick, m.play_time
+		from music m, artist a, member
+		where m.music_sq in
+			<foreach collection="list" item="sq" open="(" close=")" separator=",">
+				#{sq}
+			</foreach>
+		
+		and m.music_sq = a.music_sq and a.member_sq = member.member_sq
 	</select>
 </mapper>

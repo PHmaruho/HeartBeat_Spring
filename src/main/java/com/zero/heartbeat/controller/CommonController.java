@@ -50,25 +50,28 @@ public class CommonController {
 	
 	//JAN
 	@RequestMapping("/home")
-	public String home(Model model) {
+	public String MainList(Model model) {
 		logger.info("home start");
-		List<SearchList> list = null;
-		logger.info("home start");
-		list = commonService.mainList();
-		logger.info("home mainList size ->"+list.size());
-		model.addAttribute("list",list);
+		List<MainList> newList= new ArrayList<MainList>();
+		List<MainList> likeList= new ArrayList<MainList>();
+		int startNum=0;
+		newList=commonService.mainListNew(startNum);
+		likeList= commonService.mainListLike(startNum);
+		model.addAttribute("newList", newList);
+		model.addAttribute("likeList", likeList);
 		//model.addAttribute("kkk","100.png");
 		logger.info("home start mainList after");
 		return "common/home";
 	}
 	
 	//JAN
-		@RequestMapping("/arrive")
+		@RequestMapping("/arriveList")
 		public String arriveList(Album album, Model model) throws Exception {
-			List<Album> arriveList = commonService.selectAlbumArriveList(album);
+			List<MainList> arriveList= new ArrayList<MainList>();
+			int startNum=0;
+			arriveList=commonService.selectAlbumArriveList(startNum);
 			model.addAttribute("arriveList", arriveList);
-			logger.debug("인터셉터 테스트");
-			return "common/arrive";
+			return "common/arriveList";
 	}
 	
 	// JSY
@@ -101,4 +104,5 @@ public class CommonController {
 		
 		return "common/foot";
 	}
+	
 }

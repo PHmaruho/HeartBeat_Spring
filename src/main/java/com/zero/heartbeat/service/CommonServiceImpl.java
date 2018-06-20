@@ -3,6 +3,7 @@ package com.zero.heartbeat.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +38,7 @@ public class CommonServiceImpl implements CommonService {
 		list= commonDao.selectAlbumMainListLike(startNum);
 		logger.info("CommonServiceImpl selectAlbumMainList working");
 		return list;
-	}
+	}//JSY
 	public List<MainList> selectAlbumMainListNew(int startNum) {
 		List<MainList> list= new ArrayList<MainList>();
 		list= commonDao.selectAlbumMainListNew(startNum);
@@ -47,21 +48,44 @@ public class CommonServiceImpl implements CommonService {
 
 	// JAN
 	@Override
-	public List<Album> selectAlbumArriveList(Album album) {
+	public List<MainList> selectAlbumArriveList(int startNum) {
 		// TODO Auto-generated method stub
-		return commonDao.selectAlbumArriveList(album);
+		List<MainList> list= new ArrayList<MainList>();
+		list= commonDao.selectAlbumArriveList(startNum);
+		return list;
 	}
 
 	//JAN 메인 컨텐츠 목록
 	@Override
-	public List<SearchList> mainList() {
+	public List<MainList> mainListLike(int startNum) {
+		List<MainList> list= new ArrayList<MainList>();
+		list= commonDao.mainListLike(startNum);
 		logger.info("CommonServiceImpl mainList before");
-		return commonDao.mainList();
+		return list;
+	}
+	//JAN
+	public List<MainList> mainListNew(int startNum) {
+		List<MainList> list = new ArrayList<MainList>();
+		list= commonDao.mainListNew(startNum);
+		return list;
 	}
 
 	// 최우일
 	@Override
 	public List<Music> selectPlaylistFoot(int sessionSq) {
 		return commonDao.selectPlaylistFoot(sessionSq);
+	}
+	
+	// 최우일
+	@Override
+	public Music selectMusicFootLoad(int sq) {
+		return commonDao.selectMusicFootLoad(sq);
+	}
+	
+	// 최우일
+	@Override
+	public Map<String, Music> selectMusicCookieList(Map<String, Object> paramMap) {
+		// TODO Auto-generated method stub
+		return commonDao.selectMusicCookieList(paramMap);
 	}
 }

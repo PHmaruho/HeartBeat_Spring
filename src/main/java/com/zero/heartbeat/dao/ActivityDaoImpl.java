@@ -11,8 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.zero.heartbeat.model.MusicLike;
+import com.zero.heartbeat.model.SearchList;
 import com.zero.heartbeat.model.Tag;
+import com.zero.heartbeat.model.AllLikeList;
 import com.zero.heartbeat.model.Code;
+import com.zero.heartbeat.model.Follow;
 import com.zero.heartbeat.model.Member;
 import com.zero.heartbeat.model.Music;
 
@@ -55,7 +58,115 @@ public class ActivityDaoImpl implements ActivityDao {
 		// TODO Auto-generated method stub
 		return session.selectList("activity.likeList",member_sq);
 	}
+	
+	//JAN
+	@Override
+	public List<AllLikeList> selectAllLikeList(int id) {
+		// TODO Auto-generated method stub
+		logger.info("selectAllLikeList DaoImpl ");
+		return session.selectList("selectAllLikeList",id);
+	}
+	//JAN
+	@Override
+	public void clickUnlikeMusic(int unLike) {
+		// TODO Auto-generated method stub
+		session.update("clickUnlikeMusic",unLike);
+	}
+	//JAN
+	@Override
+	public void clickUnlikeAlbum(int unLike) {
+		// TODO Auto-generated method stub
+		session.update("clickUnlikeAlbum",unLike);
+	}
+	
+	//JAN
+	@Override
+	public List<AllLikeList> selectUnLikeList(int id) {
+		// TODO Auto-generated method stub
+		return session.selectList("selectUnLikeList",id);
+	}
+	//JAN
+	@Override
+	public void clickLikeAlbum(int likeAlbum, int id) {
+		// TODO Auto-generated method stub
+		Map<String , Object> map = new HashMap<String,Object>();
+		map.put("likeAlbum", likeAlbum);
+		map.put("id", id);
+		session.insert("clickLikeAlbum",map);
+	}
+	//JAN
+	@Override
+	public void clickLikeMusic(int likeMusic, int id) {
+		// TODO Auto-generated method stub
+		Map<String , Object> map = new HashMap<String,Object>();
+		map.put("likeMusic", likeMusic);
+		map.put("id", id);
+		session.insert("clickLikeMusic",map);
+	}
+	
+	//JAN
+	@Override
+	public void unLikeCancel(int unLikeCancel, String music_like_type) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("unLikeCancel", unLikeCancel);
+		map.put("music_like_type", music_like_type);
+		logger.info("unLike:"+map.get("unLikeCancel"));
+		session.update("unLikeCancel",map);
+	}
+	
+	//JAN
+	@Override
+	public List<Member> selectFollowing(int id) {
+		// TODO Auto-generated method stub
+		return session.selectList("selectFollowing",id);
+	}
+	//JAN
+	@Override
+	public List<Member> selectFollower(int id) {
+		// TODO Auto-generated method stub
+		return session.selectList("selectFollower",id);
+	}
+	
+	//JAN
+	@Override
+	public void follow(int mbsq, int ss) {
+		// TODO Auto-generated method stub
+		Follow following = new Follow();
+		
+		following.setTarget_sq(mbsq);
+		following.setMember_sq(ss);
+		
+		session.insert("follow",following);
+	}
+	
+	//JAN
+	@Override
+	public void unfollow(int memberSq, int targetSq) {
+		// TODO Auto-generated method stub
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("member_sq",memberSq);
+		map.put("target_sq", targetSq);
+		
+		session.delete("unfollow",map);
+	}
 
+	
+	
+	//JAN
+	@Override
+	public int followCheck(int mbsq, int ss) {
+		// TODO Auto-generated method stub
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("target_sq", mbsq);
+		map.put("me", ss);
+		
+		return session.selectOne("followCheck",map);
+	}
+
+	
+	
 	// PHmaruho
 	@Override
 	public List<Code> selectAlbumType() {
@@ -72,7 +183,7 @@ public class ActivityDaoImpl implements ActivityDao {
 	
 	// 최우일
 	@Override
-	public HashMap<String, Object> selectMusicDetail(int sq) {
+	public Music selectMusicDetail(int sq) {
 		return session.selectOne("selectMusicDetail", sq);
 	}
 
@@ -80,5 +191,23 @@ public class ActivityDaoImpl implements ActivityDao {
 	@Override
 	public List<Member> selectMusicArtists(int sq) {
 		return session.selectList("selectMusicArtists", sq);
+	}
+
+	// 최우일
+	@Override
+	public Map<Integer, HashMap<String, Object>> selectReplyAtMusic(int sq) {
+		return session.selectMap("selectReplyAtMusic", sq, "time_stamp");
+	}
+
+	// 최우일
+	@Override
+	public List<Music> selectMusicByArtist(int sq) {
+		return session.selectList("selectMusicByArtist", sq);
+	}
+
+	// 최우일
+	@Override
+	public Member selectMemberArtist(int sq) {
+		return session.selectOne("selectMemberArtistCwi", sq);
 	}
 }
