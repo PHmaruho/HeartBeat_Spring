@@ -35,11 +35,11 @@
 				</span>
 				<span id="footDuration" class="cwi-foot-current">0:00</span>
 				
-				<div class="cwi-foot-player-volume-contorl">
-					<span class="cwi-foot-player-volume-icon">
+				<div id="footVolumeLeave" class="cwi-foot-player-volume-contorl">
+					<span id="footVolumeEnter" class="cwi-foot-player-volume-icon">
 						<img src="${pageContext.request.contextPath }/resources/img/icon/volume-button-64.png">
 					</span>
-					<div class="cwi-foot-player-volume">
+					<div id="footVolumeDisplay" class="cwi-foot-player-volume cwi-foot-display-none">
 						<input id="footVoulume" type="range" min="0.0" max="1.0" step="0.01" value="0.5"
 							oninput="footPlayer.setVolume(this.value)" onchange="footPlayer.setVolume(this.value)">	
 					</div>
@@ -51,10 +51,10 @@
 				<table class="cwi-foot-player-info">
 					<tr>
 						<td rowspan="2"><span id="footImage"></span></td>
-						<td><span id="footArtists"></span></td>
+						<td><span id="footArtists" class="cwi-vertical-bottom"></span></td>
 					</tr>
 					<tr>
-						<td><span id="footTitle"></span></td>
+						<td><span id="footTitle" class="cwi-vertical-top"></span></td>
 					</tr>
 				</table>
 				

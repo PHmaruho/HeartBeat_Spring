@@ -59,10 +59,6 @@
 	text-align: right;
 }
 
-.cwi-detail-player-info td span {
-	margin: 10px 10px 10px 10px
-}
-
 .cwi-artist-info {
 	width: 70%;
 	position: relative;
@@ -216,7 +212,7 @@ input[type='range']::-webkit-slider-thumb {
 	min-width: 1050px;
 }
 
-a.cwi-cursor-pointer : hover {
+.cwi-cursor-pointer {
 	cursor: pointer;
 }
 
@@ -323,7 +319,9 @@ a.cwi-cursor-pointer : hover {
 	position: absolute;
 	right: 0px;
 	top: 10px;
-	
+	box-shadow: 0px 3px 2px gray;
+    border: 1px solid gray;
+    border-radius: 3px;
 }
 
 .cwi-foot-player-volume-icon {
@@ -332,29 +330,24 @@ a.cwi-cursor-pointer : hover {
 	left: 9px;
 }
 
-.container {
-  display: -webkit-flex;
-  display: flex;
-}
-.initial {
-  -webkit-flex: initial;
-          flex: initial;
-  width: 200px;
-  min-width: 100px;
-}
-.none {
--webkit-flex: none;
-flex: none;
-  width: 200px;
-}
-
-.flex1 {
--webkit-flex: 1;
-flex: 1;
-}
-
 .cwi-foot-current {
 	position: relative;
 	margin: 0 20px 0 20px;
 	margin-top: 14px;
+}
+
+.cwi-vertical-top {
+	vertical-align: top !important;
+}
+
+.cwi-vertical-bottom {
+	vertical-align: bottom !important;
+}
+
+.cwi-discover-td {
+	width: 33%;
+}
+
+.cwi-discover-radios {
+	
 }

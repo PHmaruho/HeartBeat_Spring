@@ -29,7 +29,7 @@
 							</span>
 						</td>
 						<td>
-							<span class="badge badge-dark cwi-detail-player-artist">
+							<span class="badge badge-dark cwi-detail-player-artist cwi-vertical-bottom">
 								<c:forEach var="artist" items="${music.artistList }" varStatus="artistStatus">
 									<a onclick="goto('/others/artist/${artist.member_sq}')" class="cwi-cursor-pointer">${artist.nick}</a>
 									<c:if test="${!artistStatus.last }">
@@ -40,7 +40,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td><span class="badge badge-dark cwi-artist-player-title">${music.music_nm }</span></td>
+						<td><span class="badge badge-dark cwi-artist-player-title cwi-vertical-top">${music.music_nm }</span></td>
 					</tr>
 				</table>
 				
