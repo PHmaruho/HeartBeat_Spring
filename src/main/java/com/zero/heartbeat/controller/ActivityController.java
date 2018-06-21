@@ -148,15 +148,16 @@ public class ActivityController {
 	public String followList(Model model, HttpSession httpSession) {
 		List<Member> following = new ArrayList<Member>();
 		List<Member> follower = new ArrayList<Member>();
-
+		
 
 		int id = Integer.parseInt((String) httpSession.getAttribute("loginSession"));
 		logger.info("id ~ : " + id);
 		
-		
+	
 		following = activityService.selectFollowing(id);
 		follower = activityService.selectFollower(id);
 		
+		logger.info("cntFollow 나오니?" + following.size());
 		
 		model.addAttribute("following",following);
 		model.addAttribute("follower",follower);

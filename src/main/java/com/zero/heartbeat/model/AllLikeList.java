@@ -12,6 +12,8 @@ public class AllLikeList {
 	private String code_meaning;
 	private int like_Count;
 	private int music_like_sq;
+	
+	
 	public int getCntFollow() {
 		return cntFollow;
 	}
