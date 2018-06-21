@@ -117,7 +117,7 @@
 		</c:if>
 	</div>
 	<br>
-	<c:if test="${empty loginSession }">
+<%-- 	<c:if test="${empty loginSession }">
 	<button data-toggle="modal" data-target="#myModal" id="modalBtnLogin">로그인</button>
 	<div id="myModal" class="modal fade" role="dialog">
 	  <div class="modal-dialog">
@@ -209,7 +209,7 @@
 		    </div>	
 		  </div>
 		</div>
-	</c:if>
+	</c:if> --%>
 <%-- 	${kkk}<p>
 	<img src="${pageContext.request.contextPath }/resources/img/album/${kkk}"> --%>
 <%-- <form name="like" method="post" action="${pageContext.request.contextPath }/my/likeTest">
