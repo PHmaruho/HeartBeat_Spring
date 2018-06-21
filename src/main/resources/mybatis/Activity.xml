@@ -159,7 +159,7 @@
 		SELECT  CHECKCNTFOLLOW_SQ(#{id},m.member_sq) as cntFollow
 		       ,a.album_sq, a.img_path, a.album_nm,  m.member_sq, m.nick,ml.music_like_sq
 		       , mu.music_sq, c.code_meaning
-		       ,ALBUM_COUNT(mu.music_sq) as like_count
+		       ,MUSIC_COUNT(mu.music_sq) as like_count
 		From code c, album a, member m, music_like ml, FOLLOW f, music mu
 		Where c.code_meaning='곡'
 		AND ml.member_sq=#{id}
@@ -188,7 +188,7 @@
 		SELECT  CHECKCNTFOLLOW_SQ(#{id},m.member_sq) as cntFollow
 		       ,a.album_sq, a.img_path, a.album_nm,  m.member_sq, m.nick,ml.music_like_sq
 		       , mu.music_sq, c.code_meaning
-		       ,ALBUM_COUNT(mu.music_sq) as like_count
+		       ,MUSIC_COUNT(mu.music_sq) as like_count
 		From code c, album a, member m, music_like ml, FOLLOW f, music mu
 		Where c.code_meaning='언라이크곡'
 		AND ml.member_sq=#{id}
@@ -201,7 +201,7 @@
 	
 	<!-- JAN 팔로잉 내가 팔로우 하는 사람 목록 -->
 	<select id="selectFollowing" resultType="Member" parameterType="int">
-		select m.member_sq, m.nick
+		select m.member_sq, m.nick, CHECKCNTFOLLOW_SQ(#{id},m.member_sq) cntFollow
 	    from follow f, member m
 	    where f.target_sq = m.member_sq
 	    and
@@ -212,7 +212,7 @@
 	
 	<!-- JAN  팔로워  나를 팔로우 하는사람 -->
 	<select id="selectFollower" resultType="Member" parameterType="int">
-		select m.member_sq, m.nick
+		select m.member_sq, m.nick, CHECKCNTFOLLOW_SQ(#{id},m.member_sq) cntFollow
 	    from member m, follow f
 	    where f.target_sq = #{id}
 	    and m.member_sq = f.member_sq
@@ -259,12 +259,78 @@
 		WHERE CODE_CATEGORY = 'AT'
 	</select>
 	
+	<!-- PHmaruho -->
 	<select id="selectMusicTag" resultType="Tag">
 		select *
 		from tag
 		start with TAG_CATEGORY is null
 		CONNECT BY PRIOR TAG_CD = TAG_CATEGORY
 	</select>
+	
+	<!-- PHmaruho -->
+	<insert id="insertAlbum" parameterType="Album">
+		INSERT INTO album
+		VALUES (
+			ALBUM_SQ.NEXTVAL,
+			#{album_nm},
+			0,
+			#{member_sq},
+			#{album_comment},
+			SYSDATE,
+			ALBUM_SQ.CURRVAL,
+			#{open_yn},
+			#{album_type})
+	</insert>
+	
+	<!-- PHmaruho -->
+	<select id="selectAlbumSeq" parameterType="int" resultType="int">
+		SELECT MAX(album_sq)
+		FROM album
+		WHERE member_sq = #{member_sq}
+	</select>
+	
+	<!-- PHmaruho -->
+	<insert id="insertAlbumMusic" parameterType="Music">
+		INSERT INTO music
+		VALUES(
+			MUSIC_SQ.NEXTVAL,
+			#{album_sq},
+			#{music_no},
+			#{music_nm},
+			#{play_time},
+			null,
+			#{music_comment},
+			0,0,
+			#{open_yn}
+		)
+	</insert>
+	
+	<!-- PHmaruho -->
+	<select id="selectAlbumMusicSeq" parameterType="int" resultType="int">
+		SELECT music_sq
+		FROM music
+		WHERE album_sq = #{album_sq}
+	</select>
+	
+	<!-- PHmaruho -->
+	<insert id="insertArtistList" parameterType="Artist">
+		INSERT INTO artist
+		VALUES(
+			ARTIST_SQ.NEXTVAL,
+			#{music_sq},
+			#{member_sq}
+		)
+	</insert>
+	
+	<!-- PHmaruho -->
+	<insert id="insertMusicTagList" parameterType="MusicTag">
+		INSERT INTO music_tag
+		VALUES(
+			MUSIC_TAG_SQ.NEXTVAL,
+			#{music_sq},
+			#{tag_cd}
+		)
+	</insert>
 	
 	<!-- 최우일 -->
 	<select id="selectMusicDetail" parameterType="int" resultMap="musicMap">

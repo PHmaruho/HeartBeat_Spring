@@ -5,8 +5,8 @@
 <script src="${pageContext.request.contextPath }/resources/js/drag-arrange.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-ui.js"></script>
 <!-- custom -->
-<link href="${pageContext.request.contextPath }/resources/css/ph/uploadAlbum.css?test=3" rel="stylesheet" type="text/css">
-<script src="${pageContext.request.contextPath }/resources/js/ph/uploadAlbum.js?test=3"></script>
+<link href="${pageContext.request.contextPath }/resources/css/ph/uploadAlbum.css?test=11" rel="stylesheet" type="text/css">
+<script src="${pageContext.request.contextPath }/resources/js/ph/uploadAlbum.js?test=11"></script>
 
 </head>
 <body>
@@ -15,28 +15,29 @@
 			<input type="button" value="업로드" onclick="" class="btn">
 			<input type="button" value="업로드리스트" onclick="" class="btn">
 			<input type="button" value="수정/삭제" onclick="" class="btn">
+			<input type="hidden" value="${pageContext.request.contextPath }">
 		</div>
 	</div>
 		<br />
 	<div class="ph-album" style="border:1px solid;">
-	<form action="album/pro" name="album_upload" method="post" enctype="multipart/form-data">
+	<form action="album/pro" name="album_upload" method="post" enctype="multipart/form-data" onsubmit="return before_upload();">
 		<div class="ph-album-edit" style="border:1px solid;">
 			<table border="1">
 				<tr>
 					<td colspan="2">
-						<img alt="Album_Image" src="" id="album_img" name="img_path" class="ph-album-img-thumbnail">
+						<img alt="Album_Image" src="${pageContext.request.contextPath }/resources/img/album/default_album_cover.png" id="album_img" name="img_path" class="ph-album-img-thumbnail">
 					</td>
 				</tr>
 				<tr>
 					<td colspan="2">
-						<input type="file" name="img_path" class="ph-album-img-up-btn" id="uploadAlbumImg" onchange="getAlbumPreview(this)">
+						<input type="file" name="album_img" class="ph-album-img-up-btn" id="uploadAlbumImg" onchange="getAlbumPreview(this)" accept=".png">
 						<input type="button" class="ph-album-img-del-btn" value="삭제" onclick="" id="deleteAlbumImg">
 					</td>
 				</tr>
 				<tr>
 					<td>앨범명</td>
 					<td>
-						<input type="text" name="album_nm" class="ph-album-nm">
+						<input type="text" name="album_nm" class="ph-album-nm" required="required">
 					</td>
 				</tr>
 				<tr>
@@ -50,7 +51,7 @@
 					<td>
 						<label></label>
 						<select name="title_music_sq" id="title_music_sq">
-							
+							<option value="1">1번</option>
 						</select>
 					</td>
 				</tr>
@@ -85,14 +86,14 @@
 							</td>
 							<td colspan="2">
 								곡제목:
-									<input type="text" name="music_nm" class="ph-music-nm">
+									<input type="text" name="music_nm" class="ph-music-nm" required="required">
 							</td>
 							<td rowspan="6" class="ph-music-button">
 								<input type="button" value="삭제" class="ph-music-delete" onclick="removeMusic(this)">
 								<span class="ph-music-move">이동</span>
 								<input type="button" value="축소" class="ph-music-extend" onclick="musicFix(this)">
 
-								<input type="hidden" name="music_no" value="1" class="ph-music-no">
+								<input type="hidden" name="music_no" value="1" class="ph-music-no" id="music_no">
 								<input type="hidden" name="artist" value="" class="ph-artist-list">
 								<input type="hidden" name="music_tag" value="" class="ph-tag-list">
 								<input type="hidden" name="play_time" value="0" id="play_time" class="play_time">
@@ -134,7 +135,7 @@
 							</td>
 							<td>
 								<div class="file_selected">
-								 	<input type="text" name="file_select_name" id="file_select_name" size="10" class="file_select_name" disabled="disabled">
+								 	<input type="text" name="file_select_name" id="file_select_name" size="10" class="file_select_name" disabled="disabled" required="required">
 								 	<input type="file" name="file" class="ph-file-form" style="display: none;" accept=".mp3" onchange="fileChange(event, this)">
 							 	</div>
 							 	<div class="ph-file-player">

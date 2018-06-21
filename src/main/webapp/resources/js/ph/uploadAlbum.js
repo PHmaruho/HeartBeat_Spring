@@ -15,6 +15,7 @@
 	});
 	$( function() {
 	    $("#itemList").sortable({
+	    	axis:'y',
 	    	update: function(event, ui){
 	    		var list = $('.ph-music-no');
 	    		var list2 = $('.ph-music-order');
@@ -25,22 +26,51 @@
 	    			list2.eq(i).html((i++)+1);
 	    		});
 	    	},
+	    	helper: function(event, ui){
+	    		ui.children().each(function(){
+	    			$(this).width($(this).width());
+	    		});
+	    		return ui;
+	    	},
 	    	handle: ".ph-music-move"
-	    });
-	    $("#itemList").disableSelection();
+	    }).disableSelection();
+//	    $('#itemList li').draggable({
+//	        connectToSortable: '#itemList',
+//	        helper : 'original',
+//	        revert : 'invalid',
+//	        start  : function(event, ui){
+//	            $(ui.helper).addClass("musicItem");
+//	        }
+//	    });
 	});
 	
+	// 앨범 이미지 보기
 	function getAlbumPreview(input) {
 	    if (input.files && input.files[0]) {
-	        var reader = new FileReader();
+	    	if(input.files[0].type.indexOf("png") == -1){
+	    		alert("파일 형식을 확인해 주세요(png)");
+	    		let file = $(input);
+	    		file.val('');
+	    		
+	    		var reader = new FileReader();
+		        reader.onload = function (e) {
+			            var element = window.document.getElementById("album_img");
+			            element.setAttribute("src", "/heartbeat/resources/img/album/default_album_cover.png");
+		        	}
+		        reader.readAsDataURL(file[0].files[0]);
+	    		return;
+	    	}
+	    	var reader = new FileReader();
 	        reader.onload = function (e) {
 		            var element = window.document.getElementById("album_img");
 		            element.setAttribute("src", e.target.result);
 	        	}
-	        reader.readAsDataURL(input.files[0]);
+	        reader.readAsDataURL(input.files[0]);	    	
+	       
 	    }
 	}
 
+	// 음악 리스트 추가하기
 	function addList(){
 		var allItems = 0;
 		var musicItem = $('.musicItem');
@@ -72,7 +102,7 @@
 			+"<input type='hidden' name='artist' value='' class='ph-artist-list'>"
 			+"<input type='hidden' name='music_tag' value='' class='ph-tag-list'>"
 			+"<input type='hidden' name='play_time' value='0' id='play_time' class='play_time'>"
-			+"<input type='hidden' value='1' class='ph-music-toggle-check'></td></tr>"
+			+"<input type='hidden' value='0' class='ph-music-toggle-check'></td></tr>"
 			+"<tr class='ph-tr-2'><td class='ph-td-1'>가수:"
 			+"<input type='text' class='ph-search-artist-txt' size='10' placeholder='Nick or Email' onclick='searchArtist(event, this)' oninput='searchArtist(event, this)' onkeydown='searchArtist_key(event, this)'>"
 			+"<div class='ph-artist-ajax-selected'></div></td>"
@@ -95,6 +125,8 @@
 			+"<tr class='ph-tr-6'><td colspan='2'>공개여부:"
 			+"<select name='music_open_yn'><option value='Y'>Y</option><option value='N'>N</option></select></td></tr></table></li>";
 		item.append(str);
+		
+		toggleFn(allItems, 1, 1, "none");
 		
 		var title = $('#title_music_sq');
 		var title_str = "";
@@ -237,6 +269,11 @@
 				}
 				text.eq(index_i).text("");
 				text.eq(index_i).text(list.eq(index_j));
+			}
+		} else if(e.keyCode == 13){
+			alert("enter");
+			if(index_j >= 0){
+				selectedArtist(list.eq(index_j));
 			}
 		}
 	}
@@ -488,6 +525,32 @@
 		let real_file = e.target.files;
 
 		audio.find('#source').attr("src", URL.createObjectURL(files[0]));
+	}
+	
+	// onsubmit
+	function before_upload(){
+		let file_list = $('.ph-file-form');
+		let artist_list = $('.ph-search-artist-ul');
+		let val = true;
+		
+		file_list.each(function(){
+			if($(this).val() == ''){
+				alert("파일을 추가해 주세요.");
+				val = false;
+			}
+		});
+		if(val == false){
+			return val;
+		}
+		
+		artist_list.each(function(){
+			if($(this).html().trim().length == 0){
+				alert("아티스트를 추가해 주세요.")
+				val = false;
+			}
+		})
+		
+		return val;
 	}
 
 	// modules

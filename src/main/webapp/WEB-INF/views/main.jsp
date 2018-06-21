@@ -5,6 +5,8 @@
 <html>
 <head>
 <title>Heart Beat</title>
+<link href="${pageContext.request.contextPath }/resources/css/csshake.css?v=<%=System.currentTimeMillis() %>" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/cwi.css?v=<%=System.currentTimeMillis() %>" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/bootstrap.css?v=<%=System.currentTimeMillis() %>" rel="stylesheet" type="text/css">
 <script src="${pageContext.request.contextPath }/resources/js/jquery.3.3.1.js?v=<%=System.currentTimeMillis() %>"></script>
 <script src="${pageContext.request.contextPath }/resources/js/wavesurfer.js?v=<%=System.currentTimeMillis() %>"></script>
@@ -33,7 +35,7 @@
 	}
 	
 	.footDiv {
-		height: 80px;
+		height: 50px;
 		width: 100%;
 		position: fixed;
 		bottom: 0px;

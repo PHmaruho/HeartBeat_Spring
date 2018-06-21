@@ -10,6 +10,7 @@ public class Member {
 	private String		status;
 	private Date		pw_dt;
 	private Date		reg_dt;
+	private int			cntFollow;
 	
 	public int getMember_sq() {
 		return member_sq;
@@ -52,5 +53,11 @@ public class Member {
 	}
 	public void setReg_dt(Date reg_dt) {
 		this.reg_dt = reg_dt;
+	}
+	public int getCntFollow() {
+		return cntFollow;
+	}
+	public void setCntFollow(int cntFollow) {
+		this.cntFollow = cntFollow;
 	}
 }

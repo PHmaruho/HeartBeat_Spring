@@ -4,12 +4,20 @@ import java.util.List;
 import java.util.Map;
 
 import com.zero.heartbeat.model.MusicLike;
+import com.zero.heartbeat.model.MusicTag;
+import com.zero.heartbeat.model.Tag;
+
+import scala.collection.generic.BitOperations.Int;
+
+import com.zero.heartbeat.model.Album;
+import com.zero.heartbeat.model.Artist;
 import com.zero.heartbeat.model.SearchList;
 import com.zero.heartbeat.model.Tag;
 import com.zero.heartbeat.model.AllLikeList;
 import com.zero.heartbeat.model.Code;
 import com.zero.heartbeat.model.Member;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.zero.heartbeat.model.Music;
@@ -39,6 +47,14 @@ public interface ActivityDao {
 	// PHmaruho
 	public List<Code> selectAlbumType();
 	public List<Tag> searchTag();
+	public int uploadAlbumPro_album(Album albumDto);
+	public int selectAlbumSeq(int member_sq);
+	public Boolean uploadMusicPro(Music musicDto);
+	public List<Integer> selectMusicSeq(int album_sq);
+	public Boolean insertArtistList(Artist artistDto);
+	public Boolean insertMusicTagList(MusicTag musicTagDto);
+	public void updateAlbumTitleMusic(int music_sq);
+	public int selectOneMusicSeq(int album_sq);
 	
 	
 	Music selectMusicDetail(int sq);	// 최우일

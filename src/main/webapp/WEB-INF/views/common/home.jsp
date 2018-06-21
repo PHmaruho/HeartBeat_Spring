@@ -7,6 +7,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jsy.js"></script>
 <link href="${pageContext.request.contextPath }/resources/css/jsy/search.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Slabo+27px" rel="stylesheet">
 <script type="text/javascript">
 
 /* window.onfocus=function(){
@@ -38,7 +39,7 @@
 
 
 .contents {
- 	margin-bottom : 25%;
+ 	margin-bottom : 3%;
  	
 }
 
@@ -58,7 +59,7 @@
 	padding: 0;
 	border-style: none;
 	width: 100%;
-	height: 200px;
+	height: auto;
 	
 }
 .glul li {
@@ -99,6 +100,7 @@
 #modalBtnLogin{
 	display:none;
 }
+
 </style>
 </head>
 <body>
@@ -115,7 +117,7 @@
 		</c:if>
 	</div>
 	<br>
-	<c:if test="${empty loginSession }">
+<%-- 	<c:if test="${empty loginSession }">
 	<button data-toggle="modal" data-target="#myModal" id="modalBtnLogin">로그인</button>
 	<div id="myModal" class="modal fade" role="dialog">
 	  <div class="modal-dialog">
@@ -207,7 +209,7 @@
 		    </div>	
 		  </div>
 		</div>
-	</c:if>
+	</c:if> --%>
 <%-- 	${kkk}<p>
 	<img src="${pageContext.request.contextPath }/resources/img/album/${kkk}"> --%>
 <%-- <form name="like" method="post" action="${pageContext.request.contextPath }/my/likeTest">
@@ -235,9 +237,9 @@
 	<div id="slider">
 	<!-- <h2> Main List Testing</h2> -->
 		<img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner4.jpg" class="bannerimg" id="slide">
-		<img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner1.jpg" class="bannerimg" >
+		<%-- <img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner1.jpg" class="bannerimg" >
 		<img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner2.jpg" class="bannerimg" >
-		<img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner3.jpg" class="bannerimg" >
+		<img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner3.jpg" class="bannerimg" > --%>
 	</div>
 	</div> 
 
@@ -248,19 +250,31 @@
 	<ul class="glul">
 		<c:forEach var="album" items="${newList}" varStatus="i">
 			<li>
+			<div id="popAlbum${i.index }">
+			<div class="likeAlbum">
 			<a href="goto('/others/music/${album.music_sq}')">
 				<input type="hidden" id="music_sq${i.index }" value="${album.music_sq}">
-			<img src="resources/img/album/${album.img_path }.jpg" class="albumImg" ></a>
+			<img src="${pageContext.request.contextPath }/resources/img/album/${album.img_path }.jpg" class="albumImg" ></a>
 				<br>
 				<br>
-				${album.music_sq}<br>
-				${album.album_sq}
-				<br>
+				<c:if test="${album.music_like_type == null }">
 				<a href="#">
-					<img src="${pageContext.request.contextPath }/resources/img/profile/dislike.png" class="glul-img" onclick="likeAlbum(${album.album_sq}, 704)">
+					<img src="${pageContext.request.contextPath }/resources/img/profile/dislike.png" class="glul-img" onclick="likeAlbum(${album.album_sq},${loginSession },'popAlbum${i.index }')">
 				</a>
-				${album.album_nm }<br>
-				${album.nick }<br>
+				</c:if>
+				<c:if test="${album.code_meaning == '앨범' }">
+					<a href="#">
+						<img src="${pageContext.request.contextPath }/resources/img/profile/like.png" class="glul-img" onclick="like_func(${like.music_like_sq},'${like.code_meaning }','likeList${i.index }')">
+					</a>
+				</c:if>
+							
+					<br>
+					${album.album_nm }<br>
+					<a href="/heartbeat/others/artist/${album.member_sq}">
+					${album.nick }
+					</a><br>
+				</div>
+				</div>
 			</li>
 					<%-- <tr>
 						<input type="button" value="공유" onclick="mainListShare(${i.index})"></td>
@@ -268,7 +282,7 @@
 		</c:forEach>
 	</ul>
 </div>
-		<Br><Br>
+
 <div class="contents">
 	<h2 style="text-align:center;" class="subTitle">Popular List</h2>
 	<br><br>

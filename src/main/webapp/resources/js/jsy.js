@@ -105,11 +105,11 @@ function searchKeywordUsers(){
 			//alert('v: '+v);
 			if(res==0){
 				//alert('else');
-					var str="<li class='keyword-tag-added'>"
-						+det
-						+"<input type='button' class='deleteTag' onclick='deleteKeywordTag(this)' value='x'>"
-						+"<input type='hidden' value='"+e+"' class='addTag-hidden'>"
-						+"</li>";
+				var str="<li class='keyword-tag-added'>"	// cwi
+					+"<span class='badge badge-pill badge-secondary shake-opacity' onclick='deleteKeywordTag(this)'>"
+					+det
+					+"<input type='hidden' value='"+e+"' class='addTag-hidden'>"
+					+"</span></li>";
 						
 				$('.keyword-tag').append(str);
 				if(len==0) 	$('#tag').val($('#tag').val()+''+e+'');
@@ -135,11 +135,11 @@ function searchKeywordUsers(){
 			//alert('v: '+v);
 			if(res==0){
 				//alert('else');
-				var str="<li class='keyword-artist-added'>"
-						+det
-						+"<input type='button' class='deleteArtist' onclick='deleteKeywordArtist(this)' value='x'>"
-						+"<input type='hidden' value='"+e+"' class='addArtist-hidden'>"
-						+"</li>";
+				var str="<li class='keyword-artist-added'>"	// cwi
+					+"<span class='badge badge-pill badge-secondary shake-opacity' onclick='deleteKeywordArtist(this)'>"
+					+det
+					+"<input type='hidden' value='"+e+"' class='addArtist-hidden'>"
+					+"</span></li>";
 						
 				$('.keyword-artist').append(str);
 				if(len==0) 	$('#artist').val($('#artist').val()+''+e+'');
@@ -165,11 +165,11 @@ function searchKeywordUsers(){
 			//alert('v: '+v);
 			if(res==0){
 				//alert('else');
-				var str="<li class='keyword-title-added'>"
+				var str="<li class='keyword-title-added'>"	// cwi
+						+"<span class='badge badge-pill badge-secondary shake-opacity' onclick='deleteKeywordTitle(this)'>"
 						+det
-						+"<input type='button' class='deleteTitle' onclick='deleteKeywordTitle(this)' value='x'>"
 						+"<input type='hidden' value='"+e+"' class='addTitle-hidden'>"
-						+"</li>";
+						+"</span></li>";
 						
 				$('.keyword-title').append(str);
 				

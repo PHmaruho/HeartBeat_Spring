@@ -370,3 +370,11 @@ function pauseDisplayButton() {
 	$('#detailPauseBtn' + musicMain.getDetailNum()).addClass('cwi-foot-display-none');
 	$('#detailRotateBtn' + musicMain.getDetailNum()).removeClass('cwi-detail-rotate');
 }
+
+$('#footVolumeEnter').on('mouseenter', function() {
+	$('#footVolumeDisplay').removeClass('cwi-foot-display-none');
+});
+
+$('#footVolumeLeave').on('mouseleave', function() {
+	$('#footVolumeDisplay').addClass('cwi-foot-display-none');
+});

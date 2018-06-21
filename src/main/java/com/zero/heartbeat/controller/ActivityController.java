@@ -45,7 +45,6 @@ public class ActivityController {
 	// uploadForm
 	@RequestMapping(value="/upload")
 	public String upload(Model model) {
-		
 		return "activity/my/upload";
 	}
 	
@@ -54,8 +53,6 @@ public class ActivityController {
 	public String uploadAlbum(Model model) {
 		List<Code> type = activityService.selectAlbumType();
 		List<Tag> tag = activityService.searchTag();
-		
-		logger.info(tag + "");
 		
 		model.addAttribute("album_type", type);
 		model.addAttribute("music_tag", tag);
@@ -66,21 +63,11 @@ public class ActivityController {
 	@RequestMapping(value="/upload/album/pro")
 	public String uploadAlbumPro(Model model, HttpServletRequest request,
 									MultipartHttpServletRequest mhsr) {
-		
-	
-		activityService.uploadAlbumPro(mhsr, request);
-		
-		
-//		try {
-//			File dir = new File(savePath);
-//			if(!dir.isDirectory()) {
-//				dir.mkdir();
-//			}
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//			logger.debug("없다규!@@@@@@ " + savePath);
-//		}
-		return "activity/my/uploadAlbum";
+		Boolean judge = activityService.uploadAlbumPro(mhsr, request);
+		if(!judge) {
+			
+		}
+		return "forward:/upload/album";
 	}
 
 	// uploadMusic
@@ -88,6 +75,15 @@ public class ActivityController {
 	public String uploadMusic(Model model) {
 		
 		return "activity/my/uploadMusic";
+	}
+	public String uploadMusicPro(Model model, HttpServletRequest request,
+									MultipartHttpServletRequest mhsr) {
+		Boolean judge = activityService.uploadMusicPro(mhsr, request);
+		if(!judge) {
+			
+		}
+		
+		return "forward:/upload/music";
 	}
 	
 	// 최우일
@@ -148,15 +144,16 @@ public class ActivityController {
 	public String followList(Model model, HttpSession httpSession) {
 		List<Member> following = new ArrayList<Member>();
 		List<Member> follower = new ArrayList<Member>();
-
+		
 
 		int id = Integer.parseInt((String) httpSession.getAttribute("loginSession"));
 		logger.info("id ~ : " + id);
 		
-		
+	
 		following = activityService.selectFollowing(id);
 		follower = activityService.selectFollower(id);
 		
+		logger.info("cntFollow 나오니?" + following.size());
 		
 		model.addAttribute("following",following);
 		model.addAttribute("follower",follower);

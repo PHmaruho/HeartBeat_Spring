@@ -12,6 +12,7 @@ public class MainList {
 	private int music_sq;
 	private String music_nm;
 	private int music_like;
+	private String code_meaning;
 	
 	
 	public int getRn() {
@@ -79,6 +80,12 @@ public class MainList {
 	}
 	public void setMusic_like(int music_like) {
 		this.music_like = music_like;
+	}
+	public String getCode_meaning() {
+		return code_meaning;
+	}
+	public void setCode_meaning(String code_meaning) {
+		this.code_meaning = code_meaning;
 	}
 	
 	
