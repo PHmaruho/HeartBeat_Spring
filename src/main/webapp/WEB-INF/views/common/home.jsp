@@ -23,15 +23,15 @@
 		<c:if test="${!empty loginSession }">
 <!-- 			<button onclick="goto('/logout')">logout</button>
 			<button onclick="goto('/memberInfoChangeForm')">개인정보수정</button> -->
-			<button onclick="goto('/my/followList')">FollowList</button>
-			<button onclick="goto('/my/likeTest')">내가좋아하는게뭐게</button>
+			<button onclick="goto('/my/follow')">FollowList</button>
+			<button onclick="goto('/my/like')">내가좋아하는게뭐게</button>
 			<!-- <button onclick="goto('/arrive')" >최신음악</button> -->
 			<button onclick="getMemberAlarmList();" class="alarm">알람</button>
 			<div id="alarmContent" class="alarmContent"></div>
 		</c:if>
 	</div>
 	<br>
-	<c:if test="${empty loginSession }">
+<%-- 	<c:if test="${empty loginSession }">
 	<button data-toggle="modal" data-target="#myModal" id="modalBtnLogin">로그인</button>
 	<div id="myModal" class="modal fade" role="dialog">
 	  <div class="modal-dialog">
@@ -123,7 +123,7 @@
 		    </div>	
 		  </div>
 		</div>
-	</c:if>
+	</c:if> --%>
 <%-- 	${kkk}<p>
 	<img src="${pageContext.request.contextPath }/resources/img/album/${kkk}"> --%>
 <%-- <form name="like" method="post" action="${pageContext.request.contextPath }/my/likeTest">
