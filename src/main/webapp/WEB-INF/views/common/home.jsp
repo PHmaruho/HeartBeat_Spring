@@ -125,7 +125,7 @@
 	<ul class="glul">
 		<c:forEach var="album" items="${list }"  varStatus="i">
 			<li>
-				<img src="${pageContext.request.contextPath }/resources/img/album/${home.img_path}.jpg"  id="mainList">
+				<img src="${pageContext.request.contextPath }/resources/img/album/${home.img_path}.png"  id="mainList">
 				<p align="center">
 				${home.album_nm }
 			<br>
@@ -144,10 +144,10 @@
 	<div class="banner" id="sliderFrame">
 	<div id="slider">
 	<!-- <h2> Main List Testing</h2> -->
-		<img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner4.jpg" class="bannerimg" id="slide">
-		<%-- <img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner1.jpg" class="bannerimg" >
-		<img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner2.jpg" class="bannerimg" >
-		<img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner3.jpg" class="bannerimg" > --%>
+		<img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner4.png" class="bannerimg" id="slide">
+		<%-- <img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner1.png" class="bannerimg" >
+		<img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner2.png" class="bannerimg" >
+		<img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner3.png" class="bannerimg" > --%>
 	</div>
 	</div> 
 
@@ -160,25 +160,25 @@
 			<li>
 			<div id="popAlbum${i.index }">
 			<div class="likeAlbum">
-			<a href="goto('/others/music/${album.music_sq}')">
+			<a onclick="goto('/others/music/${album.music_sq}')">
 				<input type="hidden" id="music_sq${i.index }" value="${album.music_sq}">
-			<img src="${pageContext.request.contextPath }/resources/img/album/${album.img_path }.jpg" class="albumImg" ></a>
+			<img src="${pageContext.request.contextPath }/resources/img/album/${album.img_path }.png" class="albumImg" ></a>
 				<br>
 				<br>
 				<c:if test="${album.music_like_type == null }">
-				<a href="#">
+				<a>
 					<img src="${pageContext.request.contextPath }/resources/img/profile/dislike.png" class="glul-img" onclick="likeAlbum(${album.album_sq},${loginSession },'popAlbum${i.index }')">
 				</a>
 				</c:if>
 				<c:if test="${album.code_meaning == '앨범' }">
-					<a href="#">
+					<a>
 						<img src="${pageContext.request.contextPath }/resources/img/profile/like.png" class="glul-img" onclick="like_func(${like.music_like_sq},'${like.code_meaning }','likeList${i.index }')">
 					</a>
 				</c:if>
 							
 					<br>
 					${album.album_nm }<br>
-					<a href="/heartbeat/others/artist/${album.member_sq}">
+					<a onclick="goto('/heartbeat/others/artist/${album.member_sq}')">
 					${album.nick }
 					</a><br>
 				</div>
@@ -197,9 +197,9 @@
 		<ul class="glul">
 			<c:forEach var="album" items="${likeList }" varStatus="i">
 				<li>
-					<a href="/others/music/${album.music_sq}">
+					<a onclick="goto('/others/music/${album.music_sq}')">
 					<input type="hidden" id="music_sq${i.index }" name="music_sq${i.index }" value="${album.music_sq}">
-					<img src="resources/${album.img_path }.jpg" class="albumImg"></a><br>
+					<img src="resources/${album.img_path }.png" class="albumImg"></a><br>
 					<br>
 					${album.album_nm }<br>
 					${album.nick }<br>
