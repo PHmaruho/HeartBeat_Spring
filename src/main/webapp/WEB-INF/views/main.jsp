@@ -107,7 +107,7 @@ $(document).ready(function(){
 					</tr>
 					<tr>
 						<td colspan="2"><input type="button" value="로그인" onclick="kkhcheck()">
-						<input type="button" value="취소" onclick="location.href='/heartbeat'">
+						<input type="button" value="취소" data-dismiss='modal'>
 						</td>
 					</tr>
 				</table>
@@ -156,7 +156,7 @@ $(document).ready(function(){
 						<tr>
 							<td colspan="2">
 								<input type="button" id="join_btn" value="회원가입" onclick="kkhjoin()">
-								<input type="button" value="취소" onclick="location.href='/heartbeat'"> 
+								<input type="button" value="취소" data-dismiss='modal'>
 							</td>
 						</tr>
 					</table>

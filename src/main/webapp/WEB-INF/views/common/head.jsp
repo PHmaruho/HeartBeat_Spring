@@ -63,7 +63,7 @@ function modaljoinBtn(){
 </head>
 <body>
 	<c:if test="${!empty loginSession }">
-		<button onclick="goto('/logout');goto('/head')">logout</button>
+		<button onclick="goto('/logout');goto('/head');goto('/')">logout</button>
 		<button onclick="goto('/memberInfoChangeForm')">개인정보수정</button>
 	</c:if>
 	<c:if test="${empty loginSession }">
