@@ -232,9 +232,12 @@ public class ActivityDaoImpl implements ActivityDao {
 	}
 	
 	@Override
-	public void updateAlbumTitleMusic(int music_sq) {
+	public void updateAlbumTitleMusic(int music_sq, int img_seq) {
 		// TODO Auto-generated method stub
-		session.update("updateAlbumTitleMusic", music_sq);
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("music_sq", music_sq);
+		map.put("album_sq", img_seq);
+		session.update("updateAlbumTitleMusic", map);
 	}
 	
 	@Override

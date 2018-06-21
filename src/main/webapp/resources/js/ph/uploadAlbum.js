@@ -130,8 +130,8 @@
 		
 		var title = $('#title_music_sq');
 		var title_str = "";
-		for(var i=1 ; i<=allItems+1 ; i++){
-			title_str += "<option value='" + (i) +"'>" + (i) + "번 </option>";
+		for(var i=0 ; i<allItems+1 ; i++){
+			title_str += "<option value='" + (i) +"'>" + (i+1) + "번 </option>";
 		}
 		title.html(title_str);
 	}
@@ -181,9 +181,9 @@
     		list.each(function(i, obj){
     			$(this).val(i+1);
     			list2.eq(i).html("");
-    			list2.eq(i).html((i++)+1);
+    			list2.eq(i).html(i+1);
     			
-    			title_str += "<option value='" + (i) +"'>" + (i) + "번 </option>";
+    			title_str += "<option value='" + (i) +"'>" + (i+1) + "번 </option>";
     		});
     		
     		title.html(title_str);
@@ -531,6 +531,7 @@
 	function before_upload(){
 		let file_list = $('.ph-file-form');
 		let artist_list = $('.ph-search-artist-ul');
+		let tag_list = $('.ph-search-tag-ul');
 		let val = true;
 		
 		file_list.each(function(){
@@ -547,6 +548,12 @@
 			if($(this).html().trim().length == 0){
 				alert("아티스트를 추가해 주세요.")
 				val = false;
+			}
+		});
+		
+		tag_list.each(function(){
+			if($(this).html().trim().length == 0){
+				
 			}
 		})
 		

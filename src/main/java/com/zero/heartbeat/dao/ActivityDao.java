@@ -53,7 +53,7 @@ public interface ActivityDao {
 	public List<Integer> selectMusicSeq(int album_sq);
 	public Boolean insertArtistList(Artist artistDto);
 	public Boolean insertMusicTagList(MusicTag musicTagDto);
-	public void updateAlbumTitleMusic(int music_sq);
+	public void updateAlbumTitleMusic(int music_sq, int img_seq);
 	public int selectOneMusicSeq(int album_sq);
 	
 	
