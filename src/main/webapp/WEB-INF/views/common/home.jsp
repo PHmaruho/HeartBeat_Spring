@@ -105,7 +105,6 @@
 </head>
 <body>
 	<div class="menuButton">
-		<button onclick="goto('/discover')">검색</button>	
 		<c:if test="${!empty loginSession }">
 			<button onclick="goto('/logout')">logout</button>
 			<button onclick="goto('/memberInfoChangeForm')">개인정보수정</button>
@@ -257,17 +256,8 @@
 			<img src="${pageContext.request.contextPath }/resources/img/album/${album.img_path }.jpg" class="albumImg" ></a>
 				<br>
 				<br>
-				<c:if test="${album.music_like_type == null }">
-				<a href="#">
-					<img src="${pageContext.request.contextPath }/resources/img/profile/dislike.png" class="glul-img" onclick="likeAlbum(${album.album_sq},${loginSession },'popAlbum${i.index }')">
-				</a>
-				</c:if>
-				<c:if test="${album.code_meaning == '앨범' }">
-					<a href="#">
-						<img src="${pageContext.request.contextPath }/resources/img/profile/like.png" class="glul-img" onclick="like_func(${like.music_like_sq},'${like.code_meaning }','likeList${i.index }')">
-					</a>
-				</c:if>
-							
+				
+					<img src="${pageContext.request.contextPath }/resources/img/profile/dislike.png" class="glul-img" onclick="likeAlbum(${album.album_sq},${loginSession },'popAlbum${i.index }')">		
 					<br>
 					${album.album_nm }<br>
 					<a href="/heartbeat/others/artist/${album.member_sq}">

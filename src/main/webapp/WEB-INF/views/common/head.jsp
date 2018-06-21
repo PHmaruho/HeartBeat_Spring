@@ -2,70 +2,102 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <head>
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
-<style>
-	.modal-backdrop{
-		z-index:990;
-	}
-	
-	/* .modal-content{
-		z-index:1010;
-	} */
+<style type="text/css">
+.head {
+	weight : 100%;
+	height : 60px;
+}
+
+.contents {
+	position : relative;
+}
+.logoImg {
+	weight : 100px;
+	height : 60px;
+	margin-left : 10%;
+	background-color: white;
+}
+
+.cbtn {
+	height : 60px;
+	background-color: 282828;
+	border : 0;
+	outline : 0;
+}
+.glyphicon {
+	height : 60px;
+	wieght : 60px;
+	border : 0;
+	outline : 0;
+}
+
 </style>
 <script type="text/javascript">
-$(document).ready(function(){
-    $(".dropdown").hover(            
-        function() {
-            $('.dropdown-menu', this).stop( true, true ).slideDown("fast");
-            $(this).toggleClass('open');        
-        },
-        function() {
-            $('.dropdown-menu', this).stop( true, true ).slideUp("fast");
-            $(this).toggleClass('open');       
-        }
-    );
-});
 
-$(document).ready( function() {
-/*     $('#myCarousel').carousel({
-        interval:   4000
-	}); */
-	
-	var clickEvent = false;
-	$('#myCarousel').on('click', '.nav a', function() {
-			clickEvent = true;
-			$('.nav li').removeClass('active');
-			$(this).parent().addClass('active');		
-	}).on('slid.bs.carousel', function(e) {
-		if(!clickEvent) {
-			var count = $('.nav').children().length -1;
-			var current = $('.nav li.active');
-			current.removeClass('active').next().addClass('active');
-			var id = parseInt(current.data('slide-to'));
-			if(count == id) {
-				$('.nav li').first().addClass('active');	
-			}
-		}
-		clickEvent = false;
-	});
-});
-
-function modalBtnLogin(){
-	$('#modalBtnLogin').click();
-}
-
-function modaljoinBtn(){
-	$('#joinBtn').click();
-}
 </script>   
 
 </head>
 <body>
-	<c:if test="${!empty loginSession }">
-		<button onclick="goto('/logout')">logout</button>
-		<button onclick="goto('/memberInfoChangeForm')">개인정보수정</button>
-	</c:if>
-<button id="modalBtnLogin1" onclick="modalBtnLogin()">로그인</button>
-<button id="joinBtn1" onclick="modaljoinBtn()">회원가입</button>
+<div class="head">
+	<div class="contents">
+		<img src="${pageContext.request.contextPath }/resources/img/banner/logo.gif" class="logoImg" >
+		<button onclick="goto('/home')" class="cbtn">HOME</button>
+		<button onclick="goto('/discover')" i class="glyphicon glyphicon-search"></button>
+		
+	</div>
+	
+	
+		
+		
+		
+	<div class="menuButton">
+	<c:if test="${empty loginSession }">
+	<button data-toggle="modal" data-target="#myModal" id="modalBtnLogin">로그인</button>
+	<div id="myModal" class="modal fade" role="dialog">
+	      <div class="modal-body">
+	        <form action="/heartbeat/loginPro" method="post" id="log_kkhform">
+				<table>
+					<tr>
+						<td>이메일</td>
+						<td><input type="text" id="log_email" name="email"
+							required="required"></td>
+							<td>
+								<span id="log_email_msg"></span>
+							</td>
+					</tr>
+					<tr>
+						<td>비밀번호</td>
+						<td><input type="password" id="log_pw" name="pw"
+							required="required"></td>
+							<td>
+								<span id="log_pw_msg"></span>
+							</td>
+					</tr>
+					<tr>
+						<td colspan="2"><span id="log_msg"></span></td>
+					</tr>
+					<tr>
+						<td colspan="2"><input type="button" value="로그인" onclick="kkhcheck()">
+						<input type="button" value="취소" onclick="location.href='/heartbeat'">
+						</td>
+					</tr>
+				</table>
+			</form>
+	      </div>
+	      </div>
+	      </c:if>
+	      <div class="menuButton">
+		<c:if test="${!empty loginSession }">
+			<button onclick="goto('/logout')">logout</button>
+			<button onclick="goto('/memberInfoChangeForm')">개인정보수정</button>
+			<button onclick="goto('/my/followList')">FollowList</button>
+			<button onclick="goto('/my/likeTest')">내가좋아하는게뭐게</button>
+			<!-- <button onclick="goto('/arrive')" >최신음악</button> -->
+			<button onclick="getMemberAlarmList(${loginSession })" class="alarm">알람</button>
+			<div id="alarmContent" class="alarmContent"></div>
+		</c:if>
+	</div>
+	</div>
+	</div>
+</div>
 </body>

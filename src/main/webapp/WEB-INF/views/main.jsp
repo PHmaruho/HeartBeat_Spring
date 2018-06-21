@@ -12,9 +12,9 @@
 <script src="${pageContext.request.contextPath }/resources/js/musicControlMain.js?v=<%=System.currentTimeMillis() %>"></script>
 <style type="text/css">
 	.headDiv {
-		height: 80px;
+		height: 60px;
 		width:100%;
-		background-color: yellow;
+		background: linear-gradient( to right, yellow, red, purple, blue );
 		position: fixed;
 		top: 0px;
 		z-index: 999;
