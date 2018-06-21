@@ -311,7 +311,7 @@ public class ActivityServiceImpl implements ActivityService {
 			}
 			
 			// title_music_sq 설정 update
-			activityDao.updateAlbumTitleMusic(music_seq.get(Integer.parseInt(title_music)));
+			activityDao.updateAlbumTitleMusic(music_seq.get(Integer.parseInt(title_music)), img_seq);
 		} else {
 			return false;
 		}
@@ -418,7 +418,7 @@ public class ActivityServiceImpl implements ActivityService {
 			}
 			
 			// title_music_sq 설정 update
-			activityDao.updateAlbumTitleMusic(music_seq);
+			activityDao.updateAlbumTitleMusic(music_seq, img_seq);
 		}
 		return null;
 	}

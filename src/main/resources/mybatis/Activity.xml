@@ -332,6 +332,15 @@
 		)
 	</insert>
 	
+	<!-- PHmaruho -->
+	<update id="updateAlbumTitleMusic" parameterType="hashmap">
+		UPDATE album
+		SET
+			music_sq = #{music_sq}
+		WHERE
+			album_sq = #{album_sq}
+	</update>
+	
 	<!-- 최우일 -->
 	<select id="selectMusicDetail" parameterType="int" resultMap="musicMap">
 		select m.music_sq, m.music_nm, m.album_sq, a.member_sq, member.nick, tag.*
