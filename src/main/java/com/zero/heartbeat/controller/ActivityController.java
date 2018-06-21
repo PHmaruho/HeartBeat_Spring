@@ -117,7 +117,7 @@ public class ActivityController {
 		return "activity/my/likeTest";
 	}*/
 	
-	@RequestMapping("/my/likeTest")
+	@RequestMapping("/my/like")
 	public ModelAndView selectAllLikeList(HttpSession session) {
 		String id = (String) session.getAttribute("loginSession");
 		int member_sq = Integer.parseInt(id);
@@ -134,13 +134,13 @@ public class ActivityController {
 		
 		mav.addObject("list",list);
 		mav.addObject("unList",unList);
-		mav.setViewName("activity/my/likeTest");
+		mav.setViewName("activity/my/like");
 		return mav;
 	}
 	
 
 	//JAN
-	@RequestMapping("/my/followList")
+	@RequestMapping("/my/follow")
 	public String followList(Model model, HttpSession httpSession) {
 		List<Member> following = new ArrayList<Member>();
 		List<Member> follower = new ArrayList<Member>();
@@ -158,7 +158,7 @@ public class ActivityController {
 		model.addAttribute("following",following);
 		model.addAttribute("follower",follower);
 		
-		return "activity/my/followList";
+		return "activity/my/follow";
 	}
 
 }

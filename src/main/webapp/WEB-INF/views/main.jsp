@@ -6,6 +6,8 @@
 <head>
 <title>Heart Beat</title>
 <link href="${pageContext.request.contextPath }/resources/css/csshake.css?v=<%=System.currentTimeMillis() %>" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/kkh.css?v=<%=System.currentTimeMillis() %>" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/jan.css?v=<%=System.currentTimeMillis() %>" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/cwi.css?v=<%=System.currentTimeMillis() %>" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/bootstrap.css?v=<%=System.currentTimeMillis() %>" rel="stylesheet" type="text/css">
 <script src="${pageContext.request.contextPath }/resources/js/jquery.3.3.1.js?v=<%=System.currentTimeMillis() %>"></script>
@@ -40,14 +42,6 @@
 		position: fixed;
 		bottom: 0px;
 		z-index: 999;
-	}
-	
-	#joinBtn{
-	display:none;
-	}
-	
-	#modalBtnLogin{
-		display:none;
 	}
 </style>
 <script type="text/javascript">
