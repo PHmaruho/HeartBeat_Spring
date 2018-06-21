@@ -40,7 +40,6 @@ public class ActivityController {
 	// uploadForm
 	@RequestMapping(value="/upload")
 	public String upload(Model model) {
-		
 		return "activity/my/upload";
 	}
 	
@@ -49,8 +48,6 @@ public class ActivityController {
 	public String uploadAlbum(Model model) {
 		List<Code> type = activityService.selectAlbumType();
 		List<Tag> tag = activityService.searchTag();
-		
-		logger.info(tag + "");
 		
 		model.addAttribute("album_type", type);
 		model.addAttribute("music_tag", tag);
@@ -61,11 +58,11 @@ public class ActivityController {
 	@RequestMapping(value="/upload/album/pro")
 	public String uploadAlbumPro(Model model, HttpServletRequest request,
 									MultipartHttpServletRequest mhsr) {
-		
-		activityService.uploadAlbumPro(mhsr, request);
-		
-		
-		return "activity/my/uploadAlbum";
+		Boolean judge = activityService.uploadAlbumPro(mhsr, request);
+		if(!judge) {
+			
+		}
+		return "forward:/upload/album";
 	}
 
 	// uploadMusic
@@ -73,6 +70,15 @@ public class ActivityController {
 	public String uploadMusic(Model model) {
 		
 		return "activity/my/uploadMusic";
+	}
+	public String uploadMusicPro(Model model, HttpServletRequest request,
+									MultipartHttpServletRequest mhsr) {
+		Boolean judge = activityService.uploadMusicPro(mhsr, request);
+		if(!judge) {
+			
+		}
+		
+		return "forward:/upload/music";
 	}
 	
 	// 최우일

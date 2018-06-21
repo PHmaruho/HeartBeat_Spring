@@ -24,7 +24,8 @@ public interface ActivityService {
 	// PHmaruho
 	public List<Code> selectAlbumType();
 	public List<Tag> searchTag();
-	public void uploadAlbumPro(MultipartHttpServletRequest mhsr, HttpServletRequest request);
+	public Boolean uploadAlbumPro(MultipartHttpServletRequest mhsr, HttpServletRequest request);
+	public Boolean uploadMusicPro(MultipartHttpServletRequest mhsr, HttpServletRequest request);
 	
 	HashMap<String, Object> selectMusicDetail(int sq); // 최우일
 	List<Member> selectMusicArtists(int sq); // 최우일

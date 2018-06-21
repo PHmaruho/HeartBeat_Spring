@@ -15,7 +15,7 @@
 	});
 	$( function() {
 	    $("#itemList").sortable({
-	    	revert:true,
+	    	axis:'y',
 	    	update: function(event, ui){
 	    		var list = $('.ph-music-no');
 	    		var list2 = $('.ph-music-order');
@@ -26,17 +26,22 @@
 	    			list2.eq(i).html((i++)+1);
 	    		});
 	    	},
+	    	helper: function(event, ui){
+	    		ui.children().each(function(){
+	    			$(this).width($(this).width());
+	    		});
+	    		return ui;
+	    	},
 	    	handle: ".ph-music-move"
-	    });
-	    $('#itemList li').draggable({
-	        connectToSortable: '#itemList',
-	        helper : 'original',
-	        revert : 'invalid',
-	        start  : function(event, ui){
-	            $(ui.helper).addClass("musicItem");
-	        }
-	    });
-	    $("#itemList").disableSelection();
+	    }).disableSelection();
+//	    $('#itemList li').draggable({
+//	        connectToSortable: '#itemList',
+//	        helper : 'original',
+//	        revert : 'invalid',
+//	        start  : function(event, ui){
+//	            $(ui.helper).addClass("musicItem");
+//	        }
+//	    });
 	});
 	
 	// 앨범 이미지 보기

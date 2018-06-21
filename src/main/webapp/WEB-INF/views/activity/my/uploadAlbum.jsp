@@ -5,8 +5,8 @@
 <script src="${pageContext.request.contextPath }/resources/js/drag-arrange.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-ui.js"></script>
 <!-- custom -->
-<link href="${pageContext.request.contextPath }/resources/css/ph/uploadAlbum.css?test=9" rel="stylesheet" type="text/css">
-<script src="${pageContext.request.contextPath }/resources/js/ph/uploadAlbum.js?test=9"></script>
+<link href="${pageContext.request.contextPath }/resources/css/ph/uploadAlbum.css?test=11" rel="stylesheet" type="text/css">
+<script src="${pageContext.request.contextPath }/resources/js/ph/uploadAlbum.js?test=11"></script>
 
 </head>
 <body>
@@ -30,7 +30,7 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-						<input type="file" name="img_path" class="ph-album-img-up-btn" id="uploadAlbumImg" onchange="getAlbumPreview(this)" accept=".png">
+						<input type="file" name="album_img" class="ph-album-img-up-btn" id="uploadAlbumImg" onchange="getAlbumPreview(this)" accept=".png">
 						<input type="button" class="ph-album-img-del-btn" value="삭제" onclick="" id="deleteAlbumImg">
 					</td>
 				</tr>
