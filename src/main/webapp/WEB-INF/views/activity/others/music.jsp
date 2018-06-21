@@ -17,11 +17,9 @@
 					</span>
 				</td>
 				<td>
-					<span class="badge badge-dark cwi-detail-player-artist">
+					<span class="badge badge-dark cwi-detail-player-artist cwi-vertical-bottom">
 						<c:forEach var="artist" items="${music.artistList }" varStatus="status">
-							<h4 class="cwi-detail-h-inline">
-								<a onclick="goto('/others/artist/${artist.member_sq}')" class="cwi-cursor-pointer">${artist.nick}</a>
-							</h4>
+							<a onclick="goto('/others/artist/${artist.member_sq}')" class="cwi-cursor-pointer">${artist.nick}</a>
 							<c:if test="${!status.last }">
 								, 
 							</c:if>
@@ -30,7 +28,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td><h1><span class="badge badge-dark cwi-detail-player-title">${music.music_nm }</span></h1></td>
+				<td><span class="badge badge-dark cwi-detail-player-title cwi-vertical-top">${music.music_nm }</span></td>
 			</tr>
 		</table>
 		

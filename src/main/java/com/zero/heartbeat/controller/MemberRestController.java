@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,9 +76,9 @@ public class MemberRestController {
 	
 	// JSY
 	@RequestMapping("/memberAlarmList")
-	public ModelAndView selectAlarmMemberList(ModelAndView mv,String member_id) {
-		
-		int id=Integer.parseInt(member_id);
+	public ModelAndView selectAlarmMemberList(ModelAndView mv,HttpSession session) {
+		String member_sq = (String) session.getAttribute("loginSession");
+		int id=Integer.parseInt(member_sq);
 		List<AlarmList> list=new ArrayList<AlarmList>();
 		HashMap<String,Object> map=new HashMap<String, Object>();
 		map.put("member_sq", id);

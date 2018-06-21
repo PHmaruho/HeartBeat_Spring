@@ -4,68 +4,6 @@
 <head>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/Jan.js"></script>
 
-<style type="text/css">
-.box {
-	margin-left: 7%;
-	margin-right: 7%;
-}
-
-.contents {
- 	margin-bottom : 10%; 	
-}
-
-.glul-img {
-	width : 30px;
-	height : 30px;
-}
-.a {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	border-style: none;
-}
-
-.glul {
-	list-style: none;
-	padding: 0;
-	border-style: none;
-	width: 100%;
-	height: auto;
-	
-}
-.glul li {
-	width: 13%;
-	height: 100%;
-	margin-left: 5%;
-	margin-bottom : 8%;
-	display: inline-block;
-	text-align : center;
-/* 	border-style: solid;
-	border-width: 1px; */
-}
-
-.subTitle:hover {
-	color : red;
-	text-decoration: underline;
-}
-
-.albumImg {
-	width: 70%;
-	height : 150px;
-	margin-left: 10%;
-	border-style: solid;
-	border-width : 1px;
-	border-color : silver;
-}
-
-.albumImg:hover {
-	border-color : red;
-	text-decofation : none;
-}
-
-</style>
-
-</script>
 </head>
 <body>
 <button onclick="goto('/home')">Home</button>	

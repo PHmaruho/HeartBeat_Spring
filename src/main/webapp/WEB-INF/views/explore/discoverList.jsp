@@ -1,15 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>disCoverList</title>
+<head>
 <style type="text/css">
-	img{width:150px;}
+	/* img{width:150px;} */
 	.part{
 		display:inline-block;
 		margin-bottom: 20px;
@@ -46,14 +42,16 @@
 		<c:forEach var="list" items="${discoverList}" varStatus="i">
 			<div class="searchResult">
 				<div class="part">
-					<a href="/heartbeat/others/music/${list.music_sq}">
-					<img src="${pageContext.request.contextPath }/resources/img/album/${ list.img_path }.jpg"></a><br>
+					<a onclick="goto('/others/music/${list.music_sq}')">
+					<img src="${pageContext.request.contextPath }/resources/img/album/${ list.img_path }.jpg" style="width:100px;"></a><br>
 						<%-- img_path: ${ list.img_path }<Br> --%>
 						 앨범명: ${list.album_nm }<br>
 					<!-- music_sq:  ${list.music_sq}<br>-->
 				</div>	
 				<div class="part">
-					닉네임: ${list.nick }<br>
+					닉네임:${list.nick } 
+
+					<br>
 					곡명: ${list.music_nm }<br>
 					<!-- equalizer??  <br> -->
 					발매일: 

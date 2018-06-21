@@ -2,10 +2,14 @@
 
 .keyword-tag-added,.keyword-artist-added,.keyword-title-added{
 	list-style-type:none;
-	border:1px solid;
+	/* border:1px solid; */
+	padding: 2px;	/* cwi */
 	float:left;
 }
 
+.keyword-artist, .keyword-tag, .keyword-title {
+	padding: 0px;
+}
 
 .menuButton{
 	 position:relative;
@@ -29,3 +33,51 @@
 	display:none;
 }
 
+.alarmUrl{
+	text-decoration: none;
+}
+
+.cwi-discover-table-div {
+	display: table-cell;
+}
+
+.cwi-discover-serach-button {
+	height: 100px;
+}
+
+.cwi-discover-main {
+	width: 70%;
+	margin: auto;
+	position: relative;
+	min-width: 1050px;
+	margin-bottom: 16px;
+	/* background-color: silver; */
+}
+
+#detailTextSpace {
+	-webkit-flex: 1;
+	flex: 1;
+}
+
+#detailSearchCategory {
+	display: -webkit-flex;
+	display: flex;
+	width: 100%;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.cwi-discover-radios {
+	width: 170px;
+	-webkit-flex: none;
+	flex: none;
+}
+
+.cwi-discover-input {
+	margin-left: 5px;
+}
+
+
+.cwi-discover-radios label {
+	margin-top: 5px;
+}

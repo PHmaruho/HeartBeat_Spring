@@ -125,3 +125,11 @@ function kkhjoin(){
 		document.getElementById("email").focus();
 	}
 }
+
+function modalBtnLogin(){
+	$('#modalBtnLogin').click();
+}
+
+function modaljoinBtn(){
+	$('#joinBtn').click();
+}

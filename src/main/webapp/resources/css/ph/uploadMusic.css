@@ -1,0 +1,20 @@
+@charset "UTF-8";
+.ph-album{
+	position: relative;
+	width: 60%;
+	height: 70%;
+	display: flex;
+	margin-right: auto;
+	margin-left: auto;
+}
+.ph-album-music-editor{
+	width: 100%;
+}
+#itemList_music {
+	width: 100%;
+	list-style-type: none;
+	padding-left: 0px;
+	margin-left: 0px;
+	border: 1px solid;
+	float: left;
+}
