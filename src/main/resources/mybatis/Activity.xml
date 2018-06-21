@@ -159,7 +159,7 @@
 		SELECT  CHECKCNTFOLLOW_SQ(#{id},m.member_sq) as cntFollow
 		       ,a.album_sq, a.img_path, a.album_nm,  m.member_sq, m.nick,ml.music_like_sq
 		       , mu.music_sq, c.code_meaning
-		       ,ALBUM_COUNT(mu.music_sq) as like_count
+		       ,MUSIC_COUNT(mu.music_sq) as like_count
 		From code c, album a, member m, music_like ml, FOLLOW f, music mu
 		Where c.code_meaning='곡'
 		AND ml.member_sq=#{id}
@@ -188,7 +188,7 @@
 		SELECT  CHECKCNTFOLLOW_SQ(#{id},m.member_sq) as cntFollow
 		       ,a.album_sq, a.img_path, a.album_nm,  m.member_sq, m.nick,ml.music_like_sq
 		       , mu.music_sq, c.code_meaning
-		       ,ALBUM_COUNT(mu.music_sq) as like_count
+		       ,MUSIC_COUNT(mu.music_sq) as like_count
 		From code c, album a, member m, music_like ml, FOLLOW f, music mu
 		Where c.code_meaning='언라이크곡'
 		AND ml.member_sq=#{id}
@@ -201,7 +201,7 @@
 	
 	<!-- JAN 팔로잉 내가 팔로우 하는 사람 목록 -->
 	<select id="selectFollowing" resultType="Member" parameterType="int">
-		select m.member_sq, m.nick
+		select m.member_sq, m.nick, CHECKCNTFOLLOW_SQ(#{id},m.member_sq) cntFollow
 	    from follow f, member m
 	    where f.target_sq = m.member_sq
 	    and
@@ -212,7 +212,7 @@
 	
 	<!-- JAN  팔로워  나를 팔로우 하는사람 -->
 	<select id="selectFollower" resultType="Member" parameterType="int">
-		select m.member_sq, m.nick
+		select m.member_sq, m.nick, CHECKCNTFOLLOW_SQ(#{id},m.member_sq) cntFollow
 	    from member m, follow f
 	    where f.target_sq = #{id}
 	    and m.member_sq = f.member_sq

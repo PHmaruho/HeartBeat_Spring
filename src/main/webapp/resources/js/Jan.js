@@ -86,7 +86,7 @@ function autoSlide() {
 }
 */
 // Common - 상세페이지
-function like_func(sq, type) {
+function like_func(sq, type,v) {
 	/*alert('like_func')
 	alert("도착ㄱ");
 	alert("타입 :" + type );
@@ -99,7 +99,8 @@ function like_func(sq, type) {
 		},
 		success: function() {
 			alert("좋아요 취소");
-			location.reload();
+			/*location.reload();*/
+			$('#'+v).load('#'+v+' '+'#'+v);
 		}
 	})
 	
@@ -142,7 +143,7 @@ $.ajax({
 
 
 // Activity - clickLike
-function likeAlbum(sq, id) {
+function likeAlbum(sq, id, type) {
 	$.ajax({
 		url : '/heartbeat/do/likeAlbum',
 		data: {
@@ -150,8 +151,9 @@ function likeAlbum(sq, id) {
 			member_sq : id
 		},
 		success:function() {
-			alert("♡쪼아효♡");
-			location.reload();
+			alert("♥");
+			/*location.reload();*/
+			$('#'+type).load('#'+type+' '+'#'+type);
 		}
 		
 	})
@@ -165,18 +167,15 @@ function likeMusic(sq, id) {
 			member_sq : id
 		},
 		success:function() {
-			alert("♡쪼아효♡");
-			location.reload();
+			alert("♥");
+			/*location.reload();
+			$('#'+type).load('#'+type+' '+'#'+type);*/
 		}
 		
 	})
 }
 
-function unLikeCancel(sq, type) {
-	/*alert('unLikeCancel')
-	alert("도착ㄱ");
-	alert("타입 :" + type );
-	alert("sq : " + sq);*/
+function unLikeCancel(sq, type,v) {
 	
 	$.ajax({
 		url: '/heartbeat/do/unLikeCancel',
@@ -186,16 +185,16 @@ function unLikeCancel(sq, type) {
 		},
 		success : function() {
 			alert("다시 조아요");
-			location.reload();
+			/*location.reload();*/
+			$('#'+v).load('#'+v+' '+'#'+v);
 		}
 	})
 	
 }
 
 
-function following(sq,session) {
-	//alert("session : " + session);
-	//alert("sq : " + sq);
+function following(sq,session,type) {
+
 	if(sq==session) alert('본인을 팔로우 할 수 없습니다.');
 	$.ajax({
 		url: '/heartbeat/do/follow',
@@ -204,18 +203,22 @@ function following(sq,session) {
 			loginSession : session
 		},
 		success : function(data) {
-			if(data == 1) alert("팔로잉");
-			else if (data == 0) alert("이미 팔로우된 유저");
-			location.reload();
+			
+			if(data == 1) {
+				alert("팔로잉 시작");
+			$('#'+type).load('#'+type+' '+'#'+type);
+
+			} else if (data == 0) alert("이미 팔로우된 유저");
+			/*location.reload();*/
+			$('#'+type).load('#'+type+' '+'#'+type);
 			
 		}
 	})
 }
 
 
-function unfollow(targetSq,memberSq) {
-	//alert("session : " + session);
-	//alert("sq : " + sq);
+function unfollow(targetSq,memberSq,type) {
+	
 	if(targetSq== memberSq) alert('본인을 팔로우할 수 없습니다.')
 	else{
 		$.ajax({
@@ -225,12 +228,13 @@ function unfollow(targetSq,memberSq) {
 				target_sq:targetSq
 			},
 			success : function() {
-				alert("팔로우해제");
-				location.reload();
-				
+				alert("팔로우 해제");
+				/*location.reload();*/
+				$('#'+type).load('#'+type+' '+'#'+type);
 			}
 		});
 		
 	}
 }
+
 
