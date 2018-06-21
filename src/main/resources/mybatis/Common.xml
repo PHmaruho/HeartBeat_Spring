@@ -53,8 +53,16 @@
 		album_type AS albumType
 	 -->
 	 <!-- JAN -->
-	<select id="arriveList" parameterType="Album" resultMap="AlbumResult">
-		select * from Album
+	<select id="selectAlbumArriveList"  parameterType="int" resultType="MainList">
+ 	<![CDATA[ 
+	select rownum as rn, am.* from
+	(select a.album_sq,a.album_nm,a.img_path
+		,m.music_sq,m.music_nm,m.music_like
+	from album a, music m
+	where a.album_sq=m.album_sq and m.open_yn='Y'
+	order by a.release_dt) am 
+	where rownum>#{startNum} and rownum<=#{startNum}+10
+	]]>
 	</select>
 	
 	
@@ -68,7 +76,8 @@
 
 
 	<!-- JSY -->
-	<select id="selectAlbumMainListLike" parameterType="int" resultType="MainList">
+<!--<select id="selectAlbumMainListLike" parameterType="int" resultType="MainList"> -->
+	<select id="mainListLike" parameterType="int" resultType="MainList">
 	<![CDATA[ 
 	select rownum as rn, am.* from
 	(select a.album_sq,a.album_nm,a.img_path
@@ -79,8 +88,9 @@
 	order by music_like
 	]]>
 	</select>
-	<select id="selectAlbumMainListNew" parameterType="int" resultType="MainList">
-	<![CDATA[ 
+ <!--<select id="selectAlbumMainListNew" parameterType="int" resultType="MainList">-->
+ <select id="mainListNew"  parameterType="int" resultType="MainList">	
+ 	<![CDATA[ 
 	select rownum as rn, am.* from
 	(select a.album_sq,a.album_nm,a.img_path
 		,m.music_sq,m.music_nm,m.music_like

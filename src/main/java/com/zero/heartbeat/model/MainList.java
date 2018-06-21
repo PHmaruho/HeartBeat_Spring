@@ -8,6 +8,7 @@ public class MainList {
 	private int music_sq;
 	private String music_nm;
 	private int music_like;
+	private String nick;
 	
 	public int getRn() {
 		return rn;
@@ -50,6 +51,12 @@ public class MainList {
 	}
 	public void setMusic_like(int music_like) {
 		this.music_like = music_like;
+	}
+	public String getNick() {
+		return nick;
+	}
+	public void setNick(String nick) {
+		this.nick = nick;
 	}
 	
 	

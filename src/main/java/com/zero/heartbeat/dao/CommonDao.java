@@ -9,9 +9,11 @@ import com.zero.heartbeat.model.Music;
 import com.zero.heartbeat.model.SearchList;
 public interface CommonDao {
 
-	// JAN
-	List<Album> selectAlbumArriveList(Album album);
-	List<SearchList> mainList();
+	//JAN
+	List<MainList> mainListLike(int startNum);
+	List<MainList> mainListNew(int startNum);
+	List<MainList> selectAlbumArriveList(int startNum);
+
 
 	// JSY
 	List<MainList> selectAlbumMainListLike(int startNum);
