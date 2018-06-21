@@ -26,12 +26,13 @@ public class MemberDaoImpl implements MemberDao {
 		HashMap<String,Object> map=new HashMap<String,Object>();
 		map.put("id", id);
 		map.put("music_sq", music_sq);
+		logger.info("MemberDaoImpl insertAlarmShareMusic working");
 		session.insert("insertAlarmShareMusic", map);
-	}
+	}//JSY
 	public void selectAlarmMemberList(HashMap<String, Object> map) {
 		logger.info("MemberDaoImpl selectAlarmMemberList working");
 		session.selectOne("selectAlarmMemberList",map);
-	}
+	}//JSY
 	public void updateAlarmStatus(int alarm_sq) {
 		logger.info("MemberDaoImpl updateAlarmStatus working");
 		session.update("updateAlarmStatus",alarm_sq);

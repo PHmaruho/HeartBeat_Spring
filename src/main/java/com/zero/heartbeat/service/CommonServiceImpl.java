@@ -3,6 +3,7 @@ package com.zero.heartbeat.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +38,7 @@ public class CommonServiceImpl implements CommonService {
 		list= commonDao.selectAlbumMainListLike(startNum);
 		logger.info("CommonServiceImpl selectAlbumMainList working");
 		return list;
-	}
+	}//JSY
 	public List<MainList> selectAlbumMainListNew(int startNum) {
 		List<MainList> list= new ArrayList<MainList>();
 		list= commonDao.selectAlbumMainListNew(startNum);
@@ -75,4 +76,16 @@ public class CommonServiceImpl implements CommonService {
 		return commonDao.selectPlaylistFoot(sessionSq);
 	}
 	
+	// 최우일
+	@Override
+	public Music selectMusicFootLoad(int sq) {
+		return commonDao.selectMusicFootLoad(sq);
+	}
+	
+	// 최우일
+	@Override
+	public Map<String, Music> selectMusicCookieList(Map<String, Object> paramMap) {
+		// TODO Auto-generated method stub
+		return commonDao.selectMusicCookieList(paramMap);
+	}
 }

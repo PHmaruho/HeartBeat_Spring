@@ -12,6 +12,8 @@
 		<result property="music_nm" column="music_nm"/>
 		<result property="nick" column="nick"/>
 		<result property="reply_level" column="reply_level"/>
+		<result property="member_sq" column="member_sq"/>
+		<result property="music_sq" column="music_sq"/>
 	</resultMap>
 	<insert id="insertAlarmShareMusic" parameterType="hashmap">
 		insert into alarm values(alarm_sq.nextval,#{id},#{music_sq},'음악','N')

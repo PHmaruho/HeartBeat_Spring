@@ -1,5 +1,6 @@
 package com.zero.heartbeat.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -15,11 +16,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.zero.heartbeat.model.AllLikeList;
 import com.zero.heartbeat.model.Code;
 import com.zero.heartbeat.model.Tag;
 import com.zero.heartbeat.model.Member;
+import com.zero.heartbeat.model.Music;
 import com.zero.heartbeat.model.MusicLike;
+import com.zero.heartbeat.model.SearchList;
 import com.zero.heartbeat.service.ActivityService;
 import com.zero.heartbeat.service.CommonService;
 import com.zero.heartbeat.service.ExploreService;
@@ -84,25 +89,25 @@ public class ActivityController {
 	// 최우일
 	@RequestMapping("/others/music/{sq}")
 	public String othersMusic(Model model, @PathVariable int sq) {
-		HashMap<String, Object> map = activityService.selectMusicDetail(sq);
-		List<Member> list= activityService.selectMusicArtists(sq);
+		Music music = activityService.selectMusicDetail(sq);
 		
-		model.addAttribute("music", map);
-		model.addAttribute("artist", list);
+		model.addAttribute("music", music);
 		return "activity/others/music";
 	}
 	
 	// 최우일
 	@RequestMapping("/others/artist/{sq}")
 	public String othersArtist(Model model, @PathVariable int sq) {
-		int[] list = {302,303,304,305,306,307};
+		List<Music> list = activityService.selectMusicByArtist(sq);
+		Member member = activityService.selectMemberArtist(sq);
 		
+		model.addAttribute("member", member);
 		model.addAttribute("list", list);
 		return "activity/others/artist";
 	}
 	
 	//JAN
-	@RequestMapping(value="/my/like")
+	/*@RequestMapping(value="/my/like")
 	public String selectMusicLikeList(Model model, HttpSession session) {
 		int member_sq = (Integer) session.getAttribute("member_sq");
 		List<MusicLike> list = activityService.likeList(member_sq);
@@ -110,6 +115,49 @@ public class ActivityController {
 		logger.info("likeList : " + list);
 		model.addAttribute("likeList",list);
 		return "activity/my/likeTest";
+	}*/
+	
+	@RequestMapping("/my/likeTest")
+	public ModelAndView selectAllLikeList(HttpSession session) {
+		String id = (String) session.getAttribute("loginSession");
+		int member_sq = Integer.parseInt(id);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		List<AllLikeList> list = new ArrayList<AllLikeList>();
+		List<AllLikeList> unList = new ArrayList<AllLikeList>();
+		list = activityService.selectAllLikeList(member_sq);
+		unList = activityService.selectUnLikeList(member_sq);
+		logger.info("selectAllLikeList Controller ");
+		logger.info("list size: "+ list.size());
+		logger.info("unList size: "+ unList.size());
+		
+		mav.addObject("list",list);
+		mav.addObject("unList",unList);
+		mav.setViewName("activity/my/likeTest");
+		return mav;
+	}
+	
+
+	//JAN
+	@RequestMapping("/my/followList")
+	public String followList(Model model, HttpSession httpSession) {
+		List<Member> following = new ArrayList<Member>();
+		List<Member> follower = new ArrayList<Member>();
+
+
+		int id = Integer.parseInt((String) httpSession.getAttribute("loginSession"));
+		logger.info("id ~ : " + id);
+		
+		
+		following = activityService.selectFollowing(id);
+		follower = activityService.selectFollower(id);
+		
+		
+		model.addAttribute("following",following);
+		model.addAttribute("follower",follower);
+		
+		return "activity/my/followList";
 	}
 
 }

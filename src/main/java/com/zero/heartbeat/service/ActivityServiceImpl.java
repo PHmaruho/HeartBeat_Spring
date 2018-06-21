@@ -1,6 +1,7 @@
 package com.zero.heartbeat.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -28,6 +29,9 @@ import scala.collection.generic.BitOperations.Int;
 
 import com.zero.heartbeat.model.Album;
 import com.zero.heartbeat.model.Artist;
+import com.zero.heartbeat.model.SearchList;
+import com.zero.heartbeat.model.Tag;
+import com.zero.heartbeat.model.AllLikeList;
 import com.zero.heartbeat.model.Code;
 import com.zero.heartbeat.model.Member;
 import com.zero.heartbeat.model.Music;
@@ -72,6 +76,90 @@ public class ActivityServiceImpl implements ActivityService {
 		// TODO Auto-generated method stub
 		return activityDao.likeList(member_sq);
 	}
+	//JAN
+	@Override
+	public List<AllLikeList> selectAllLikeList(int id) {
+		// TODO Auto-generated method stub
+		logger.info("selectAllLikeList ServiceImpl ");
+		return activityDao.selectAllLikeList(id);
+	}
+	//JAN
+	@Override
+	public void clickUnlikeMusic(int unLike) {
+		// TODO Auto-generated method stub
+		activityDao.clickUnlikeMusic(unLike);
+	}
+
+	//JAN
+	@Override
+	public void clickUnlikeAlbum(int unLike) {
+		// TODO Auto-generated method stub
+		activityDao.clickUnlikeAlbum(unLike);
+	}
+	//JAN
+	@Override
+	public List<AllLikeList> selectUnLikeList(int id) {
+		// TODO Auto-generated method stub
+		return activityDao.selectUnLikeList(id);
+	}
+	//JAN
+	@Override
+	public void clickLikeAlbum(int likeAlbum, int id) {
+		// TODO Auto-generated method stub
+		activityDao.clickLikeAlbum(likeAlbum,id);
+	}
+	
+	//JAN
+	@Override
+	public void clickLikeMusic(int likeMusic, int id) {
+		// TODO Auto-generated method stub
+		activityDao.clickLikeMusic(likeMusic,id);
+	}
+	
+	//JAN
+	@Override
+	public void unLikeCancel(int unLikeCancel, String music_like_type) {
+		// TODO Auto-generated method stub
+		activityDao.unLikeCancel(unLikeCancel,music_like_type);
+	}
+	
+	//JAN
+	@Override
+	public List<Member> selectFollowing(int id) {
+		// TODO Auto-generated method stub
+		return activityDao.selectFollowing(id);
+	}
+
+	//JAN
+	@Override
+	public List<Member> selectFollower(int id) {
+		// TODO Auto-generated method stub
+		return activityDao.selectFollower(id);
+	}
+	
+	//JAN
+	@Override
+	public void follow(int mbsq, int ss) {
+		// TODO Auto-generated method stub
+		activityDao.follow(mbsq,ss);
+	}
+	
+	//JAN
+	@Override
+	public int followCheck(int mbsq, int ss) {
+		// TODO Auto-generated method stub
+		return activityDao.followCheck(mbsq,ss);
+	}
+	
+	//JAN
+	@Override
+	public void unfollow(int memberSq, int targetSq) {
+		// TODO Auto-generated method stub
+		activityDao.unfollow(memberSq, targetSq);
+	}
+
+	
+	
 	
 	// PHmaruho
 	@Override
@@ -337,7 +425,7 @@ public class ActivityServiceImpl implements ActivityService {
 	
 	// 최우일
 	@Override
-	public HashMap<String, Object> selectMusicDetail(int sq) {
+	public Music selectMusicDetail(int sq) {
 		return activityDao.selectMusicDetail(sq);
 	}
 
@@ -345,5 +433,23 @@ public class ActivityServiceImpl implements ActivityService {
 	@Override
 	public List<Member> selectMusicArtists(int sq) {
 		return activityDao.selectMusicArtists(sq);
+	}
+
+	// 최우일
+	@Override
+	public Map<Integer, HashMap<String, Object>> selectReplyAtMusic(int sq) {
+		return activityDao.selectReplyAtMusic(sq);
+	}
+
+	// 최우일
+	@Override
+	public List<Music> selectMusicByArtist(int sq) {
+		return activityDao.selectMusicByArtist(sq);
+	}
+
+	// 최우일
+	@Override
+	public Member selectMemberArtist(int sq) {
+		return activityDao.selectMemberArtist(sq);
 	}
 }

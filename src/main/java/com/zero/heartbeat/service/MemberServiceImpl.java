@@ -31,13 +31,13 @@ public class MemberServiceImpl implements MemberService {
 	// JSY
 	public void insertAlarmShareMusic(String id,String music_sq) {
 		memberDao.insertAlarmShareMusic(id,music_sq);
-		logger.info("MemberServiceImpl mainListShare working");
+		logger.info("MemberServiceImpl insertAlarmShareMusic working");
 		
-	}
+	}//JSY
 	public void selectAlarmMemberList(HashMap<String, Object> map) {
 		logger.info("MemberServiceImpl selectAlarmMemberList working");
 		memberDao.selectAlarmMemberList(map);
-	}
+	}//JSY
 	public void updateAlarmStatus(int alarm_sq) {
 		logger.info("MemberServiceImpl updateAlarmStatus working");
 		memberDao.updateAlarmStatus(alarm_sq);

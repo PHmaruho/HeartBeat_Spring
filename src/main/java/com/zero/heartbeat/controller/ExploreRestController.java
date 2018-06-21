@@ -36,17 +36,36 @@ public class ExploreRestController {
 	
 	//JSY
 	@RequestMapping("/discoverList")
-	public ModelAndView selectAllSearchList(String val) {
+	public ModelAndView selectAllSearchList(String kArtist,String kTitle,String kTag) {
 		List<String> tag= new ArrayList<String>(); 
 		List<String> artist=new ArrayList<String>();
 		List<String> title= new ArrayList<String>(); 
 		
 		List<SearchList> discoverList= new ArrayList<SearchList>();
+		List<SearchList> resultList= new ArrayList<SearchList>();
 		ModelAndView model= new ModelAndView();
 		SearchKeyword dto=new SearchKeyword();
-		String[] arr1=val.split(" ");
+		String[] arrArt=kArtist.split(",");
+		String[] arrTitle=kTitle.split(",");
+		String[] arrTag=kTag.split(",");
 		
-		for(String s:arr1) {
+		for(String s:arrArt) {
+			if(s.contains("all")) artist.add("전체");
+			else artist.add(s);
+			logger.info("arrArt: "+s);
+		}
+		for(String s:arrTitle) {
+			if(s.contains("all")) title.add("전체");
+			else title.add(s);
+			logger.info("arrTitle: "+s);
+		}
+		for(String s:arrTag) {
+			if(s.contains("all")) tag.add("전체");
+			else tag.add(s);
+			logger.info("arrTag: "+s);
+		}
+		
+		/*for(String s:arr1) {
 			if(s.contains("#")&&!s.equals("#")) {
 				String[] splitTag=s.split("#");
 						tag.add(splitTag[1]);
@@ -63,10 +82,14 @@ public class ExploreRestController {
 						logger.info("*ArrTitle:"+title);
 			}
 		}
-		
+		*/
 		if(tag.isEmpty()|| tag.size()==0||tag.contains(" ")) tag.add("전체");
 		if(artist.isEmpty()|| artist.size()==0|| artist.contains(" ")) artist.add("전체");
 		if(title.isEmpty()|| title.size()==0|| title.contains(" ")) title.add("전체");
+		
+		logger.info("artist: "+artist.size());
+		logger.info("title: "+title.size());
+		logger.info("tag: "+tag.size());
 		
 		if(artist.contains("전체")&& title.contains("전체")&&tag.contains("전체")) {
 			discoverList=null;
@@ -75,11 +98,28 @@ public class ExploreRestController {
 			dto.setArrTag(tag);
 			dto.setArrTitle(title);
 			discoverList= exploreService.selectAllSearchList(dto);
+			for(int i=0;i<discoverList.size();i++) {
+				int v=0;
+				String nick=discoverList.get(i).getNick();
+				for(int n=i+1;n<discoverList.size();n++) {
+					String nick2=discoverList.get(n).getNick();
+					if(discoverList.get(i).getAlbum_nm().equals(discoverList.get(n).getAlbum_nm())) {
+						if(discoverList.get(i).getMusic_sq()==discoverList.get(n).getMusic_sq()) {
+							nick+=", "+nick2;
+							v=1;
+							continue;
+						}// music_sq
+					}// album_nm
+				}
+				logger.info("nick:"+nick);
+				logger.info("v:"+v);
+				discoverList.get(i).setNick(nick);
+				if(v==1) discoverList.remove(i+1);
+				/*else resultList.add(discoverList.get(i));
+				logger.info("resultList:"+resultList.get(0).getNick());*/
+			}// for 전체
 		}
 		
-		logger.info("artist: "+artist.size());
-		logger.info("title: "+title.size());
-		logger.info("tag: "+tag.size());
 		model.addObject("discoverList", discoverList);
 		model.addObject("artist",dto.getArrArtist());
 		model.addObject("tag",dto.getArrTag());
@@ -126,9 +166,7 @@ public class ExploreRestController {
 		model.setViewName("explore/discoverList");*/
 		logger.info("ExploreRestController selectAllSearchList working");
 		return model;
-	}
-	
-	//JSY
+	}//JSY
 	@RequestMapping("/getKeyword/tag")
 	public Map<String,List<Tag>> getKeywordTag(String searchWord) {
 		List<Tag> list=new ArrayList<Tag>();
@@ -138,27 +176,23 @@ public class ExploreRestController {
 		map.put("list", list);
 		logger.info("ExploreRestController getKeywordTag working");
 		return map;
-	}
-	
-	//JSY
+	}//JSY
 	@RequestMapping("/getKeyword/artist")
 	public Map<String,List<Member>> getKeywordArtist(String searchWord) {
 		List<Member> list=new ArrayList<Member>();
 		list= exploreService.getKeywordArtist(searchWord);
 		Map<String,List<Member>> map=new HashMap<String,List<Member>>();
 		map.put("list", list);
-		logger.info("ExploreRestController getKeywordTag working");
+		logger.info("ExploreRestController getKeywordArtist working");
 		return map;
-	}
-	
-	//JSY
+	}//JSY
 	@RequestMapping("/getKeyword/title")
 	public Map<String,List<Music>> getKeywordTitle(String searchWord) {
 		List<Music> list=new ArrayList<Music>();
 		list= exploreService.getKeywordTitle(searchWord);
 		Map<String,List<Music>> map=new HashMap<String,List<Music>>();
 		map.put("list", list);
-		logger.info("ExploreRestController getKeywordTag working");
+		logger.info("ExploreRestController getKeywordTitle working");
 		return map;
 	}
 }

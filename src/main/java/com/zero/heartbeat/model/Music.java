@@ -18,6 +18,15 @@ public class Music {
 	private List<Member>	artistList;
 	private int			list_sq;
 	private int			list_no;
+	// 최우일 - 한 곡에 여러 태그들
+	private List<MusicTag>	tagList;
+	
+	public List<MusicTag> getTagList() {
+		return tagList;
+	}
+	public void setTagList(List<MusicTag> tagList) {
+		this.tagList = tagList;
+	}
 	
 	public int getList_sq() {
 		return list_sq;

@@ -1,96 +1,97 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<head>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery.3.3.1.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/js/jquery-ui.css">
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jsy.js"></script>
+<link href="${pageContext.request.contextPath }/resources/css/jsy/search.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
 $(document).ready(function(){
-	$("#detailText").autocomplete({
-		focus:function(event,ui){
-			$(this).val(ui.item.label);
-			return false;
-		},
-		minlength:1,
-		source:function(request,response){
-			var keyword=($('#cat').val()==null)? "":$('#cat').val();
-			$.ajax({
-				url: "/heartbeat/do/getKeyword/"+keyword,
-				dataType:"json",
-				data:{
-					searchWord:request.term
-				},
-				success:function(data){
-					if(keyword=='tag'){
-						response($.map(data.list,function(item){
-							return{
-								label:item.tag_meaning,
-								value:item.tag_meaning
-							};
-						}))	
-					}
-					else if(keyword=='artist'){
-						response($.map(data.list,function(item){
-							return{
-								label:item.nick,
-								value:item.nick
-							};
-						}))	
-					}
-					else if(keyword=='title'){
-						response($.map(data.list,function(item){
-							return{
-								label:item.music_nm,
-								value:item.music_nm
-							};
-						}))	
-					}
-				},
-			})
-		},
-		select:function(event,ui){
-			var cat=$('#cat').val();
-			var det= $('#detailText').val();
-			
-			if(cat=='title'){
-				$('#searchBox').val($('#searchBox').val()+'*'+det+' ');
-			}else if(cat=='artist'){
-				$('#searchBox').val($('#searchBox').val()+'@'+det+' ');
-			}else if(cat=='tag'){
-				$('#searchBox').val($('#searchBox').val()+'#'+det+' ');
-			} 
-		}
-	})
+	autoSearch();
 })
-
 
 </script>
 </head>
 <body>
-	<div id="placeHolder">
+	<!-- <div id="placeHolder">
 		가수는 @, 곡명은 *를, 태그는 #을 붙이고 단어마다 스페이스바를 해주세요! ex)@가수 *곡명 #태그
 	</div>
-	검색: <input type="text" id="searchBox">
-	<input type="button" id="searchAll" value="검색" onclick="searchList()">
-	<input type="button" id="detailSearch" onclick="showDetailSearch()" value="상세검색">
+	 	검색: <input type="text" id="searchBox"> -->
+	 	
+	<div class="cwi-discover-main">
+		<div id="detailSearchCategory">
+			<div class="cwi-discover-radios cwi-discover-input">
+				<input type="radio" value="artist" onclick="searchDetailShowKeyword(this)"
+					name="detailSearchCategoryRadio" id="radioArtist" checked="checked">
+				<label for="radioArtist">회원</label>
+				
+				<input type="radio" value="title" onclick="searchDetailShowKeyword(this)"
+					name="detailSearchCategoryRadio" id="radioTitle">
+				<label for="radioTitle">노래</label>
+				
+				<input type="radio" value="tag" onclick="searchDetailShowKeyword(this)"
+					name="detailSearchCategoryRadio" id="radioTag">
+				<label for="radioTag">태그</label>
+			</div>
 	
-	<div id="detailSearchCategory" style="display: none;">
-		<input type="button" value="tag" onclick="searchDetailShowKeyword(this)">
-		<input type="button" value="artist" onclick="searchDetailShowKeyword(this)">
-		<input type="button" value="title" onclick="searchDetailShowKeyword(this)">
-
-		<div id="detailTextSpace" style="display: none;">
-			<input type="text" id="cat" style="display:none;"readonly> 
-			상세검색: <input type="text" id="detailText"> 
+			<div id="detailTextSpace" style="display: inline;">
+				<div class="cwi-discover-input">
+					<input type="text" id="detailText" onkeypress="if(event.keyCode==13){searchKeywordUsers();}" class="form-control">
+					<input type="hidden" id="cat" readonly value="artist">
+				</div>
+			</div>
+			
+			<button type="button" class="btn btn-secondary cwi-discover-input" onclick="searchList()">검색</button>
 		</div>
-	</div>
 	
-	<div id="keywordList">
+		
+		<table class="table table-bordered">
+			<tr>
+				<td class="cwi-discover-td">
+					회원
+					<button type="button" class="close" aria-label="Close" onclick="deleteArtistAll()">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</td>
+				<td>
+					노래
+					<button type="button" class="close" aria-label="Close" onclick="deleteTitleAll()">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</td>
+				<td>
+					태그
+					<button type="button" class="close" aria-label="Close" onclick="deleteTagAll()">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div id="artistDiv" class="cwi-discover-table-div">
+						<input type="hidden" id="artist" value="" >
+						<ul class="keyword-artist"></ul>
+					</div>
+				</td>
+				<td>
+					<div id="titleDiv" class="cwi-discover-table-div">
+						<input type="hidden" id="title" value="" >
+						<ul class="keyword-title"></ul>
+						<br>
+					</div>
+				</td>
+				<td>
+					<div id="tagDiv" class="cwi-discover-table-div">
+						<input type="hidden" id ="tag" value="" >
+						<ul class="keyword-tag"></ul>
+						<br>
+					</div>
+				</td>
+			</tr>
+		</table>
+		<div id="keywordList"></div>
 	</div>
 </body>
 
