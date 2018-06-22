@@ -29,6 +29,7 @@
 		<result property="play_time" column="play_time"/>
 		<result property="list_no" column="list_no"/>
 		<result property="likeCnt" column="likeCnt" />
+		<result property="isLiked" column="isLiked" />
 		
 		<collection property="artistList" javaType="java.util.ArrayList" resultMap="artistsMap"/>
 		<collection property="tagList" javaType="java.util.ArrayList" resultMap="musicTagMap"/>
