@@ -158,7 +158,7 @@
 	</div> 
 
 <br><br><br><br>
-<div class="contents">
+<div class="jan-contents">
 	<h2 style="text-align:center;" class="subTitle">New Product List</h2>
 		<br><br>
 	<ul class="glul">
@@ -171,17 +171,7 @@
 			<img src="${pageContext.request.contextPath }/resources/img/album/${album.img_path }.png" class="albumImg" ></a>
 				<br>
 				<br>
-				<c:if test="${album.music_like_type == null }">
-				<a>
-					<img src="${pageContext.request.contextPath }/resources/img/profile/dislike.png" class="glul-img" onclick="likeAlbum(${album.album_sq},${loginSession },'popAlbum${i.index }')">
-				</a>
-				</c:if>
-				<c:if test="${album.code_meaning == '앨범' }">
-					<a>
-						<img src="${pageContext.request.contextPath }/resources/img/profile/like.png" class="glul-img" onclick="like_func(${like.music_like_sq},'${like.code_meaning }','likeList${i.index }')">
-					</a>
-				</c:if>
-							
+				<a><img src="${pageContext.request.contextPath }/resources/img/profile/like.png" class="glul-img" onclick="likeAlbum(${album.album_sq},${loginSession },'popAlbum${i.index }')"></a>	
 					<br>
 					${album.album_nm }<br>
 					<a onclick="goto('/heartbeat/others/artist/${album.member_sq}')">
@@ -189,7 +179,7 @@
 					</a><br>
 				</div>
 				</div>
-			</li>
+				</li>
 					<%-- <tr>
 						<input type="button" value="공유" onclick="mainListShare(${i.index})"></td>
 					</tr> --%>
@@ -207,8 +197,10 @@
 					<input type="hidden" id="music_sq${i.index }" name="music_sq${i.index }" value="${album.music_sq}">
 					<img src="resources/${album.img_path }.png" class="albumImg"></a><br>
 					<br>
-					${album.album_nm }<br>
-					${album.nick }<br>
+					<a onclick="goto('/heartbeat/others/artist/${album.album_sq}')">
+					${album.album_nm }</a><br>
+					<a onclick="goto('/heartbeat/others/artist/${album.member_sq}')">
+					${album.nick }</a><br>
 					<img src="resources/img/profile/like.png" class="glul-img">
 					${album.album_like }<br>
 <%-- 							<input type="button" value="공유" onclick="mainListShare(${i.index})"></td>

@@ -17,9 +17,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style type="text/css">
 	.headDiv {
-		height: 80px;
+		height: 60px;
 		width:100%;
-		background-color: yellow;
+		background-color: linear-gradient( to right, yellow, red, purple, blue );
 		position: fixed;
 		top: 0px;
 		z-index: 999;
