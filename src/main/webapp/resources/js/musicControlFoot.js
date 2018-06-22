@@ -18,9 +18,12 @@ function initFoot(sq) {
 		$('#footDuration').text(formatTime(footPlayer.duration));
 		$('#footProgress').text( formatTime(0));
 		
+		console.log(musicMain.getMusicPage());
 		if (musicMain.getMusicPage()) {
+			console.log(musicMain.getMusicPage());
 			for(var i = 0; i <= maxDetailNum; i++) {
 				if (detailPlayer[i].sq == footPlayer.sq) {
+					console.log('musicfoot 24 line : ' + i)
 					musicMain.setDetailNum(i);
 				}
 			}
@@ -48,7 +51,6 @@ function initFoot(sq) {
 
 function loadFoot(sq) {
 	pauseDisplayButton();
-	console.log('load1111111Foot : ' + sq);
 	footPlayer.sq = sq;
 	musicMain.setFootReady(false);
 	musicMain.setDetailNum(-1);
@@ -354,7 +356,6 @@ $('input[type="range"]').change(function () {
 });
 
 function playDisplayButton() {
-	console.log('playDisplayButton');
 	$('#footPlayBtn').addClass('cwi-foot-display-none');
 	$('#detailPlayBtn' + musicMain.getDetailNum()).addClass('cwi-foot-display-none');
 	$('#footPauseBtn').removeClass('cwi-foot-display-none');
@@ -363,7 +364,6 @@ function playDisplayButton() {
 }
 
 function pauseDisplayButton() {
-	console.log('pauseDisplayButton');
 	$('#footPlayBtn').removeClass('cwi-foot-display-none');
 	$('#detailPlayBtn' + musicMain.getDetailNum()).removeClass('cwi-foot-display-none');
 	$('#footPauseBtn').addClass('cwi-foot-display-none');
