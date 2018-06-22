@@ -3,6 +3,7 @@
 <head>
 </head>
 <body onresize="resizeComment()">
+	${music.likeCnt }
 	<div class="cwi-detail-player-main">
 		<table class="cwi-detail-player-info">
 			<tr>
