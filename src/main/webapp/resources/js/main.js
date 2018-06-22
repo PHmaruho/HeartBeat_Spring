@@ -3,14 +3,13 @@ function supports_history_api() {
 }
 
 function swapContent(link) {
-	musicMain.setMusicPage(false);
-	musicMain.setDetailNum(-1);
 	if(link == "/foot?r=1" || link == "/head?r=1") {
 		var newPath = link.replace('/', '').split('?')[0];
 		$('#' + newPath +  'Div').load(processUrl() + link);
 		return false;
 	} else {
-		console.log('link : ' + link);
+		musicMain.setDetailNum(-1);
+		musicMain.setMusicPage(false);
 		if (link == '/?r=1') {
 			$('#contentDiv').load(processUrl() + '/home?r=1');
 		} else {

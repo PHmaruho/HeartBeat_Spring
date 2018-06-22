@@ -361,7 +361,7 @@
 		where a.music_sq in (
 		    select music_sq
 		    from artist
-		    where member_sq = 703)
+		    where member_sq = #{sq})
 		and m.music_sq = a.music_sq and a.member_sq = member.member_sq and m.music_sq = tag.music_sq
 	</select>
 	
