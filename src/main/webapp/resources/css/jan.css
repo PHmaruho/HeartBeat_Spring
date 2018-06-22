@@ -126,3 +126,7 @@
 	border-color : red;
 	text-decofation : none;
 }
+
+.js-load {
+	display: none;
+}

@@ -1,5 +1,6 @@
 package com.zero.heartbeat.controller;
 
+import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +25,7 @@ import com.zero.heartbeat.model.Tag;
 import com.zero.heartbeat.model.Member;
 import com.zero.heartbeat.model.Music;
 import com.zero.heartbeat.model.MusicLike;
+import com.zero.heartbeat.model.Paging;
 import com.zero.heartbeat.model.SearchList;
 import com.zero.heartbeat.service.ActivityService;
 import com.zero.heartbeat.service.CommonService;
@@ -124,8 +126,11 @@ public class ActivityController {
 		
 		ModelAndView mav = new ModelAndView();
 		
+		
 		List<AllLikeList> list = new ArrayList<AllLikeList>();
 		List<AllLikeList> unList = new ArrayList<AllLikeList>();
+		
+		
 		list = activityService.selectAllLikeList(member_sq);
 		unList = activityService.selectUnLikeList(member_sq);
 		logger.info("selectAllLikeList Controller ");

@@ -1,5 +1,6 @@
 package com.zero.heartbeat.dao;
 
+import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -68,7 +69,7 @@ public class ActivityDaoImpl implements ActivityDao {
 	@Override
 	public List<AllLikeList> selectAllLikeList(int id) {
 		// TODO Auto-generated method stub
-		logger.info("selectAllLikeList DaoImpl ");
+		
 		return session.selectList("selectAllLikeList",id);
 	}
 	//JAN
@@ -88,6 +89,7 @@ public class ActivityDaoImpl implements ActivityDao {
 	@Override
 	public List<AllLikeList> selectUnLikeList(int id) {
 		// TODO Auto-generated method stub
+		
 		return session.selectList("selectUnLikeList",id);
 	}
 	//JAN
