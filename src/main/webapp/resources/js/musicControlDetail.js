@@ -73,7 +73,6 @@ function playFromDetail(detailNum) {
 }
 
 function playAll(detailNum) {
-	console.log('playAll');
 	playDisplayButton();
 	var e = detailPlayer[detailNum].getCurrentTime();
 	footPlayer.play(e);
@@ -165,7 +164,17 @@ function showDetailComments(detailNum) {
 		commentsMouseout(detailNum);
 	});
 	
+	$('#detailCommentIconsLine' + detailNum).on('click', function(e) {
+		var target = $(e.target);
+		
+		if (target.is('img')) {
+			commentClicked(detailNum, target.attr('alt'))
+		}
+	});
 	
+	$('#detailCommentsOn' + detailNum).on('click', function() {
+		commentClicked(detailNum, $('#detailCommentsOn' + detailNum).attr('title'))
+	});
 }
 
 function commentsMouseover(target, detailNum) {
@@ -214,4 +223,42 @@ function resizeComment() {
 	for (var i = 0; i <= maxDetailNum; i++) {
 		showDetailComments(i)
 	}
+}
+
+function commentClicked(detailNum, timeStamp) {
+	var comments = detailPlayer[detailNum].comments[timeStamp];
+	
+	$('#detailCommentTarget' + detailNum).html(' ' + comments.nick);
+	$('#detailCommentHidden' + detailNum).val(timeStamp);
+}
+
+function commentKeyPress(detailNum, type) {
+	if (event.keyCode == 13) {
+		if (type == 0) {	// music
+			doSomething(detailNum);
+		} else {	// artist
+			doSomething2(detailNum);
+		}
+	} else if ($('#detailCommentText' + detailNum).val() == '' && event.keyCode == 8) {
+		$('#detailCommentTarget' + detailNum).html('');
+		$('#detailCommentHidden' + detailNum).val('');
+	}
+}
+
+// music에서 작동될 펑션, $('#detailCommentHidden' + detailNum).val()의 값이 비어있다면 일반 댓글 입력이므로 getCurrentTime()으로 time_stamp 가져갈것
+// $('#detailCommentHidden' + detailNum).val()에 값이 있다면 해당 값을 time_stamp로 이용
+// detailPlayer[detailNum].comments[timeStamp] 를 이용하면 reply_sq 등 필요한 정보 이용 가능
+function doSomething(detailNum) {
+	console.log('detailNum : ' + detailNum);
+	console.log('target : ' + $('#detailCommentTarget' + detailNum).text());
+	console.log('text : ' + $('#detailCommentText' + detailNum).val());
+	console.log('hidden : ' + $('#detailCommentHidden' + detailNum).val());
+}
+
+// artist 펑션
+function doSomething2(detailNum) {
+	console.log('detailNum : ' + detailNum);
+	console.log('target : ' + $('#detailCommentTarget' + detailNum).text());
+	console.log('text : ' + $('#detailCommentText' + detailNum).val());
+	console.log('hidden : ' + $('#detailCommentHidden' + detailNum).val());
 }
