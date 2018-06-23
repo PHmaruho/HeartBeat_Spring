@@ -3,6 +3,7 @@ package com.zero.heartbeat.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -88,8 +89,15 @@ public class ActivityController {
 	
 	// 최우일
 	@RequestMapping("/others/music/{sq}")
-	public String othersMusic(Model model, @PathVariable int sq) {
-		Music music = activityService.selectMusicDetail(sq);
+	public String othersMusic(Model model, @PathVariable int sq, HttpSession session) {
+		Object obj = session.getAttribute("loginSession");
+		int member_sq = obj == null ? 0 : Integer.parseInt(obj.toString());
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("member_sq", member_sq);
+		map.put("music_sq", sq);
+		
+		Music music = activityService.selectMusicDetail(map);
 		
 		model.addAttribute("music", music);
 		return "activity/others/music";
@@ -97,8 +105,15 @@ public class ActivityController {
 	
 	// 최우일
 	@RequestMapping("/others/artist/{sq}")
-	public String othersArtist(Model model, @PathVariable int sq) {
-		List<Music> list = activityService.selectMusicByArtist(sq);
+	public String othersArtist(Model model, @PathVariable int sq, HttpSession session) {
+		Object obj = session.getAttribute("loginSession");
+		int member_sq = obj == null ? 0 : Integer.parseInt(obj.toString());
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("member_sq", member_sq);
+		map.put("target_sq", sq);
+		
+		List<Music> list = activityService.selectMusicByArtist(map);
 		Member member = activityService.selectMemberArtist(sq);
 		
 		model.addAttribute("member", member);

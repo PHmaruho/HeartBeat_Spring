@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zero.heartbeat.model.Member;
+import com.zero.heartbeat.model.Music;
 import com.zero.heartbeat.model.MusicLike;
 import com.zero.heartbeat.service.ActivityService;
 import com.zero.heartbeat.service.CommonService;
@@ -146,5 +147,31 @@ public class ActivityRestController {
 		map = activityService.selectReplyAtMusic(sq);
 		
 		return map;
+	}
+	
+	// 최우일
+	@RequestMapping("/reLike/{music_sq}")	// 기존 좋아요가 재활용이 어렵다고 판단, 좋아요 취소가 있다면 update, 없다면 insert
+	public void reLike(@PathVariable int music_sq, HttpSession session) {
+		Object obj = session.getAttribute("loginSession");
+		int member_sq = obj == null ? 0 : Integer.parseInt(obj.toString());
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("member_sq", member_sq);
+		map.put("music_sq", music_sq);
+		
+		activityService.mergeMusicLike(map);
+	}
+	
+	// 최우일
+	@RequestMapping("/unLike/{music_sq}")	// 기존 좋아요가 재활용이 어렵다고 판단, 좋아요 취소가 있다면 update, 없다면 insert
+	public void unLike(@PathVariable int music_sq, HttpSession session) {
+		Object obj = session.getAttribute("loginSession");
+		int member_sq = obj == null ? 0 : Integer.parseInt(obj.toString());
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("member_sq", member_sq);
+		map.put("music_sq", music_sq);
+		
+		activityService.updateMusicUnlike(map);
 	}
 }

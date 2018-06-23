@@ -98,7 +98,6 @@ function like_func(sq, type,v) {
 			music_like_type: type
 		},
 		success: function() {
-			alert("좋아요 취소");
 			/*location.reload();*/
 			$('#'+v).load('#'+v+' '+'#'+v);
 		}
@@ -151,7 +150,6 @@ function likeAlbum(sq, id, type) {
 			member_sq : id
 		},
 		success:function() {
-			alert("♥");
 			/*location.reload();*/
 			$('#'+type).load('#'+type+' '+'#'+type);
 		}
@@ -167,7 +165,6 @@ function likeMusic(sq, id) {
 			member_sq : id
 		},
 		success:function() {
-			alert("♥");
 			/*location.reload();
 			$('#'+type).load('#'+type+' '+'#'+type);*/
 		}
@@ -184,7 +181,6 @@ function unLikeCancel(sq, type,v) {
 			music_like_type: type
 		},
 		success : function() {
-			alert("다시 조아요");
 			/*location.reload();*/
 			$('#'+v).load('#'+v+' '+'#'+v);
 		}
@@ -205,7 +201,6 @@ function following(sq,session,type) {
 		success : function(data) {
 			
 			if(data == 1) {
-				alert("팔로잉 시작");
 			$('#'+type).load('#'+type+' '+'#'+type);
 
 			} else if (data == 0) alert("이미 팔로우된 유저");
@@ -228,7 +223,6 @@ function unfollow(targetSq,memberSq,type) {
 				target_sq:targetSq
 			},
 			success : function() {
-				alert("팔로우 해제");
 				/*location.reload();*/
 				$('#'+type).load('#'+type+' '+'#'+type);
 			}

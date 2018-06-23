@@ -3,7 +3,6 @@
 <head>
 </head>
 <body onresize="resizeComment()">
-	${music.likeCnt }
 	<div class="cwi-detail-player-main">
 		<table class="cwi-detail-player-info">
 			<tr>
@@ -64,16 +63,6 @@
 		<input type="hidden" id="detailMusicSq0" value="${music.music_sq }">
 		<input type="hidden" id="maxDetailNum" value="0">
 	</div>
-	<div class="cwi-detail-player-etc">
-		<div>
-			<span class="badge badge-pill badge-light"><img>좋아요</span>
-			<span class="badge badge-pill badge-light"><img>공유</span>
-			<span class="badge badge-pill badge-light"><img>추가</span>
-			
-			<span class="badge badge-pill badge-light"><img>좋아요 수</span>
-			<span class="badge badge-pill badge-light"><img>공유 수</span>
-		</div>
-	</div>
 	
 	<div class="cwi-detail-under-main">
 		<div class="cwi-comment-wrapper">
@@ -91,6 +80,20 @@
 					onkeydown="commentKeyPress(0, 0)" placeholder="답글을 달아주세요">
 				<input type="hidden" id="detailCommentHidden0" value="">
 			</div>
+		</div>
+		<div id="detailLike0">
+			<c:if test="${music.isLiked == 0}">
+				<span id="detailLikeButton0" class="badge badge-pill badge-light cwi-like"
+					onclick="cwi_reLike(${music.music_sq}, this)">
+					<img src="${pageContext.request.contextPath }/resources/img/icon/like-16.png"> ${music.likeCnt }
+				</span>
+			</c:if>
+			<c:if test="${music.isLiked == 1}">
+				<span id="detailLikeButton0" class="badge badge-pill badge-light cwi-liked"
+					onclick="cwi_unLike(${music.music_sq}, this)">
+					<img src="${pageContext.request.contextPath }/resources/img/icon/liked-16.png"> ${music.likeCnt }
+				</span>
+			</c:if>
 		</div>
 	</div>
 	

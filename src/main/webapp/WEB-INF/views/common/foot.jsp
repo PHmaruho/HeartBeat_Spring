@@ -12,7 +12,7 @@
 </head>
 
 <body>
-	<div class="foot">
+	<div class="cwi-foot-main">
 		<div class="foot-player-main">
 			<div hidden="true" id="footWaveform"></div>	
 			<div class="cwi-foot-player-left">

@@ -378,3 +378,24 @@ $('#footVolumeEnter').on('mouseenter', function() {
 $('#footVolumeLeave').on('mouseleave', function() {
 	$('#footVolumeDisplay').addClass('cwi-foot-display-none');
 });
+
+
+function cwi_reLike(sq, v) {
+	$.ajax({
+		url: '/heartbeat/do/reLike/' + sq,
+		success: function() {
+			$('#'+v.parentNode.id).load('#'+v.id+' '+'#'+v.id);
+		}
+	});
+}
+
+function cwi_unLike(sq, v) {
+	$.ajax({
+		url: '/heartbeat/do/unLike/' + sq,
+		success: function() {
+			$('#'+v.parentNode.id).load('#'+v.id+' '+'#'+v.id);
+		}
+	});
+}
+
+console.log(2);

@@ -62,56 +62,6 @@
 					</li>
 					</c:forEach>
 				</c:if>
-					 <li class="lists__item js-load">test1</li>
-				      <li class="lists__item js-load">txttxttxttxttxttxt</li>
-				      <li class="lists__item js-load">test2</li>
-				      <li class="lists__item js-load">txttxttxttxttxttxt</li>
-				      <li class="lists__item js-load">test3</li>
-				      <li class="lists__item js-load">txttxttxttxttxttxt</li>
-				      <li class="lists__item js-load">test4</li>
-				      <li class="lists__item js-load">txttxttxttxttxttxt</li>
-				      <li class="lists__item js-load">test5</li>
-				      <li class="lists__item js-load">txttxttxttxttxttxt</li>
-				      <li class="lists__item js-load">test6</li>
-				      <li class="lists__item js-load">txttxttxttxttxttxt</li>
-				      <li class="lists__item js-load">test7</li>
-				      <li class="lists__item js-load">txttxttxttxttxttxt</li>
-				      <li class="lists__item js-load">test8</li>
-				      <li class="lists__item js-load">txttxttxttxttxttxt</li>
-				      <li class="lists__item js-load">test9</li>
-				      <li class="lists__item js-load">txttxttxttxttxttxt</li>
-				      <li class="lists__item js-load">test10</li>
-				      <li class="lists__item js-load">txttxttxttxttxttxt</li>
-				      <li class="lists__item js-load">test11</li>
-				      <li class="lists__item js-load">txttxttxttxttxttxt</li>
-				      <li class="lists__item js-load">test12</li>
-				      <li class="lists__item js-load">txttxttxttxttxttxt</li>
-				      <li class="lists__item js-load">test13</li>
-				      <li class="lists__item js-load">txttxttxttxttxttxt</li>
-				      <li class="lists__item js-load">test14</li>
-				      <li class="lists__item js-load">txttxttxttxttxttxt</li>
-				      <li class="lists__item js-load">test15</li>
-				      <li class="lists__item js-load">txttxttxttxttxttxt</li>
-				      <li class="lists__item js-load">test16</li>
-				      <li class="lists__item js-load">txttxttxttxttxttxt</li>
-				      <li class="lists__item js-load">test17</li>
-				      <li class="lists__item js-load">txttxttxttxttxttxt</li>
-				      <li class="lists__item js-load">test18</li>
-				      <li class="lists__item js-load">txttxttxttxttxttxt</li>
-				      <li class="lists__item js-load">test19</li>
-				      <li class="lists__item js-load">txttxttxttxttxttxt</li>
-				      <li class="lists__item js-load">test20</li>
-				      <li class="lists__item js-load">txttxttxttxttxttxt</li>
-				      <li class="lists__item js-load">test21</li>
-				      <li class="lists__item js-load">txttxttxttxttxttxt</li>
-				      <li class="lists__item js-load">test22</li>
-				      <li class="lists__item js-load">txttxttxttxttxttxt</li>
-				      <li class="lists__item js-load">test23</li>
-				      <li class="lists__item js-load">txttxttxttxttxttxt</li>
-				      <li class="lists__item js-load">test24</li>
-				      <li class="lists__item js-load">txttxttxttxttxttxt</li>
-				      <li class="lists__item js-load">test25</li>
-				      <li class="lists__item js-load">txttxttxttxttxttxt</li>
 	</ul>
 	<div id="js-btn-wrap" class="btn-wrap" style="text-align:center;" > <a href="javascript:;" class="button">더보기</a> </div>
 	</div>
