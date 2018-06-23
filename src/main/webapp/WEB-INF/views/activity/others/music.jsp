@@ -3,6 +3,7 @@
 <head>
 </head>
 <body onresize="resizeComment()">
+	${music.likeCnt }
 	<div class="cwi-detail-player-main">
 		<table class="cwi-detail-player-info">
 			<tr>
@@ -75,14 +76,21 @@
 	</div>
 	
 	<div class="cwi-detail-under-main">
-		댓글입력 - 미구현
-		<div class="input-group mb-3">
-			<div class="input-group-prepend">
-				<span class="input-group-text" id="basic-addon1">
-					<img src="${pageContext.request.contextPath }/resources/img/profile/703.png" width="30" height="30">
-				</span>
+		<div class="cwi-comment-wrapper">
+			<div class="cwi-comment-img-wrapper">
+				<c:if test="${empty loginSession }">
+					<img src="${pageContext.request.contextPath }/resources/img/profile/default-32.png" class="cwi-comment-img">
+				</c:if>
+				<c:if test="${!empty loginSession }">
+					<img src="${pageContext.request.contextPath }/resources/img/profile/${loginSession }.png"class="cwi-comment-img">
+				</c:if>
 			</div>
-			<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+			<div class="cwi-comment-input-wrapper">
+				<a id="detailCommentTarget0" class="cwi-comment-target"></a>
+				<input type="text" id="detailCommentText0" class="cwi-comment-input"
+					onkeydown="commentKeyPress(0, 0)" placeholder="답글을 달아주세요">
+				<input type="hidden" id="detailCommentHidden0" value="">
+			</div>
 		</div>
 	</div>
 	
