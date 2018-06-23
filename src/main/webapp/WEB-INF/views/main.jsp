@@ -11,10 +11,9 @@
 <link href="${pageContext.request.contextPath }/resources/css/cwi.css?v=<%=System.currentTimeMillis() %>" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/resources/css/bootstrap.css?v=<%=System.currentTimeMillis() %>" rel="stylesheet" type="text/css">
 <script src="${pageContext.request.contextPath }/resources/js/jquery.3.3.1.js?v=<%=System.currentTimeMillis() %>"></script>
+<script src="${pageContext.request.contextPath }/resources/js/bootstrap.js?v=<%=System.currentTimeMillis() %>"></script>
 <script src="${pageContext.request.contextPath }/resources/js/wavesurfer.js?v=<%=System.currentTimeMillis() %>"></script>
 <script src="${pageContext.request.contextPath }/resources/js/musicControlMain.js?v=<%=System.currentTimeMillis() %>"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style type="text/css">
 	.headDiv {
 		height: 80px;
