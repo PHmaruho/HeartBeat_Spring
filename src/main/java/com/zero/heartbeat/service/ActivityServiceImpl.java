@@ -188,7 +188,7 @@ public class ActivityServiceImpl implements ActivityService {
 		// album
 		MultipartFile album_img = mhsr.getFile("album_img");
 		String album_nm = mhsr.getParameter("album_nm");
-		String album_comment = mhsr.getParameter("album_comment");
+		String album_comment = mhsr.getParameter("album_comment") == null ? "" : mhsr.getParameter("album_comment"); 
 		String title_music = mhsr.getParameter("title_music_sq");
 		String album_type = mhsr.getParameter("album_type");
 		String album_open_yn = mhsr.getParameter("album_open_yn");
@@ -237,6 +237,12 @@ public class ActivityServiceImpl implements ActivityService {
 			String[] music_tag = mhsr.getParameterValues("music_tag");
 			String[] music_comment = mhsr.getParameterValues("music_comment");
 			String[] music_open_yn = mhsr.getParameterValues("music_open_yn");
+			
+			for (int p = 0; p < music_no.length; p++) {
+				if(music_comment[p] == null || music_comment[p].length() == 0) {
+					music_comment[p] = null;
+				}
+			}
 			
 			List<MultipartFile> file_list = mhsr.getFiles("file");
 			
@@ -329,16 +335,38 @@ public class ActivityServiceImpl implements ActivityService {
 		HttpSession session = request.getSession();
 		int member_sq = 717;
 		
+		MultipartFile album_img = mhsr.getFile("album_img");
 		Album albumDto = new Album();
 		albumDto.setAlbum_nm("unAlbum_nm");
 		albumDto.setAlbum_comment("unAlbum_comment");
 		albumDto.setMusic_sq(0);
-		albumDto.setAlbum_type("");
-		albumDto.setOpen_yn("y");
+		albumDto.setAlbum_type(request.getParameter("album_type"));
+		albumDto.setOpen_yn("Y");
 		albumDto.setMember_sq(member_sq);
 		
 		// album 등록작업
 		int result_album = activityDao.uploadAlbumPro_album(albumDto);
+		
+		// Album_img File 등록
+		try {
+			savePath = request.getSession().getServletContext().getRealPath(realImgPath);
+			
+			// img 경로 확인 및 생성
+			File dir1 = new File(savePath);
+			if(!dir1.isDirectory()) {
+				dir1.mkdir();
+			}
+			
+			// album img 등록
+			File img_file = new File(savePath + result_album + ".png");
+			album_img.transferTo(img_file);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.debug("img 경로가 없습니다 " + savePath);
+			e.printStackTrace();
+			return false;
+		}
 		
 		if(result_album == 1) {
 			// img 파일 명을 바꾸기 위한 작업
@@ -350,7 +378,7 @@ public class ActivityServiceImpl implements ActivityService {
 			String artist = mhsr.getParameter("artist");
 			String play_time = mhsr.getParameter("play_time");
 			String music_tag = mhsr.getParameter("music_tag");
-			String music_comment = mhsr.getParameter("music_comment");
+			String music_comment = mhsr.getParameter("music_comment") == null ? "" : mhsr.getParameter("music_comment");
 			String music_open_yn = mhsr.getParameter("music_open_yn");
 			
 			MultipartFile music_file_multi = mhsr.getFile("file");
@@ -420,7 +448,7 @@ public class ActivityServiceImpl implements ActivityService {
 			// title_music_sq 설정 update
 			activityDao.updateAlbumTitleMusic(music_seq, img_seq);
 		}
-		return null;
+		return true;
 	}
 	
 	// 최우일

@@ -5,11 +5,12 @@
 <script src="${pageContext.request.contextPath }/resources/js/drag-arrange.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-ui.js"></script>
 <!-- custom -->
-<link href="${pageContext.request.contextPath }/resources/css/ph/uploadMusic.css?test=3" rel="stylesheet" type="text/css">
-<script src="${pageContext.request.contextPath }/resources/js/ph/uploadMusic.js?test=3"></script>
+<link href="${pageContext.request.contextPath }/resources/css/ph/uploadMusic.css?test=6" rel="stylesheet" type="text/css">
+<script src="${pageContext.request.contextPath }/resources/js/ph/uploadMusic.js?test=6"></script>
 
 </head>
 <body>
+<div class="ph-width-70">
 	<div class="container">
 		<div class="btn-group">
 			<input type="button" value="업로드" onclick="" class="btn">
@@ -19,10 +20,37 @@
 		</div>
 	</div>
 		<br />
+	<form id="album_upload" action="music/pro" name="album_upload" method="post" enctype="multipart/form-data" onsubmit="return before_upload();">
 	<div class="ph-album" style="border:1px solid;">
-	<form action="album/pro" name="album_upload" method="post" enctype="multipart/form-data" onsubmit="return before_upload();">
+		<input type="hidden" name="album_open_yn" value="Y">
+		<div class="ph-album-edit" style="border:1px solid;">
+			<table border="1">
+				<tr>
+					<td colspan="2">
+						<img alt="Album_Image" src="${pageContext.request.contextPath }/resources/img/album/default_album_cover.png" id="album_img" name="img_path" class="ph-album-img-thumbnail">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<input type="button" id="ph-album-img-btn" onclick="uploadAlbum_img()" value="앨범이미지">
+						<input type="text" id="img_file_text" size="10" disabled="disabled" required="required">
+						<input type="file" name="album_img" class="ph-album-img-up-btn dis_none" id="uploadAlbumImg" onchange="getAlbumPreview(event, this)" accept=".png">
+					</td>
+				</tr>
+				<tr>
+					<td>종류</td>
+					<td>
+						<select name="album_type">
+							<c:forEach var="type" items="${album_type }">
+								<option value="${type.code_cd }">${type.code_meaning }</option>
+							</c:forEach>
+						</select>
+					</td>
+				</tr>
+			</table>
+		</div>
 		<div class="ph-album-music-editor" style="border:1px solid;">
-			<ul id="itemList_music">
+			<ul id="itemList">
 				<li class="ui-state-default musicItem">
 					<table class="ph-music-list-table">
 						<tr class="ph-tr-1">
@@ -113,14 +141,14 @@
 				</li>
 			</ul>
 			<br />
-			<input type="button" value="추가하기" onclick="addList()">
 			<input type="submit" value="업로드">
 		</div>
+	</div>
 	</form>
 		<div style="display: none;">
 			<c:forEach var="tag" items="${music_tag }">
 				<input type="hidden" value="${tag.tag_cd},${tag.tag_category},${tag.tag_meaning}" class="tag_list">
 			</c:forEach>
 		</div>
-	</div>
+</div>
 </body>
