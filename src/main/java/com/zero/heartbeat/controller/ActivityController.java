@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.zero.heartbeat.annotation.CheckSession;
 import com.zero.heartbeat.model.AllLikeList;
 import com.zero.heartbeat.model.Code;
 import com.zero.heartbeat.model.Tag;
@@ -98,6 +99,9 @@ public class ActivityController {
 		map.put("music_sq", sq);
 		
 		Music music = activityService.selectMusicDetail(map);
+		if (music == null) {
+			return "common/noResult";
+		}
 		
 		model.addAttribute("music", music);
 		return "activity/others/music";
@@ -114,7 +118,10 @@ public class ActivityController {
 		map.put("target_sq", sq);
 		
 		List<Music> list = activityService.selectMusicByArtist(map);
-		Member member = activityService.selectMemberArtist(sq);
+		Member member = activityService.selectMemberArtist(map);
+		if (member == null) {
+			return "common/noResult";
+		}
 		
 		model.addAttribute("member", member);
 		model.addAttribute("list", list);

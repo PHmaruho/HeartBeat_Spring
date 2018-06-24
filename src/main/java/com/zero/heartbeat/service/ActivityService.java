@@ -48,7 +48,7 @@ public interface ActivityService {
 	List<Member> selectMusicArtists(int sq); // 최우일
 	Map<Integer, HashMap<String, Object>> selectReplyAtMusic(int sq);	// 최우일
 	List<Music> selectMusicByArtist(HashMap<String, Object> map);	// 최우일
-	Member selectMemberArtist(int sq);	// 최우일
+	Member selectMemberArtist(HashMap<String, Object> map);	// 최우일
 	void mergeMusicLike(HashMap<String, Object> map);	// 최우일
 	void updateMusicUnlike(HashMap<String, Object> map);	// 최우일
 }

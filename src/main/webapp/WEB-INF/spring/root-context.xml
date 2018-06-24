@@ -10,8 +10,8 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<context:property-placeholder location="classpath:mybatis/jdbc.properties" />
 
-	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
-		destroy-method="close">
+
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass" value="${jdbc.driverClassName}" />
 		<property name="jdbcUrl" value="${jdbc.url}" />
 		<property name="user" value="${jdbc.username}" />
@@ -50,5 +50,5 @@
 	</bean>
 	<!-- <bean id="mailService" class="com.zero.heartbeat.service.MailServiceImpl"> 
 		<property name="javaMailSender" ref="javaMailSender" /> </bean> -->
-
+		
 </beans>

@@ -279,8 +279,8 @@ public class ActivityDaoImpl implements ActivityDao {
 
 	// 최우일
 	@Override
-	public Member selectMemberArtist(int sq) {
-		return session.selectOne("selectMemberArtistCwi", sq);
+	public Member selectMemberArtist(HashMap<String, Object> map) {
+		return session.selectOne("selectMemberArtistCwi", map);
 	}
 
 	// 최우일

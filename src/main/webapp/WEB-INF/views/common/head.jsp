@@ -49,12 +49,20 @@ $(document).ready( function() {
 		clickEvent = false;
 	});
 });
+
+if ($('#needLogin').val() == 1) {
+	loginButtonClick();
+}
+
+function loginButtonClick() {
+	$('#modalBtnLogin').click();
+}
 </script>
 
 </head>
 <body>
 	<c:if test="${!empty loginSession }">
-		<button onclick="goto('/logout');goto('/head');goto('/')">logout</button>
+		<button onclick="logoutFunc()">logout</button>
 		<button onclick="goto('/memberInfoChangeForm')">개인정보수정</button>
 	</c:if>
 	<c:if test="${empty loginSession }">
@@ -85,7 +93,7 @@ $(document).ready( function() {
 								<tr>
 									<td colspan="2">
 										<input type="button" value="로그인" onclick="kkhcheck()">
-										<input type="button" value="취소"data-dismiss='modal'>
+										<input type="button" value="취소" data-dismiss='modal'>
 									</td>
 								</tr>
 							</table>

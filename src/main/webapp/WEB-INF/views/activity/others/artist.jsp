@@ -5,87 +5,121 @@
 </head>
 <body onresize="resizeComment()">
 	<div class="cwi-artist-info">
-		<img width="200" height="200" src="${pageContext.request.contextPath }/resources/img/profile/${member.member_sq }.png">
-		nick : ${member.nick }
+		<img src="${pageContext.request.contextPath }/resources/img/profile/${member.member_sq }.png" class="cwi-artist-img">
+		<h1 class="display-4 cwi-artist-nick">${member.nick }</h1>
+		팔로워 : ${member.followerCnt }
+		팔로잉 : ${member.followingCnt }
+		<div id="artistFollow" class="cwi-like-wrapper">
+			<c:if test="${member.cntFollow == 0}">
+				<span id="artistFollowButton" class="badge badge-pill badge-light cwi-like"
+					onclick="cwi_reLike(${music.music_sq}, this)">
+					팔로우
+				</span>
+			</c:if>
+			<c:if test="${member.cntFollow == 1}">
+				<span id="artistFollowButton" class="badge badge-pill badge-light cwi-liked"
+					onclick="cwi_unLike(${music.music_sq}, this)">
+					팔로우 취소
+				</span>
+			</c:if>
+		</div>	
 	</div>
 
 	<c:forEach var="music" items="${list }" varStatus="status">
 		<div class="cwi-artist-player-main">
-			<span class="cwi-artist-player-img">
-				<img src="${pageContext.request.contextPath }/resources/img/album/${music.album_sq }.png">
-			</span>
-			
-			<div class="cwi-artist-second-main">
-				<table class="cwi-artist-player-info">
-					<tr>
-						<td rowspan="2" style="width: 70px; height: 70px;">
-							<span>
-								<a id="detailPlayBtn${status.index }" onclick="playFromDetail(${status.index })">
-									<img src="${pageContext.request.contextPath }/resources/img/icon/play-button-64.png">
-								</a>
-								<a id="detailPauseBtn${status.index }" class="cwi-foot-display-none" onclick="pauseFromDetail(${status.index })">
-									<img src="${pageContext.request.contextPath }/resources/img/icon/pause-button-64.png">
-								</a>
-							</span>
-						</td>
-						<td>
-							<span class="badge badge-dark cwi-detail-player-artist cwi-vertical-bottom">
-								<c:forEach var="artist" items="${music.artistList }" varStatus="artistStatus">
-									<a onclick="goto('/others/artist/${artist.member_sq}')" class="cwi-cursor-pointer">${artist.nick}</a>
-									<c:if test="${!artistStatus.last }">
-										, 
-									</c:if>
-								</c:forEach>
-							</span>
-						</td>
-					</tr>
-					<tr>
-						<td><span class="badge badge-dark cwi-artist-player-title cwi-vertical-top">${music.music_nm }</span></td>
-					</tr>
-				</table>
-				
-				<div class="cwi-artist-player-tags">
-					<c:forEach var="tag" items="${music.tagList }" varStatus="tagStatus">
-						<h6 class="cwi-detail-h-inline"><span class="badge badge-pill badge-secondary">#${tag.tag_meaning}</span></h6>
-					</c:forEach>
+			<div class="cwi-artist-flex">
+				<div class="cwi-artist-player-img">
+					<img src="${pageContext.request.contextPath }/resources/img/album/${music.album_sq }.png">
 				</div>
 				
-				<div class="cwi-artist-player-wave-wrapper">
-					<div id="detailWaveForm${status.index }" class="cwi-artist-player-wave"></div>
-					<div class="cwi-detail-progress">
-						<span id="detailProgress${status.index }" class="progress-left badge badge-pill badge-dark"></span>
-						<span id="detailDuration${status.index }" class="progress-right badge badge-pill badge-dark"></span>
+				<div class="cwi-artist-second-main">
+					<table class="cwi-artist-player-info">
+						<tr>
+							<td rowspan="2" style="width: 70px; height: 70px;">
+								<span>
+									<a id="detailPlayBtn${status.index }" onclick="playFromDetail(${status.index })">
+										<img src="${pageContext.request.contextPath }/resources/img/icon/play-button-64.png">
+									</a>
+									<a id="detailPauseBtn${status.index }" class="cwi-foot-display-none" onclick="pauseFromDetail(${status.index })">
+										<img src="${pageContext.request.contextPath }/resources/img/icon/pause-button-64.png">
+									</a>
+								</span>
+							</td>
+							<td>
+								<span class="badge badge-dark cwi-detail-player-artist cwi-vertical-bottom">
+									<c:forEach var="artist" items="${music.artistList }" varStatus="artistStatus">
+										<a onclick="goto('/others/artist/${artist.member_sq}')" class="cwi-cursor-pointer">${artist.nick}</a>
+										<c:if test="${!artistStatus.last }">
+											, 
+										</c:if>
+									</c:forEach>
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<td><span class="badge badge-dark cwi-artist-player-title cwi-vertical-top">${music.music_nm }</span></td>
+						</tr>
+					</table>
+					
+					<div class="cwi-artist-player-tags">
+						<c:forEach var="tag" items="${music.tagList }" varStatus="tagStatus">
+							<h6 class="cwi-detail-h-inline"><span class="badge badge-pill badge-secondary">#${tag.tag_meaning}</span></h6>
+						</c:forEach>
 					</div>
 					
-					<div id="detailComments${status.index }" style="height: 24px;">
-						<div id="detailCommentIconsLine${status.index }" class="cwi-datail-comments-line"></div>
-						<span id="detailCommentsOn${status.index }" style="position: absolute;">
-							<span id="detailCommentsOn${status.index }-1" class="badge cwi-comments-color"></span>
-							<span id="detailCommentsOn${status.index }-2" class="badge cwi-comments-color"></span>
-							<span id="detailCommentsOn${status.index }-3" class="badge cwi-comments-color"></span>
-						</span>
+					<div class="cwi-artist-player-wave-wrapper">
+						<div id="detailWaveForm${status.index }" class="cwi-artist-player-wave"></div>
+						<div class="cwi-detail-progress">
+							<span id="detailProgress${status.index }" class="progress-left badge badge-pill badge-dark"></span>
+							<span id="detailDuration${status.index }" class="progress-right badge badge-pill badge-dark"></span>
+						</div>
+						
+						<div id="detailComments${status.index }" style="height: 24px;">
+							<div id="detailCommentIconsLine${status.index }" class="cwi-datail-comments-line"></div>
+							<span id="detailCommentsOn${status.index }" style="position: absolute;">
+								<span id="detailCommentsOn${status.index }-1" class="badge cwi-comments-color"></span>
+								<span id="detailCommentsOn${status.index }-2" class="badge cwi-comments-color"></span>
+								<span id="detailCommentsOn${status.index }-3" class="badge cwi-comments-color"></span>
+							</span>
+						</div>
 					</div>
 				</div>
 			</div>
-			
-			<div id="detailLike0">
+		</div>	
+		<div class="cwi-artist-third-main">
+			<div id="detailLike${status.index }" class="cwi-like-wrapper">
 				<c:if test="${music.isLiked == 0}">
-					<span id="detailLikeButton0" class="badge badge-pill badge-light cwi-like"
+					<span id="detailLikeButton${status.index }" class="badge badge-pill badge-light cwi-like"
 						onclick="cwi_reLike(${music.music_sq}, this)">
 						<img src="${pageContext.request.contextPath }/resources/img/icon/like-16.png"> ${music.likeCnt }
 					</span>
 				</c:if>
 				<c:if test="${music.isLiked == 1}">
-					<span id="detailLikeButton0" class="badge badge-pill badge-light cwi-liked"
+					<span id="detailLikeButton${status.index }" class="badge badge-pill badge-light cwi-liked"
 						onclick="cwi_unLike(${music.music_sq}, this)">
 						<img src="${pageContext.request.contextPath }/resources/img/icon/liked-16.png"> ${music.likeCnt }
 					</span>
 				</c:if>
 			</div>
-			
-			<input type="hidden" id="detailMusicSq${status.index }" value="${music.music_sq }">
-			<c:set var="maxNum" value="${status.index }"/>
-		</div>	
+			<div class="cwi-comment-wrapper">
+				<div class="cwi-comment-img-wrapper">
+					<c:if test="${empty loginSession }">
+						<img src="${pageContext.request.contextPath }/resources/img/profile/default-32.png" class="cwi-comment-img">
+					</c:if>
+					<c:if test="${!empty loginSession }">
+						<img src="${pageContext.request.contextPath }/resources/img/profile/${loginSession }.png"class="cwi-comment-img">
+					</c:if>
+				</div>
+				<div class="cwi-comment-input-wrapper">
+					<a id="detailCommentTarget${status.index }" class="cwi-comment-target"></a>
+					<input type="text" id="detailCommentText${status.index }" class="cwi-comment-input"
+						onkeydown="commentKeyPress(${status.index }, 1)" placeholder="답글을 달아주세요">
+					<input type="hidden" id="detailCommentHidden${status.index }" value="">
+				</div>
+			</div>	
+		</div>
+		<input type="hidden" id="detailMusicSq${status.index }" value="${music.music_sq }">
+		<c:set var="maxNum" value="${status.index }"/>
 	</c:forEach>
 	<input type="hidden" id="maxDetailNum" value="${maxNum }">
 	

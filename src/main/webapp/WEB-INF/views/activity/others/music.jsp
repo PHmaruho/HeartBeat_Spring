@@ -65,6 +65,20 @@
 	</div>
 	
 	<div class="cwi-detail-under-main">
+		<div id="detailLike0" class="cwi-like-wrapper">
+			<c:if test="${music.isLiked == 0}">
+				<span id="detailLikeButton0" class="badge badge-pill badge-light cwi-like"
+					onclick="cwi_reLike(${music.music_sq}, this)">
+					<img src="${pageContext.request.contextPath }/resources/img/icon/like-16.png"> ${music.likeCnt }
+				</span>
+			</c:if>
+			<c:if test="${music.isLiked == 1}">
+				<span id="detailLikeButton0" class="badge badge-pill badge-light cwi-liked"
+					onclick="cwi_unLike(${music.music_sq}, this)">
+					<img src="${pageContext.request.contextPath }/resources/img/icon/liked-16.png"> ${music.likeCnt }
+				</span>
+			</c:if>
+		</div>
 		<div class="cwi-comment-wrapper">
 			<div class="cwi-comment-img-wrapper">
 				<c:if test="${empty loginSession }">
@@ -80,20 +94,6 @@
 					onkeydown="commentKeyPress(0, 0)" placeholder="답글을 달아주세요">
 				<input type="hidden" id="detailCommentHidden0" value="">
 			</div>
-		</div>
-		<div id="detailLike0">
-			<c:if test="${music.isLiked == 0}">
-				<span id="detailLikeButton0" class="badge badge-pill badge-light cwi-like"
-					onclick="cwi_reLike(${music.music_sq}, this)">
-					<img src="${pageContext.request.contextPath }/resources/img/icon/like-16.png"> ${music.likeCnt }
-				</span>
-			</c:if>
-			<c:if test="${music.isLiked == 1}">
-				<span id="detailLikeButton0" class="badge badge-pill badge-light cwi-liked"
-					onclick="cwi_unLike(${music.music_sq}, this)">
-					<img src="${pageContext.request.contextPath }/resources/img/icon/liked-16.png"> ${music.likeCnt }
-				</span>
-			</c:if>
 		</div>
 	</div>
 	

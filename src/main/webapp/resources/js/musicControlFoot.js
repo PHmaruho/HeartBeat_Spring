@@ -18,9 +18,7 @@ function initFoot(sq) {
 		$('#footDuration').text(formatTime(footPlayer.duration));
 		$('#footProgress').text( formatTime(0));
 		
-		console.log(musicMain.getMusicPage());
 		if (musicMain.getMusicPage()) {
-			console.log(musicMain.getMusicPage());
 			for(var i = 0; i <= maxDetailNum; i++) {
 				if (detailPlayer[i].sq == footPlayer.sq) {
 					console.log('musicfoot 24 line : ' + i)
@@ -381,21 +379,32 @@ $('#footVolumeLeave').on('mouseleave', function() {
 
 
 function cwi_reLike(sq, v) {
-	$.ajax({
-		url: '/heartbeat/do/reLike/' + sq,
-		success: function() {
-			$('#'+v.parentNode.id).load('#'+v.id+' '+'#'+v.id);
-		}
-	});
+	if (checkLogin()) {
+		$.ajax({
+			url: '/heartbeat/do/reLike/' + sq,
+			success: function() {
+				$('#'+v.parentNode.id).load('#'+v.id+' '+'#'+v.id);
+			}
+		});
+	}
 }
 
 function cwi_unLike(sq, v) {
-	$.ajax({
-		url: '/heartbeat/do/unLike/' + sq,
-		success: function() {
-			$('#'+v.parentNode.id).load('#'+v.id+' '+'#'+v.id);
-		}
-	});
+	if (checkLogin()) {
+		$.ajax({
+			url: '/heartbeat/do/unLike/' + sq,
+			success: function() {
+				$('#'+v.parentNode.id).load('#'+v.id+' '+'#'+v.id);
+			}
+		});
+	}
 }
 
-console.log(2);
+function checkLogin() {
+	if ($('#loginSession').val() == '') {
+		loginButtonClick();
+		return false;
+	} else {
+		return true;
+	}
+}

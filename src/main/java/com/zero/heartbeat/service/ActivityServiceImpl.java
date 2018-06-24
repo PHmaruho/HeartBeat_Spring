@@ -449,8 +449,8 @@ public class ActivityServiceImpl implements ActivityService {
 
 	// 최우일
 	@Override
-	public Member selectMemberArtist(int sq) {
-		return activityDao.selectMemberArtist(sq);
+	public Member selectMemberArtist(HashMap<String, Object> map) {
+		return activityDao.selectMemberArtist(map);
 	}
 
 	// 최우일
