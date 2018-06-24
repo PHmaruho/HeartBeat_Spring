@@ -61,7 +61,6 @@ function loginButtonClick() {
 
 </head>
 <body>
-<button onclick="dfdfdf()">adsfad</button>
 	<c:if test="${!empty loginSession }">
 		<button onclick="logoutFunc()">logout</button>
 		<button onclick="goto('/memberInfoChangeForm')">개인정보수정</button>

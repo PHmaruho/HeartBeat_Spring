@@ -60,7 +60,7 @@
 				
 				<%-- <input type="button" value="playlist" onclick="playlistClick()">
 				<div id="playlist" class="cwi-foot-playlist">
-					<table class="cwi-foot-playlist-table">
+					<table id="playlistTable" class="cwi-foot-playlist-table">
 						<c:forEach var="playlist" items="${playlist}">
 							<tr onclick="loadFoot(${playlist.music_sq}); alert(${playlist.music_sq} + '로 음악 변경, 임시기능이기에 직접 play 바람, 동기화 미지원')">
 								<td>sq : ${playlist.music_sq} </td>

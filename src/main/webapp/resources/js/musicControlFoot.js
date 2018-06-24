@@ -1,7 +1,7 @@
 var footPlayer;
 var footProgressFlag = 0;
 
-//cookieList();
+cookieList();
 initFoot(302);
 
 function initFoot(sq) {
@@ -158,8 +158,7 @@ function setCookie(cname, cvalue) {
     		contentType: 'application/json; charset=UTF-8',
     		success : function(data) {
     			document.cookie = 'cookieOrder' + cname + '=' + encodeURI(cvalue) + ';' + expires + ';path=/';
-    			footPlayer.cookieList.cookieName = data.cookieName;
-    			console.log(footPlayer.cookieList);
+    			footPlayer.cookieList[cookieName] = data.cookieOrder1;
     		},
     		error:function(request,status,error){
     		    console.log('code : ' + request.status + '\n' + 'message : ' + request.responseText + '\n' + 'error : ' + error);
@@ -300,20 +299,6 @@ function cookieFromPlay(sq) {
 	loadFoot(sq);
 }
 
-//for (var i = 1; i <= 100; i++) {
-//	setCookie(i, 302);
-//}
-//setCookie(50);
-//console.log(document.cookie);
-//
-//deleteCookie(1);
-//deleteCookie(1);
-//deleteCookie(1);
-//console.log(document.cookie);
-
-//cookieFromPlay(55555);
-//console.log(document.cookie);
-
 function cookieList() {
 	var cookie = cookieToObject();
 	
@@ -325,6 +310,7 @@ function cookieList() {
 			contentType: 'application/json; charset=UTF-8',
 			success : function(data) {
 				footPlayer.cookieList = data;
+				console.log(footPlayer.cookieList);
 			},
 			error:function(request,status,error){
 			    console.log('code : ' + request.status + '\n' + 'message : ' + request.responseText + '\n' + 'error : ' + error);
@@ -333,14 +319,25 @@ function cookieList() {
 	}
 }
 
-//console.log(cookieToObject());
-//deleteCookie(1);
-//console.log(cookieToObject());
-//console.log(footPlayer.cookieList);
+function initPlaylist() {
+	var list = $('#playlistTable');
+	var max = getMaxCookie();
+	var newHtml = '';
+	
+	for (var i = 1; i <= max; i++) {
+		var cookie = footPlayer.cookieList['cookieOrder' + i];
+		newHtml = newHtml + 
+		'<tr onclick="loadFoot('+ cookie.music_sq +')">' +
+			'<td>sq : '+ cookie.music_sq +' </td>' +
+			'<td>'+
+				'<c:forEach var="artistList" items="${playlist.artistList}">' +
+					'artist : ${artistList.nick }' +
+				'</c:forEach>' +
+			'</td>' +
+		'</tr>';
+	}
+}
 
-//deleteCookie();
-//cookieFromAdd(302);
-//console.log(document.cookie);
 $('input[type="range"]').change(function () {
     var val = ($(this).val() - $(this).attr('min')) / ($(this).attr('max') - $(this).attr('min'));
     
@@ -451,8 +448,11 @@ function cwi_unfollow(targetSq, v) {
 	}
 }
 
-function dfdfdf() {
-	console.log(window.location);
-	console.log(window.location.pathname);
-	console.log(window.location.pathname.replace('/' + $('#packageName').val(), ''));
-}
+//console.log(cookieToObject());
+//deleteCookie(1);
+//console.log(cookieToObject());
+//console.log(footPlayer.cookieList);
+
+//deleteCookie();
+//cookieFromAdd(302);
+//console.log(document.cookie);
