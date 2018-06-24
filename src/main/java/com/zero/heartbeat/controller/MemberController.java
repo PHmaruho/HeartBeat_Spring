@@ -84,7 +84,7 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/loginPro")
-	public String loginPro(Model model, String email, String pw, HttpSession session) {
+	public String loginPro(Model model, String email, String pw, String loginUrl, HttpSession session) {
 		String returnString = "";
 		Member member = new Member();
 		member.setEmail(email);
@@ -93,11 +93,10 @@ public class MemberController {
 		if (loginSession != 0) {
 			String member_sq = memberService.getMemberSq(member);
 			session.setAttribute("loginSession", member_sq);
-			returnString = "redirect:/";
+			returnString = "redirect:" + loginUrl;
 		} else {
 			returnString = "forward:/loginForm";
 		}
-		System.out.println(returnString);
 		return returnString;
 	}
 

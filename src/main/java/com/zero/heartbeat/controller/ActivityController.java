@@ -128,6 +128,24 @@ public class ActivityController {
 		return "activity/others/artist";
 	}
 	
+	// 최우일
+	@RequestMapping("/my/music")
+	public String myMusic(Model model, HttpSession session) {
+		Object obj = session.getAttribute("loginSession");
+		int member_sq = obj == null ? 0 : Integer.parseInt(obj.toString());
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("member_sq", member_sq);
+		map.put("target_sq", member_sq);
+		
+		List<Music> list = activityService.selectMusicByArtist(map);
+		Member member = activityService.selectMemberArtist(map);
+		
+		model.addAttribute("member", member);
+		model.addAttribute("list", list);
+		return "activity/my/music";
+	}
+	
 	//JAN
 	/*@RequestMapping(value="/my/like")
 	public String selectMusicLikeList(Model model, HttpSession session) {

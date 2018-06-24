@@ -450,3 +450,9 @@ function cwi_unfollow(targetSq, v) {
 		}
 	}
 }
+
+function dfdfdf() {
+	console.log(window.location);
+	console.log(window.location.pathname);
+	console.log(window.location.pathname.replace('/' + $('#packageName').val(), ''));
+}

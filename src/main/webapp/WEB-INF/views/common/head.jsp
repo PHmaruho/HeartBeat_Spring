@@ -61,6 +61,7 @@ function loginButtonClick() {
 
 </head>
 <body>
+<button onclick="dfdfdf()">adsfad</button>
 	<c:if test="${!empty loginSession }">
 		<button onclick="logoutFunc()">logout</button>
 		<button onclick="goto('/memberInfoChangeForm')">개인정보수정</button>
@@ -97,6 +98,7 @@ function loginButtonClick() {
 									</td>
 								</tr>
 							</table>
+							<input type="hidden" name="loginUrl" id="loginUrl">	<!-- cwi 로그인완료시 원래 위치로 -->
 						</form>
 					</div>
 				</div>
