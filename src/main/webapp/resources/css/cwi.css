@@ -454,3 +454,22 @@ input[type='range']::-webkit-slider-thumb {
 	top: 20px;
 	left: 310px;
 }
+
+.cwi-follow-wrapper {
+	position: absolute;
+	top: 85px;
+	left: 310px;
+}
+
+.cwi-artist-follow-stat {
+	display: inline-block;
+	position: absolute;
+	right: 20px;
+	bottom: 10px;
+}
+
+.cwi-font-size-1 {
+	font-size: 1.0rem;
+	font-weight: 100;
+	line-height: 1.2;
+}

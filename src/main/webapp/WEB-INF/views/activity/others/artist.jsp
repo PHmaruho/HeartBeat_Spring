@@ -7,22 +7,25 @@
 	<div class="cwi-artist-info">
 		<img src="${pageContext.request.contextPath }/resources/img/profile/${member.member_sq }.png" class="cwi-artist-img">
 		<h1 class="display-4 cwi-artist-nick">${member.nick }</h1>
-		팔로워 : ${member.followerCnt }
-		팔로잉 : ${member.followingCnt }
-		<div id="artistFollow" class="cwi-like-wrapper">
+		
+		<div id="artistFollow" class="cwi-follow-wrapper">
 			<c:if test="${member.cntFollow == 0}">
 				<span id="artistFollowButton" class="badge badge-pill badge-light cwi-like"
-					onclick="cwi_reLike(${music.music_sq}, this)">
-					팔로우
+					onclick="cwi_follow(${member.member_sq}, this)">
+					<img src="${pageContext.request.contextPath }/resources/img/icon/follow-16.png"> 팔로우
 				</span>
 			</c:if>
 			<c:if test="${member.cntFollow == 1}">
 				<span id="artistFollowButton" class="badge badge-pill badge-light cwi-liked"
-					onclick="cwi_unLike(${music.music_sq}, this)">
-					팔로우 취소
+					onclick="cwi_unfollow(${member.member_sq}, this)">
+					<img src="${pageContext.request.contextPath }/resources/img/icon/following-16.png"> 취소
 				</span>
 			</c:if>
-		</div>	
+		</div>
+		<div class="cwi-artist-follow-stat">
+			<h5 class="cwi-font-size-1">팔로워 / ${member.followerCnt }</h5>
+			<h5 class="cwi-font-size-1">팔로잉 / ${member.followingCnt }</h5>
+		</div>
 	</div>
 
 	<c:forEach var="music" items="${list }" varStatus="status">

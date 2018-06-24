@@ -408,3 +408,46 @@ function checkLogin() {
 		return true;
 	}
 }
+
+function cwi_follow(sq, v) {
+	if (checkLogin()) {
+		var session = $('#loginSession').val();
+		
+		if (sq == session) {
+			alert('본인을 팔로우 할 수 없습니다.');
+		} else {
+			$.ajax({
+				url: '/heartbeat/do/follow',
+				data: {
+					member_sq : sq,
+					loginSession : session
+				},
+				success : function() {
+					$('#'+v.parentNode.id).load('#'+v.id+' '+'#'+v.id);
+				}
+			});
+		}
+	}
+}
+
+
+function cwi_unfollow(targetSq, v) {
+	if (checkLogin()) {
+		var memberSq = $('#loginSession').val();
+		
+		if(targetSq == memberSq) {
+			alert('본인을 팔로우할 수 없습니다.')
+		} else {
+			$.ajax({
+				url: '/heartbeat/do/unfollow',
+				data: {
+					member_sq : memberSq,
+					target_sq : targetSq
+				},
+				success : function() {
+					$('#'+v.parentNode.id).load('#'+v.id+' '+'#'+v.id);
+				}
+			});
+		}
+	}
+}
