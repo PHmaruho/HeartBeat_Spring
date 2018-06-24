@@ -56,9 +56,9 @@
 			<img src="${pageContext.request.contextPath }/resources/img/album/${album.img_path }.png" class="albumImg" ></a>
 				<br>
 				<br>
-				<a><img src="${pageContext.request.contextPath }/resources/img/profile/like.png" class="glul-img" onclick="likeAlbum(${album.album_sq},${loginSession },'popAlbum${i.index }')"></a>	
 					<br>
-					${album.album_nm }<br>
+					<a onclick="goto('/heartbeat/others/artist/${album.album_sq}')">
+					${album.album_nm }</a><br>
 					<a onclick="goto('/heartbeat/others/artist/${album.member_sq}')">
 					${album.nick }
 					</a><br>
