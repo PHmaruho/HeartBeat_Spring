@@ -20,8 +20,7 @@ function initFoot(sq) {
 		
 		if (musicMain.getMusicPage()) {
 			for(var i = 0; i <= maxDetailNum; i++) {
-				if (detailPlayer[i].sq == footPlayer.sq) {
-					console.log('musicfoot 24 line : ' + i)
+				if (typeof detailPlayer[i] !== 'undefined' && detailPlayer[i].sq == footPlayer.sq) {
 					musicMain.setDetailNum(i);
 				}
 			}
