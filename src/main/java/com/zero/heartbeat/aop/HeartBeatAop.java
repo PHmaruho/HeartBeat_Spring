@@ -10,10 +10,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class HeartBeatAop {
 	@Around("@annotation(com.zero.heartbeat.annotation.CheckSession)")
-	public Object CheckSessionAop2(ProceedingJoinPoint joinPoint) throws Throwable{
+	public Object CheckSessionAop(ProceedingJoinPoint joinPoint) throws Throwable{
 		StandardSessionFacade session = null;
 		
         for ( Object o : joinPoint.getArgs() ){
+        	System.out.println(o.getClass().getName() + " : " + o);
             if ( o instanceof StandardSessionFacade ) {
                 session = (StandardSessionFacade)o;
             }

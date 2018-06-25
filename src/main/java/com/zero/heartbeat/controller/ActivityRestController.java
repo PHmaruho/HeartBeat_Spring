@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.zero.heartbeat.annotation.CheckSession;
 import com.zero.heartbeat.model.Member;
 import com.zero.heartbeat.model.Music;
 import com.zero.heartbeat.model.MusicLike;

@@ -21,6 +21,11 @@ $(document).ready(function(){
 	 	검색: <input type="text" id="searchBox"> -->
 	 	
 	<div class="cwi-discover-main">
+		<div class="jumbotron cwi-discover-jumbo">
+			<h1 class="display-4">탐색</h1>
+			<p class="lead">검색 하고싶은 요소를 선택 후 검색어를 입력해주세요.</p>
+			<hr class="my-4">
+		</div>
 		<div id="detailSearchCategory">
 			<div class="cwi-discover-radios cwi-discover-input">
 				<input type="radio" value="artist" onclick="searchDetailShowKeyword(this)"

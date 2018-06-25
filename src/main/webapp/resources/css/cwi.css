@@ -473,3 +473,15 @@ input[type='range']::-webkit-slider-thumb {
 	font-weight: 100;
 	line-height: 1.2;
 }
+
+.cwi-discover-jumbo {
+	padding-bottom: 0px !important;
+}
+
+.cwi-head-main {
+	width: 70%;
+	height: 100%;
+	margin: auto;
+	position: relative;
+	min-width: 1050px;
+}

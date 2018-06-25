@@ -36,8 +36,8 @@
 			<exclude-mapping path="/head"/>
 			<exclude-mapping path="/foot"/>
 			<exclude-mapping path="/do/**"/>
-			<exclude-mapping path="/loginPro"/>
-			<exclude-mapping path="**/pro"/>
+			<exclude-mapping path="/**/*Pro*"/>
+			<exclude-mapping path="/**/*pro*"/>
 			
 			<exclude-mapping path="/resources/**"/>
 			<beans:ref bean="RefreshInterceptor"/>
