@@ -23,7 +23,7 @@ $(document).ready(function(){
 	<div class="cwi-discover-main">
 		<div class="jumbotron cwi-discover-jumbo">
 			<h1 class="display-4">탐색</h1>
-			<p class="lead">검색 하고싶은 요소를 선택 후 검색어를 입력해주세요.</p>
+			<p class="lead">회원/노래/태그 중 하나를 선택 후 검색어를 입력해주세요.</p>
 			<hr class="my-4">
 		</div>
 		<div id="detailSearchCategory">
