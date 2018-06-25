@@ -2,10 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <head>
 <head>
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery.3.3.1.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/js/jquery-ui.css">
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jsy.js"></script>
 <link href="${pageContext.request.contextPath }/resources/css/jsy/search.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
 $(document).ready(function(){
@@ -15,11 +13,6 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-	<!-- <div id="placeHolder">
-		가수는 @, 곡명은 *를, 태그는 #을 붙이고 단어마다 스페이스바를 해주세요! ex)@가수 *곡명 #태그
-	</div>
-	 	검색: <input type="text" id="searchBox"> -->
-	 	
 	<div class="cwi-discover-main">
 		<div class="jumbotron cwi-discover-jumbo">
 			<h1 class="display-4">탐색</h1>

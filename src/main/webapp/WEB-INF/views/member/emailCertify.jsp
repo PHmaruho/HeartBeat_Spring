@@ -20,24 +20,21 @@ function kkhEmailCheck() {
 </script>
 </head>
 <body>
-	<form action="/heartbeat/emailServiceSuccess" id="form">
-	<h2>인증번호 입력</h2>
-		<table>
-			<tr>
-				<td>
-					<input type="text" name="" id="inputCheck" required="required">
-				</td>
-				<td>
-					<input type="button" value="인증" onclick="kkhEmailCheck()">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<input type="hidden" value="0" id="numCheck">
-					<input type="hidden" value="${member.email }" name="email">
-				</td>
-			</tr>
-		</table>
-	</form>
-	<span id="msg"></span>
+	<div class="cwi-discover-main">
+		<div class="jumbotron cwi-discover-jumbo">
+			<h1 class="display-4">메일 인증</h1>
+			<p class="lead">입력하신 메일 주소로 인증번호가 발송 되었습니다.</p>
+			<hr class="my-4">
+		</div>
+		
+		<form action="/heartbeat/emailServiceSuccess" id="form">
+			<div class="form-group cwi-change-under">
+				<input type="text" name="" id="inputCheck" required="required" class="cwi-change-input" placeholder="인증번호">
+				<input type="button" value="인증" onclick="kkhEmailCheck()" class="cwi-change-button">
+			</div>
+						<input type="hidden" value="0" id="numCheck">
+						<input type="hidden" value="${member.email }" name="email">
+		</form>
+		<span id="msg"></span>
+	</div>
 </body>

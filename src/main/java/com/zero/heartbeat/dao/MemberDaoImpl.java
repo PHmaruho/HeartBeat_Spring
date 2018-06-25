@@ -93,5 +93,10 @@ public class MemberDaoImpl implements MemberDao {
 		// TODO Auto-generated method stub
 		return session.selectOne("getMemberSq",member);
 	}
-
+	
+	// 최우일
+	@Override
+	public int selectAlarmCount(int member_sq) {
+		return session.selectOne("selectAlarmCount", member_sq);
+	}
 }

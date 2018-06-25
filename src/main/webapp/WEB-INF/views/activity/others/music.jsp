@@ -94,6 +94,9 @@
 					onkeydown="commentKeyPress(0, 0)" placeholder="답글을 달아주세요">
 				<input type="hidden" id="detailCommentHidden0" value="">
 			</div>
+			<div class="ph-comment-list-wrapper">
+			
+			</div>
 		</div>
 	</div>
 	

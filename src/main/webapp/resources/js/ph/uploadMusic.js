@@ -14,6 +14,40 @@ $('html').click(function(e){
 		}
 	});
 
+function uploadAlbum_img(){
+	let file_btn = $('#uploadAlbumImg');
+	file_btn.click();
+}
+
+//앨범 이미지 보기
+function getAlbumPreview(event, input) {
+    if (input.files && input.files[0]) {
+    	if(input.files[0].type.indexOf("png") == -1){
+    		alert("파일 형식을 확인해 주세요(png)");
+    		let file = $(input);
+    		file.val('');
+    		
+    		var reader = new FileReader();
+	        reader.onload = function (e) {
+		            var element = window.document.getElementById("album_img");
+		            element.setAttribute("src", "/heartbeat/resources/img/album/default_album_cover.png");
+	        	}
+	        reader.readAsDataURL(file[0].files[0]);
+    		return;
+    	}
+    	var reader = new FileReader();
+        reader.onload = function (e) {
+	            var element = window.document.getElementById("album_img");
+	            element.setAttribute("src", e.target.result);
+        	}
+        reader.readAsDataURL(input.files[0]);
+     
+        let text = $('#img_file_text');
+        let img_file = $(input);
+        texts.val(img_file.val());
+    }
+}
+
 function searchArtist(e, searchArt){
 	var text = $(searchArt);
 	var text_list = $('.ph-search-artist-txt');
@@ -43,6 +77,8 @@ function searchArtist(e, searchArt){
 				}
 			}
 		});
+	} else {
+		complete.eq(index_i).hide();
 	}
 }
 
@@ -227,20 +263,22 @@ function searchTag(selectText){
 					
 				});
 				
-				tag_show_list.eq(i).find('ul').html("");
-				tag_show_list.eq(i).find('ul').append(str);
-				$(this).eq(i).show();
+				tag_show_list.eq(i).find('ul').html(str);
+				li.show();
 				
 				return;
+			} else {
+				tag_show_list.eq(i).show();
+				let li_tag = li.find('li');
+				li_tag.each(function(j, obj){
+					let li_id = $(this).find('span').attr('id');
+					if(li_id.toLowerCase().indexOf(text.val().toLowerCase()) != -1){
+						$(this).show();
+					} else {
+						$(this).hide();
+					}
+				});
 			}
-			
-			li.each(function(j, obj){
-				if(li.eq(j).find('span').attr('id').indexOf(text.val()) != -1){
-					li.eq(j).show();
-				} else {
-					li.eq(j).hide();
-				}
-			});
 		}
 	});
 }
@@ -350,15 +388,21 @@ function fileChange(e, file_upload){
 	audio.find('#source').attr("src", URL.createObjectURL(files[0]));
 }
 
-// onsubmit
+//onsubmit
 function before_upload(){
 	let file_list = $('.ph-file-form');
 	let artist_list = $('.ph-search-artist-ul');
+	let tag_list = $('.ph-search-tag-ul');
 	let val = true;
 	
-	file_list.each(function(){
+	if($('#uploadAlbumImg').val() == ''){
+		alert("앨범이미지를 추가해 주세요.");
+		return false;
+	}
+	
+	file_list.each(function(i, obj){
 		if($(this).val() == ''){
-			alert("파일을 추가해 주세요.");
+			alert((i+1) + "번째 음악파일을 추가해 주세요.");
 			val = false;
 		}
 	});
@@ -366,12 +410,25 @@ function before_upload(){
 		return val;
 	}
 	
-	artist_list.each(function(){
+	artist_list.each(function(i, obj){
 		if($(this).html().trim().length == 0){
-			alert("아티스트를 추가해 주세요.")
+			alert((i+1) + "번째 아티스트를 추가해 주세요.")
 			val = false;
 		}
-	})
+	});
+	if(val == false){
+		return val;
+	}
+	
+	tag_list.each(function(i, obj){
+		if($(this).html().trim().length == 0){
+			alert((i+1) + "번째 태그를 추가해 주세요.")
+			val = false;
+		}
+	});
+	if(val == false){
+		return val;
+	}
 	
 	return val;
 }

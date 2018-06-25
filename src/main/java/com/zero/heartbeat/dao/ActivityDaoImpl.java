@@ -1,6 +1,5 @@
 package com.zero.heartbeat.dao;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,11 +12,10 @@ import org.springframework.stereotype.Repository;
 
 import com.zero.heartbeat.model.MusicLike;
 import com.zero.heartbeat.model.MusicTag;
+import com.zero.heartbeat.model.Reply;
 import com.zero.heartbeat.model.Tag;
 import com.zero.heartbeat.model.Album;
 import com.zero.heartbeat.model.Artist;
-import com.zero.heartbeat.model.SearchList;
-import com.zero.heartbeat.model.Tag;
 import com.zero.heartbeat.model.AllLikeList;
 import com.zero.heartbeat.model.Code;
 import com.zero.heartbeat.model.Follow;
@@ -244,6 +242,54 @@ public class ActivityDaoImpl implements ActivityDao {
 	public int selectOneMusicSeq(int album_sq) {
 		// TODO Auto-generated method stub
 		return session.selectOne("selectAlbumMusicSeq", album_sq);
+	}
+	
+	@Override
+	public int insertReplyMusic(Reply replyDto) {
+		// TODO Auto-generated method stub
+		return session.insert("insertReplyMusic", replyDto);
+	}
+	
+	@Override
+	public int insertReplyMusic1(Reply replyDto) {
+		// TODO Auto-generated method stub
+		return session.insert("insertReplyMusic1", replyDto);
+	}
+	
+	@Override
+	public Map<String, Object> selectReplyOrders(String reply_sq_str) {
+		// TODO Auto-generated method stub
+		return session.selectOne("selectReplyOrders", reply_sq_str);
+	}
+	
+	@Override
+	public Map<String, Object> selectReplyOrders1(String reply_sq_str) {
+		// TODO Auto-generated method stub
+		return session.selectOne("selectReplyOrders1", reply_sq_str);
+	}
+	
+	@Override
+	public Reply selectLastReply(int member_sq) {
+		// TODO Auto-generated method stub
+		return session.selectOne("selectLastReply", member_sq);
+	}
+	
+	@Override
+	public int updateReplyGroup(Reply replyDto) {
+		// TODO Auto-generated method stub
+		return session.update("updateReplyGroup", replyDto);
+	}
+	
+	@Override
+	public int selectTotalReply(int music_sq) {
+		// TODO Auto-generated method stub
+		return session.selectOne("selectTotalReply", music_sq);
+	}
+	
+	@Override
+	public List<Reply> selectReplyList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return session.selectList("selectReplyList", map);
 	}
 	
 	// JSY

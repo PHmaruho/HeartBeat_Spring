@@ -2,7 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <head>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/Jan.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jsy.js"></script>
 <link href="${pageContext.request.contextPath }/resources/css/jsy/search.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
 
@@ -18,14 +17,6 @@
 </script>
 </head>
 <body>
-	<div class="menuButton">
-		<c:if test="${!empty loginSession }">
-			<div id="alarmContent" class="alarmContent"></div>
-		</c:if>
-	</div>
-	<br>
-
-<br><br>
 <div class="box">
 	<div class="banner" id="sliderFrame">
 	<div id="slider">
@@ -96,6 +87,4 @@
 		</ul>
 	</div>
 </div>
-<br><br><br>
-
 </body>

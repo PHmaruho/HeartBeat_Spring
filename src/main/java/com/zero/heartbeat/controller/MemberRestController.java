@@ -78,14 +78,13 @@ public class MemberRestController {
 	// JSY
 	@RequestMapping("/memberAlarmList")
 	public ModelAndView selectAlarmMemberList(ModelAndView mv,HttpSession session) {
-		String member_sq = (String) session.getAttribute("loginSession");
-		int id=Integer.parseInt(member_sq);
+		Object obj = session.getAttribute("loginSession");
+		int id = obj == null ? 0 : Integer.parseInt(obj.toString());
 		List<AlarmList> list=new ArrayList<AlarmList>();
 		HashMap<String,Object> map=new HashMap<String, Object>();
 		map.put("member_sq", id);
 		memberService.selectAlarmMemberList(map);
-		list=(List<AlarmList>) map.get("resultList");
-		logger.info("list.size:"+list.size());
+		list=(List<AlarmList>) map.get("resultList"); 
 		mv.addObject("list", list);
 		mv.setViewName("member/memberAlarmList");
 		logger.info("MemberRestController selectAlarmMemberList working");
@@ -98,6 +97,18 @@ public class MemberRestController {
 		logger.info("alarm_sq: "+alarm_sq);
 		logger.info("MemberRestController updateAlarmStatus working");
 		memberService.updateAlarmStatus(alarm_sq);
+	}
+	
+	// 최우일
+	@RequestMapping("/alarmCount")
+	public String alarmCount(HttpSession session) {
+		Object obj = session.getAttribute("loginSession");
+		int member_sq = obj == null ? 0 : Integer.parseInt(obj.toString());
+		
+		int result = memberService.selectAlarmCount(member_sq);
+		logger.info("result : " + result);
+		
+		return result + "";
 	}
 	
 }

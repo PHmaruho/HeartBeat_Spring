@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.zero.heartbeat.model.MusicLike;
+import com.zero.heartbeat.model.Reply;
 import com.zero.heartbeat.model.SearchList;
 import com.zero.heartbeat.model.Tag;
 import com.zero.heartbeat.model.AllLikeList;
@@ -43,6 +44,8 @@ public interface ActivityService {
 	public List<Tag> searchTag();
 	public Boolean uploadAlbumPro(MultipartHttpServletRequest mhsr, HttpServletRequest request);
 	public Boolean uploadMusicPro(MultipartHttpServletRequest mhsr, HttpServletRequest request);
+	public int insertReplyMusic(HttpServletRequest request);
+	public List<Reply> selectReplyList(HttpServletRequest request);
 	
 	Music selectMusicDetail(HashMap<String, Object> map); // 최우일
 	List<Member> selectMusicArtists(int sq); // 최우일

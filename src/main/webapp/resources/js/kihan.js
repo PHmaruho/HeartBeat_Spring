@@ -44,12 +44,12 @@ function kkhcheck() {
 				}
 			});		
 		}else{
-			document.getElementById("log_pw_msg").innerHTML="비밀번호를 입력해주세요";
+			document.getElementById("log_msg").innerHTML="비밀번호를 입력해주세요";
 			document.getElementById("log_pw").focus();
 		}
 		
 	}else{
-		document.getElementById("log_email_msg").innerHTML="이메일을 입력해주세요";
+		document.getElementById("log_msg").innerHTML="이메일을 입력해주세요";
 		document.getElementById("log_email").focus();
 	}
 
@@ -67,12 +67,12 @@ $(document).ready(function(){
 		/*document.getElementById("email_msg").innerHTML=email;*/
 		if(email != null && email != ""){
 			if(emailex.test(email)){
-				document.getElementById("email_validate").innerHTML="";
+				document.getElementById("join_msg").innerHTML="";
 			}else{
-				document.getElementById("email_validate").innerHTML="올바른 형식으로 입력해주세요.";
+				document.getElementById("join_msg").innerHTML="올바른 형식으로 입력해주세요.";
 			}
 		}else{
-			document.getElementById("email_validate").innerHTML="";
+			document.getElementById("join_msg").innerHTML="";
 		}
 	});
 });
@@ -83,10 +83,7 @@ function kkhjoin(){
 	var Vpw = $('#pw').val();
 	var Vre_pw = $('#re_pw').val();
 	var Vnick = $('#nick').val();
-	document.getElementById("email_msg").innerHTML="";
-	document.getElementById("pw_msg").innerHTML="";
-	document.getElementById("repw_msg").innerHTML="";
-	document.getElementById("nick_msg").innerHTML="";
+	document.getElementById("join_msg").innerHTML="";
 	if(Vemail != null && Vemail != ""){
 		if(emailex.test(Vemail)){
 		if(Vpw != null && Vpw != ""){
@@ -100,30 +97,30 @@ function kkhjoin(){
 								if(data==0){
 									document.getElementById("kkhform").submit();
 								}else{
-									document.getElementById("email_msg").innerHTML="존재하는 이메일입니다.";
+									document.getElementById("join_msg").innerHTML="존재하는 이메일입니다.";
 									document.getElementById("email").focus();
 								}
 							}
 						});						
 					}else{
-						document.getElementById("repw_msg").innerHTML="비밀번호가 다릅니다.";
+						document.getElementById("join_msg").innerHTML="비밀번호가 다릅니다.";
 						document.getElementById("re_pw").focus();
 					}
 				}else{
-					document.getElementById("nick_msg").innerHTML="별명을 입력해주세요.";
+					document.getElementById("join_msg").innerHTML="별명을 입력해주세요.";
 					document.getElementById("nick").focus();
 				}
 			}else{
-				document.getElementById("repw_msg").innerHTML="비밀번호확인을 입력해주세요.";
+				document.getElementById("join_msg").innerHTML="비밀번호확인을 입력해주세요.";
 				document.getElementById("re_pw").focus();
 			}
 		}else{
-			document.getElementById("pw_msg").innerHTML="비밀번호를 입력해주세요.";
+			document.getElementById("join_msg").innerHTML="비밀번호를 입력해주세요.";
 			document.getElementById("pw").focus();
 		}
 		}
 	}else{
-		document.getElementById("email_msg").innerHTML="이메일을 입력해주세요";
+		document.getElementById("join_msg").innerHTML="이메일을 입력해주세요";
 		document.getElementById("email").focus();
 	}
 }

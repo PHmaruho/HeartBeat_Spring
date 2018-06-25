@@ -48,7 +48,7 @@ public class ExploreRestController {
 		String[] arrArt=kArtist.split(",");
 		String[] arrTitle=kTitle.split(",");
 		String[] arrTag=kTag.split(",");
-		
+	
 		for(String s:arrArt) {
 			if(s.contains("all")) artist.add("전체");
 			else artist.add(s);
@@ -64,25 +64,7 @@ public class ExploreRestController {
 			else tag.add(s);
 			logger.info("arrTag: "+s);
 		}
-		
-		/*for(String s:arr1) {
-			if(s.contains("#")&&!s.equals("#")) {
-				String[] splitTag=s.split("#");
-						tag.add(splitTag[1]);
-						logger.info("#ArrTag:"+tag);
-			}
-			else if(s.contains("@")&&!s.equals("@")) {
-				String[] splitArtist=s.split("@");
-				artist.add(splitArtist[1]);
-				logger.info("@ArrArtist:"+artist);
-			}
-			else if(s.contains("*")&&!s.equals("*")) {
-				String[] splitTitle=s.split("\\*");
-						title.add(splitTitle[1]);
-						logger.info("*ArrTitle:"+title);
-			}
-		}
-		*/
+	
 		if(tag.isEmpty()|| tag.size()==0||tag.contains(" ")) tag.add("전체");
 		if(artist.isEmpty()|| artist.size()==0|| artist.contains(" ")) artist.add("전체");
 		if(title.isEmpty()|| title.size()==0|| title.contains(" ")) title.add("전체");
@@ -119,51 +101,13 @@ public class ExploreRestController {
 				logger.info("resultList:"+resultList.get(0).getNick());*/
 			}// for 전체
 		}
-		
 		model.addObject("discoverList", discoverList);
 		model.addObject("artist",dto.getArrArtist());
 		model.addObject("tag",dto.getArrTag());
 		model.addObject("title",dto.getArrTitle());
 		
 		model.setViewName("explore/discoverList");
-		
-		/*logger.info("Total tag:"+tag);
-		logger.info("Total artist:"+artist);
-		logger.info("Total title:"+title);*/
-		/*
-		if(tag.isEmpty()|| tag.length()==0||tag.equals(" ")) tag="all";
-		if(artist.isEmpty()|| artist.length()==0|| artist.equals(" ")) artist="all";
-		if(title.isEmpty()|| title.length()==0|| title.equals(" ")) title="all";
-		
-		artist=artist.trim().replace(" ","|");
-		title=title.trim().replace(" ","|");
-		tag=tag.trim().replace(" ","|");
-		if(artist.equals("all")&& title.equals("all")&&tag.equals("all")) {
-			discoverList=null;
-		}else {
-			dto.setArrArtist(artist);
-			dto.setArrTag(tag);
-			dto.setArrTitle(title);
-			discoverList= exploreService.selectAllSearchList(dto);
-		}
-		
-		if(artist.equals("all")) artist="전체";
-		if(title.equals("all")) title="전체";
-		if(tag.equals("all")) tag="전체";
-		
-		String word_art=artist.replace("|", ", ");
-		String word_tag=tag.replace("|", ", ");
-		String word_title=title.replace("|", ", ");
-		logger.info("word_art:"+word_art);
-		logger.info("word_tag:"+word_tag);
-		logger.info("word_title:"+word_title);
-		
-		model.addObject("word_art", word_art);
-		model.addObject("word_tag", word_tag);
-		model.addObject("word_title", word_title);
-		
-		model.addObject("discoverList", discoverList);
-		model.setViewName("explore/discoverList");*/
+	
 		logger.info("ExploreRestController selectAllSearchList working");
 		return model;
 	}//JSY

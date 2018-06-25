@@ -14,11 +14,12 @@
 <script src="${pageContext.request.contextPath }/resources/js/bootstrap.js?v=<%=System.currentTimeMillis() %>"></script>
 <script src="${pageContext.request.contextPath }/resources/js/wavesurfer.js?v=<%=System.currentTimeMillis() %>"></script>
 <script src="${pageContext.request.contextPath }/resources/js/musicControlMain.js?v=<%=System.currentTimeMillis() %>"></script>
+<script src="${pageContext.request.contextPath }/resources/js/jsy.js?v=<%=System.currentTimeMillis() %>"></script>
 <style type="text/css">
 .headDiv {
 	height: 50px;
 	width:100%;
-	background-color: rgba(0, 0, 0, 0.7);
+	background-color: black;
 	position: fixed;
 	top: 0px;
 	z-index: 999;

@@ -495,6 +495,7 @@ input[type='range']::-webkit-slider-thumb {
 
 .cwi-head-white-font {
 	color: white !important;
+	user-select: none;
 }
 
 .cwi-discover-radios {
@@ -505,6 +506,7 @@ input[type='range']::-webkit-slider-thumb {
 
 .cwi-discover-input {
 	margin-left: 5px;
+	display: inline-block;
 }
 
 
@@ -544,7 +546,7 @@ input[type='range']::-webkit-slider-thumb {
 	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-.cwi-change-cwi-change-button {
+.cwi-change-button {
 	display: inline-block;
 	font-weight: 400;
 	text-align: center;
@@ -566,3 +568,42 @@ input[type='range']::-webkit-slider-thumb {
 	vertical-align: bottom;
 }
 
+#headAlramCount {
+	height: 19px;
+	margin: auto;
+	margin-left: -12px;
+}
+
+.cwi-login-button {
+	position: relative;
+	padding: 26px !important;
+}
+
+.cwi-login-table {
+	width: 100%;
+}
+
+#kkhform input {
+	margin-bottom: 5px;
+}
+
+#kkhform button {
+	display: inherit;
+	width: 100%;
+}
+
+#join_msg {
+	height: 25px;
+}
+
+.cwi-alarm-list {
+	margin-bottom: 5px;
+}
+
+.cwi-alarm-text {
+	width: 200px;
+	display: inline-block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
