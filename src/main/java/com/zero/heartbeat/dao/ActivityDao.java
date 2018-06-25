@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.zero.heartbeat.model.MusicLike;
 import com.zero.heartbeat.model.MusicTag;
+import com.zero.heartbeat.model.Reply;
 import com.zero.heartbeat.model.Tag;
 
 import scala.collection.generic.BitOperations.Int;
@@ -55,6 +56,14 @@ public interface ActivityDao {
 	public Boolean insertMusicTagList(MusicTag musicTagDto);
 	public void updateAlbumTitleMusic(int music_sq, int img_seq);
 	public int selectOneMusicSeq(int album_sq);
+	public Map<String, Object> selectReplyOrders(String reply_sq_str);
+	public Map<String, Object> selectReplyOrders1(String reply_sq_str);
+	public int insertReplyMusic(Reply replyDto);
+	public int insertReplyMusic1(Reply replyDto);
+	public Reply selectLastReply(int member_sq);
+	public int updateReplyGroup(Reply replyDto);
+	public int selectTotalReply(int music_sq);
+	public List<Reply> selectReplyList(Map<String, Object> map);
 	
 	
 	Music selectMusicDetail(int sq);	// 최우일

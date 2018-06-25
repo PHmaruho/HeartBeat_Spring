@@ -12,6 +12,11 @@ public class Reply {
 	private int			reply_level;
 	private int			reply_group;
 	private Date		write_dt;
+	private String		reply_parent;
+	
+	// PHmaruho
+	// reply 기능 때문에 추가
+	private String reply_sq_str;
 	
 	public int getReply_sq() {
 		return reply_sq;
@@ -66,5 +71,17 @@ public class Reply {
 	}
 	public void setWrite_dt(Date write_dt) {
 		this.write_dt = write_dt;
+	}
+	public String getReply_parent() {
+		return reply_parent;
+	}
+	public void setReply_parent(String reply_parent) {
+		this.reply_parent = reply_parent;
+	}
+	public String getReply_sq_str() {
+		return reply_sq_str;
+	}
+	public void setReply_sq_str(String reply_sq_str) {
+		this.reply_sq_str = reply_sq_str;
 	}
 }
