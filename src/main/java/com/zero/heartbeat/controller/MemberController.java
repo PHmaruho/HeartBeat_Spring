@@ -118,7 +118,7 @@ public class MemberController {
 
 	@CheckSession
 	@RequestMapping("/memberInfoChangePro")
-	public String memberInfoChangePro(Member member, Model model) {
+	public String memberInfoChangePro(Member member, Model model, HttpSession session) {
 		model.addAttribute("member", member);
 		return "member/memberInfoChangePro";
 	}

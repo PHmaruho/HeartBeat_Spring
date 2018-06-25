@@ -28,7 +28,7 @@
 								<%-- <input type="hidden" id="music_sq${i.index }" value="${like.album_sq}"> --%>
 								<img src="${pageContext.request.contextPath }/resources/img/album/${like.img_path }.png" class="albumImg">
 							</a><br><br>
-							<a href="">
+							<a href="#">
 								<img src="${pageContext.request.contextPath }/resources/img/profile/like.png" class="glul-img" onclick="like_func(${like.music_like_sq},'${like.code_meaning }','likeList${i.index }')">
 							</a>
 							${like.like_Count }<br>
@@ -41,7 +41,7 @@
 								<%-- <input type="hidden" id="music_sq${i.index }" value="${like.music_sq}"> --%>				
 								<img src="${pageContext.request.contextPath }/resources/img/album/${like.img_path }.png" class="albumImg" style="border-radius: 50%;">
 							</a><br><br>
-							<a href="">
+							<a href="#">
 								<img src="${pageContext.request.contextPath }/resources/img/profile/like.png" class="glul-img" onclick="like_func(${like.music_like_sq},'${like.code_meaning }','likeList${i.index }')">
 							</a>
 							${like.like_Count }<br>
@@ -82,7 +82,7 @@
 							<%-- <input type="hidden" id="music_sq${i.index }" value="${like.album_sq}"> --%>
 							<img src="${pageContext.request.contextPath }/resources/img/album/${unlike.img_path }.png" class="albumImg"><br>
 						</a>
-						<a href="">
+						<a href="#">
 							<img src="${pageContext.request.contextPath }/resources/img/profile/dislike.png" class="glul-img" onclick="unLikeCancel(${unlike.music_like_sq},'${unlike.code_meaning }','unlikeList${i.index }')">
 						</a>
 						${unlike.like_Count }<br>
@@ -94,7 +94,7 @@
 							<%-- <input type="hidden" id="music_sq${i.index }" value="${like.music_sq}"> --%>				
 							<img src="${pageContext.request.contextPath }/resources/img/album/${unlike.img_path }.png" class="albumImg" style="border-radius: 50%;"><br>
 						</a>
-						<a href="">
+						<a href="#">
 							<img src="${pageContext.request.contextPath }/resources/img/profile/dislike.png" class="glul-img" onclick="unLikeCancel(${unlike.music_like_sq},'${unlike.code_meaning }','unlikeList${i.index }')">
 						</a>
 						${unlike.like_Count }<br>

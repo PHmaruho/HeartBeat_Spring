@@ -15,33 +15,34 @@
 <script src="${pageContext.request.contextPath }/resources/js/wavesurfer.js?v=<%=System.currentTimeMillis() %>"></script>
 <script src="${pageContext.request.contextPath }/resources/js/musicControlMain.js?v=<%=System.currentTimeMillis() %>"></script>
 <style type="text/css">
-	.headDiv {
-		height: 50px;
-		width:100%;
-		background-color: rgba(0, 0, 0, 0.7);
-		position: fixed;
-		top: 0px;
-		z-index: 999;
-	}
+.headDiv {
+	height: 50px;
+	width:100%;
+	background-color: rgba(0, 0, 0, 0.7);
+	position: fixed;
+	top: 0px;
+	z-index: 999;
 	
-	.contentWrap {
-		width: 100%;
-		position: relative;
-		/* background-color: green; */
-	}
-	
-	.emptyDiv {
-		height: 50px;
-		position: relative;
-	}
-	
-	.footDiv {
-		height: 50px;
-		width: 100%;
-		position: fixed;
-		bottom: 0px;
-		z-index: 999;
-	}
+}
+
+.contentWrap {
+	width: 100%;
+	position: relative;
+	/* background-color: green; */
+}
+
+.emptyDiv {
+	height: 50px;
+	position: relative;
+}
+
+.footDiv {
+	height: 50px;
+	width: 100%;
+	position: fixed;
+	bottom: 0px;
+	z-index: 999;
+}
 </style>
 <script type="text/javascript">
 $(document).ready(function(){
