@@ -101,7 +101,7 @@ public class ActivityController {
 	
 	// 최우일
 	@RequestMapping("/others/music/{sq}")
-	public String othersMusic(Model model, @PathVariable int sq, HttpSession session) {
+	public String othersMusic(Model model, @PathVariable String sq, HttpSession session) {
 		Object obj = session.getAttribute("loginSession");
 		int member_sq = obj == null ? 0 : Integer.parseInt(obj.toString());
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -111,7 +111,7 @@ public class ActivityController {
 		
 		Music music = activityService.selectMusicDetail(map);
 		if (music == null) {
-			return "common/noResult";
+			return "common/error";
 		}
 		
 		model.addAttribute("music", music);
@@ -120,7 +120,7 @@ public class ActivityController {
 	
 	// 최우일
 	@RequestMapping("/others/artist/{sq}")
-	public String othersArtist(Model model, @PathVariable int sq, HttpSession session) {
+	public String othersArtist(Model model, @PathVariable String sq, HttpSession session) {
 		Object obj = session.getAttribute("loginSession");
 		int member_sq = obj == null ? 0 : Integer.parseInt(obj.toString());
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -131,7 +131,7 @@ public class ActivityController {
 		List<Music> list = activityService.selectMusicByArtist(map);
 		Member member = activityService.selectMemberArtist(map);
 		if (member == null) {
-			return "common/noResult";
+			return "common/error";
 		}
 		
 		model.addAttribute("member", member);
