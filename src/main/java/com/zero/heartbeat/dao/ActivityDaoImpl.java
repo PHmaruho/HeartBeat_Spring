@@ -255,8 +255,8 @@ public class ActivityDaoImpl implements ActivityDao {
 	
 	// 최우일
 	@Override
-	public Music selectMusicDetail(int sq) {
-		return session.selectOne("selectMusicDetail", sq);
+	public Music selectMusicDetail(HashMap<String, Object> map) {
+		return session.selectOne("selectMusicDetail", map);
 	}
 
 	// 최우일
@@ -273,13 +273,31 @@ public class ActivityDaoImpl implements ActivityDao {
 
 	// 최우일
 	@Override
-	public List<Music> selectMusicByArtist(int sq) {
-		return session.selectList("selectMusicByArtist", sq);
+	public List<Music> selectMusicByArtist(HashMap<String, Object> map) {
+		return session.selectList("selectMusicByArtist", map);
 	}
 
 	// 최우일
 	@Override
-	public Member selectMemberArtist(int sq) {
-		return session.selectOne("selectMemberArtistCwi", sq);
+	public Member selectMemberArtist(HashMap<String, Object> map) {
+		return session.selectOne("selectMemberArtistCwi", map);
+	}
+
+	// 최우일
+	@Override
+	public void mergeMusicLike(HashMap<String, Object> map) {
+		int result = session.update("mergeMusicLike", map);
+		if (result == 0) {
+			logger.debug("mergeMusicLike error");
+		}
+	}
+
+	// 최우일
+	@Override
+	public void updateMusicUnlike(HashMap<String, Object> map) {
+		int result = session.update("updateMusicUnlike", map);
+		if (result == 0) {
+			logger.debug("updateMusicUnlike error");
+		}
 	}
 }

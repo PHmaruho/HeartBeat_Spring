@@ -16,7 +16,7 @@
 <script src="${pageContext.request.contextPath }/resources/js/musicControlMain.js?v=<%=System.currentTimeMillis() %>"></script>
 <style type="text/css">
 	.headDiv {
-		height: 80px;
+		height: 50px;
 		width:100%;
 		background-color: yellow;
 		position: fixed;
@@ -31,7 +31,7 @@
 	}
 	
 	.emptyDiv {
-		height: 80px;
+		height: 50px;
 		position: relative;
 	}
 	
@@ -74,6 +74,8 @@ $(document).ready(function(){
 
 	
 	<input type="hidden" value="${packageName }" id="packageName">
+	<input type="hidden" value="${needLogin }" id="needLogin">
+	<input type="hidden" value="${loginSession }" id="loginSession">
 	<script src="${pageContext.request.contextPath }/resources/js/main.js?v=<%=System.currentTimeMillis() %>"></script>
 </body>
 </html>

@@ -43,3 +43,10 @@ var musicMain = (function() {
 		setDetailNum : setDetailNum
 	};
 })();
+
+function logoutFunc() {
+	goto('/logout');
+	goto('/head');
+	goto('/');
+	$('#loginSession').val('');
+}

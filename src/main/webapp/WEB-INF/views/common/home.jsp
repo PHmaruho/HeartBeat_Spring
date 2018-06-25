@@ -18,6 +18,7 @@
 </script>
 </head>
 <body>
+	<button onclick="goto('/others/music/302')">302</button>	
 	<div class="menuButton">
 		<button onclick="goto('/discover')">검색</button>	
 		<c:if test="${!empty loginSession }">

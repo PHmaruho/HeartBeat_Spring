@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -82,21 +83,17 @@ public class MemberController {
 		return null;
 	}
 
-	@RequestMapping("/loginPro")
-	public String loginPro(Model model, String email, String pw, HttpSession session) {
+	@RequestMapping(value = "/loginPro")
+	public String loginPro(Model model, String email, String pw, String loginUrl, HttpSession session) {
 		String returnString = "";
-		model.addAttribute("email", email);
-		model.addAttribute("pw", pw);
 		Member member = new Member();
 		member.setEmail(email);
 		member.setPw(pw);
-		System.out.println(member.getEmail());
-		System.out.println(member.getPw());
 		int loginSession = memberService.login(member);
 		if (loginSession != 0) {
 			String member_sq = memberService.getMemberSq(member);
 			session.setAttribute("loginSession", member_sq);
-			returnString = "forward:/home";
+			returnString = "redirect:" + loginUrl;
 		} else {
 			returnString = "forward:/loginForm";
 		}

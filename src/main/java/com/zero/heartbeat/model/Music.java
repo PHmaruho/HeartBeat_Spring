@@ -14,12 +14,15 @@ public class Music {
 	private int			music_share;
 	private String		open_yn;
 	
-	// 곡 별 좋아요 갯수
+	// 곡 별 좋아요 갯수, 회원별 좋아요 여부
 	private int			likeCnt;
+	private int			isLiked;
+	
 	// 최우일 - 한 곡에 대한 여러 작업자들
 	private List<Member>	artistList;
 	private int			list_sq;
 	private int			list_no;
+	
 	// 최우일 - 한 곡에 여러 태그들
 	private List<MusicTag>	tagList;
 	
@@ -29,14 +32,12 @@ public class Music {
 	public void setLikeCnt(int likeCnt) {
 		this.likeCnt = likeCnt;
 	}
-	
 	public List<MusicTag> getTagList() {
 		return tagList;
 	}
 	public void setTagList(List<MusicTag> tagList) {
 		this.tagList = tagList;
 	}
-	
 	public int getList_sq() {
 		return list_sq;
 	}
@@ -114,5 +115,11 @@ public class Music {
 	}
 	public void setOpen_yn(String open_yn) {
 		this.open_yn = open_yn;
+	}
+	public int getIsLiked() {
+		return isLiked;
+	}
+	public void setIsLiked(int isLiked) {
+		this.isLiked = isLiked;
 	}
 }

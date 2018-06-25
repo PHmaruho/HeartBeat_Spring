@@ -23,6 +23,8 @@ function kkhcheck() {
 							success : function(data) {
 								if (data.email != null || data.email != "") {
 									if (data.status == "A1") {
+										var url = window.location.pathname.replace('/' + $('#packageName').val(), '');
+										$('#loginUrl').val(url)	// cwi - 현재 url hidden에 저장
 										document.getElementById("log_kkhform").submit();
 									}
 									if (data.status == "A2") {

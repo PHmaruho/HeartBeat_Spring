@@ -2,6 +2,7 @@ package com.zero.heartbeat.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,12 +22,12 @@ public class RefreshInterceptor extends HandlerInterceptorAdapter {
 		if (!r.equals("1") || r == "") {
 			if (!c.equals("1") || c == "") {
 				request.setAttribute("url", request.getRequestURI().replace("/heartbeat", ""));
-				logger.info(request.getRequestURI());
 				request.setAttribute("c", "1");
 				request.getRequestDispatcher("/").forward(request, response);
 				return false;
 			}
 		}
+		
 		return true;
 	}
 }

@@ -3,6 +3,7 @@ package com.zero.heartbeat.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.zero.heartbeat.annotation.CheckSession;
 import com.zero.heartbeat.model.AllLikeList;
 import com.zero.heartbeat.model.Code;
 import com.zero.heartbeat.model.Tag;
@@ -88,8 +90,18 @@ public class ActivityController {
 	
 	// 최우일
 	@RequestMapping("/others/music/{sq}")
-	public String othersMusic(Model model, @PathVariable int sq) {
-		Music music = activityService.selectMusicDetail(sq);
+	public String othersMusic(Model model, @PathVariable int sq, HttpSession session) {
+		Object obj = session.getAttribute("loginSession");
+		int member_sq = obj == null ? 0 : Integer.parseInt(obj.toString());
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("member_sq", member_sq);
+		map.put("music_sq", sq);
+		
+		Music music = activityService.selectMusicDetail(map);
+		if (music == null) {
+			return "common/noResult";
+		}
 		
 		model.addAttribute("music", music);
 		return "activity/others/music";
@@ -97,13 +109,41 @@ public class ActivityController {
 	
 	// 최우일
 	@RequestMapping("/others/artist/{sq}")
-	public String othersArtist(Model model, @PathVariable int sq) {
-		List<Music> list = activityService.selectMusicByArtist(sq);
-		Member member = activityService.selectMemberArtist(sq);
+	public String othersArtist(Model model, @PathVariable int sq, HttpSession session) {
+		Object obj = session.getAttribute("loginSession");
+		int member_sq = obj == null ? 0 : Integer.parseInt(obj.toString());
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("member_sq", member_sq);
+		map.put("target_sq", sq);
+		
+		List<Music> list = activityService.selectMusicByArtist(map);
+		Member member = activityService.selectMemberArtist(map);
+		if (member == null) {
+			return "common/noResult";
+		}
 		
 		model.addAttribute("member", member);
 		model.addAttribute("list", list);
 		return "activity/others/artist";
+	}
+	
+	// 최우일
+	@RequestMapping("/my/music")
+	public String myMusic(Model model, HttpSession session) {
+		Object obj = session.getAttribute("loginSession");
+		int member_sq = obj == null ? 0 : Integer.parseInt(obj.toString());
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("member_sq", member_sq);
+		map.put("target_sq", member_sq);
+		
+		List<Music> list = activityService.selectMusicByArtist(map);
+		Member member = activityService.selectMemberArtist(map);
+		
+		model.addAttribute("member", member);
+		model.addAttribute("list", list);
+		return "activity/my/music";
 	}
 	
 	//JAN
