@@ -108,6 +108,7 @@
 	select *
 	from album a, member m, music ms
 	where a.member_sq = m.member_sq
+	and a.music_sq = ms.music_sq
 	
 	</select>
 	<!-- select rownum as rn, am.* from
