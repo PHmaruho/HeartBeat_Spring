@@ -15,9 +15,13 @@
 	
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/main.js"></script>
+<script type="text/javascript">
+
+</script>
+<link href="${pageContext.request.contextPath }/resources/css/jsy/search.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<h2>검색결과</h2>
+	<%-- <h2>검색결과</h2>
 	<p>
 			결과: Artist [ 
 				<c:forEach var="art" items="${ artist}">
@@ -32,7 +36,7 @@
 					/${tag}
 				</c:forEach>
 				]
-		<p>
+		<p> --%>
 	
 	<c:if test="${discoverList==null || discoverList.size()==0}">
 		검색 결과가 없습니다.
@@ -40,30 +44,31 @@
 	
 	<c:if test="${ discoverList!=null }">
 		<c:forEach var="list" items="${discoverList}" varStatus="i">
-			<div class="searchResult">
-				<div class="part">
+			<table class="searchResult">
+				<td class="part">
 					<a onclick="goto('/others/music/${list.music_sq}')">
-					<img src="${pageContext.request.contextPath }/resources/img/album/${ list.img_path }.jpg" style="width:100px;"></a><br>
+ 					<img src="${pageContext.request.contextPath }/resources/img/album/${ list.img_path }.jpg" style="width:100px;"></a><br>
 						<%-- img_path: ${ list.img_path }<Br> --%>
-						 앨범명: ${list.album_nm }<br>
+						 ${list.album_nm }<br>
 					<!-- music_sq:  ${list.music_sq}<br>-->
-				</div>	
-				<div class="part">
-					닉네임:${list.nick } 
+				</td>	
+				<td class="part">
+					${list.nick } 
 
 					<br>
-					곡명: ${list.music_nm }<br>
+					${list.music_nm }<br>
 					<!-- equalizer??  <br> -->
-					발매일: 
+					 
 						<fmt:formatDate value="${list.release_dt }" pattern="yyyy.MM.dd"/>
 					<br>								<!-- musicShare로 바꾸기!!!!! -->
 					<%-- <input type="button" value="공유" onclick="musicShare(${list.music_sq})">  
 					<button onclick="goto('/others/song/${list.music_sq }')">댓글</button> --%>		
 					<img src="${pageContext.request.contextPath }/resources/img/profile/like.png" style="width:20px;">${list.music_like }
-				</div>
-			</div>
+				</td>
+			</table>
 			<p>
 		</c:forEach>
 	</c:if>
+	
 </body>
 </html>
