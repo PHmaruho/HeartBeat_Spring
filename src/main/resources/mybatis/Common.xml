@@ -98,17 +98,22 @@
  <!--<select id="selectAlbumMainListNew" parameterType="int" resultType="MainList">-->
  <select id="mainListNew"  parameterType="int" resultType="MainList">	
  	<![CDATA[ 
-	select rownum as rn, am.* from
+ 	select a.album_nm, a.album_sq, a.member_sq, a.img_path, m.nick, m.member_sq, ms.music_sq
+ 	from album a, member m, music ms
+ 	where a.member_sq = m.member_sq
+ 	and ms.album_sq = a.album_sq
+ 	
+	
+	]]>
+	</select>
+	<!-- select rownum as rn, am.* from
 	(select a.album_sq,a.album_nm,a.img_path
 			,b.nick, m.music_sq,m.music_nm
 	from album a, music m, member b 
 	where a.album_sq=m.album_sq and m.open_yn='Y'
  	 and a.member_sq=b.member_sq
 	order by a.release_dt) am
-	where rownum>#{startNum} and rownum<=#{startNum}+10
-	]]>
-	</select>
-	
+	where rownum>#{startNum} and rownum<=#{startNum}+10 -->
 	<!-- 최우일 -->
 	<select id="selectPlaylistFoot" parameterType="int" resultMap="Playlist">
 		select p.list_sq, musics.*, m.nick, p.list_no

@@ -19,15 +19,25 @@
 </head>
 <body>
 <div class="box">
-	<div class="banner" id="sliderFrame">
-	<div id="slider">
+	<div class="product_con">
+	<ul class="product_list">
 	<!-- <h2> Main List Testing</h2> -->
-		<img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner4.png" class="bannerimg" id="slide">
-		<%-- <img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner1.png" class="bannerimg" >
-		<img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner2.png" class="bannerimg" >
-		<img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner3.png" class="bannerimg" > --%>
+		<li class="hli"><img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner4.png" class="bannerimg"></li>
+		<li class="hli"><img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner1.png" class="bannerimg" ></li>
+		<li class="hli"><img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner2.png" class="bannerimg" ></li>
+		<li class="hli"><img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner3.png" class="bannerimg" ></li>
+	</ul>
+	<a class="btn_prev" href="#none">◀</a>
+    <a class="btn_next" href="#none">▶</a>
+    <div class="numlist">
+        <a href="#none">●</a>
+        <a href="#none">●</a>
+        <a href="#none">●</a>
+        <a href="#none">●</a>
+    </div>
 	</div>
-	</div> 
+	<br><br><br>
+	
 <div class="contents">
 	<h2 style="text-align:center;" class="subTitle">New Product List</h2>
 		<br><br>
@@ -39,21 +49,11 @@
 			<a onclick="goto('/others/music/${album.music_sq}')">
 				<input type="hidden" id="music_sq${i.index }" value="${album.music_sq}">
 			<img src="${pageContext.request.contextPath }/resources/img/album/${album.img_path }.png" class="albumImg" ></a>
-				<br>
-				<br>
-				<c:if test="${album.music_like_type == null }">
-				<a>
+				<%-- <a>
 					<img src="${pageContext.request.contextPath }/resources/img/profile/dislike.png" class="glul-img" onclick="likeAlbum(${album.album_sq},${loginSession },'popAlbum${i.index }')">
-				</a>
-				</c:if>
-				<c:if test="${album.code_meaning == '앨범' }">
-					<a>
-						<img src="${pageContext.request.contextPath }/resources/img/profile/like.png" class="glul-img" onclick="like_func(${like.music_like_sq},'${like.code_meaning }','likeList${i.index }')">
-					</a>
-				</c:if>
-							
-					<br>
-					${album.album_nm }<br>
+				</a> --%>
+					<br><text style="font-weight: bold; font:'Gloria Hallelujah', cursive;">
+					${album.album_nm }</text><br>
 					<a onclick="goto('/heartbeat/others/artist/${album.member_sq}')">
 					${album.nick }
 					</a><br>
