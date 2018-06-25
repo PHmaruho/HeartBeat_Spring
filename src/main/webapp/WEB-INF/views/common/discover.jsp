@@ -15,11 +15,6 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-	<!-- <div id="placeHolder">
-		가수는 @, 곡명은 *를, 태그는 #을 붙이고 단어마다 스페이스바를 해주세요! ex)@가수 *곡명 #태그
-	</div>
-	 	검색: <input type="text" id="searchBox"> -->
-	 	
 	<div class="cwi-discover-main">
 		<div class="jumbotron cwi-discover-jumbo">
 			<h1 class="display-4">탐색</h1>
