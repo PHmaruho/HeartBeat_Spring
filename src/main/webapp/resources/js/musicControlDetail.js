@@ -316,6 +316,11 @@ function doSomething(detailNum) {
 	
 	let music_sq = detailPlayer[detailNum].sq;
 	
+	if(reply_comment.length == 0){
+		alert("글을 입력해주세요.");
+		return false;
+	}
+	
 	$.ajax({
 		type:"POST",
 		url: "/heartbeat/do/reply/music",
