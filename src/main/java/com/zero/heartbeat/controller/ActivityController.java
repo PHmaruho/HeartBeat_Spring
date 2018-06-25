@@ -214,5 +214,6 @@ public class ActivityController {
 		
 		return "activity/my/follow";
 	}
+	
 
 }

@@ -13,7 +13,7 @@
 	<h2 style="text-align:center;" class="subTitle">Likes</h2><br>
 		<h6 style="color:gray;">Hear the tracks you’ve liked:</h6>
 		<br><br><Br>
-	<ul class="glul lists">
+	<ul class="glul">
 			<c:if test="${list==null ||list.size()==0}">
 				리스트가 없습니다.
 			</c:if>
@@ -21,7 +21,7 @@
 			<c:if test="${list!=null }">
 				<c:forEach var="like" items="${list}" varStatus="i">
 					<li>
-					<div id="likeList${i.index }">
+					<div id="likeList${i.index }" class="following">
 					<c:if test="${like.code_meaning == '앨범' }">
 						<div class="likeAlbum">
 							<a href="/heartbeat/others/album/${like.album_sq}">
@@ -47,23 +47,23 @@
 							${like.like_Count }<br>
 						</div>
 					</c:if>
-					
-						${like.album_nm }<br>
-						<a href="/heartbeat/others/artist/${like.member_sq}">
-							${like.nick }<br>
-						</a>
+					<br>
+						<a href="/heartbeat/others/music/${like.music_sq}" class="music_nm">${like.album_nm }</a>
+					<br>
+						<a href="/heartbeat/others/artist/${like.member_sq}" class="member_nick">
+							${like.nick }
+						</a><br>
 						<c:if test="${like.cntFollow== 0}">
-							<input type="button" value="+follow" onclick="following(${like.member_sq},${loginSession },'likeList${i.index }')" id="follow" >
+							<input type="button" value="following" onclick="following(${like.member_sq},${loginSession },'likeList${i.index }')" id="follow" class="jbtn jfollow">
 						</c:if>
 						<c:if test="${like.cntFollow>0 }">	
-							<input type="button" value="-unfollow" onclick="unfollow(${like.member_sq},${loginSession },'likeList${i.index }')"id="unfollow" >
+							<input type="button" value="unfollow" onclick="unfollow(${like.member_sq},${loginSession },'likeList${i.index }')"id="unfollow" class="jbtn jfollow">
 						</c:if>
 						</div>
 					</li>
 					</c:forEach>
 				</c:if>
 	</ul>
-	<div id="js-btn-wrap" class="btn-wrap" style="text-align:center;" > <a href="javascript:;" class="button">더보기</a> </div>
 	</div>
 <div class="contents">
 	<h2 style="text-align:center;" class="subTitle">unLikes</h2><br>
@@ -75,7 +75,7 @@
 			<c:if test="${unList!=null }">
 			<c:forEach var="unlike" items="${unList}" varStatus="i">
 				<li>
-				<div id="unlikeList${i.index }">
+				<div id="unlikeList${i.index }" class="following">
 				<c:if test="${unlike.code_meaning == '언라이크앨범' }">
 					<div class="likeAlbum">
 						<a href="/heartbeat/others/album/${unlike.album_sq}">
@@ -100,24 +100,23 @@
 						${unlike.like_Count }<br>
 					</div>
 				</c:if>
+					<a href="/heartbeat/others/music/${unlike.music_sq}" class="music_nm">${unlike.album_nm }</a>
+					<br>
 					
-					${unlike.album_nm }<br>
-					
-					<a href="/heartbeat/others/artist/${unlike.member_sq}">
-						${unlike.nick }<br>
-					</a>
+					<a href="/heartbeat/others/artist/${unlike.member_sq}" class="member_nick">
+						${unlike.nick }
+					</a><br>
 					<c:if test="${unlike.cntFollow== 0}">
-						<input type="button" value="+follow" onclick="following(${unlike.member_sq},${loginSession },'unlikeList${i.index }')" id="follow" >
+						<input type="button" value="following" onclick="following(${unlike.member_sq},${loginSession },'unlikeList${i.index }')" id="follow"class="jbtn jfollow" >
 					</c:if>
 					<c:if test="${unlike.cntFollow>0 }">	
-						<input type="button" value="-unfollow" onclick="unfollow(${unlike.member_sq},${loginSession },'unlikeList${i.index }')"id="unfollow" >
+						<input type="button" value="unfollow" onclick="unfollow(${unlike.member_sq},${loginSession },'unlikeList${i.index }')"id="unfollow" class="jbtn jfollow">
 					</c:if>
 					</div>
 				</li>
 			</c:forEach>
 		</c:if>
 	</ul>
-    <div id="js-btn-wrap" class="btn-wrap"> <a href="javascript:;" class="button">더보기</a> </div>
 </div>
 </div>
 

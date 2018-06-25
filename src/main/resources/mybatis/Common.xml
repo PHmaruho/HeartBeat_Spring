@@ -97,14 +97,18 @@
 	</select>
  <!--<select id="selectAlbumMainListNew" parameterType="int" resultType="MainList">-->
  <select id="mainListNew"  parameterType="int" resultType="MainList">	
- 	<![CDATA[ 
+ 	<!-- <![CDATA[ 
  	select a.album_nm, a.album_sq, a.member_sq, a.img_path, m.nick, m.member_sq, ms.music_sq
  	from album a, member m, music ms
  	where a.member_sq = m.member_sq
  	and ms.album_sq = a.album_sq
- 	
+ 	and a.music_sq = ms.music_sq
 	
-	]]>
+	]]> -->
+	select *
+	from album a, member m, music ms
+	where a.member_sq = m.member_sq
+	
 	</select>
 	<!-- select rownum as rn, am.* from
 	(select a.album_sq,a.album_nm,a.img_path

@@ -61,12 +61,22 @@
 	border-style: solid;
 	border-width : 1px;
 	border-color : silver;
+	opacity: 0.7;
+    filter: alpha(opacity=40);
 }
 
+.falbumImg {
+	width: 70%;
+	height : 150px;
+	margin-left: 10%;
+	border-radius: 50%;
+}
 
 .albumImg:hover {
-	border-color : red;
 	text-decofation : none;
+	opacity: 1.0;
+    filter: alpha(opacity=100);
+    
 }
 
 hli{list-style:none}
@@ -91,4 +101,52 @@ hli{list-style:none}
 .numlist {width:105px; margin:0 auto;}
 
 
+.member_nick {
+	color : gray;
+}
 
+.member_nick:hover {
+	color : black;
+	text-decoration: none; 
+}
+
+
+.music_nm {
+		color : black;
+}
+.music_nm:hover {
+	text-decoration: none;
+	
+}
+
+.jfollow {
+	border-color : #FF9BE6;
+	color:white;
+	outline-color: white;
+	background-color: white;
+}
+
+.following:hover >.jfollow {
+	border-radius : 10%;
+	color: #FF9BE6;
+	border: 1;
+	border-style: solid;
+	border-color: silver; 
+}
+
+.jfollow:hover {
+	border-style : solid; 
+	border-color :#FF91C8;
+	color : #ffffff;
+}
+
+.jbtn {
+	position: relative;
+    border: 0;
+    padding: 15px 25px;
+    display: inline-block;
+    text-align: center;
+    color: white;
+	padding: 4px 12px;  
+  	font-size: 14px;	
+}
