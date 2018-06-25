@@ -20,6 +20,13 @@ function kkhEmailCheck() {
 </script>
 </head>
 <body>
+	<div class="cwi-discover-main">
+		<div class="jumbotron cwi-discover-jumbo">
+			<h1 class="display-4">인증번호 입력</h1>
+			<p class="lead">입력하신 메일 주소로</p>
+			<hr class="my-4">
+		</div>
+	</div>
 	<form action="/heartbeat/emailServiceSuccess" id="form">
 	<h2>인증번호 입력</h2>
 		<table>

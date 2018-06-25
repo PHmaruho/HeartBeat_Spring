@@ -19,7 +19,7 @@ arrive.jsp!
 <body>
 
 	<h2> Main List Testing</h2>
-	<img src="resources/img/album/mj.jpg"><br>
+	<img src="resources/img/album/mj.png"><br>
 	|| Image root checking 용<Br>
 	
 		<form id="mainListShare">
@@ -29,7 +29,7 @@ arrive.jsp!
 						<tr>
 							<td colspan="2"><a href="goto('/others/music/${album.music_sq}')">
 								<input type="hidden" id="music_sq${i.index }" value="${album.music_sq}">
-								<img src="resources/img/album/${album.img_path }.jpg"></a></td>
+								<img src="resources/img/album/${album.img_path }.png"></a></td>
 						</tr>
 						
 						<tr>
