@@ -300,10 +300,6 @@ function searchList(){
 		if(art.length==0 || art==null || art=='' || art==' ') art='all';
 		if(tit.length==0 || tit==null || tit==''|| tit==' ') tit='all';
 		if(tag.length==0 || tag==null || tag=='' || tag==' ') tag='all';
-		/*alert('필터 후');
-		alert('art:'+art);
-		alert('tag:'+tag);
-		alert('title:'+tit);*/
 	}
 
 		$.ajax({

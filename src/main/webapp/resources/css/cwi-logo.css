@@ -2,6 +2,7 @@
 .cwi-neon-logo-p {
 	text-align: center;
 	font-size: 50px;
+	user-select: none;
 }
 
 .cwi-neon-logo-a {
@@ -78,6 +79,7 @@
 	margin: auto;
     position: absolute;
     left: 100px;
+    user-select: none;
 }
 
 .light-up-letters .fade {

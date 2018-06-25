@@ -12,39 +12,43 @@
 	<c:if test="${list!=null }">
 		<c:forEach var="alarm" items="${ list}" varStatus="i">
 			<input type="hidden" id="alarm_sq${i.index }" value="${alarm.alarm_sq }"/>
-				<c:if test="${alarm.alarm_type=='팔로우' }">
-					<a href="/heartbeat/others/artist/${alarm.member_sq}" class="alarmUrl">
-					${alarm.nick } </a>
-					님이 나를 팔로우 하셨습니다.
-				</c:if>
-				<c:if test="${alarm.alarm_type=='댓글' }">
-					<c:if test="${alarm.reply_level==0 }">
-						<a href="/heartbeat/others/artist/${alarm.member_sq}" class="alarmUrl">
-						${alarm.nick }</a> 
-						님이 음악 
-						<a href="/heartbeat/others/music/${alarm.music_sq}" class="alarmUrl">
-						${alarm.music_nm }</a> 에 댓글을 달았습니다.
-					</c:if>
-					<c:if test="${alarm.reply_level==1 }">
-						<a href="/heartbeat/others/artist/${alarm.member_sq}" class="alarmUrl">
-						${alarm.nick }</a>
-						님이 음악 
-						<a href="/heartbeat/others/music/${alarm.music_sq}" class="alarmUrl">
-						${alarm.music_nm }</a> 에  답글을 달았습니다.							
-					</c:if> 
-				</c:if>
-				<c:if test="${alarm.alarm_type=='음악' }">
-					<a href="/heartbeat/others/artist/${alarm.member_sq}" class="alarmUrl">
-					${alarm.nick }</a> 
-					님이 음악  
-					<a href="/heartbeat/others/music/${alarm.music_sq}" class="alarmUrl">
-					${alarm.music_nm }</a> 을'좋아요' 했습니다.
-				</c:if>
-				<c:if test="${alarm.alarm_type=='앨범' }">
-					<a href="/heartbeat/others/artist/${alarm.member_sq}" class="alarmUrl">
-					${alarm.nick } </a> 님이 앨범 ' ${alarm.album_nm }' 을(를) '좋아요' 했습니다.
-				</c:if>
-				<input type="button" onclick="updateAlarmStatus(${alarm.alarm_sq});" value="확인" class="btn btn-secondary cwi-discover-input alarm-button"><br>
+				<div class="cwi-alarm-list">
+					<div class="cwi-alarm-text">
+						<c:if test="${alarm.alarm_type=='팔로우' }">
+							<a onclick="goto('/others/artist/${alarm.member_sq}')" class="alarmUrl badge badge-dark">
+							${alarm.nick } </a>
+							님이 팔로우
+						</c:if>
+						<c:if test="${alarm.alarm_type=='댓글' }">
+							<c:if test="${alarm.reply_level==0 }">
+								<a onclick="goto('/others/artist/${alarm.member_sq}')" class="alarmUrl badge badge-dark">
+								${alarm.nick }</a> 
+								님이 음악 
+								<a href="/heartbeat/others/music/${alarm.music_sq}" class="alarmUrl">
+								${alarm.music_nm }</a> 에 댓글
+							</c:if>
+							<c:if test="${alarm.reply_level==1 }">
+								<a href="/heartbeat/others/artist/${alarm.member_sq}" class="alarmUrl">
+								${alarm.nick }</a>
+								님이 댓글 
+								<a href="/heartbeat/others/music/${alarm.music_sq}" class="alarmUrl">
+								${alarm.music_nm }</a> 에  답글							
+							</c:if> 
+						</c:if>
+						<c:if test="${alarm.alarm_type=='음악' }">
+							<a href="/heartbeat/others/artist/${alarm.member_sq}" class="alarmUrl">
+							${alarm.nick }</a> 
+							님이 음악  
+							<a href="/heartbeat/others/music/${alarm.music_sq}" class="alarmUrl">
+							${alarm.music_nm }</a> 을 좋아요
+						</c:if>
+						<c:if test="${alarm.alarm_type=='앨범' }">
+							<a href="/heartbeat/others/artist/${alarm.member_sq}" class="alarmUrl">
+							${alarm.nick } </a> 님이 앨범 ' ${alarm.album_nm }' 을 좋아요
+						</c:if>
+					</div>
+					<input type="button" onclick="updateAlarmStatus(${alarm.alarm_sq});" value="확인" class="btn btn-secondary cwi-discover-input alarm-button">
+				</div>
 		</c:forEach>
 	</c:if>
 </body>

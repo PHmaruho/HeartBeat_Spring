@@ -84,6 +84,7 @@ public class MemberRestController {
 		HashMap<String,Object> map=new HashMap<String, Object>();
 		map.put("member_sq", id);
 		memberService.selectAlarmMemberList(map);
+		list=(List<AlarmList>) map.get("resultList"); 
 		mv.addObject("list", list);
 		mv.setViewName("member/memberAlarmList");
 		logger.info("MemberRestController selectAlarmMemberList working");
