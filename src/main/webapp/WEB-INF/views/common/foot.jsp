@@ -58,21 +58,8 @@
 					</tr>
 				</table>
 				
-				<%-- <input type="button" value="playlist" onclick="playlistClick()">
-				<div id="playlist" class="cwi-foot-playlist">
-					<table id="playlistTable" class="cwi-foot-playlist-table">
-						<c:forEach var="playlist" items="${playlist}">
-							<tr onclick="loadFoot(${playlist.music_sq}); alert(${playlist.music_sq} + '로 음악 변경, 임시기능이기에 직접 play 바람, 동기화 미지원')">
-								<td>sq : ${playlist.music_sq} </td>
-								<td>
-									<c:forEach var="artistList" items="${playlist.artistList}">
-										artist : ${artistList.nick }
-									</c:forEach>
-								</td>	
-		 					</tr>
-						</c:forEach>
-					</table>
-				</div> --%>
+				<input type="button" value="playlist" onclick="playlistClick()">
+				<div id="playlist" class="cwi-foot-playlist"></div>
 			</div>
 		</div>
 	</div>

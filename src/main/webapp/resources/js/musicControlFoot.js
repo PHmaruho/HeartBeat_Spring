@@ -1,8 +1,10 @@
 var footPlayer;
 var footProgressFlag = 0;
 
-cookieList();
-initFoot(302);
+(function() {
+	initFoot(getCookie(getCookie()));
+	cookieList();
+})();
 
 function initFoot(sq) {
 	footPlayer = WaveSurfer.create({
@@ -311,6 +313,7 @@ function cookieList() {
 			success : function(data) {
 				footPlayer.cookieList = data;
 				console.log(footPlayer.cookieList);
+				initPlaylist();
 			},
 			error:function(request,status,error){
 			    console.log('code : ' + request.status + '\n' + 'message : ' + request.responseText + '\n' + 'error : ' + error);
@@ -320,22 +323,39 @@ function cookieList() {
 }
 
 function initPlaylist() {
-	var list = $('#playlistTable');
 	var max = getMaxCookie();
+	var now = getCookie();
 	var newHtml = '';
 	
 	for (var i = 1; i <= max; i++) {
 		var cookie = footPlayer.cookieList['cookieOrder' + i];
+		var artistList = cookie.artistList;
+		var artistLength = cookie.artistList.length;
+		
+		if (i == now) {
+			newHtml = newHtml + '<div id="cookieOrder' + i + '" class="cwi-list-row-div cwi-list-row-div-now">'
+		} else {
+			newHtml = newHtml + '<div id="cookieOrder' + i + '" class="cwi-list-row-div">'
+		}
 		newHtml = newHtml + 
-		'<tr onclick="loadFoot('+ cookie.music_sq +')">' +
-			'<td>sq : '+ cookie.music_sq +' </td>' +
-			'<td>'+
-				'<c:forEach var="artistList" items="${playlist.artistList}">' +
-					'artist : ${artistList.nick }' +
-				'</c:forEach>' +
-			'</td>' +
-		'</tr>';
+			'<img src="/heartbeat/resources/img/album/' + cookie.album_sq + '.png" width="32" height="32"' +
+			' onclick="playFromList(' + cookie.music_sq + ', this.parentNode.id.replace(\'cookieOrder\', \'\'))" class="cwi-list-img">' + 
+			'<div class="cwi-list-artist-wrapper">';
+			
+		for (var j = 0; j < artistLength; j++) {
+			newHtml = newHtml + 
+			'<a class="cwi-list-artist badge badge-dark" onclick="goto(\'/others/artist/' +
+				artistList[j].member_sq + '\')">' + artistList[j].nick + '</a>';
+		}
+		
+		newHtml = newHtml +
+		'</div>' +
+		'<div class="cwi-list-title-wrapper"><a class="cwi-list-title" onclick="goto(\'/others/music/' +
+			cookie.music_sq + '\')">' + cookie.music_nm + '</a></div>' +
+		'<button onclick="deleteFromList(' + i + ')" class="cwi-list-x-button close">x</button></div>';
 	}
+	
+	$('#playlist').html(newHtml);
 }
 
 $('input[type="range"]').change(function () {
@@ -456,3 +476,21 @@ function cwi_unfollow(targetSq, v) {
 //deleteCookie();
 //cookieFromAdd(302);
 //console.log(document.cookie);
+
+function playlistClick() {
+	playlist.toggle();
+}
+
+function playFromList(sq, number) {
+	loadFoot(sq);
+	setCookie(number);
+	checkFootReady(playFromFoot);
+	initPlaylist();
+}
+
+function deleteFromList(num) {
+	deleteCookie(num);
+	initPlaylist();
+}
+
+console.log(3);

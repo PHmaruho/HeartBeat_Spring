@@ -21,6 +21,6 @@ public interface CommonService {
 	List<MainList> selectAlbumArriveList(int startNum);
 
 	List<Music> selectPlaylistFoot(int sessionSq);	// 최우일
-	Music selectMusicFootLoad(int sq);	// 최우일
+	Music selectMusicFootLoad(HashMap<String, Object> map);	// 최우일
 	Map<String, Music> selectMusicCookieList(Map<String, Object> paramMap);	// 최우일
 }

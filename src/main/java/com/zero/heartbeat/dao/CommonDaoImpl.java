@@ -61,8 +61,8 @@ public class CommonDaoImpl implements CommonDao {
 	
 	// 최우일
 	@Override
-	public Music selectMusicFootLoad(int sq) {
-		return session.selectOne("selectMusicFootLoad", sq);
+	public Music selectMusicFootLoad(HashMap<String, Object> map) {
+		return session.selectOne("selectMusicFootLoad", map);
 	}
 	
 	// 최우일
