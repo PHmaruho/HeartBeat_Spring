@@ -4,11 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +21,7 @@ import com.zero.heartbeat.annotation.CheckSession;
 import com.zero.heartbeat.model.Member;
 import com.zero.heartbeat.model.Music;
 import com.zero.heartbeat.model.MusicLike;
+import com.zero.heartbeat.model.Reply;
 import com.zero.heartbeat.service.ActivityService;
 import com.zero.heartbeat.service.CommonService;
 import com.zero.heartbeat.service.ExploreService;
@@ -174,5 +177,25 @@ public class ActivityRestController {
 		map.put("music_sq", music_sq);
 		
 		activityService.updateMusicUnlike(map);
+	}
+	
+	// PHmaruho
+	@RequestMapping(value="/reply/music")
+	public Map<String, String> insertReplyMusic(HttpServletRequest request, Model model){
+		int result = activityService.insertReplyMusic(request);
+		Map<String, String> map = null;
+		
+		if(result != -1) {
+			map = new HashMap<String, String>(); 
+			map.put("result", "Y");
+		}
+		return map;
+	}
+	
+	@RequestMapping(value="/reply/list")
+	public List<Reply> selectReplyList(HttpServletRequest request){
+		List<Reply> reply_list = activityService.selectReplyList(request);
+		
+		return reply_list;
 	}
 }

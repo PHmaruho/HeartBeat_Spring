@@ -79,9 +79,16 @@ public class ActivityController {
 	@CheckSession
 	@RequestMapping(value="/upload/music")
 	public String uploadMusic(Model model, HttpSession session) {
+		List<Code> type = activityService.selectAlbumType();
+		List<Tag> tag = activityService.searchTag();
+		
+		model.addAttribute("album_type", type);
+		model.addAttribute("music_tag", tag);
 		
 		return "activity/my/uploadMusic";
 	}
+	
+	@RequestMapping(value="/upload/music/pro")
 	public String uploadMusicPro(Model model, HttpServletRequest request,
 									MultipartHttpServletRequest mhsr) {
 		Boolean judge = activityService.uploadMusicPro(mhsr, request);

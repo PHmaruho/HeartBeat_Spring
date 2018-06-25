@@ -343,6 +343,124 @@
 			album_sq = #{album_sq}
 	</update>
 	
+	<!-- PHmaruho -->
+	<select id="selectReplyOrders2">
+		
+	</select>
+	
+	<!-- PHmaruho -->
+	<select id="selectReplyOrders" parameterType="String" resultType="hashmap">
+		SELECT reply_sq, REPLY_ORDER+1 reply_order, REPLY_LEVEL+1 reply_level, REPLY_GROUP, reply_parent
+		FROM reply
+		WHERE REPLY_SQ = #{reply_sq}
+	</select>
+	
+	<!-- PHmaruho -->
+	<select id="selectReplyOrders1" parameterType="String" resultType="hashmap">
+		select r2.reply_sq reply_sq, r2.reply_order+1 reply_order, r2.reply_level reply_level, r2.reply_group reply_group, r2.reply_parent reply_parent
+		from(
+		        select MAX(reply_order) reply_order
+		        from reply
+		        where reply_parent = #{reply_sq}) r1,
+		    (
+		        select reply_sq, MAX(reply_order) reply_order, reply_level, reply_group, reply_parent
+		        from reply
+		        where reply_parent = #{reply_sq}
+		        group by reply_sq, reply_level, reply_group, reply_parent) r2
+		where r1.reply_order = r2.reply_order
+	</select>
+	
+	<!-- PHmaruho -->
+	<insert id="insertReplyMusic" parameterType="Reply">
+		INSERT INTO reply
+		VALUES(
+				REPLY_SQ.NEXTVAL,
+				#{music_sq},
+				#{member_sq},
+				#{time_stamp},
+				#{reply_comment},
+				#{reply_order},
+				#{reply_level},
+				#{reply_sq_str},
+				SYSDATE,
+				<choose>
+					<when test='reply_parent == "N"'>
+						#{reply_sq}
+					</when>
+					<otherwise>
+						#{reply_parent}
+					</otherwise>
+				</choose>
+		)
+	</insert>
+	
+	<!-- PHmaruho -->
+	<insert id="insertReplyMusic1" parameterType="Reply">
+		INSERT INTO reply
+		VALUES(
+				REPLY_SQ.NEXTVAL,
+				#{music_sq},
+				#{member_sq},
+				#{time_stamp},
+				#{reply_comment},
+				1,
+				1, REPLY_SQ.CURRVAL,
+				SYSDATE,
+				'N'
+		)
+	</insert>
+	
+	<!-- PHmaruho -->
+	<select id="selectLastReply" parameterType="int" resultType="Reply">
+		SELECT r2.reply_sq reply_sq, r1.reply_order reply_order, r1.reply_level reply_level, r1.reply_group reply_group
+		FROM (
+			    SELECT MAX(reply_sq) reply_sq, reply_order, reply_level, reply_group
+			    FROM reply
+			    where MEMBER_SQ = #{member_sq}
+			    GROUP BY reply_order, reply_level, reply_group) r1,
+		    (
+			    SELECT MAX(reply_sq) reply_sq
+			    From reply
+			    where member_sq = #{member_sq}) r2
+		WHERE r1.reply_sq = r2.reply_sq
+	</select>
+	
+	<!-- PHmaruho -->
+	<update id="updateReplyGroup" parameterType="int">
+		<![CDATA[
+			UPDATE REPLY
+			SET
+			    reply_order = reply_order + 1
+			WHERE
+			    reply_sq != #{reply_sq}
+			    AND reply_group = #{reply_group}
+			    AND reply_order >= #{reply_order}
+		]]>
+	</update>
+	
+	<!-- PHmaruho -->
+	<select id="selectTotalReply" parameterType="int">
+		SELECT count(*)
+		FROM reply
+		WHERE music_sq = #{music_sq};
+	</select>
+	
+	<!-- PHmaruho -->
+	<select id="selectReplyList">
+		SELECT *
+		FROM
+			(
+			SELECT rownum rn , a.*
+			FROM
+				(
+				SELECT *
+				FROM reply
+				WHERE music_sq = #{music_sq}
+				ORDER BY reply_order ASC) a 
+			)
+		WHERE rn BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
 	<!-- 최우일 -->
 	<select id="selectMusicDetail" parameterType="HashMap" resultMap="musicMap">
 		select m.*, nvl(cnt,0) likeCnt, nvl2(ml.target_sq, 1, 0) isLiked
@@ -396,7 +514,7 @@
 	
 	<!-- 최우일 -->
 	<select id="selectReplyAtMusic" parameterType="int" resultMap="replyMap">
-		select r2.time_stamp, member_sq, nick, reply_comment
+		select r2.time_stamp, r1.reply_sq, member_sq, nick, reply_comment
 		from (
 		  select min(reply_sq) reply_sq, time_stamp
 		  from reply

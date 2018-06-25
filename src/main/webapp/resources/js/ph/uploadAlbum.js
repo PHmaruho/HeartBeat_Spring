@@ -34,18 +34,15 @@
 	    	},
 	    	handle: ".ph-music-move"
 	    }).disableSelection();
-//	    $('#itemList li').draggable({
-//	        connectToSortable: '#itemList',
-//	        helper : 'original',
-//	        revert : 'invalid',
-//	        start  : function(event, ui){
-//	            $(ui.helper).addClass("musicItem");
-//	        }
-//	    });
 	});
 	
+	function uploadAlbum_img(){
+		let file_btn = $('#uploadAlbumImg');
+		file_btn.click();
+	}
+	
 	// 앨범 이미지 보기
-	function getAlbumPreview(input) {
+	function getAlbumPreview(event, input) {
 	    if (input.files && input.files[0]) {
 	    	if(input.files[0].type.indexOf("png") == -1){
 	    		alert("파일 형식을 확인해 주세요(png)");
@@ -65,8 +62,11 @@
 		            var element = window.document.getElementById("album_img");
 		            element.setAttribute("src", e.target.result);
 	        	}
-	        reader.readAsDataURL(input.files[0]);	    	
-	       
+	        reader.readAsDataURL(input.files[0]);
+	     
+	        let text = $('#img_file_text');
+	        let img_file = $(input);
+	        texts.val(img_file.val());
 	    }
 	}
 
@@ -85,45 +85,92 @@
 			return false;
 		}
 
-		var str = "<li class='ui-state-default musicItem'>"
-			+"<table class='ph-music-list-table'>"
-			+"<tr class='ph-tr-1'><td rowspan='6' class='ph-music-order'>"
+		var str = '<li class="ui-state-default musicItem">'
+			+'<table class="ph-music-list-table">'
+			+'<tr class="ph-tr-1">'
+			+'<td rowspan="6" class="ph-music-order">'
 			+ (allItems + 1)
-			+"</td>"
-			+"<td colspan='2'>곡제목:"
-			+"<input type='text' name='music_nm' class='ph-music-nm' required='required'></td>"
-			+"<td rowspan='6' class='ph-music-button'>"
-			+"<input type='button' value='삭제' class='ph-music-delete' onclick='removeMusic(this)'>"
-			+"<span class='ph-music-move'>이동</span>"
-			+"<input type='button' value='축소' class='ph-music-extend' onclick='musicFix(this)'>"
-			+"<input type='hidden' name='music_no' value='"
+			+'</td>'
+			+'<td colspan="2">'
+			+'곡제목:'
+			+'<input type="text" name="music_nm" class="ph-music-nm" required="required">'
+			+'</td>'
+			+'<td rowspan="6" class="ph-music-button">'
+			+'<input type="button" value="삭제" class="ph-music-delete" onclick="removeMusic(this)">'
+			+'<span class="ph-music-move">이동</span>'
+			+'<input type="button" value="축소" class="ph-music-extend" onclick="musicFix(this)">'
+			+'<input type="hidden" name="music_no" value="'
 			+ (allItems + 1)
-			+"' class='ph-music-no'>"
-			+"<input type='hidden' name='artist' value='' class='ph-artist-list'>"
-			+"<input type='hidden' name='music_tag' value='' class='ph-tag-list'>"
-			+"<input type='hidden' name='play_time' value='0' id='play_time' class='play_time'>"
-			+"<input type='hidden' value='0' class='ph-music-toggle-check'></td></tr>"
-			+"<tr class='ph-tr-2'><td class='ph-td-1'>가수:"
-			+"<input type='text' class='ph-search-artist-txt' size='10' placeholder='Nick or Email' onclick='searchArtist(event, this)' oninput='searchArtist(event, this)' onkeydown='searchArtist_key(event, this)'>"
-			+"<div class='ph-artist-ajax-selected'></div></td>"
-			+"<td class='ph-td-2'><ul class='ph-search-artist-ul'></ul></td></tr>"
-			+"<tr class='ph-tr-3'><td class='ph-td'>장르:"
-			+"<input type='text' class='ph-search-tag-txt' size='10' placeholder='장르' onclick='searchTag(this)' oninput='searchTag(this)'>"
-			+"<div class='ph-tag-ajax-selected'><ul class='ph-tag-ajax-ul'>"
-			+"</ul></div></td>"
-			+"<td class='ph-td'><ul class='ph-search-tag-ul'></ul></td></tr>"
-			+"<tr class='ph-tr-4'><td>파일:"
-			+"<input type='button' value='첨부' class='ph-btn-insert-file' onclick='insertFile(this)'></td>"
-			+"<td><div class='file_selected'>"
-			+"<input type='text' name='file_select_name' id='file_select_name' size='10' class='file_select_name' disabled='disabled'>"
-			+"<input type='file' name='file' class='ph-file-form' style='display: none;' accept='.mp3' onchange='fileChange(event, this)'></div>"
-			+"<div class='ph-file-player'><!-- 미리듣기 플레이어! -->"
-			+"<audio id='sound' src='' controls></audio></div></td></tr>"
-			+"<tr class='ph-tr-5'>"
-			+"<td colspan='2'>코멘트:"
-			+"<input type='text' name='music_comment' class='ph-music-comment'></td></tr>"
-			+"<tr class='ph-tr-6'><td colspan='2'>공개여부:"
-			+"<select name='music_open_yn'><option value='Y'>Y</option><option value='N'>N</option></select></td></tr></table></li>";
+			+'" class="ph-music-no" id="music_no">'
+			+'<input type="hidden" name="artist" value="" class="ph-artist-list">'
+			+'<input type="hidden" name="music_tag" value="" class="ph-tag-list">'
+			+'<input type="hidden" name="play_time" value="0" id="play_time" class="play_time">'
+			+'<!-- hidden -->'
+			+'<input type="hidden" value="1" class="ph-music-toggle-check">'
+			+'</td>'
+			+'</tr>'
+			+'<tr class="ph-tr-2">'
+			+'<td class="ph-td-1">'
+			+'가수:'
+			+'<input type="text" class="ph-search-artist-txt" size="10" placeholder="Nick or Email" onclick="searchArtist(event, this)" oninput="searchArtist(event, this)" onkeydown="searchArtist_key(event, this)">'
+			+'<div class="ph-artist-ajax-selected"></div>'
+			+'</td>'
+			+'<td class="ph-td-2">'
+			+'<ul class="ph-search-artist-ul">'
+			+'</ul>'
+			+'</td>'
+			+'</tr>'
+			+'<tr class="ph-tr-3">'
+			+'<td class="ph-td">'
+			+'장르:'
+			+'<input type="text" class="ph-search-tag-txt" size="10" placeholder="장르" onclick="searchTag(this)" oninput="searchTag(this)">'
+			+'<div class="ph-tag-ajax-selected">'
+			+'<ul class="ph-tag-ajax-ul">'
+			+'</ul>'
+			+'</div>'
+			+'</td>'
+			+'<td class="ph-td">'
+			+'<ul class="ph-search-tag-ul">'
+			+'</ul>'
+			+'</td>'
+			+'</tr>'
+			+'<tr class="ph-tr-4">'
+			+'<td>'
+			+'파일:'
+			+'<input type="button" value="첨부" class="ph-btn-insert-file" onclick="insertFile(this)">'
+			+'</td>'
+			+'<td>'
+			+'<div class="file_selected">'
+			+'<input type="text" name="file_select_name" id="file_select_name" size="10" class="file_select_name" disabled="disabled" required="required">'
+			+'<input type="file" name="file" class="ph-file-form" style="display: none;" accept=".mp3" onchange="fileChange(event, this)">'
+			+'</div>'
+			+'<div class="ph-file-player">'
+			+'<!-- 미리듣기 플레이어! -->'
+			+'<div>'
+			+'</div>'
+			+'<audio id="sound" src="" controls>'
+			+'<source src="" id="source" />'
+			+'</audio>'
+			+'</div>'
+			+'</td>'
+			+'</tr>'
+			+'<tr class="ph-tr-5">'
+			+'<td colspan="2">'
+			+'코멘트:'
+			+'<input type="text" name="music_comment" class="ph-music-comment">'
+			+'</td>'
+			+'</tr>'
+			+'<tr class="ph-tr-6">'
+			+'<td colspan="2">'
+			+'공개여부:'
+			+'<select name="music_open_yn">'
+			+'<option value="Y">Y</option>'
+			+'<option value="N">N</option>'
+			+'</select>'
+			+'</td>'
+			+'</tr>'
+			+'</table>'
+			+'</li>';
 		item.append(str);
 		
 		toggleFn(allItems, 1, 1, "none");
@@ -220,6 +267,8 @@
 					}
 				}
 			});
+		} else {
+			complete.eq(index_i).hide();
 		}
 	}
 	
@@ -404,20 +453,22 @@
 						
 					});
 					
-					tag_show_list.eq(i).find('ul').html("");
-					tag_show_list.eq(i).find('ul').append(str);
-					$(this).eq(i).show();
+					tag_show_list.eq(i).find('ul').html(str);
+					li.show();
 					
 					return;
+				} else {
+					tag_show_list.eq(i).show();
+					let li_tag = li.find('li');
+					li_tag.each(function(j, obj){
+						let li_id = $(this).find('span').attr('id');
+						if(li_id.toLowerCase().indexOf(text.val().toLowerCase()) != -1){
+							$(this).show();
+						} else {
+							$(this).hide();
+						}
+					});
 				}
-				
-				li.each(function(j, obj){
-					if(li.eq(j).find('span').attr('id').indexOf(text.val()) != -1){
-						li.eq(j).show();
-					} else {
-						li.eq(j).hide();
-					}
-				});
 			}
 		});
 	}
@@ -534,9 +585,14 @@
 		let tag_list = $('.ph-search-tag-ul');
 		let val = true;
 		
-		file_list.each(function(){
+		if($('#uploadAlbumImg').val() == ''){
+			alert("앨범이미지를 추가해 주세요.");
+			return false;
+		}
+		
+		file_list.each(function(i, obj){
 			if($(this).val() == ''){
-				alert("파일을 추가해 주세요.");
+				alert((i+1) + "번째 음악파일을 추가해 주세요.");
 				val = false;
 			}
 		});
@@ -544,18 +600,25 @@
 			return val;
 		}
 		
-		artist_list.each(function(){
+		artist_list.each(function(i, obj){
 			if($(this).html().trim().length == 0){
-				alert("아티스트를 추가해 주세요.")
+				alert((i+1) + "번째 아티스트를 추가해 주세요.")
 				val = false;
 			}
 		});
+		if(val == false){
+			return val;
+		}
 		
-		tag_list.each(function(){
+		tag_list.each(function(i, obj){
 			if($(this).html().trim().length == 0){
-				
+				alert((i+1) + "번째 태그를 추가해 주세요.")
+				val = false;
 			}
-		})
+		});
+		if(val == false){
+			return val;
+		}
 		
 		return val;
 	}

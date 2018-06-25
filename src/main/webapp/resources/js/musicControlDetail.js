@@ -300,6 +300,36 @@ function doSomething(detailNum) {
 	console.log('target : ' + $('#detailCommentTarget' + detailNum).text());
 	console.log('text : ' + $('#detailCommentText' + detailNum).val());
 	console.log('hidden : ' + $('#detailCommentHidden' + detailNum).val());
+	console.log('music_sq :' + detailPlayer[detailNum].sq);
+	let hidden_time = $('#detailCommentHidden' + detailNum).val() == null ? "" : $('#detailCommentHidden' + detailNum).val();
+	let reply_comment = $('#detailCommentText' + detailNum).val();
+	
+	let time_stamp;
+	let reply_sq;
+	if(hidden_time.length == 0){ // 일반 댓글
+		reply_sq = "";
+		time_stamp = Math.floor(detailPlayer[detailNum].getCurrentTime());
+	} else { // 특정 인물 댓글
+		reply_sq = detailPlayer[detailNum].comments[$('#detailCommentHidden' + detailNum).val()].reply_sq;
+		time_stamp = hidden_time;
+	}
+	
+	let music_sq = detailPlayer[detailNum].sq;
+	
+	$.ajax({
+		type:"POST",
+		url: "/heartbeat/do/reply/music",
+		data:{reply_type:'music',
+			  reply_sq:reply_sq,
+			  music_sq:music_sq,
+			  time_stamp:time_stamp,
+			  reply_comment:reply_comment},
+		success: function(data2){
+			if(data2.result == "Y"){
+				getDetailComments(detailNum);
+			}
+		}
+	});
 }
 
 // artist 펑션
@@ -308,4 +338,19 @@ function doSomething2(detailNum) {
 	console.log('target : ' + $('#detailCommentTarget' + detailNum).text());
 	console.log('text : ' + $('#detailCommentText' + detailNum).val());
 	console.log('hidden : ' + $('#detailCommentHidden' + detailNum).val());
+}
+
+// PHmaruho
+// Paging List
+function replyListPaging(page, detailNum){
+	let music_sq = detailPlayer[detailNum].sq;
+	$.ajax({
+		type:"POST",
+		url: "/heartbeat/do/reply/list",
+		data:{music_sq:music_sq,
+			  page:page},
+		success: function(data){
+			 
+		}
+	});
 }
