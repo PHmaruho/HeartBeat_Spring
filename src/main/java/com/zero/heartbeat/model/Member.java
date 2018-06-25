@@ -12,6 +12,10 @@ public class Member {
 	private Date		reg_dt;
 	private int			cntFollow;
 	
+	// 최우일 - 팔로워 수 / 팔로잉 수
+	private int			followerCnt;
+	private int			followingCnt;
+	
 	public int getMember_sq() {
 		return member_sq;
 	}
@@ -59,5 +63,17 @@ public class Member {
 	}
 	public void setCntFollow(int cntFollow) {
 		this.cntFollow = cntFollow;
+	}
+	public int getFollowerCnt() {
+		return followerCnt;
+	}
+	public void setFollowerCnt(int followerCnt) {
+		this.followerCnt = followerCnt;
+	}
+	public int getFollowingCnt() {
+		return followingCnt;
+	}
+	public void setFollowingCnt(int followingCnt) {
+		this.followingCnt = followingCnt;
 	}
 }

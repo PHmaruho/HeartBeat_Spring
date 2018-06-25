@@ -425,8 +425,8 @@ public class ActivityServiceImpl implements ActivityService {
 	
 	// 최우일
 	@Override
-	public Music selectMusicDetail(int sq) {
-		return activityDao.selectMusicDetail(sq);
+	public Music selectMusicDetail(HashMap<String, Object> map) {
+		return activityDao.selectMusicDetail(map);
 	}
 
 	// 최우일
@@ -443,13 +443,25 @@ public class ActivityServiceImpl implements ActivityService {
 
 	// 최우일
 	@Override
-	public List<Music> selectMusicByArtist(int sq) {
-		return activityDao.selectMusicByArtist(sq);
+	public List<Music> selectMusicByArtist(HashMap<String, Object> map) {
+		return activityDao.selectMusicByArtist(map);
 	}
 
 	// 최우일
 	@Override
-	public Member selectMemberArtist(int sq) {
-		return activityDao.selectMemberArtist(sq);
+	public Member selectMemberArtist(HashMap<String, Object> map) {
+		return activityDao.selectMemberArtist(map);
+	}
+
+	// 최우일
+	@Override
+	public void mergeMusicLike(HashMap<String, Object> map) {
+		activityDao.mergeMusicLike(map);
+	}
+
+	// 최우일
+	@Override
+	public void updateMusicUnlike(HashMap<String, Object> map) {
+		activityDao.updateMusicUnlike(map);
 	}
 }
