@@ -364,7 +364,10 @@ function updateAlarmStatus(v) {
 			alarmSq:v,
 		},
 		success:function(){
-		getMemberAlarmList();
+			getMemberAlarmList();
+			$('#alarmContent').toggle();
+			getAlarmCount();
 		}
 	})
 }
+console.log(5);

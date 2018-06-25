@@ -104,6 +104,12 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return memberDao.getMemberSq(member);
 	}
+	
+	// 최우일
+	@Override
+	public int selectAlarmCount(int member_sq) {
+		return memberDao.selectAlarmCount(member_sq);
+	}
 
 
 }

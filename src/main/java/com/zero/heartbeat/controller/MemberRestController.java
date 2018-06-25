@@ -100,4 +100,16 @@ public class MemberRestController {
 		memberService.updateAlarmStatus(alarm_sq);
 	}
 	
+	// 최우일
+	@RequestMapping("/alarmCount")
+	public String alarmCount(HttpSession session) {
+		Object obj = session.getAttribute("loginSession");
+		int member_sq = obj == null ? 0 : Integer.parseInt(obj.toString());
+		
+		int result = memberService.selectAlarmCount(member_sq);
+		logger.info("result : " + result);
+		
+		return result + "";
+	}
+	
 }

@@ -15,49 +15,43 @@
 	} */
 </style>
 <script type="text/javascript">
-$(document).ready(function(){
-    $(".dropdown").hover(            
-        function() {
-            $('.dropdown-menu', this).stop( true, true ).slideDown("fast");
-            $(this).toggleClass('open');        
-        },
-        function() {
-            $('.dropdown-menu', this).stop( true, true ).slideUp("fast");
-            $(this).toggleClass('open');       
-        }
-    );
-});
-
-$(document).ready( function() {
-/*     $('#myCarousel').carousel({
-        interval:   4000
-	}); */
+(function() {
+	if ($('#needLogin').val() == 1) {
+		loginButtonClick();
+	}
 	
-	var clickEvent = false;
-	$('#myCarousel').on('click', '.nav a', function() {
-			clickEvent = true;
-			$('.nav li').removeClass('active');
-			$(this).parent().addClass('active');		
-	}).on('slid.bs.carousel', function(e) {
-		if(!clickEvent) {
-			var count = $('.nav').children().length -1;
-			var current = $('.nav li.active');
-			current.removeClass('active').next().addClass('active');
-			var id = parseInt(current.data('slide-to'));
-			if(count == id) {
-				$('.nav li').first().addClass('active');	
-			}
+	if ($('#loginSession').val() != '') {
+		getAlarmCount();
+		if (alramInterval == false) {
+			alramInterval = setInterval(function() {
+				getAlarmCount();
+				}, 1000);
 		}
-		clickEvent = false;
-	});
-});
-
-if ($('#needLogin').val() == 1) {
-	loginButtonClick();
-}
+	} else {
+		clearInterval(alramInterval);
+	}
+})();
 
 function loginButtonClick() {
 	$('#modalBtnLogin').click();
+}
+
+function getAlarmCount() {
+	$.ajax({
+		type:"POST",
+		url: "/heartbeat/do/alarmCount",
+		success: function(data){
+			if (data > 0) {
+				$('#headAlramCount').addClass('badge-danger');
+				$('#headAlramCount').removeClass('badge-dark');
+			} else {
+				$('#headAlramCount').addClass('badge-dark');
+				$('#headAlramCount').removeClass('badge-danger');
+				
+			}
+		 	$('#headAlramCount').html(data);
+		}
+	});
 }
 </script>
 
@@ -79,6 +73,7 @@ function loginButtonClick() {
 					<a class="nav-link cwi-head-white-font" onclick="logoutFunc()">로그아웃</a>
 					<a class="nav-link cwi-head-white-font" onclick="goto('/memberInfoChangeForm')">정보수정</a>
 					<a class="nav-link cwi-head-white-font" onclick="getMemberAlarmList()">알람</a>
+					<span id="headAlramCount" class="badge badge-pill badge-danger"></span>
 				</c:if>
 				<c:if test="${empty loginSession }">
 					<a class="nav-link cwi-head-white-font" onclick="goto('/discover')">탐색</a>
