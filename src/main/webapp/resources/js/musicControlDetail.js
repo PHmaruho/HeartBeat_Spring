@@ -278,8 +278,11 @@ function doSomething(detailNum) {
 			  time_stamp:time_stamp,
 			  reply_comment:reply_comment},
 		success: function(data2){
-			if(data2.result == "Y"){
+			if(data2 == "Y"){
 				getDetailComments(detailNum);
+			} else {
+				alert("에러가 발생하였습니다.");
+				return;
 			}
 		}
 	});

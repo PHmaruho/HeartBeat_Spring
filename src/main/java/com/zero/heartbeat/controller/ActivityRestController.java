@@ -153,15 +153,14 @@ public class ActivityRestController {
 	
 	// PHmaruho
 	@RequestMapping(value="/reply/music")
-	public Map<String, String> insertReplyMusic(HttpServletRequest request, Model model){
+	public String insertReplyMusic(HttpServletRequest request, Model model){
 		int result = activityService.insertReplyMusic(request);
-		Map<String, String> map = null;
+		String finalResult = "N";
 		
 		if(result != -1) {
-			map = new HashMap<String, String>(); 
-			map.put("result", "Y");
+			finalResult = "Y";
 		}
-		return map;
+		return finalResult;
 	}
 	
 	@RequestMapping(value="/reply/list")

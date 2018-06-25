@@ -288,7 +288,7 @@ public class ActivityServiceImpl implements ActivityService {
 				MusicTag musicTagDto = null;
 				for (int k = 0; k < temp_music_tag.length; k++) {
 					musicTagDto = new MusicTag();
-					musicTagDto.setMusic_sq(music_seq.get(k));
+					musicTagDto.setMusic_sq(music_seq.get(j));
 					musicTagDto.setTag_cd(temp_music_tag[k]);
 					Boolean judge3 = activityDao.insertMusicTagList(musicTagDto);
 					if(!judge3) {
@@ -334,7 +334,7 @@ public class ActivityServiceImpl implements ActivityService {
 		String savePath = null;
 		
 		HttpSession session = request.getSession();
-		int member_sq = 717;
+		int member_sq = Integer.parseInt(String.valueOf(session.getAttribute("loginSession")));
 		
 		MultipartFile album_img = mhsr.getFile("album_img");
 		Album albumDto = new Album();
@@ -455,89 +455,92 @@ public class ActivityServiceImpl implements ActivityService {
 	// PHmaruho
 	@Override
 	public int insertReplyMusic(HttpServletRequest request) {
-		// TODO Auto-generated method stub
-		String reply_sq = request.getParameter("reply_sq").equals("") ? null : request.getParameter("reply_sq");
+		String reply_sq = request.getParameter("reply_sq") == null ? "" : request.getParameter("reply_sq");
 		int music_sq = Integer.parseInt(request.getParameter("music_sq"));
 		int time_stamp = Integer.parseInt(request.getParameter("time_stamp"));
 		String reply_comment = request.getParameter("reply_comment");
-		HttpSession session = request.getSession();
-//		int member_sq = Integer.parseInt((String) session.getAttribute("member_sq"));
-		int member_sq = 703;
 		
-		int result1 = 0, result2 = 0, result3 = 0;
+		HttpSession session = request.getSession();
+		String member_sq = (String) session.getAttribute("loginSession");
+		
+		int result1 = 0, result2 = 0;
+		
+		logger.debug("^^^^^^^^^^^ -> " + " / " + reply_sq + " / " + music_sq + " / " + time_stamp + " / " + reply_comment  + " / " + member_sq);
 		
 		Reply replyDto = new Reply();
-		if(reply_sq != null) {
-			replyDto.setReply_sq_str(reply_sq);
-		}
-		replyDto.setMusic_sq(music_sq);
-		replyDto.setTime_stamp(time_stamp);
-		replyDto.setMember_sq(member_sq);
-		replyDto.setReply_comment(reply_comment);
-		
-		logger.debug("@#@# -> " + replyDto.getReply_sq_str() + " / " + replyDto.getMusic_sq()  + " / " + replyDto.getTime_stamp() + " / " +
-				replyDto.getMember_sq() + " / " + replyDto.getReply_comment());
-		
-		if(reply_sq != null) {
-			Map<String, Object> olg = null;
-			// 하위 댓글 있는 체크
-			olg = activityDao.selectReplyOrders1(reply_sq);
+		// target reply
+		if(reply_sq.length() != 0) {
+			logger.debug("member_sq -> " + member_sq);
+			logger.debug("@@@@@@@@@@@@@@target");
+			replyDto = activityDao.selectTargetReply(reply_sq);
 			
-			logger.debug((olg == null) + "");
+			logger.debug("member_sq -> " + replyDto.getMember_sq());
 			
-			// 만약에 없다면 체크
-			if(olg == null) {
-				logger.debug("!@#$%$^!@#$%!@#^!@#^");
-				olg = activityDao.selectReplyOrders(reply_sq);
+			// 등록자의 member_sq로 바꿔준다.
+			replyDto.setMember_sq(Integer.parseInt(member_sq));
+			replyDto.setTime_stamp(time_stamp);
+			replyDto.setReply_comment(reply_comment);
+			
+			result1 = activityDao.insertTargetReply(replyDto);
+			
+			logger.debug("@@Target => " + replyDto.getReply_order());
+			
+		} else { // normal reply
+			logger.debug("member_sq -> " + replyDto.getMember_sq());
+			
+			logger.debug("@@@@@@@@@@@@@@normal");
+			replyDto = new Reply();
+			replyDto.setMember_sq(Integer.parseInt(member_sq));
+			replyDto.setTime_stamp(time_stamp);
+			replyDto.setMusic_sq(music_sq);
+			replyDto.setReply_comment(reply_comment);
+			
+			logger.debug("member_sq -> " + replyDto.getMember_sq());
+			
+			int reply_order_normal = activityDao.selectSameTimeStamp(replyDto);
+			
+			logger.debug("reply_order_normal => " + reply_order_normal);
+			
+			if(reply_order_normal != -1) {
+				replyDto.setReply_order(reply_order_normal+1);
 			}
-			logger.debug("@@@@@@@@@@" + olg.toString());
-
-			replyDto.setReply_sq(Integer.parseInt(String.valueOf(olg.get("REPLY_SQ"))));
-			replyDto.setReply_order(Integer.parseInt(String.valueOf(olg.get("REPLY_ORDER"))));
-			replyDto.setReply_level(Integer.parseInt(String.valueOf(olg.get("REPLY_LEVEL"))));
-			replyDto.setReply_group(Integer.parseInt(String.valueOf(olg.get("REPLY_GROUP"))));
-			replyDto.setReply_parent((String) olg.get("REPLY_PARENT"));
-			logger.debug("^^^^^^^^^^^ -> " + replyDto.getReply_sq() + " / " + replyDto.getReply_order() + " / " + 
-					replyDto.getReply_level() + " / " + replyDto.getReply_group() + " / " + replyDto.getReply_parent());
-			result1 = activityDao.insertReplyMusic(replyDto);
-		} else {
-			logger.debug("########NEW#########");
-			result2 = activityDao.insertReplyMusic1(replyDto);
-		}
-		
-		// 입력이 성공적으로 된다면, update를 진행해준다.
-//		if(result1 == 1 && reply_sq != null) {
-			Reply replyDto_update = activityDao.selectLastReply(member_sq);
-			logger.debug(replyDto_update.toString());
 			
-			result3 = activityDao.updateReplyGroup(replyDto_update);
-//		}
-		return 1;
+			logger.debug("reply_order_normal => " + replyDto.getReply_order());
+			
+			result2 = activityDao.insertNormalReply(replyDto);
+		}
+		// 하위 목록이 있다면 업데이트 처리를 진행한다.
+		if(result1 == 1 || result2 == 1) {
+			Reply replyDto_update = activityDao.selectLastReplyByMe(member_sq);
+			
+			int result3 = activityDao.updateLowerReply(replyDto_update);
+		}
+		return result1+result2;
 	}
 	
 	// PHmaruho
 	@Override
 	public List<Reply> selectReplyList(HttpServletRequest request) {
 		// TODO Auto-generated method stub
-		int music_sq = Integer.parseInt(request.getParameter("music_sq"));
-		String pageNum = request.getParameter("page");
-		
-		int totCnt  = activityDao.selectTotalReply(music_sq);
-		if (pageNum==null || pageNum.equals("")) {	pageNum = "1";	}
-		int currentPage = Integer.parseInt(pageNum);	
-		int pageSize  = 10, blockSize = 5;
-		int startRow = (currentPage - 1) * pageSize + 1;
-		int endRow   = startRow + pageSize - 1;
-		int startNum = totCnt - startRow + 1;
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("music_sq", music_sq);
-		map.put("startRow", startRow);
-		map.put("endRow", endRow);
-		List<Reply> list = activityDao.selectReplyList(map);
-		int pageCnt = (int)Math.ceil((double)totCnt/pageSize);
-		int startPage = (int)(currentPage-1)/blockSize*blockSize + 1;
-		int endPage = startPage + blockSize -1;	
-		if (endPage > pageCnt) endPage = pageCnt;
+//		int music_sq = Integer.parseInt(request.getParameter("music_sq"));
+//		String pageNum = request.getParameter("page");
+//		
+//		int totCnt  = activityDao.selectTotalReply(music_sq);
+//		if (pageNum==null || pageNum.equals("")) {	pageNum = "1";	}
+//		int currentPage = Integer.parseInt(pageNum);	
+//		int pageSize  = 10, blockSize = 5;
+//		int startRow = (currentPage - 1) * pageSize + 1;
+//		int endRow   = startRow + pageSize - 1;
+//		int startNum = totCnt - startRow + 1;
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("music_sq", music_sq);
+//		map.put("startRow", startRow);
+//		map.put("endRow", endRow);
+//		List<Reply> list = activityDao.selectReplyList(map);
+//		int pageCnt = (int)Math.ceil((double)totCnt/pageSize);
+//		int startPage = (int)(currentPage-1)/blockSize*blockSize + 1;
+//		int endPage = startPage + blockSize -1;	
+//		if (endPage > pageCnt) endPage = pageCnt;
 		return null;
 	}
 	
