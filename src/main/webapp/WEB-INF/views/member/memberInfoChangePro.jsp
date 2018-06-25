@@ -72,7 +72,7 @@
 <div class="memberChagne">
 	<form action="/heartbeat/memberInfoChangePro2" id="form"
 		enctype="multipart/form-data" method="post">
-		<table class="changeInfoTb" style="margin-left : 35%;margni-top : 20%;border-collapse: separate;border-spacing: 1px;text-align: left;line-height: 1.5;border-top: 1px solid #ccc;">
+		<table class="changeInfoTb" style="margin-left : 35%;margin-top : 50px;border-collapse: separate;border-spacing: 1px;text-align: left;line-height: 1.5;">
 			<tr>
 				<td colspan="3" align="center">
 					<img id="thumbnail" width="100" height="100">

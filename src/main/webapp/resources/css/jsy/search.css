@@ -20,17 +20,18 @@
 }
 
 .alarmContent{
-	position:absoulute;
 	padding-top:15px;
 	padding-bottom:15px;
 	padding-left:15px;
 	padding-right:15px;
-	margin-left:260px;
 	width:250px;
 	height:350px;
 	background-color:#ffffff;
 	box-shadow:0 2px 4px rgba(0,0,0,0.25);
 	display:none;
+	position: absolute;
+	right: 0px;
+	top: 50px;
 }
 
 .alarmUrl{
@@ -70,25 +71,6 @@
 	 top:0px;
 	 left:0px;
 	 
-}
-
-.alarmContent{
-	position:absoulute;
-	padding-top:15px;
-	padding-bottom:15px;
-	padding-left:15px;
-	padding-right:15px;
-	margin-left:260px;
-	width:250px;
-	height:350px;
-	background-color:#ffffff;
-	box-shadow:0 2px 4px rgba(0,0,0,0.25);
-	display:none;
-}
-
-.alarmUrl{
-	text-decoration: none;
-	font-style: italic;
 }
 
 .cwi-discover-table-div {

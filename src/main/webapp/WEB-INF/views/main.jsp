@@ -18,7 +18,7 @@
 .headDiv {
 	height: 50px;
 	width:100%;
-	background-color: rgba(0, 0, 0, 0.7);
+	background-color: black;
 	position: fixed;
 	top: 0px;
 	z-index: 999;

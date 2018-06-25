@@ -64,9 +64,10 @@ function loginButtonClick() {
 </head>
 <body>
 	<div class="cwi-head-main">
+		<div id="alarmContent" class="alarmContent"></div>
 		<div class="cwi-head-logo-position">
 			<p class="cwi-neon-logo-p">
-				<a class="cwi-neon-logo-a" href="" onclick="goto('/home')">HeartBeat</a>
+				<a class="cwi-neon-logo-a" href="" onclick="goto('/home')">HEARTBEAT</a>
 			</p>
 		</div>
 		<div class="cwi-head-buttons">
@@ -77,6 +78,7 @@ function loginButtonClick() {
 					<a class="nav-link cwi-head-white-font" onclick="goto('/discover')">탐색</a>
 					<a class="nav-link cwi-head-white-font" onclick="logoutFunc()">로그아웃</a>
 					<a class="nav-link cwi-head-white-font" onclick="goto('/memberInfoChangeForm')">정보수정</a>
+					<a class="nav-link cwi-head-white-font" onclick="getMemberAlarmList()">알람</a>
 				</c:if>
 				<c:if test="${empty loginSession }">
 					<a class="nav-link cwi-head-white-font" onclick="goto('/discover')">탐색</a>

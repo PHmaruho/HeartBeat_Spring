@@ -18,14 +18,6 @@
 </script>
 </head>
 <body>
-	<div class="menuButton">
-		<c:if test="${!empty loginSession }">
-			<div id="alarmContent" class="alarmContent"></div>
-		</c:if>
-	</div>
-	<br>
-
-<br><br>
 <div class="box">
 	<div class="banner" id="sliderFrame">
 	<div id="slider">
@@ -96,6 +88,4 @@
 		</ul>
 	</div>
 </div>
-<br><br><br>
-
 </body>

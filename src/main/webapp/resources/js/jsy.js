@@ -357,16 +357,13 @@ function getMemberAlarmList(){
 		}
 	})
 }*/
-function updateAlarmStatus(v){
-	//alert('alarm_sq: '+c);
+function updateAlarmStatus(v) {
 	$.ajax({
 		url:'/heartbeat/do/updateAlarmStatus',
 		data:{
 			alarmSq:v,
 		},
 		success:function(){
-			//alert('읽음 ok');
-		/*	location.reload();*/
 		getMemberAlarmList();
 		}
 	})

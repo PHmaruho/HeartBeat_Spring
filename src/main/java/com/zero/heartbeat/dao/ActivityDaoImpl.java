@@ -1,6 +1,5 @@
 package com.zero.heartbeat.dao;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,8 +16,6 @@ import com.zero.heartbeat.model.Reply;
 import com.zero.heartbeat.model.Tag;
 import com.zero.heartbeat.model.Album;
 import com.zero.heartbeat.model.Artist;
-import com.zero.heartbeat.model.SearchList;
-import com.zero.heartbeat.model.Tag;
 import com.zero.heartbeat.model.AllLikeList;
 import com.zero.heartbeat.model.Code;
 import com.zero.heartbeat.model.Follow;

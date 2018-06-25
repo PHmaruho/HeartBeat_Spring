@@ -17,7 +17,7 @@
 	<c:if test="${following.size()!=0 }">
 		<div id="following">
 		<c:forEach var="following" items="${following}">
- 			<img src="${pageContext.request.contextPath }/resources/img/album/${following.member_sq }.jpg" class="albumImg" ><br>
+ 			<img src="${pageContext.request.contextPath }/resources/img/album/${following.member_sq }.png" class="albumImg" ><br>
 			${following.nick }<br>
 			<br>
 			 <c:if test="${following.cntFollow== 0}">
@@ -40,7 +40,7 @@
 	<c:if test="${follower.size()!=0 }">
 		<div id="follower">
 		<c:forEach var="follower" items="${follower}" >
-			<img src="${pageContext.request.contextPath }/resources/img/album/${follower.member_sq }.jpg" class="albumImg" ><br>
+			<img src="${pageContext.request.contextPath }/resources/img/album/${follower.member_sq }.png" class="albumImg" ><br>
 			${follower.nick }<br>
 			<br>
 			<c:if test="${follower.cntFollow== 0}">

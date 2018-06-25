@@ -45,26 +45,28 @@
 	<c:if test="${ discoverList!=null }">
 		<c:forEach var="list" items="${discoverList}" varStatus="i">
 			<table class="searchResult">
-				<td class="part">
-					<a onclick="goto('/others/music/${list.music_sq}')">
- 					<img src="${pageContext.request.contextPath }/resources/img/album/${ list.img_path }.jpg" style="width:100px;"></a><br>
-						<%-- img_path: ${ list.img_path }<Br> --%>
-						 ${list.album_nm }<br>
-					<!-- music_sq:  ${list.music_sq}<br>-->
-				</td>	
-				<td class="part">
-					${list.nick } 
-
-					<br>
-					${list.music_nm }<br>
-					<!-- equalizer??  <br> -->
-					 
-						<fmt:formatDate value="${list.release_dt }" pattern="yyyy.MM.dd"/>
-					<br>								<!-- musicShare로 바꾸기!!!!! -->
-					<%-- <input type="button" value="공유" onclick="musicShare(${list.music_sq})">  
-					<button onclick="goto('/others/song/${list.music_sq }')">댓글</button> --%>		
-					<img src="${pageContext.request.contextPath }/resources/img/profile/like.png" style="width:20px;">${list.music_like }
-				</td>
+				<tr>
+					<td class="part">
+						<a onclick="goto('/others/music/${list.music_sq}')">
+	 					<img src="${pageContext.request.contextPath }/resources/img/album/${ list.img_path }.png" style="width:100px;"></a><br>
+							<%-- img_path: ${ list.img_path }<Br> --%>
+							 ${list.album_nm }<br>
+						<!-- music_sq:  ${list.music_sq}<br>-->
+					</td>	
+					<td class="part">
+						${list.nick } 
+	
+						<br>
+						${list.music_nm }<br>
+						<!-- equalizer??  <br> -->
+						 
+							<fmt:formatDate value="${list.release_dt }" pattern="yyyy.MM.dd"/>
+						<br>								<!-- musicShare로 바꾸기!!!!! -->
+						<%-- <input type="button" value="공유" onclick="musicShare(${list.music_sq})">  
+						<button onclick="goto('/others/song/${list.music_sq }')">댓글</button> --%>		
+						<img src="${pageContext.request.contextPath }/resources/img/profile/like.png" style="width:20px;">${list.music_like }
+					</td>
+				</tr>
 			</table>
 			<p>
 		</c:forEach>
