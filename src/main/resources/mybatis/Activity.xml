@@ -29,6 +29,7 @@
 		<result property="play_time" column="play_time"/>
 		<result property="list_no" column="list_no"/>
 		<result property="likeCnt" column="likeCnt" />
+		<result property="isLiked" column="isLiked" />
 		
 		<collection property="artistList" javaType="java.util.ArrayList" resultMap="artistsMap"/>
 		<collection property="tagList" javaType="java.util.ArrayList" resultMap="musicTagMap"/>
@@ -419,44 +420,54 @@
 	</insert>
 	
 	<!-- 최우일 -->
-<!-- 	<select id="selectMusicDetail" parameterType="int" resultMap="musicMap">
-		select m.music_sq, m.music_nm, m.album_sq, a.member_sq, member.nick, tag.*
-		from music m, artist a, member, (
-		    select mt.music_sq, t.tag_cd, t.tag_meaning
-		    from music_tag mt, tag t
-		    where mt.tag_cd = t.tag_cd) tag
-		where m.music_sq = #{sq} and m.music_sq = a.music_sq and a.member_sq = member.member_sq and m.music_sq = tag.music_sq
-	</select> -->
-	
-	<!-- 최우일 -->
-	<select id="selectMusicDetail" parameterType="int" resultMap="musicMap">
-		select m.*, nvl(cnt,0) likeCnt
+	<select id="selectMusicDetail" parameterType="HashMap" resultMap="musicMap">
+		select m.*, nvl(cnt,0) likeCnt, nvl2(ml.target_sq, 1, 0) isLiked
 		from (
-			select m.music_sq, m.music_nm, m.album_sq, a.member_sq, member.nick, tag.tag_cd, tag.tag_meaning
-			from music m, artist a, member, (
-		   		select mt.music_sq, t.tag_cd, t.tag_meaning
-		    	from music_tag mt, tag t
-		    	where mt.tag_cd = t.tag_cd) tag
-			where m.music_sq = #{sq} and m.music_sq = a.music_sq and a.member_sq = member.member_sq and m.music_sq = tag.music_sq) m
-    	left join (
-    		select target_sq, count(*) cnt
-			from music_like
-			where music_like_type = 'LI2'
-			group by target_sq) l on m.music_sq = l.target_sq
+		    select m.music_sq, m.music_nm, m.album_sq, a.member_sq, member.nick, tag.tag_cd, tag.tag_meaning
+		    from music m, artist a, member, (
+		        select mt.music_sq, t.tag_cd, t.tag_meaning
+		        from music_tag mt, tag t
+		        where mt.tag_cd = t.tag_cd) tag
+		    where m.music_sq = #{music_sq} and m.music_sq = a.music_sq and a.member_sq = member.member_sq and m.music_sq = tag.music_sq) m
+		    
+		left join (
+		    select target_sq, count(*) cnt
+		    from music_like
+		    where music_like_type = 'LI2'
+		    group by target_sq) l on m.music_sq = l.target_sq
+		    
+		left join (
+		    select target_sq
+		    from music_like
+		    where music_like_type = 'LI2' and member_sq = #{member_sq}) ml on m.music_sq = ml.target_sq
 	</select>
 	
 	<!-- 최우일 -->
-	<select id="selectMusicByArtist" parameterType="int" resultMap="musicMap">
-		select m.music_nm, m.album_sq, a.member_sq, member.nick, tag.*
-		from music m, artist a, member, (
-		    select mt.music_sq, t.tag_cd, t.tag_meaning
-		    from music_tag mt, tag t
-		    where mt.tag_cd = t.tag_cd) tag
-		where a.music_sq in (
-		    select music_sq
-		    from artist
-		    where member_sq = #{sq})
-		and m.music_sq = a.music_sq and a.member_sq = member.member_sq and m.music_sq = tag.music_sq
+	<select id="selectMusicByArtist" parameterType="HashMap" resultMap="musicMap">
+		select m.*, nvl(cnt,0) likeCnt, nvl2(ml.target_sq, 1, 0) isLiked
+		from (
+		    select m.music_sq, m.music_nm, m.album_sq, a.member_sq, member.nick, tag.tag_cd, tag.tag_meaning
+		    from music m, artist a, member, (
+		        select mt.music_sq, t.tag_cd, t.tag_meaning
+		        from music_tag mt, tag t
+		        where mt.tag_cd = t.tag_cd) tag
+		    where a.music_sq in (
+		        select music_sq
+		        from artist
+		        where member_sq = #{target_sq})
+		    and m.music_sq = a.music_sq and a.member_sq = member.member_sq and m.music_sq = tag.music_sq) m
+		    
+		    left join (		
+		    select target_sq, count(*) cnt
+		    from music_like
+		    where music_like_type = 'LI2'
+		    group by target_sq) l on m.music_sq = l.target_sq
+		    
+		    left join (		    
+		    select target_sq
+		    from music_like
+		    where music_like_type = 'LI2' and member_sq = #{member_sq}) ml on m.music_sq = ml.target_sq
+		order by m.music_sq desc
 	</select>
 	
 	<!-- 최우일 -->
@@ -475,9 +486,42 @@
 	</select>
 	
 	<!-- 최우일 -->
-	<select id="selectMemberArtistCwi" parameterType="int" resultType="Member">
-		select nick, member_sq
-		from member
-		where member_sq = #{sq}
+	<select id="selectMemberArtistCwi" parameterType="HashMap" resultType="Member">
+		select m.nick, m.member_sq, CHECKCNTFOLLOW_SQ(#{member_sq}, #{target_sq}) cntFollow, followerCnt, followingCnt
+		from member m, (
+		    select count(*) followerCnt
+		    from follow
+		    where target_sq = #{target_sq}), (
+		    select count(*) followingCnt
+		    from follow
+		    where member_sq = #{target_sq})
+		where m.member_sq = #{target_sq}
 	</select>
+	
+	<!-- 최우일 -->
+	<update id="mergeMusicLike" parameterType="HashMap">
+		merge into music_like l
+		    using (
+		        select max(music_like_sq) music_like_sq
+		        from (
+		            select 0 music_like_sq
+		            from dual
+		            union all
+		            select music_like_sq
+		            from music_like
+		            where music_like_type='LI4' and target_sq = #{music_sq} and member_sq = #{member_sq})) l2
+		    on (l.music_like_sq = l2.music_like_sq)
+		when matched then
+		    update set l.music_like_type='LI2'
+		when not matched then
+		    insert (l.music_like_sq, l.target_sq, l.member_sq, l.music_like_type)
+		    values(music_like_sq.nextval, #{music_sq}, #{member_sq}, 'LI2')	
+	</update>
+	
+	<!-- 최우일 -->
+	<update id="updateMusicUnlike" parameterType="HashMap">
+		update music_like
+		set music_like_type = 'LI4'
+		where target_sq = #{music_sq} and member_sq = #{member_sq} and music_like_type = 'LI2'
+	</update>
 </mapper>

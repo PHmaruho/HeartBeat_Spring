@@ -2,15 +2,48 @@ var detailPlayer = [];
 var maxDetailNum = $('#maxDetailNum').val();
 var isCommentsOn = false;
 var spanFlag = false;
+var hasMoreDetail;
+var detailLoopCount;
+var contentsPerScroll = 5;
 
 (function() {
+	hasMoreDetail = true;
+	detailLoopCount = 0;
 	musicMain.setMusicPage(true);
-	for (var i = 0; i <= maxDetailNum; i++) {
-		initDetail(i, $('#detailMusicSq' + i).val());
-	}
+	initLoop(detailLoopCount);
 })();
 
+$(window).scroll(function() {
+	if ($(window).scrollTop() == $(document).height() - $(window).height() && hasMoreDetail) {
+		initLoop(detailLoopCount);
+		console.log(1);
+	}
+});
+
+function initLoop(dlc) {
+	var startNum = contentsPerScroll * dlc;
+	var endNum;
+	var minus = maxDetailNum - startNum;
+	
+	if (minus < 0) {
+		hasMoreDetail = false;
+		return false;
+	} else if (minus < 5 && minus >= 0) {
+		hasMoreDetail = false;
+		endNum = startNum + minus;
+	} else {
+		endNum = startNum + contentsPerScroll - 1;
+	}
+	
+	for (var i = startNum; i <= endNum; i++) {
+		initDetail(i, $('#detailMusicSq' + i).val());
+	}
+	
+	detailLoopCount = detailLoopCount + 1;
+}
+
 function initDetail(detailNum, sq) {
+	$('#detailPlayerHidden' + detailNum).removeClass('cwi-foot-display-none');
 	var waveContainer = '#detailWaveForm' + detailNum;
 	
 	detailPlayer[detailNum] = WaveSurfer.create({
@@ -39,6 +72,10 @@ function initDetail(detailNum, sq) {
 	    if (maxDetailNum >= 1) {
 	    	checkFootReady(checkSameDetailNum, detailNum)
 	    }
+	    
+		if (detailPlayer[detailNum].sq == footPlayer.sq) {
+			musicMain.setDetailNum(detailNum);
+		}
 	});
 	
 	detailPlayer[detailNum].on('audioprocess', function () {
@@ -93,9 +130,19 @@ function pauseFromDetail(detailNum) {
 
 function seekFromDetail(e, detailNum) {
 	if (musicMain.getDetailNum() == detailNum) {
-		$('#footProgressBar').val(e)
+		var footProgressBar = $('#footProgressBar');
+		footProgressBar.val(e);
 		$('#footProgress').text( formatTime(footPlayer.duration * e) );
 		footPlayer.seekTo(e);
+		
+	    var val = (footProgressBar.val() - footProgressBar.attr('min')) / (footProgressBar.attr('max') - footProgressBar.attr('min'));
+	    
+	    footProgressBar.css('background-image',
+	                '-webkit-gradient(linear, left top, right top, '
+	                + 'color-stop(' + val + ', #FF0000), '
+	                + 'color-stop(' + val + ', #C5C5C5)'
+	                + ')'
+	                );
 	}
 }
 

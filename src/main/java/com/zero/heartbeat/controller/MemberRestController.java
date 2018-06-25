@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.zero.heartbeat.annotation.CheckSession;
 import com.zero.heartbeat.model.AlarmList;
 import com.zero.heartbeat.model.Member;
 import com.zero.heartbeat.service.ActivityService;

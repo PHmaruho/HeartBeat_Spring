@@ -15,9 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.zero.heartbeat.annotation.CheckSession;
 import com.zero.heartbeat.model.Member;
 import com.zero.heartbeat.service.ActivityService;
 import com.zero.heartbeat.service.CommonService;
@@ -82,21 +84,17 @@ public class MemberController {
 		return null;
 	}
 
-	@RequestMapping("/loginPro")
-	public String loginPro(Model model, String email, String pw, HttpSession session) {
+	@RequestMapping(value = "/loginPro")
+	public String loginPro(Model model, String email, String pw, String loginUrl, HttpSession session) {
 		String returnString = "";
-		model.addAttribute("email", email);
-		model.addAttribute("pw", pw);
 		Member member = new Member();
 		member.setEmail(email);
 		member.setPw(pw);
-		System.out.println(member.getEmail());
-		System.out.println(member.getPw());
 		int loginSession = memberService.login(member);
 		if (loginSession != 0) {
 			String member_sq = memberService.getMemberSq(member);
 			session.setAttribute("loginSession", member_sq);
-			returnString = "forward:/home";
+			returnString = "redirect:" + loginUrl;
 		} else {
 			returnString = "forward:/loginForm";
 		}
@@ -109,6 +107,7 @@ public class MemberController {
 		return "forward:/home";
 	}
 
+	@CheckSession
 	@RequestMapping("/memberInfoChangeForm")
 	public String memberInfoChangeForm(Model model, HttpSession session) {
 		Member member = new Member();
@@ -117,12 +116,14 @@ public class MemberController {
 		return "member/memberInfoChangeForm";
 	}
 
+	@CheckSession
 	@RequestMapping("/memberInfoChangePro")
-	public String memberInfoChangePro(Member member, Model model) {
+	public String memberInfoChangePro(Member member, Model model, HttpSession session) {
 		model.addAttribute("member", member);
 		return "member/memberInfoChangePro";
 	}
 
+	@CheckSession
 	@RequestMapping("/memberInfoChangePro2")
 	public String memberInfoChangePro2(HttpServletRequest req, HttpServletResponse res, HttpSession session) {
 		String path = "c://aaa";
@@ -155,7 +156,7 @@ public class MemberController {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		return "/common/home";
+		return "redirect:/home";
 	}
 
 	@RequestMapping("/joinForm")
@@ -170,6 +171,6 @@ public class MemberController {
 		member.setPw(pw);
 		member.setNick(nick);
 		memberService.join(member);
-		return "/common/home";
+		return "redirect:/home";
 	}
 }

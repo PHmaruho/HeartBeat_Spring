@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.zero.heartbeat.annotation.CheckSession;
 import com.zero.heartbeat.model.Album;
 import com.zero.heartbeat.model.MainList;
 import com.zero.heartbeat.model.Music;
@@ -39,6 +41,11 @@ public class CommonController {
 		String c = request.getAttribute("c") == null ? "" : request.getAttribute("c").toString();
 		c = url.equals("/home") ? "1" : c;
 		
+		HttpSession session = request.getSession();
+		String needLogin = session.getAttribute("needLogin") == null ? "" : session.getAttribute("needLogin").toString();
+		model.addAttribute("needLogin", needLogin);
+		session.setAttribute("needLogin", "");
+		
 		String str[] = this.getClass().getPackage().toString().split("\\.");
 		
 		model.addAttribute("url", url);
@@ -59,8 +66,7 @@ public class CommonController {
 		likeList= commonService.mainListLike(startNum);
 		model.addAttribute("newList", newList);
 		model.addAttribute("likeList", likeList);
-		//model.addAttribute("kkk","100.png");
-		logger.info("home start mainList after");
+		logger.info("home start mainList after1111");
 		return "common/home";
 	}
 	

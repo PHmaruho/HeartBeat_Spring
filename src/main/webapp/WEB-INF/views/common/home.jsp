@@ -19,14 +19,7 @@
 </head>
 <body>
 	<div class="menuButton">
-		<button onclick="goto('/discover')">검색</button>	
 		<c:if test="${!empty loginSession }">
-<!-- 			<button onclick="goto('/logout')">logout</button>
-			<button onclick="goto('/memberInfoChangeForm')">개인정보수정</button> -->
-			<button onclick="goto('/my/follow')">FollowList</button>
-			<button onclick="goto('/my/like')">내가좋아하는게뭐게</button>
-			<!-- <button onclick="goto('/arrive')" >최신음악</button> -->
-			<button onclick="getMemberAlarmList();" class="alarm">알람</button>
 			<div id="alarmContent" class="alarmContent"></div>
 		</c:if>
 	</div>

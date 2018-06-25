@@ -3,6 +3,7 @@ package com.zero.heartbeat.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.zero.heartbeat.annotation.CheckSession;
 import com.zero.heartbeat.model.AllLikeList;
 import com.zero.heartbeat.model.Code;
 import com.zero.heartbeat.model.Tag;
@@ -43,14 +45,16 @@ public class ActivityController {
 	
 	// PHmaruho
 	// uploadForm
+	@CheckSession
 	@RequestMapping(value="/upload")
-	public String upload(Model model) {
+	public String upload(Model model, HttpSession session) {
 		return "activity/my/upload";
 	}
 	
 	// uploadAlbum
+	@CheckSession
 	@RequestMapping(value="/upload/album")
-	public String uploadAlbum(Model model) {
+	public String uploadAlbum(Model model, HttpSession session) {
 		List<Code> type = activityService.selectAlbumType();
 		List<Tag> tag = activityService.searchTag();
 		
@@ -60,19 +64,21 @@ public class ActivityController {
 		return "activity/my/uploadAlbum";
 	}
 	
+	@CheckSession
 	@RequestMapping(value="/upload/album/pro")
-	public String uploadAlbumPro(Model model, HttpServletRequest request,
+	public String uploadAlbumPro(Model model, HttpServletRequest request, HttpSession session,
 									MultipartHttpServletRequest mhsr) {
 		Boolean judge = activityService.uploadAlbumPro(mhsr, request);
 		if(!judge) {
 			
 		}
-		return "forward:/upload/album";
+		return "redirect:/upload/album";
 	}
 
 	// uploadMusic
+	@CheckSession
 	@RequestMapping(value="/upload/music")
-	public String uploadMusic(Model model) {
+	public String uploadMusic(Model model, HttpSession session) {
 		List<Code> type = activityService.selectAlbumType();
 		List<Tag> tag = activityService.searchTag();
 		
@@ -90,13 +96,23 @@ public class ActivityController {
 			
 		}
 		
-		return "forward:/upload/music";
+		return "redirect:/upload/music";
 	}
 	
 	// 최우일
 	@RequestMapping("/others/music/{sq}")
-	public String othersMusic(Model model, @PathVariable int sq) {
-		Music music = activityService.selectMusicDetail(sq);
+	public String othersMusic(Model model, @PathVariable int sq, HttpSession session) {
+		Object obj = session.getAttribute("loginSession");
+		int member_sq = obj == null ? 0 : Integer.parseInt(obj.toString());
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("member_sq", member_sq);
+		map.put("music_sq", sq);
+		
+		Music music = activityService.selectMusicDetail(map);
+		if (music == null) {
+			return "common/noResult";
+		}
 		
 		model.addAttribute("music", music);
 		return "activity/others/music";
@@ -104,13 +120,42 @@ public class ActivityController {
 	
 	// 최우일
 	@RequestMapping("/others/artist/{sq}")
-	public String othersArtist(Model model, @PathVariable int sq) {
-		List<Music> list = activityService.selectMusicByArtist(sq);
-		Member member = activityService.selectMemberArtist(sq);
+	public String othersArtist(Model model, @PathVariable int sq, HttpSession session) {
+		Object obj = session.getAttribute("loginSession");
+		int member_sq = obj == null ? 0 : Integer.parseInt(obj.toString());
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("member_sq", member_sq);
+		map.put("target_sq", sq);
+		
+		List<Music> list = activityService.selectMusicByArtist(map);
+		Member member = activityService.selectMemberArtist(map);
+		if (member == null) {
+			return "common/noResult";
+		}
 		
 		model.addAttribute("member", member);
 		model.addAttribute("list", list);
 		return "activity/others/artist";
+	}
+	
+	// 최우일
+	@CheckSession
+	@RequestMapping("/my/music")
+	public String myMusic(Model model, HttpSession session) {
+		Object obj = session.getAttribute("loginSession");
+		int member_sq = obj == null ? 0 : Integer.parseInt(obj.toString());
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("member_sq", member_sq);
+		map.put("target_sq", member_sq);
+		
+		List<Music> list = activityService.selectMusicByArtist(map);
+		Member member = activityService.selectMemberArtist(map);
+		
+		model.addAttribute("member", member);
+		model.addAttribute("list", list);
+		return "activity/my/music";
 	}
 	
 	//JAN
@@ -124,6 +169,7 @@ public class ActivityController {
 		return "activity/my/likeTest";
 	}*/
 	
+	@CheckSession
 	@RequestMapping("/my/like")
 	public ModelAndView selectAllLikeList(HttpSession session) {
 		String id = (String) session.getAttribute("loginSession");
@@ -147,6 +193,7 @@ public class ActivityController {
 	
 
 	//JAN
+	@CheckSession
 	@RequestMapping("/my/follow")
 	public String followList(Model model, HttpSession httpSession) {
 		List<Member> following = new ArrayList<Member>();

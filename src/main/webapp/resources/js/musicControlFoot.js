@@ -1,7 +1,7 @@
 var footPlayer;
 var footProgressFlag = 0;
 
-//cookieList();
+cookieList();
 initFoot(302);
 
 function initFoot(sq) {
@@ -18,12 +18,9 @@ function initFoot(sq) {
 		$('#footDuration').text(formatTime(footPlayer.duration));
 		$('#footProgress').text( formatTime(0));
 		
-		console.log(musicMain.getMusicPage());
 		if (musicMain.getMusicPage()) {
-			console.log(musicMain.getMusicPage());
 			for(var i = 0; i <= maxDetailNum; i++) {
-				if (detailPlayer[i].sq == footPlayer.sq) {
-					console.log('musicfoot 24 line : ' + i)
+				if (typeof detailPlayer[i] !== 'undefined' && detailPlayer[i].sq == footPlayer.sq) {
 					musicMain.setDetailNum(i);
 				}
 			}
@@ -161,8 +158,7 @@ function setCookie(cname, cvalue) {
     		contentType: 'application/json; charset=UTF-8',
     		success : function(data) {
     			document.cookie = 'cookieOrder' + cname + '=' + encodeURI(cvalue) + ';' + expires + ';path=/';
-    			footPlayer.cookieList.cookieName = data.cookieName;
-    			console.log(footPlayer.cookieList);
+    			footPlayer.cookieList[cookieName] = data.cookieOrder1;
     		},
     		error:function(request,status,error){
     		    console.log('code : ' + request.status + '\n' + 'message : ' + request.responseText + '\n' + 'error : ' + error);
@@ -303,20 +299,6 @@ function cookieFromPlay(sq) {
 	loadFoot(sq);
 }
 
-//for (var i = 1; i <= 100; i++) {
-//	setCookie(i, 302);
-//}
-//setCookie(50);
-//console.log(document.cookie);
-//
-//deleteCookie(1);
-//deleteCookie(1);
-//deleteCookie(1);
-//console.log(document.cookie);
-
-//cookieFromPlay(55555);
-//console.log(document.cookie);
-
 function cookieList() {
 	var cookie = cookieToObject();
 	
@@ -328,6 +310,7 @@ function cookieList() {
 			contentType: 'application/json; charset=UTF-8',
 			success : function(data) {
 				footPlayer.cookieList = data;
+				console.log(footPlayer.cookieList);
 			},
 			error:function(request,status,error){
 			    console.log('code : ' + request.status + '\n' + 'message : ' + request.responseText + '\n' + 'error : ' + error);
@@ -336,14 +319,25 @@ function cookieList() {
 	}
 }
 
-//console.log(cookieToObject());
-//deleteCookie(1);
-//console.log(cookieToObject());
-//console.log(footPlayer.cookieList);
+function initPlaylist() {
+	var list = $('#playlistTable');
+	var max = getMaxCookie();
+	var newHtml = '';
+	
+	for (var i = 1; i <= max; i++) {
+		var cookie = footPlayer.cookieList['cookieOrder' + i];
+		newHtml = newHtml + 
+		'<tr onclick="loadFoot('+ cookie.music_sq +')">' +
+			'<td>sq : '+ cookie.music_sq +' </td>' +
+			'<td>'+
+				'<c:forEach var="artistList" items="${playlist.artistList}">' +
+					'artist : ${artistList.nick }' +
+				'</c:forEach>' +
+			'</td>' +
+		'</tr>';
+	}
+}
 
-//deleteCookie();
-//cookieFromAdd(302);
-//console.log(document.cookie);
 $('input[type="range"]').change(function () {
     var val = ($(this).val() - $(this).attr('min')) / ($(this).attr('max') - $(this).attr('min'));
     
@@ -378,3 +372,87 @@ $('#footVolumeEnter').on('mouseenter', function() {
 $('#footVolumeLeave').on('mouseleave', function() {
 	$('#footVolumeDisplay').addClass('cwi-foot-display-none');
 });
+
+
+function cwi_reLike(sq, v) {
+	if (checkLogin()) {
+		$.ajax({
+			url: '/heartbeat/do/reLike/' + sq,
+			success: function() {
+				$('#'+v.parentNode.id).load('#'+v.id+' '+'#'+v.id);
+			}
+		});
+	}
+}
+
+function cwi_unLike(sq, v) {
+	if (checkLogin()) {
+		$.ajax({
+			url: '/heartbeat/do/unLike/' + sq,
+			success: function() {
+				$('#'+v.parentNode.id).load('#'+v.id+' '+'#'+v.id);
+			}
+		});
+	}
+}
+
+function checkLogin() {
+	if ($('#loginSession').val() == '') {
+		loginButtonClick();
+		return false;
+	} else {
+		return true;
+	}
+}
+
+function cwi_follow(sq, v) {
+	if (checkLogin()) {
+		var session = $('#loginSession').val();
+		
+		if (sq == session) {
+			alert('본인을 팔로우 할 수 없습니다.');
+		} else {
+			$.ajax({
+				url: '/heartbeat/do/follow',
+				data: {
+					member_sq : sq,
+					loginSession : session
+				},
+				success : function() {
+					$('#'+v.parentNode.id).load('#'+v.id+' '+'#'+v.id);
+				}
+			});
+		}
+	}
+}
+
+
+function cwi_unfollow(targetSq, v) {
+	if (checkLogin()) {
+		var memberSq = $('#loginSession').val();
+		
+		if(targetSq == memberSq) {
+			alert('본인을 팔로우할 수 없습니다.')
+		} else {
+			$.ajax({
+				url: '/heartbeat/do/unfollow',
+				data: {
+					member_sq : memberSq,
+					target_sq : targetSq
+				},
+				success : function() {
+					$('#'+v.parentNode.id).load('#'+v.id+' '+'#'+v.id);
+				}
+			});
+		}
+	}
+}
+
+//console.log(cookieToObject());
+//deleteCookie(1);
+//console.log(cookieToObject());
+//console.log(footPlayer.cookieList);
+
+//deleteCookie();
+//cookieFromAdd(302);
+//console.log(document.cookie);
