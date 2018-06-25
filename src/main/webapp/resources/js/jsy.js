@@ -77,7 +77,7 @@ function searchKeywordUsers(){
 	
 		var cat=$('#cat').val();
 		var det= $('#detailText').val().trim();
-		var e=det.replace(/'/g,"따옴표");
+		var e=det.replace(/'/g,"따옴표ㄱㄴㄷㄹ");
 		//alert('det:'+det);
 		//alert('e:'+e);
 		if(cat.length==0){
@@ -286,26 +286,9 @@ function searchList(){
 	var tit=$('#title').val().trim();
 	var tag=$('#tag').val().trim();
 	var c=$('#cat').val().length;
-	art=art.replace(/따옴표/g,"'");
-	tit=tit.replace(/따옴표/g,"'");
-	tag=tag.replace(/따옴표/g,"'");
-	/*
-	var keyword=document.getElementById('searchBox').value.trim();
-	//alert('keyword: '+keyword)
-	var arr= keyword.split(" ");
-	var con=["#","@","*"];
-	var con2=["#@","#*","##","@@","@*","@#","**","*@","*#"];
-	var con3
-	=["!","$","%","^","&","+","-","=","-","_","|","[","]",":",";","\'","<",">",".","{","}","?",",","\"","||"];
-	var count1=0;
-	var count2=0;
-	var count3=0;
-	var noCategory=0;
-	alert('val trim');
-	alert('art:'+art);
-	alert('tag:'+tag);
-	alert('title:'+tit);
-	*/
+	art=art.replace(/따옴표ㄱㄴㄷㄹ/g,"'");
+	tit=tit.replace(/따옴표ㄱㄴㄷㄹ/g,"'");
+	tag=tag.replace(/따옴표ㄱㄴㄷㄹ/g,"'");
 	if(c==0){
 		alert('항목을 선택하고 검색어를 입력해주세요.');
 		return false;
@@ -322,63 +305,7 @@ function searchList(){
 		alert('tag:'+tag);
 		alert('title:'+tit);*/
 	}
-	/*
-	for(var i=0;i<arr.length;i++){
-		count1=0;
-		//alert('arr['+i+']:'+arr[i]);
-		
-		for(var c3=0;c3<con3.length;c3++){
-			var result=arr[i].indexOf(con3[c3]);
-			var result2=arr[i].lastIndexOf(con3[c3]);
-			//alert('result1:'+result+'/result2:'+result2);
-			if((result==-1)&&(result2==-1)) continue;
-			else count3++;
-		}
-		//alert('count3: '+count3);
-		if(count3==0){
-			for(var c2=0;c2<con2.length;c2++){
-				var result= arr[i].lastIndexOf(con2[c2]);
-				var result2= arr[i].lastIndexOf(con2[c2]);
-				if((result==-1)&&(result2==-1)){
-					//alert('con2[c2]:'+con2[c2]+'/result:'+result+'/result2: '+result2);
-					continue;
-				}
-				else {
-					count2++;
-				}
-			}
-			//alert('count2: '+count2);
-			if(count2==0){
-				for(var c=0;c<con.length;c++){
-					
-					var result=arr[i].indexOf(con[c]);
-					var result2= arr[i].lastIndexOf(con[c]);
-					//alert('1 / arr[i]:'+arr[i]+'/con[c]:'+con[c]+'/result:'+result+'/result2: '+result2);
-					
-					if((result==0)&(result2==0)&(result==result2)){
-						var arr2=arr[i].split(con[c]);
-						for(var c1=0;c1<con.length;c1++){
-							var result=arr2[1].indexOf(con[c1]);
-							var result2= arr2[1].lastIndexOf(con[c1]);
-							var result3=arr2[1].length;
-							//alert('2 / arr2[1]:'+arr2[1]+'/con[c]:'+con[c1]+'/result:'+result+'/result2: '+result2);
-								if(result3!=0){
-									if((result==-1)&& (result2==-1)) {
-										count1+=-1;
-										//alert('2 count: '+count1);
-									}
-								}else count1=0;
-							}
-					}
-				}
-			}
-			}
-		//alert('count1: '+count1);
-		if(count1!=-3) {
-			alert('검색어 분류 또는 빈칸을 확인해주세요.');
-			return false;
-		}
-	}*/
+
 		$.ajax({
 			type:'POST',
 			url:'/heartbeat/do/discoverList',
@@ -386,11 +313,11 @@ function searchList(){
 					
 					kArtist:art,
 					kTitle:tit,
-					kTag:tag
+					kTag:tag,
 				},
 			success:function(data){
-				$('#keywordList').html("");
-				$('#keywordList').html(data);
+					$('#keywordList').html("");
+					$('#keywordList').html(data);
 			}
 		});	
 }
