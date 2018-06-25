@@ -371,6 +371,7 @@
 		)
 	</insert>
 	
+	<!-- PHmaruho -->
 	<select id="selectLastReplyByMe" parameterType="String" resultType="Reply">
 		SELECT r1.reply_sq, r2.reply_order, r2.music_sq
 		FROM(
@@ -385,7 +386,8 @@
 		WHERE r1.reply_sq = r2.reply_sq
 	</select>
 	
-	<update id="updateLowerReply">
+	<!-- PHmaruho -->
+	<update id="updateLowerReply" parameterType="Reply">
 		<![CDATA[
 			UPDATE reply
 			SET
@@ -396,6 +398,7 @@
 		]]>
 	</update>
 	
+	<!-- PHmaruho -->
 	<select id="selectSameTimeStamp" parameterType="Reply" resultType="int">
 		SELECT MAX(reply_order) reply_order
 		FROM reply
@@ -403,6 +406,7 @@
 		  AND time_stamp BETWEEN 0 AND #{time_stamp} 
 	</select>
 	
+	<!-- PHmaruho -->
 	<insert id="insertNormalReply">
 		INSERT INTO reply
 		VALUES(
@@ -418,6 +422,32 @@
 			'N'
 		)
 	</insert>
+	
+	<!-- PHmaruho -->
+	<select id="selectTotalReply" parameterType="int" resultType="int">
+		SELECT count(*)
+		FROM reply
+		WHERE music_sq = #{music_sq}
+	</select>
+	
+	<!-- PHmaruho -->
+	<select id="selectReplyList" parameterType="hashmap" resultType="Reply">
+		SELECT r1.nick, r1.email, r2.*
+		FROM member r1,
+		    (
+		    SELECT *
+		    FROM reply
+		    WHERE music_sq = #{music_sq}) r2
+		WHERE r1.member_sq = r2.member_sq
+		  AND r2.reply_order BETWEEN #{startRow} AND #{endRow}
+		ORDER BY r2.reply_order ASC
+	</select>
+	
+	<!-- PHmaruho -->
+	<delete id="deleteReply" parameterType="String">
+		DELETE FROM reply
+		WHERE reply_sq = #{reply_sq}
+	</delete>
 	
 	<!-- 최우일 -->
 	<select id="selectMusicDetail" parameterType="HashMap" resultMap="musicMap">

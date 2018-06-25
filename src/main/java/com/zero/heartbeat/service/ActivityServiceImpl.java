@@ -520,28 +520,51 @@ public class ActivityServiceImpl implements ActivityService {
 	
 	// PHmaruho
 	@Override
-	public List<Reply> selectReplyList(HttpServletRequest request) {
+	public Map<String, Object> selectReplyList(HttpServletRequest request) {
 		// TODO Auto-generated method stub
-//		int music_sq = Integer.parseInt(request.getParameter("music_sq"));
-//		String pageNum = request.getParameter("page");
-//		
-//		int totCnt  = activityDao.selectTotalReply(music_sq);
-//		if (pageNum==null || pageNum.equals("")) {	pageNum = "1";	}
-//		int currentPage = Integer.parseInt(pageNum);	
-//		int pageSize  = 10, blockSize = 5;
-//		int startRow = (currentPage - 1) * pageSize + 1;
-//		int endRow   = startRow + pageSize - 1;
-//		int startNum = totCnt - startRow + 1;
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		map.put("music_sq", music_sq);
-//		map.put("startRow", startRow);
-//		map.put("endRow", endRow);
-//		List<Reply> list = activityDao.selectReplyList(map);
-//		int pageCnt = (int)Math.ceil((double)totCnt/pageSize);
-//		int startPage = (int)(currentPage-1)/blockSize*blockSize + 1;
-//		int endPage = startPage + blockSize -1;	
-//		if (endPage > pageCnt) endPage = pageCnt;
-		return null;
+		int music_sq = Integer.parseInt(request.getParameter("music_sq"));
+		String pageNum = request.getParameter("page");
+		
+		int totCnt  = activityDao.selectTotalReply(music_sq);
+		if (pageNum==null || pageNum.equals("")) {	pageNum = "1";	}
+		int currentPage = Integer.parseInt(pageNum);	
+		int pageSize  = 10, blockSize = 5;
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow   = startRow + pageSize - 1;
+		int startNum = totCnt - startRow + 1;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("music_sq", music_sq);
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		List<Reply> list = activityDao.selectReplyList(map);
+		int pageCnt = (int)Math.ceil((double)totCnt/pageSize);
+		int startPage = (int)(currentPage-1)/blockSize*blockSize + 1;
+		int endPage = startPage + blockSize -1;	
+		if (endPage > pageCnt) endPage = pageCnt;
+		
+		map.put("list", list);
+		map.put("totCnt", totCnt);
+		map.put("pageNum", pageNum);
+		map.put("currentPage", currentPage);
+		map.put("startNum", startNum);
+		map.put("blockSize", blockSize);
+		map.put("pageCnt", pageCnt);
+		map.put("startPage", startPage);
+		map.put("endPage", endPage);
+		return map;
+	}
+	
+	//PHmaruho
+	@Override
+	public String deleteReply(HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		String reply_sq = request.getParameter("reply_sq");
+		int result = activityDao.deleteReply(reply_sq);
+		
+		if(result == 1) {
+			return "Y";
+		}
+		return "N";
 	}
 	
 	// 최우일

@@ -62,6 +62,9 @@ public interface ActivityDao {
 	public int updateLowerReply(Reply replyDto);
 	public int selectSameTimeStamp(Reply replyDto);
 	public int insertNormalReply(Reply replyDto);
+	public int selectTotalReply(int music_sq);
+	public List<Reply> selectReplyList(Map<String, Object> map);
+	public int deleteReply(String reply_sq);
 	
 	
 	Music selectMusicDetail(HashMap<String, Object> map);	// 최우일

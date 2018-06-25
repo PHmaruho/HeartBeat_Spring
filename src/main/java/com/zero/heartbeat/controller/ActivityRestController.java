@@ -181,20 +181,42 @@ public class ActivityRestController {
 	
 	// PHmaruho
 	@RequestMapping(value="/reply/music")
-	public String insertReplyMusic(HttpServletRequest request, Model model){
+	public Map<String, Object> insertReplyMusic(HttpServletRequest request, Model model){
+		HttpSession session = request.getSession();
+		String sessionCheck = session.getAttribute("loginSession") != null ? (String) session.getAttribute("loginSession") : "";
+		Map<String, Object> finalResult = new HashMap<String, Object>();
+		
+		finalResult.put("session", sessionCheck);
+		
+		if(sessionCheck.length() == 0) {
+			return finalResult;
+		}
+		
 		int result = activityService.insertReplyMusic(request);
-		String finalResult = "N";
 		
 		if(result != -1) {
-			finalResult = "Y";
+			finalResult.put("result", "Y");
 		}
 		return finalResult;
 	}
 	
+	//PHmaruho
 	@RequestMapping(value="/reply/list")
-	public List<Reply> selectReplyList(HttpServletRequest request){
-		List<Reply> reply_list = activityService.selectReplyList(request);
+	public Map<String, Object> selectReplyList(HttpServletRequest request){
+		Map<String, Object> reply_list = activityService.selectReplyList(request);
+		
+		HttpSession session = request.getSession();
+		String sessionCheck = session.getAttribute("loginSession") != null ? (String) session.getAttribute("loginSession") : "";
+		reply_list.put("session", sessionCheck);
+		logger.debug("###### ->" + reply_list);
 		
 		return reply_list;
+	}
+	
+	@RequestMapping(value="/reply/delete")
+	public String deleteReply(HttpServletRequest request) {
+		String result = activityService.deleteReply(request);
+		
+		return result;
 	}
 }

@@ -283,6 +283,24 @@ public class ActivityDaoImpl implements ActivityDao {
 		return session.insert("insertNormalReply", replyDto);
 	}
 	
+	@Override
+	public int selectTotalReply(int music_sq) {
+		// TODO Auto-generated method stub
+		return session.selectOne("selectTotalReply", music_sq);
+	}
+	
+	@Override
+	public List<Reply> selectReplyList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return session.selectList("selectReplyList", map);
+	}
+	
+	@Override
+	public int deleteReply(String reply_sq) {
+		// TODO Auto-generated method stub
+		return session.delete("deleteReply", reply_sq);
+	}
+	
 	// JSY
 	@Override
 	public List<Tag> searchTag() {
