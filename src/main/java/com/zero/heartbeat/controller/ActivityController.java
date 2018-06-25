@@ -45,14 +45,16 @@ public class ActivityController {
 	
 	// PHmaruho
 	// uploadForm
+	@CheckSession
 	@RequestMapping(value="/upload")
-	public String upload(Model model) {
+	public String upload(Model model, HttpSession session) {
 		return "activity/my/upload";
 	}
 	
 	// uploadAlbum
+	@CheckSession
 	@RequestMapping(value="/upload/album")
-	public String uploadAlbum(Model model) {
+	public String uploadAlbum(Model model, HttpSession session) {
 		List<Code> type = activityService.selectAlbumType();
 		List<Tag> tag = activityService.searchTag();
 		
@@ -62,19 +64,21 @@ public class ActivityController {
 		return "activity/my/uploadAlbum";
 	}
 	
+	@CheckSession
 	@RequestMapping(value="/upload/album/pro")
-	public String uploadAlbumPro(Model model, HttpServletRequest request,
+	public String uploadAlbumPro(Model model, HttpServletRequest request, HttpSession session,
 									MultipartHttpServletRequest mhsr) {
 		Boolean judge = activityService.uploadAlbumPro(mhsr, request);
 		if(!judge) {
 			
 		}
-		return "forward:/upload/album";
+		return "redirect:/upload/album";
 	}
 
 	// uploadMusic
+	@CheckSession
 	@RequestMapping(value="/upload/music")
-	public String uploadMusic(Model model) {
+	public String uploadMusic(Model model, HttpSession session) {
 		
 		return "activity/my/uploadMusic";
 	}
@@ -85,7 +89,7 @@ public class ActivityController {
 			
 		}
 		
-		return "forward:/upload/music";
+		return "redirect:/upload/music";
 	}
 	
 	// 최우일
@@ -129,6 +133,7 @@ public class ActivityController {
 	}
 	
 	// 최우일
+	@CheckSession
 	@RequestMapping("/my/music")
 	public String myMusic(Model model, HttpSession session) {
 		Object obj = session.getAttribute("loginSession");
@@ -157,6 +162,7 @@ public class ActivityController {
 		return "activity/my/likeTest";
 	}*/
 	
+	@CheckSession
 	@RequestMapping("/my/like")
 	public ModelAndView selectAllLikeList(HttpSession session) {
 		String id = (String) session.getAttribute("loginSession");
@@ -180,6 +186,7 @@ public class ActivityController {
 	
 
 	//JAN
+	@CheckSession
 	@RequestMapping("/my/follow")
 	public String followList(Model model, HttpSession httpSession) {
 		List<Member> following = new ArrayList<Member>();
