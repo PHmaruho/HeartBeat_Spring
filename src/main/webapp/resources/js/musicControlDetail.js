@@ -69,7 +69,7 @@ function initDetail(detailNum, sq) {
 	    $('#detailProgress' + detailNum).text( formatTime(0));
 	    getDetailComments(detailNum);
 	    
-	    if (maxDetailNum >= 1) {
+	    if (maxDetailNum >= 0) {
 	    	checkFootReady(checkSameDetailNum, detailNum)
 	    }
 	    

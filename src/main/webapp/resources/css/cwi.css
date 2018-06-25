@@ -571,3 +571,25 @@ input[type='range']::-webkit-slider-thumb {
 	margin: auto;
 	margin-left: -12px;
 }
+
+.cwi-login-button {
+	position: relative;
+	padding: 26px !important;
+}
+
+.cwi-login-table {
+	width: 100%;
+}
+
+#kkhform input {
+	margin-bottom: 5px;
+}
+
+#kkhform button {
+	display: inherit;
+	width: 100%;
+}
+
+#join_msg {
+	height: 25px;
+}

@@ -22,10 +22,12 @@
 	
 	if ($('#loginSession').val() != '') {
 		getAlarmCount();
-		if (alramInterval == false) {
+		if (typeof alramInterval == 'undefined') {
 			alramInterval = setInterval(function() {
+				console.log('alramInterval');
+				getMemberAlarmList2();
 				getAlarmCount();
-				}, 1000);
+				}, 10 * 1000);	//  10초마다 알림 갱신
 		}
 	} else {
 		clearInterval(alramInterval);
@@ -87,25 +89,16 @@ function getAlarmCount() {
 								</div>
 								<div class="modal-body">
 									<form action="/heartbeat/loginPro" method="post" id="log_kkhform">
-										<table>
+										<table class="cwi-login-table">
 											<tr>
-												<td>이메일</td>
-												<td><input type="text" id="log_email" name="email" required="required"></td>
-												<td><span id="log_email_msg"></span></td>
+												<td><input type="text" id="log_email" name="email" required="required" class="form-control" placeholder="이메일"></td>
+												<td rowspan="2" style="width: 102px"><input type="button" value="로그인" onclick="kkhcheck()" class="btn btn-primary cwi-login-button"></td>
 											</tr>
 											<tr>
-												<td>비밀번호</td>
-												<td><input type="password" id="log_pw" name="pw" required="required"></td>
-												<td><span id="log_pw_msg"></span></td>
+												<td><input type="password" id="log_pw" name="pw" required="required" class="form-control" placeholder="비밀번호"></td>
 											</tr>
 											<tr>
-												<td colspan="2"><span id="log_msg"></span></td>
-											</tr>
-											<tr>
-												<td colspan="2">
-													<input type="button" value="로그인" onclick="kkhcheck()">
-													<input type="button" value="취소" data-dismiss='modal'>
-												</td>
+												<td colspan="2"> <span id="log_msg"></span></td>
 											</tr>
 										</table>
 										<input type="hidden" name="loginUrl" id="loginUrl">	<!-- cwi 로그인완료시 원래 위치로 -->
@@ -125,36 +118,13 @@ function getAlarmCount() {
 								</div>
 								<div class="modal-body">
 									<form action="/heartbeat/joinPro" method="post" id="kkhform">
-										<table>
-											<tr>
-												<th>이메일</th>
-												<td><input type="text" name="email" id="email" required="required"></td>
-												<td><span id="email_msg"></span></td>
-											</tr>
-											<tr>
-												<td colspan="2"><span id="email_validate"></span></td>
-											</tr>
-											<tr>
-												<th>비밀번호</th>
-												<td><input type="password" name="pw" id="pw" required="required"></td>
-												<td><span id="pw_msg"></span></td>
-											</tr>
-											<tr>
-												<th>비밀번호확인</th>
-												<td><input type="password" id="re_pw" required="required"></td>
-												<td><span id="repw_msg"></span></td>
-											</tr>
-											<tr>
-												<th>별명</th>
-												<td><input type="text" name="nick" id="nick" required="required"></td>
-												<td><span id="nick_msg"></span></td>
-											</tr>
-											<tr>
-												<td colspan="2"><input type="button" id="join_btn" value="회원가입" onclick="kkhjoin()">
-												<input type="button" value="취소" data-dismiss='modal'></td>
-											</tr>
-										</table>
+										<input type="text" name="email" id="email" required="required" class="form-control" placeholder="이메일">
+										<input type="password" name="pw" id="pw" required="required" class="form-control" placeholder="비밀번호">
+										<input type="password" id="re_pw" required="required" class="form-control" placeholder="비밀번호 확인">
+										<input type="text" name="nick" id="nick" required="required" class="form-control" placeholder="별명">
 									</form>
+									<div id="join_msg"></div>
+									<button id="join_btn" onclick="kkhjoin()" class="btn btn-primary">회원가입</button>
 								</div>
 							</div>
 						</div>

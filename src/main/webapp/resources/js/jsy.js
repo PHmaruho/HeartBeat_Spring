@@ -327,9 +327,10 @@ function searchList(){
 /* member - memberAlarmList */
 function getMemberAlarmList(){
 	$('#alarmContent').toggle();
-	//alert('v:'+v);
-	/*var id=<%=session.getAttribute(loginSession)%>;*/
-	//alert('id:'+v);
+	getMemberAlarmList2();
+}
+
+function getMemberAlarmList2() {
 	$.ajax({
 		url:'/heartbeat/do/memberAlarmList',
 	
@@ -337,26 +338,9 @@ function getMemberAlarmList(){
 			$('#alarmContent').html("");
 			$('#alarmContent').html(data);
 		}
-	})
-	//alert('getMembreAlarmList: '+v);
-	/*$(document).ready(function(){
-		$('#alarmContent').toggle();
-		setTimeout(alarmContentShow(id),1000);
-		});*/
+	});
 }
-/*function alarmContentShow(v){
-	var id=v;
-	$.ajax({
-		url:'/heartbeat/do/memberAlarmList',
-		data:{
-			member_id:711// id
-		},
-		success:function(data){
-			$('#alarmContent').html("");
-			$('#alarmContent').html(data);
-		}
-	})
-}*/
+
 function updateAlarmStatus(v) {
 	$.ajax({
 		url:'/heartbeat/do/updateAlarmStatus',
@@ -364,10 +348,8 @@ function updateAlarmStatus(v) {
 			alarmSq:v,
 		},
 		success:function(){
-			getMemberAlarmList();
-			$('#alarmContent').toggle();
+			getMemberAlarmList2();
 			getAlarmCount();
 		}
-	})
+	});
 }
-console.log(5);
