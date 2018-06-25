@@ -1,6 +1,7 @@
 package com.zero.heartbeat.controller;
 
-import java.util.Locale;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,6 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.zero.heartbeat.model.Album;
+import com.zero.heartbeat.model.MainList;
+import com.zero.heartbeat.model.Music;
+import com.zero.heartbeat.model.SearchList;
 import com.zero.heartbeat.service.ActivityService;
 import com.zero.heartbeat.service.CommonService;
 import com.zero.heartbeat.service.ExploreService;
@@ -43,21 +48,61 @@ public class CommonController {
 		return "main";
 	}
 	
+	//JAN
 	@RequestMapping("/home")
-	public String home(Model model) {
+	public String MainList(Model model) {
+		logger.info("home start");
+		List<MainList> newList= new ArrayList<MainList>();
+		List<MainList> likeList= new ArrayList<MainList>();
+		int startNum=0;
+		newList=commonService.mainListNew(startNum);
+		likeList= commonService.mainListLike(startNum);
+		model.addAttribute("newList", newList);
+		model.addAttribute("likeList", likeList);
+		//model.addAttribute("kkk","100.png");
+		logger.info("home start mainList after");
 		return "common/home";
 	}
 	
-	@RequestMapping("/test2")
-	public String test2(Model model) {
-		return "test2";
+	//JAN
+		@RequestMapping("/arriveList")
+		public String arriveList(Album album, Model model) throws Exception {
+			List<MainList> arriveList= new ArrayList<MainList>();
+			int startNum=0;
+			arriveList=commonService.selectAlbumArriveList(startNum);
+			model.addAttribute("arriveList", arriveList);
+			return "common/arriveList";
 	}
 	
-	@RequestMapping("/test3")
-	public String test3(Model model, String txt, String pw) {
-		logger.info(txt);
-		logger.info(pw);
-		
-		return "test3";
+	// JSY
+	@RequestMapping("/mainList")
+	public String selectAlbumMainList(Model model) {
+		List<MainList> likeList= new ArrayList<MainList>();
+		List<MainList> newList= new ArrayList<MainList>();
+		int startNum=0;
+		likeList= commonService.selectAlbumMainListLike(startNum);
+		newList=commonService.selectAlbumMainListNew(startNum);
+		model.addAttribute("likeList", likeList);
+		model.addAttribute("newList", newList);
+		logger.info("CommonController selectAlbumMainList working");
+		return "common/mainList";
 	}
+	
+	// JAN
+	@RequestMapping("/head")
+	public String head(Model model) {
+		return "common/head";
+	}
+	
+	// 최우일
+	@RequestMapping("/foot")
+	public String foot(Model model, HttpServletRequest requset) {
+		int sessionSq = 703;
+		
+		List<Music> list = commonService.selectPlaylistFoot(sessionSq);
+		model.addAttribute("playlist", list);
+		
+		return "common/foot";
+	}
+	
 }

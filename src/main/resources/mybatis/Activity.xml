@@ -4,4 +4,404 @@
 
 <mapper namespace="Activity">
 
+	<resultMap id="MusicLikeResult" type="MusicLike">
+		<result property="music_like_sq" column="music_like_sq"/>
+		<result property="target_sq" column="target_sq"/>
+		<result property="member_sq" column="member_sq"/>
+		<result property="music_like_type" column="music_like_type"/>
+	</resultMap>
+	
+	<!-- 최우일 -->
+	<resultMap type="hashMap" id="replyMap">
+		<id property="time_stamp" column="time_stamp"/>
+		<result property="reply_sq" column="reply_sq" />
+		<result property="member_sq" column="member_sq" />
+		<result property="nick" column="nick" />
+		<result property="reply_comment" column="reply_comment" />
+	</resultMap>
+
+	<!-- 최우일 -->
+	<resultMap type="Music" id="musicMap">
+		<result property="list_sq" column="list_sq"/>
+		<result property="album_sq" column="album_sq"/>
+		<result property="music_sq" column="music_sq"/>
+		<result property="music_nm" column="music_nm"/>
+		<result property="play_time" column="play_time"/>
+		<result property="list_no" column="list_no"/>
+		<result property="likeCnt" column="likeCnt" />
+		
+		<collection property="artistList" javaType="java.util.ArrayList" resultMap="artistsMap"/>
+		<collection property="tagList" javaType="java.util.ArrayList" resultMap="musicTagMap"/>
+	</resultMap>
+	
+	<!-- 최우일 -->
+	<resultMap type="Member" id="artistsMap">
+		<id property="member_sq" column="member_sq"/>
+		<result property="nick" column="nick"/>
+	</resultMap>
+	
+	<!-- 최우일 -->
+	<resultMap type="MusicTag" id="musicTagMap">
+		<!-- <id property="music_sq" column="music_sq"/> -->
+		<result property="tag_cd" column="tag_cd"/>
+		<result property="tag_meaning" column="tag_meaning"/>
+	</resultMap>
+
+	<!--JAN 1. 좋아요 눌렀을때 실행되는 메소드 -->
+	<insert id="clickLikeAlbum" parameterType="java.util.Map">
+		INSERT INTO music_like(
+			music_like_sq,member_sq,target_sq,music_like_type
+		) VALUES (
+			music_like_sq.NEXTVAL, #{id},#{likeAlbum},'LI1'
+		)
+	</insert>
+	<insert id="clickLikeMusic" parameterType="java.util.Map">
+		INSERT INTO music_like(
+			music_like_sq,member_sq,target_sq,music_like_type
+		) VALUES (
+			music_like_sq.NEXTVAL, #{id},#{likeMusic},'LI2'
+		)
+	</insert>
+	
+	<!--JAN 다시 좋아하는 되돌리기 -->
+	<update id="unLikeCancel" parameterType="java.util.Map">
+		
+		
+		UPDATE music_like
+		<if test="music_like_type=='언라이크앨범'">
+		SET music_like_type = 'LI1'
+		</if>
+		<if test="music_like_type=='언라이크곡'">
+		SET music_like_type = 'LI2'
+		</if>
+		WHERE music_like_sq = #{unLikeCancel}
+		
+	</update>
+	
+	<!--JAN 좋아요 동일 시퀀스 레코드체크 -->
+	<select id="likeCount" resultType="int">
+		SELECT COUNT(*)
+		FROM music_like
+		WHERE member_sq = #{member_sq}
+		AND target_sq = #{target_sq}
+	</select>
+	
+	<!--JAN unlike -->
+	<!-- <delete id="clickUnlike">
+		DELETE FROM music_like
+		WHERE music_like_sq = #{unLike}
+	</delete> -->
+	
+	<!--JAN 안좋아하려구  -->
+	<update id="clickUnlikeAlbum" parameterType="int">
+		UPDATE music_like
+		SET music_like_type = 'LI3' 
+		WHERE music_like_sq = #{unLike}
+	</update>
+	<!--JAN  -->
+	<update id="clickUnlikeMusic" parameterType="int">
+		UPDATE music_like
+		SET music_like_type = 'LI4' 
+		WHERE music_like_sq = #{unLike}
+	</update>
+	
+	
+	
+	<!-- JAN : 0612 LIKE 누른 목록 확인-->
+	<select id="selectAllLikeList" resultType="AllLikeList" parameterType="int">
+		<!-- select * from(
+  (select * from(
+    select l.music_like_sq,l.target_sq, l.music_like_type,nvl(f.follow_sq,0),f.target_sq as other_sq
+		      , a.album_nm,  a.img_path, m.nick, count(l.target_sq) AlbumLikeCount
+		       , 1 music_sq, 'm' music_nm, 1 music_like, a.album_sq, c.code_meaning
+		from music_like l, album a, member m, code c ,follow f
+		where l.member_sq = #{id}
+		and l.target_sq = a.album_sq
+		and m.member_sq = a.member_sq
+		and l.music_like_type = c.code_cd
+		and c.code_meaning = '앨범'
+    and f.member_sq=#{id}
+		group by l.music_like_sq,l.target_sq, l.music_like_type
+		      , a.album_nm,  a.img_path, m.nick, a.album_sq, c.code_meaning, f.follow_sq,f.target_sq
+		order by l.music_like_sq DESC ))
+		
+		union all
+
+    (select * from
+    (
+		select l.music_like_sq,l.target_sq, l.music_like_type, nvl(f.follow_sq,0),f.target_sq as other_sq
+		        ,'a' album_nm, 'a' img_path, b.nick,1 AlbumLikeCount
+		        ,m.music_sq, m.music_nm, m.music_like, 1 album_sq, c.code_meaning
+		from music_like l, music m, member b, album a, code c, follow f
+		where l.member_sq = #{id}
+		and l.target_sq = m.music_sq
+		and b.member_sq = a.member_sq
+		and a.album_sq = m.album_sq
+		and l.music_like_type = c.code_cd
+		and c.code_meaning = '곡'
+    and f.member_sq=#{id}
+		order by l.music_like_sq DESC)
+    )
+    )
+ -->
+ 
+		SELECT  CHECKCNTFOLLOW_SQ(#{id},m.member_sq) as cntFollow
+		       ,a.album_sq, a.img_path, a.album_nm,  m.member_sq, m.nick,ml.music_like_sq
+		       ,0 music_sq, c.code_meaning
+		       ,ALBUM_COUNT(a.album_sq) as like_count
+		From code c, album a, member m, music_like ml, FOLLOW f
+		Where c.code_meaning='앨범'
+		AND ml.member_sq=#{id}
+		and ml.target_sq=a.album_sq
+		and a.member_sq=m.member_sq
+    	AND c.code_cd=ml.music_like_type
+		group by a.album_sq, a.img_path,a.album_nm,m.member_sq, m.nick, music_sq, c.code_meaning,ml.music_like_sq
+		UNION ALL
+		SELECT  CHECKCNTFOLLOW_SQ(#{id},m.member_sq) as cntFollow
+		       ,a.album_sq, a.img_path, a.album_nm,  m.member_sq, m.nick,ml.music_like_sq
+		       , mu.music_sq, c.code_meaning
+		       ,MUSIC_COUNT(mu.music_sq) as like_count
+		From code c, album a, member m, music_like ml, FOLLOW f, music mu
+		Where c.code_meaning='곡'
+		AND ml.member_sq=#{id}
+		and ml.target_sq=mu.music_sq
+		and a.album_sq=mu.album_sq
+		and a.member_sq=m.member_sq
+    	AND c.code_cd=ml.music_like_type
+		group by a.album_sq, a.img_path,a.album_nm,m.member_sq, m.nick, mu.music_sq, c.code_meaning,ml.music_like_sq
+	</select>
+	
+	
+	<!-- JAN : 0614 UNLIKE 누른 목록 확인-->
+	<select id="selectUnLikeList" resultType="AllLikeList" parameterType="int">
+		SELECT  CHECKCNTFOLLOW_SQ(#{id},m.member_sq) as cntFollow
+		       ,a.album_sq, a.img_path, a.album_nm,  m.member_sq, m.nick,ml.music_like_sq
+		       ,0 music_sq, c.code_meaning
+		       ,ALBUM_COUNT(a.album_sq) as like_count
+		From code c, album a, member m, music_like ml, FOLLOW f
+		Where c.code_meaning='언라이크앨범'
+		AND ml.member_sq=#{id}
+		and ml.target_sq=a.album_sq
+		and a.member_sq=m.member_sq
+    	AND c.code_cd=ml.music_like_type
+		group by a.album_sq, a.img_path,a.album_nm,m.member_sq, m.nick, music_sq, c.code_meaning,ml.music_like_sq
+		UNION ALL
+		SELECT  CHECKCNTFOLLOW_SQ(#{id},m.member_sq) as cntFollow
+		       ,a.album_sq, a.img_path, a.album_nm,  m.member_sq, m.nick,ml.music_like_sq
+		       , mu.music_sq, c.code_meaning
+		       ,MUSIC_COUNT(mu.music_sq) as like_count
+		From code c, album a, member m, music_like ml, FOLLOW f, music mu
+		Where c.code_meaning='언라이크곡'
+		AND ml.member_sq=#{id}
+		and ml.target_sq=mu.music_sq
+		and a.album_sq=mu.album_sq
+		and a.member_sq=m.member_sq
+    	AND c.code_cd=ml.music_like_type
+		group by a.album_sq, a.img_path,a.album_nm,m.member_sq, m.nick, mu.music_sq, c.code_meaning,ml.music_like_sq
+		</select>
+	
+	<!-- JAN 팔로잉 내가 팔로우 하는 사람 목록 -->
+	<select id="selectFollowing" resultType="Member" parameterType="int">
+		select m.member_sq, m.nick, CHECKCNTFOLLOW_SQ(#{id},m.member_sq) cntFollow
+	    from follow f, member m
+	    where f.target_sq = m.member_sq
+	    and
+	    f.member_sq = #{id}
+	    order by follow_sq DESC
+	
+	</select>
+	
+	<!-- JAN  팔로워  나를 팔로우 하는사람 -->
+	<select id="selectFollower" resultType="Member" parameterType="int">
+		select m.member_sq, m.nick, CHECKCNTFOLLOW_SQ(#{id},m.member_sq) cntFollow
+	    from member m, follow f
+	    where f.target_sq = #{id}
+	    and m.member_sq = f.member_sq
+	    order by follow_sq DESC
+	</select>
+	
+	<!-- JAN follow 팔로우 누르면 팔로우됨 -->
+	<insert id="follow" parameterType="Follow" >
+	
+	INSERT all
+	into
+	follow VALUES (
+			follow_sq.NEXTVAL, #{target_sq}, #{member_sq}
+		)
+	into
+	alarm VALUES (
+			alarm_sq.NEXTVAL, #{target_sq},follow_sq.CURRVAL,
+			'팔로우','N'
+	)
+	SELECT *
+      FROM DUAL
+	
+	</insert>
+	<!-- JAN 중복팔로우방지용 팔로우시퀀스 체크쿼리 -->
+	<select id="followCheck" parameterType="java.util.Map" resultType="int">
+		select count(follow_sq) as cnt
+		from follow
+		where member_sq = #{me}
+		and target_sq = #{target_sq} 
+		
+	</select>
+	
+	<!-- JAN 언팔 -->
+	<delete id="unfollow" parameterType="java.util.Map" >
+		DELETE FROM follow
+		WHERE member_sq = #{member_sq}
+		AND target_sq = #{target_sq}
+	</delete>
+
+	<!-- PHmaruho -->
+	<select id="selectAlbumType" resultType="Code">
+		SELECT *
+		FROM code
+		WHERE CODE_CATEGORY = 'AT'
+	</select>
+	
+	<!-- PHmaruho -->
+	<select id="selectMusicTag" resultType="Tag">
+		select *
+		from tag
+		start with TAG_CATEGORY is null
+		CONNECT BY PRIOR TAG_CD = TAG_CATEGORY
+	</select>
+	
+	<!-- PHmaruho -->
+	<insert id="insertAlbum" parameterType="Album">
+		INSERT INTO album
+		VALUES (
+			ALBUM_SQ.NEXTVAL,
+			#{album_nm},
+			0,
+			#{member_sq},
+			#{album_comment},
+			SYSDATE,
+			ALBUM_SQ.CURRVAL,
+			#{open_yn},
+			#{album_type})
+	</insert>
+	
+	<!-- PHmaruho -->
+	<select id="selectAlbumSeq" parameterType="int" resultType="int">
+		SELECT MAX(album_sq)
+		FROM album
+		WHERE member_sq = #{member_sq}
+	</select>
+	
+	<!-- PHmaruho -->
+	<insert id="insertAlbumMusic" parameterType="Music">
+		INSERT INTO music
+		VALUES(
+			MUSIC_SQ.NEXTVAL,
+			#{album_sq},
+			#{music_no},
+			#{music_nm},
+			#{play_time},
+			null,
+			#{music_comment},
+			0,0,
+			#{open_yn}
+		)
+	</insert>
+	
+	<!-- PHmaruho -->
+	<select id="selectAlbumMusicSeq" parameterType="int" resultType="int">
+		SELECT music_sq
+		FROM music
+		WHERE album_sq = #{album_sq}
+	</select>
+	
+	<!-- PHmaruho -->
+	<insert id="insertArtistList" parameterType="Artist">
+		INSERT INTO artist
+		VALUES(
+			ARTIST_SQ.NEXTVAL,
+			#{music_sq},
+			#{member_sq}
+		)
+	</insert>
+	
+	<!-- PHmaruho -->
+	<insert id="insertMusicTagList" parameterType="MusicTag">
+		INSERT INTO music_tag
+		VALUES(
+			MUSIC_TAG_SQ.NEXTVAL,
+			#{music_sq},
+			#{tag_cd}
+		)
+	</insert>
+	
+	<!-- PHmaruho -->
+	<update id="updateAlbumTitleMusic" parameterType="hashmap">
+		UPDATE album
+		SET
+			music_sq = #{music_sq}
+		WHERE
+			album_sq = #{album_sq}
+	</update>
+	
+	<!-- 최우일 -->
+<!-- 	<select id="selectMusicDetail" parameterType="int" resultMap="musicMap">
+		select m.music_sq, m.music_nm, m.album_sq, a.member_sq, member.nick, tag.*
+		from music m, artist a, member, (
+		    select mt.music_sq, t.tag_cd, t.tag_meaning
+		    from music_tag mt, tag t
+		    where mt.tag_cd = t.tag_cd) tag
+		where m.music_sq = #{sq} and m.music_sq = a.music_sq and a.member_sq = member.member_sq and m.music_sq = tag.music_sq
+	</select> -->
+	
+	<!-- 최우일 -->
+	<select id="selectMusicDetail" parameterType="int" resultMap="musicMap">
+		select m.*, nvl(cnt,0) likeCnt
+		from (
+			select m.music_sq, m.music_nm, m.album_sq, a.member_sq, member.nick, tag.tag_cd, tag.tag_meaning
+			from music m, artist a, member, (
+		   		select mt.music_sq, t.tag_cd, t.tag_meaning
+		    	from music_tag mt, tag t
+		    	where mt.tag_cd = t.tag_cd) tag
+			where m.music_sq = #{sq} and m.music_sq = a.music_sq and a.member_sq = member.member_sq and m.music_sq = tag.music_sq) m
+    	left join (
+    		select target_sq, count(*) cnt
+			from music_like
+			where music_like_type = 'LI2'
+			group by target_sq) l on m.music_sq = l.target_sq
+	</select>
+	
+	<!-- 최우일 -->
+	<select id="selectMusicByArtist" parameterType="int" resultMap="musicMap">
+		select m.music_nm, m.album_sq, a.member_sq, member.nick, tag.*
+		from music m, artist a, member, (
+		    select mt.music_sq, t.tag_cd, t.tag_meaning
+		    from music_tag mt, tag t
+		    where mt.tag_cd = t.tag_cd) tag
+		where a.music_sq in (
+		    select music_sq
+		    from artist
+		    where member_sq = #{sq})
+		and m.music_sq = a.music_sq and a.member_sq = member.member_sq and m.music_sq = tag.music_sq
+	</select>
+	
+	<!-- 최우일 -->
+	<select id="selectReplyAtMusic" parameterType="int" resultMap="replyMap">
+		select r2.time_stamp, member_sq, nick, reply_comment
+		from (
+		  select min(reply_sq) reply_sq, time_stamp
+		  from reply
+		  where music_sq = #{sq} group by time_stamp) r1, (
+		  
+		  select r.reply_sq, r.time_stamp, m.member_sq, m.nick, r.reply_comment
+		  from member m, reply r
+		  where r.music_sq = #{sq} and r.member_sq = m.member_sq) r2
+		where r1.reply_sq = r2.reply_sq
+		order by r2.time_stamp
+	</select>
+	
+	<!-- 최우일 -->
+	<select id="selectMemberArtistCwi" parameterType="int" resultType="Member">
+		select nick, member_sq
+		from member
+		where member_sq = #{sq}
+	</select>
 </mapper>

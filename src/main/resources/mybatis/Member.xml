@@ -3,5 +3,74 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Member">
-
+	<!-- JSY -->
+	<resultMap id="resultAlarmList" type="AlarmList">
+		<result property="alarm_sq" column="alarm_sq"/>
+		<result property="alarm_type" column="alarm_type"/>
+		<result property="album_nm" column="album_nm"/>
+		<result property="music_like_type" column="music_like_type"/>
+		<result property="music_nm" column="music_nm"/>
+		<result property="nick" column="nick"/>
+		<result property="reply_level" column="reply_level"/>
+		<result property="member_sq" column="member_sq"/>
+		<result property="music_sq" column="music_sq"/>
+	</resultMap>
+	<insert id="insertAlarmShareMusic" parameterType="hashmap">
+		insert into alarm values(alarm_sq.nextval,#{id},#{music_sq},'음악','N')
+	</insert>
+	<select id="selectAlarmMemberList" parameterType="java.util.Map" statementType="CALLABLE">
+		{call selectAlarmMemberList(
+						#{member_sq,		mode=IN,	jdbcType=INTEGER},
+						#{resultList,    	mode=OUT,	jdbcType=CURSOR,
+							                            javaType=java.sql.ResultSet,
+														resultMap=resultAlarmList})
+				}
+	</select>
+	<update id="updateAlarmStatus" parameterType="int">
+		update alarm set status='Y' where alarm_sq=#{alarm_sq}
+	</update>
+	
+	<!-- PHmaruho -->
+	<select id="selectMemberArtist" parameterType="java.lang.String" resultType="Member">
+		SELECT member_sq, nick, email
+		FROM member
+		WHERE email like '%' || #{keyword} || '%'
+		   OR nick  like '%' || #{keyword} || '%'
+		ORDER BY nick desc, email desc
+	</select>
+	
+	<!-- KKH -->
+	<select id="login" parameterType="Member" resultType="int">
+		select count(*) from member where email=#{email} and pw=#{pw}
+	</select>
+	
+	<select id="loginRest" parameterType="Member" resultType="Member">
+		select * from member where email=#{email} and pw=#{pw}
+	</select>
+	
+	<select id="emailCheck" parameterType="Member" resultType="int">
+		select count(*) from member where email=#{email}
+	</select>
+	
+	<select id="join" parameterType="Member">
+		insert into member values(
+  					(
+  					 select nvl(max(member_sq),0)+1 
+  					 from member
+  					 )
+  					 ,#{email},#{pw},#{nick},'A0',sysdate,sysdate
+		)
+	</select>
+	
+	<update id="turnMemberActivity" parameterType="java.lang.String">
+		update member set status = 'A1' where email = #{email}
+	</update>
+	
+	<select id="getMemberInfo" parameterType="java.lang.String" resultType="Member">
+		select * from member where member_sq = #{string}
+	</select>
+	
+	<select id="getMemberSq" parameterType="Member" resultType="java.lang.String">
+		select member_sq from member where email=#{email}
+	</select>
 </mapper>

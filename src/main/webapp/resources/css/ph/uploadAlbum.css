@@ -1,0 +1,106 @@
+@charset "UTF-8";
+
+.ph-album{
+	position: relative;
+	width: 60%;
+	height: 70%;
+	display: flex;
+	margin-right: auto;
+	margin-left: auto;
+}
+.ph-album-edit{
+	position: relative;
+	overflow: hidden;
+	float: left;
+	width: 35%;
+	height: 100%;
+}
+.ph-album-music-editor{
+	position: relative;
+	overflow: hidden;
+	float: left;
+	width: 60%;
+	height: 100%;
+}
+.ph-album-img-thumbnail{
+	position: relative;
+	display: flex;
+	width: 200px;
+	height: 200px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#itemList {
+	width: 100%;
+	list-style-type: none;
+	padding-left: 0px;
+	margin-left: 0px;
+	border: 1px solid;
+	float: left;
+}
+.musicItem{
+	width: 100%; !important
+}
+.ph-tr-1 td:nth-child(2){
+	width: 90%;
+}
+.ph-music-order, .ph-music-button{
+	width: 5%;
+}
+.ph-search-artist-ul, .ph-search-tag-ul{
+	list-style-type: none;
+}
+.ph-search-artist-li, .ph-search-tag-li{
+	float: left;
+}
+
+.file_selected{
+	display: block;
+}
+.url_selected, .dis_none, #sound{
+	display: none;
+}
+.ph-artist-ajax-selected, .ph-tag-ajax-selected{
+	position: absolute;
+	border: 1px solid;
+	margin-left: 37px;
+	width: 100px;
+	max-height: 100px;
+	overflow-y: auto;
+	z-index: 2000;
+	background-color: white;
+}
+.ph-tag-ajax-selected {
+	display: none;
+}
+.ph-tag-ajax-ul > li > span{
+	position: relative;
+	width: 100%;
+}
+.ph-artist-ajax-ul, .ph-tag-ajax-ul{
+	list-style-type: none;
+	padding-left: 5px;
+	padding-right: auto;
+}
+.ph-artist-ajax-li, .ph-tag-ajax-li{
+	border: 1px solid;
+}
+.selected-artist{
+	background-color: yellow;
+}
+.ph-search-artist-li{
+	border: 1px solid;
+}
+.ph-music-list-table{
+	width: 100%;
+}
+.ph-td-1{
+	width: 25%;
+}
+.ph-td-2{
+	width: 70%;
+}
+.ph-music-bottom{
+	width: 10%;
+}

@@ -3,19 +3,20 @@ function supports_history_api() {
 }
 
 function swapContent(link) {
-	var req = new XMLHttpRequest();
-	if (link == "/?r=1") {
-		req.open("GET", processUrl() + "/home?r=1", false);
+	if(link == "/foot?r=1" || link == "/head?r=1") {
+		var newPath = link.replace('/', '').split('?')[0];
+		$('#' + newPath +  'Div').load(processUrl() + link);
+		return false;
 	} else {
-		req.open("GET", processUrl() + link, false);
-	}
-	req.send(null);
-	
-	if (req.status == 200) {
-		document.getElementById('contentDiv').innerHTML = req.responseText;	// jquery보다 성능이 좋다고 함
+		musicMain.setDetailNum(-1);
+		musicMain.setMusicPage(false);
+		if (link == '/?r=1') {
+			$('#contentDiv').load(processUrl() + '/home?r=1');
+		} else {
+			$('#contentDiv').load(processUrl() + link);
+		}
 		return true;
 	}
-	return false;
 }
 
 function goto(link) {
@@ -26,6 +27,7 @@ function goto(link) {
 
 function toform(link, id) {
 	var data = $(id).serialize();
+	alert(data);
 	
 	if (swapContent(link + "?r=1&" + data)) {
 		history.pushState(null, null, processUrl() + link);
@@ -46,7 +48,8 @@ window.onload = function() {
 	
 	window.setTimeout(function() {
 		window.addEventListener("popstate", function(e) {
-			swapContent(location.pathname + "?r=1");
+			var pathname = location.pathname.split($('#packageName').val()).pop();
+			swapContent(pathname + "?r=1");
 		}, false);
 	}, 1);
 }
