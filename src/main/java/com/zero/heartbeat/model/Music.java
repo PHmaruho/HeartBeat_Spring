@@ -14,12 +14,21 @@ public class Music {
 	private int			music_share;
 	private String		open_yn;
 	
+	// 곡 별 좋아요 갯수
+	private int			likeCnt;
 	// 최우일 - 한 곡에 대한 여러 작업자들
 	private List<Member>	artistList;
 	private int			list_sq;
 	private int			list_no;
 	// 최우일 - 한 곡에 여러 태그들
 	private List<MusicTag>	tagList;
+	
+	public int getLikeCnt() {
+		return likeCnt;
+	}
+	public void setLikeCnt(int likeCnt) {
+		this.likeCnt = likeCnt;
+	}
 	
 	public List<MusicTag> getTagList() {
 		return tagList;

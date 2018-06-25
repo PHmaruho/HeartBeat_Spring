@@ -3,6 +3,7 @@
 <head>
 </head>
 <body onresize="resizeComment()">
+	${music.likeCnt }
 	<div class="cwi-detail-player-main">
 		<table class="cwi-detail-player-info">
 			<tr>
@@ -17,11 +18,9 @@
 					</span>
 				</td>
 				<td>
-					<span class="badge badge-dark cwi-detail-player-artist">
+					<span class="badge badge-dark cwi-detail-player-artist cwi-vertical-bottom">
 						<c:forEach var="artist" items="${music.artistList }" varStatus="status">
-							<h4 class="cwi-detail-h-inline">
-								<a onclick="goto('/others/artist/${artist.member_sq}')" class="cwi-cursor-pointer">${artist.nick}</a>
-							</h4>
+							<a onclick="goto('/others/artist/${artist.member_sq}')" class="cwi-cursor-pointer">${artist.nick}</a>
 							<c:if test="${!status.last }">
 								, 
 							</c:if>
@@ -30,7 +29,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td><h1><span class="badge badge-dark cwi-detail-player-title">${music.music_nm }</span></h1></td>
+				<td><span class="badge badge-dark cwi-detail-player-title cwi-vertical-top">${music.music_nm }</span></td>
 			</tr>
 		</table>
 		
@@ -77,14 +76,21 @@
 	</div>
 	
 	<div class="cwi-detail-under-main">
-		댓글입력 - 미구현
-		<div class="input-group mb-3">
-			<div class="input-group-prepend">
-				<span class="input-group-text" id="basic-addon1">
-					<img src="${pageContext.request.contextPath }/resources/img/profile/703.png" width="30" height="30">
-				</span>
+		<div class="cwi-comment-wrapper">
+			<div class="cwi-comment-img-wrapper">
+				<c:if test="${empty loginSession }">
+					<img src="${pageContext.request.contextPath }/resources/img/profile/default-32.png" class="cwi-comment-img">
+				</c:if>
+				<c:if test="${!empty loginSession }">
+					<img src="${pageContext.request.contextPath }/resources/img/profile/${loginSession }.png"class="cwi-comment-img">
+				</c:if>
 			</div>
-			<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+			<div class="cwi-comment-input-wrapper">
+				<a id="detailCommentTarget0" class="cwi-comment-target"></a>
+				<input type="text" id="detailCommentText0" class="cwi-comment-input"
+					onkeydown="commentKeyPress(0, 0)" placeholder="답글을 달아주세요">
+				<input type="hidden" id="detailCommentHidden0" value="">
+			</div>
 		</div>
 	</div>
 	

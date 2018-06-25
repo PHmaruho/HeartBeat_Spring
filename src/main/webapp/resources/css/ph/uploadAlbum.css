@@ -40,10 +40,12 @@
 	float: left;
 }
 .musicItem{
-	width: 100%;
+	width: 100%; !important
 }
-
-.ph-music-order{
+.ph-tr-1 td:nth-child(2){
+	width: 90%;
+}
+.ph-music-order, .ph-music-button{
 	width: 5%;
 }
 .ph-search-artist-ul, .ph-search-tag-ul{
