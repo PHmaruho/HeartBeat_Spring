@@ -222,6 +222,9 @@ function showDetailComments(detailNum) {
 	$('#detailCommentsOn' + detailNum).on('click', function() {
 		commentClicked(detailNum, $('#detailCommentsOn' + detailNum).attr('title'))
 	});
+	
+	replyListPaging(1, detailNum);
+	
 }
 
 function commentsMouseover(target, detailNum) {
@@ -316,6 +319,11 @@ function doSomething(detailNum) {
 	
 	let music_sq = detailPlayer[detailNum].sq;
 	
+	if(reply_comment.length == 0){
+		alert("글을 입력해주세요.");
+		return false;
+	}
+	
 	$.ajax({
 		type:"POST",
 		url: "/heartbeat/do/reply/music",
@@ -325,8 +333,16 @@ function doSomething(detailNum) {
 			  time_stamp:time_stamp,
 			  reply_comment:reply_comment},
 		success: function(data2){
+			if(data2.session.length == 0){
+				alert("로그인 후 사용해주세요.");
+				return false;
+			}
 			if(data2.result == "Y"){
 				getDetailComments(detailNum);
+				replyListPaging(1, detailNum);
+			} else {
+				alert("에러가 발생하였습니다.");
+				return;
 			}
 		}
 	});
@@ -344,13 +360,64 @@ function doSomething2(detailNum) {
 // Paging List
 function replyListPaging(page, detailNum){
 	let music_sq = detailPlayer[detailNum].sq;
+	let list_wrapper = $('.ph-comment-list-wrapper');
 	$.ajax({
 		type:"POST",
 		url: "/heartbeat/do/reply/list",
 		data:{music_sq:music_sq,
 			  page:page},
 		success: function(data){
-			 
+			console.log(data);
+			console.log(data.list);
+			let str_list = '<table><tr><td>No</td><td>img</td><td>COMMENT</td><td id="member_td">MEMBER</td><td id="etc_td">ETC</td></tr>';
+			$.each(data.list, function(i, obj){
+				str_list += '<tr><td>' + (data.startRow+(i)) + '</td>';
+				str_list += '<td><img class="" style= "width:50px; height:50px;" '+
+							'src = "/heartbeat/resources/img/profile/' + obj.member_sq + '.png" alt="' + i + '"></td>';
+				str_list += '<td>';
+				if(obj.reply_order != 1){
+					for(let i=0 ; i<obj.reply_level ; i++){
+						str_list += '-';
+					}
+				}
+				str_list += obj.reply_comment + '</td>'
+				          + '<td id="' + obj.member_sq + '">' + obj.nick + '<br>' + obj.email + '</td>';
+				if(data.session.length != 0 && (data.session == obj.member_sq)){
+					str_list += '<td><input type="button" value="삭제" onclick="deleteReply(' + obj.reply_sq + ', 0)"></td>';
+				} else {
+					str_list += '<td> - </td>';
+				}
+				str_list += '</tr>';
+			});
+			str_list += '</table>';
+			
+			list_wrapper.html(str_list);
 		}
 	});
+}
+
+// PHmaruho
+// deleteReply
+function deleteReply(reply_sq, detailNum){
+	let check_delete = confirm("정말 삭제하시겠습니까?");
+	if(check_delete){
+		$.ajax({
+			type: "GET",
+			url: "/heartbeat/do/reply/delete",
+			data:{reply_sq:reply_sq},
+			success: function(data){
+				if(data == "Y"){
+					alert("삭제가 되었습니다.");
+					getDetailComments(detailNum);
+					replyListPaging(1, detailNum)
+					return true;
+				} else {
+					alert("오류가 발생하였습니다.");
+					return false;
+				}
+			}
+		});
+	} else {
+		return false;
+	}
 }

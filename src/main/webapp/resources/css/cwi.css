@@ -369,10 +369,12 @@ input[type='range']::-webkit-slider-thumb {
 	width: 36px;
 	height: 36px;
 	position: relative;
+	float: left; /* PHmaruho 추가 */
 }
 
 .cwi-comment-wrapper {
-	display: flex;
+	display: table;
+	width: 100%;
 	position: relative;
 	top: 10px;
 }
@@ -606,4 +608,17 @@ input[type='range']::-webkit-slider-thumb {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+}
+/* PHmaruho */
+.ph-comment-list-wrapper, .ph-comment-list-wrapper > table{
+	width: 100%;
+}
+.ph-comment-list-wrapper table #member_td{
+	width: 25%;
+}
+.ph-comment-list-wrapper table #etc_td{
+	width: 5%;
+}
+.ph-comment-list-wrapper{
+	overflow: scroll;
 }

@@ -17,6 +17,8 @@ public class Reply {
 	// PHmaruho
 	// reply 기능 때문에 추가
 	private String reply_sq_str;
+	private String nick;
+	private String email;
 	
 	public int getReply_sq() {
 		return reply_sq;
@@ -83,5 +85,17 @@ public class Reply {
 	}
 	public void setReply_sq_str(String reply_sq_str) {
 		this.reply_sq_str = reply_sq_str;
+	}
+	public String getNick() {
+		return nick;
+	}
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }
