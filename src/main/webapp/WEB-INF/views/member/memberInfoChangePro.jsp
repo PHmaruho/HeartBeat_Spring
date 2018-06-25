@@ -65,51 +65,58 @@
 		}; 
 	});
 </script>
+<style type="text/css">
+</style>
 </head>
 <body>
+<div class="memberChagne">
 	<form action="/heartbeat/memberInfoChangePro2" id="form"
 		enctype="multipart/form-data" method="post">
-		<table>
+		<table class="changeInfoTb" style="margin-left : 35%;margni-top : 20%;border-collapse: separate;border-spacing: 1px;text-align: left;line-height: 1.5;border-top: 1px solid #ccc;">
 			<tr>
-				<td>
+				<td colspan="3" align="center">
 					<img id="thumbnail" width="100" height="100">
 				</td>
 			</tr>
 			<tr>
-				<td>
-					<input type="file" id="file" value="업로드" name="file">
+				<td colspan="3" align="center">
+					<label for="file" style="display: inline-block; padding: .5em .75em; color: #999; font-size: inherit; line-height: normal; vertical-align: middle; background-color: #fdfdfd; cursor: pointer; border: 1px solid #ebebeb; border-bottom-color: #e2e2e2; border-radius: .25em;">파일선택</label>
+					<input type="file" id="file" value="업로드" name="file" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0;">
 				</td>
 			</tr>
 			<tr>
-				<td>아이디</td>
-				<td><input type="text" placeholder="${member.email }"
+				<th style="width: 150px;padding: 10px;font-weight: bold;vertical-align: top;border-bottom: 1px solid #ccc;background: #efefef;">아이디</th>
+				<td style="width: 350px;padding: 10px;vertical-align: top;border-bottom: 1px solid #ccc;">
+				<input type="text" placeholder="${member.email }"
 					readonly="readonly"></td>
 			</tr>
 			<tr>
-				<td>닉네임</td>
-				<td><input type="text" placeholder="${member.nick }"
+				<th style="width: 150px;padding: 10px;font-weight: bold;vertical-align: top;border-bottom: 1px solid #ccc;background: #efefef;">닉네임</th>
+				<td style="width: 350px;padding: 10px;vertical-align: top;border-bottom: 1px solid #ccc;">
+				<input type="text" placeholder="${member.nick }"
 					readonly="readonly"></td>
 			</tr>
 			<tr>
-				<td>비밀번호</td>
-				<td><input type="password" required="required" id="pw"
+				<th style="width: 150px;padding: 10px;font-weight: bold;vertical-align: top;border-bottom: 1px solid #ccc;background: #efefef;">비밀번호</th>
+				<td style="width: 350px;padding: 10px;vertical-align: top;border-bottom: 1px solid #ccc;">
+				<input type="password" required="required" id="pw"
 					name="pw"></td>
 				<td><span id="pw_msg"></span></td>
 			</tr>
 			<tr>
-				<td>비밀번호확인</td>
-				<td><input type="password" required="required" id="re_pw"
+				<th style="width: 150px;padding: 10px;font-weight: bold;vertical-align: top;border-bottom: 1px solid #ccc;background: #efefef;">비밀번호확인</th>
+				<td style="width: 350px;padding: 10px;vertical-align: top;border-bottom: 1px solid #ccc;">
+				<input type="password" required="required" id="re_pw"
 					name="re_pw"></td>
 				<td><span id="re_pw_msg"></span></td>
 			</tr>
 			<tr>
-				<td>
-					<input type="button" value="수정" onclick="infoChange()">
-				</td>
-				<td>
-					<input type="button" value="취소" onclick="goto('/')">
+				<td colspan="2">
+					<input type="button" value="수정" onclick="infoChange()" class="btn">
+					<input type="button" value="취소" onclick="goto('/')" class="btn">
 				</td>
 			</tr>
 		</table>
 	</form>
+</div>
 </body>

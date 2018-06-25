@@ -155,7 +155,7 @@ public class MemberController {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		return "/common/home";
+		return "common/home";
 	}
 
 	@RequestMapping("/joinForm")
