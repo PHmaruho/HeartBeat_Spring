@@ -23,9 +23,9 @@
 	<ul class="product_list">
 	<!-- <h2> Main List Testing</h2> -->
 		<li class="hli"><img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner4.png" class="bannerimg"></li>
-		<li class="hli"><img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner1.png" class="bannerimg" ></li>
+		<%-- <li class="hli"><img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner1.png" class="bannerimg" ></li>
 		<li class="hli"><img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner2.png" class="bannerimg" ></li>
-		<li class="hli"><img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner3.png" class="bannerimg" ></li>
+		<li class="hli"><img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner3.png" class="bannerimg" ></li> --%>
 	</ul>
 	<a class="btn_prev" href="#none">◀</a>
     <a class="btn_next" href="#none">▶</a>
@@ -89,5 +89,7 @@
 			</c:forEach>
 		</ul>
 	</div> --%>
+	
+	
 </div>
 </body>

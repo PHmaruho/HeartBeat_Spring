@@ -6,11 +6,9 @@
 
 </head>
 <body>
-<button onclick="goto('/home')">Home</button>	
 <Br><Br>
 <div class="box">
 <div class="contents">
-	<h2 style="text-align:center;" class="subTitle">Likes</h2><br>
 		<h6 style="color:gray;">Hear the tracks you’ve liked:</h6>
 		<br><br><Br>
 	<ul class="glul">
@@ -25,7 +23,7 @@
 					<c:if test="${like.code_meaning == '앨범' }">
 						<div class="likeAlbum">
 							<a href="/heartbeat/others/album/${like.album_sq}">
-								<%-- <input type="hidden" id="music_sq${i.index }" value="${like.album_sq}"> --%>
+								<input type="hidden" id="music_sq${i.index }" value="${like.album_sq}">
 								<img src="${pageContext.request.contextPath }/resources/img/album/${like.img_path }.png" class="albumImg">
 							</a><br><br>
 							<a href="#">
@@ -39,8 +37,8 @@
 						<div class="likeMusic">
 							<a href="/heartbeat/others/music/${like.music_sq}">
 								<%-- <input type="hidden" id="music_sq${i.index }" value="${like.music_sq}"> --%>				
-								<img src="${pageContext.request.contextPath }/resources/img/album/${like.img_path }.png" class="albumImg" style="border-radius: 50%;">
-							</a><br><br>
+								<img src="${pageContext.request.contextPath }/resources/img/album/${like.img_path }.png" class="albumImg">
+							</a><br>
 							<a href="#">
 								<img src="${pageContext.request.contextPath }/resources/img/profile/like.png" class="glul-img" onclick="like_func(${like.music_like_sq},'${like.code_meaning }','likeList${i.index }')">
 							</a>
@@ -66,7 +64,7 @@
 	</ul>
 	</div>
 <div class="contents">
-	<h2 style="text-align:center;" class="subTitle">unLikes</h2><br>
+	<h6 style="color:gray;"> unLikes :</h6>
 		<br><br><Br>
 	<ul class="glul">
 		<c:if test="${unList==null ||unList.size()==0}">
@@ -76,10 +74,10 @@
 			<c:forEach var="unlike" items="${unList}" varStatus="i">
 				<li>
 				<div id="unlikeList${i.index }" class="following">
-				<c:if test="${unlike.code_meaning == '언라이크앨범' }">
+				<%-- <c:if test="${unlike.code_meaning == '언라이크앨범' }">
 					<div class="likeAlbum">
 						<a href="/heartbeat/others/album/${unlike.album_sq}">
-							<%-- <input type="hidden" id="music_sq${i.index }" value="${like.album_sq}"> --%>
+							<input type="hidden" id="music_sq${i.index }" value="${like.album_sq}">
 							<img src="${pageContext.request.contextPath }/resources/img/album/${unlike.img_path }.png" class="albumImg"><br>
 						</a>
 						<a href="#">
@@ -87,13 +85,13 @@
 						</a>
 						${unlike.like_Count }<br>
 					</div>
-				</c:if>
+				</c:if> --%>
 				<c:if test="${unlike.code_meaning == '언라이크곡' }">
 					<div class="likeMusic">
 						<a href="/heartbeat/others/music/${unlike.music_sq}">
 							<%-- <input type="hidden" id="music_sq${i.index }" value="${like.music_sq}"> --%>				
-							<img src="${pageContext.request.contextPath }/resources/img/album/${unlike.img_path }.png" class="albumImg" style="border-radius: 50%;"><br>
-						</a>
+							<img src="${pageContext.request.contextPath }/resources/img/album/${unlike.img_path }.png" class="albumImg">
+						</a><br><br>
 						<a href="#">
 							<img src="${pageContext.request.contextPath }/resources/img/profile/dislike.png" class="glul-img" onclick="unLikeCancel(${unlike.music_like_sq},'${unlike.code_meaning }','unlikeList${i.index }')">
 						</a>
@@ -102,7 +100,6 @@
 				</c:if>
 					<a href="/heartbeat/others/music/${unlike.music_sq}" class="music_nm">${unlike.album_nm }</a>
 					<br>
-					
 					<a href="/heartbeat/others/artist/${unlike.member_sq}" class="member_nick">
 						${unlike.nick }
 					</a><br>

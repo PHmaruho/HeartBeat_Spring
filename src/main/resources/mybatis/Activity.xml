@@ -145,7 +145,7 @@
     )
     )
  -->
- 
+<!--  
 		SELECT  CHECKCNTFOLLOW_SQ(#{id},m.member_sq) as cntFollow
 		       ,a.album_sq, a.img_path, a.album_nm,  m.member_sq, m.nick,ml.music_like_sq
 		       ,0 music_sq, c.code_meaning
@@ -157,7 +157,7 @@
 		and a.member_sq=m.member_sq
     	AND c.code_cd=ml.music_like_type
 		group by a.album_sq, a.img_path,a.album_nm,m.member_sq, m.nick, music_sq, c.code_meaning,ml.music_like_sq
-		UNION ALL
+		UNION ALL -->
 		SELECT  CHECKCNTFOLLOW_SQ(#{id},m.member_sq) as cntFollow
 		       ,a.album_sq, a.img_path, a.album_nm,  m.member_sq, m.nick,ml.music_like_sq
 		       , mu.music_sq, c.code_meaning

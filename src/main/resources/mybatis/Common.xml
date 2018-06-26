@@ -104,12 +104,20 @@
  	and ms.album_sq = a.album_sq
  	and a.music_sq = ms.music_sq
 	
-	]]> -->
+	]]>
 	select *
 	from album a, member m, music ms
 	where a.member_sq = m.member_sq
-	and a.music_sq = ms.music_sq
-	
+	and a.music_sq = ms.music_sq -->
+	<![CDATA[ 
+	select rownum as rn, am.* from
+	(select a.album_sq,a.album_nm,a.img_path
+			,b.nick, m.music_sq,m.music_nm
+	from album a, music m, member b 
+	where a.album_sq=m.album_sq and m.open_yn='Y'
+ 	 and a.member_sq=b.member_sq
+	order by a.release_dt) am
+	]]>
 	</select>
 	<!-- select rownum as rn, am.* from
 	(select a.album_sq,a.album_nm,a.img_path
@@ -118,7 +126,9 @@
 	where a.album_sq=m.album_sq and m.open_yn='Y'
  	 and a.member_sq=b.member_sq
 	order by a.release_dt) am
-	where rownum>#{startNum} and rownum<=#{startNum}+10 -->
+	where rownum>#{startNum} and rownum<=#{startNum}+20 -->
+	
+	
 	<!-- 최우일 -->
 	<select id="selectPlaylistFoot" parameterType="int" resultMap="Playlist">
 		select p.list_sq, musics.*, m.nick, p.list_no
