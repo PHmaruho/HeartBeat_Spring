@@ -145,6 +145,8 @@ function getFootLoad(sq) {
 }
 
 function setCookie(cname, cvalue) {
+	console.log(cname);
+	console.log(cvalue);
     var d = new Date();
     d.setTime(d.getTime() + (90 * 24 * 60 * 60 * 1000));	// 90일 * 24시간 * 60분 * 60초 * 1000밀리초
     var expires = 'expires=' + d.toUTCString();
@@ -161,6 +163,7 @@ function setCookie(cname, cvalue) {
     		success : function(data) {
     			document.cookie = 'cookieOrder' + cname + '=' + encodeURI(cvalue) + ';' + expires + ';path=/';
     			footPlayer.cookieList[cookieName] = data.cookieOrder1;
+    			initPlaylist();
     		},
     		error:function(request,status,error){
     		    console.log('code : ' + request.status + '\n' + 'message : ' + request.responseText + '\n' + 'error : ' + error);
@@ -168,6 +171,7 @@ function setCookie(cname, cvalue) {
     	});
     } else if (arguments.length === 1) {
     	document.cookie = 'cookieOrder=' + encodeURI(cname) + ';' + expires + ';path=/';
+    	initPlaylist();
     } else {
     	console.log('musicControlFoot setCookie parameter error');
     }
@@ -242,9 +246,11 @@ function deleteCookie(cname) {
 		}
 		document.cookie = 'cookieOrder=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
 		delete footPlayer.cookieList;
+		initPlaylist();
 	} else {
 		console.log('musicControlFoot deleteCookie parameter error');
 	}
+	initPlaylist();
 }
 
 function getMaxCookie() {
@@ -355,6 +361,7 @@ function initPlaylist() {
 		'<button onclick="deleteFromList(' + i + ')" class="cwi-list-x-button close">x</button></div>';
 	}
 	
+	$('#playlist').html('');
 	$('#playlist').html(newHtml);
 }
 
@@ -478,19 +485,25 @@ function cwi_unfollow(targetSq, v) {
 //console.log(document.cookie);
 
 function playlistClick() {
-	playlist.toggle();
+	$('#footListOff').addClass('cwi-foot-display-none');
+	$('#footListOn').removeClass('cwi-foot-display-none');
+	$('#playlist').toggle();
+}
+
+function playlistClick2() {
+	$('#footListOff').removeClass('cwi-foot-display-none');
+	$('#footListOn').addClass('cwi-foot-display-none');
+	$('#playlist').toggle();
 }
 
 function playFromList(sq, number) {
 	loadFoot(sq);
 	setCookie(number);
 	checkFootReady(playFromFoot);
-	initPlaylist();
 }
 
 function deleteFromList(num) {
 	deleteCookie(num);
-	initPlaylist();
 }
 
-console.log(3);
+console.log(9);

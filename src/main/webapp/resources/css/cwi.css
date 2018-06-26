@@ -658,3 +658,9 @@ input[type='range']::-webkit-slider-thumb {
 .cwi-list-row-div-now {
 	background-color: rgba(224, 113, 113, 0.2);
 }
+
+.cwi-foot-list-button {
+	position: absolute;
+	right: 0px;
+	top: 13px;
+}
