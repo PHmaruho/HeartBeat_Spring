@@ -5,11 +5,11 @@
 </head>
 <body>
 	<div class="container">
-		<div class="btn-group">
+		<!-- <div class="btn-group">
 			<input type="button" value="업로드" onclick="location.href='/upload'" class="btn">
 			<input type="button" value="업로드리스트" onclick="#" class="btn">
 			<input type="button" value="수정/삭제" onclick="#" class="btn">
-		</div>
+		</div> -->
 		
 		<br />
 	

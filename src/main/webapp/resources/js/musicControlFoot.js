@@ -40,8 +40,17 @@ function initFoot(sq) {
 			}
 		}
 		$('#footImage').html('<img src="/heartbeat/resources/img/album/' + footPlayer.info.album_sq + '.png" width="30" height="30">');
-		$('#footTitle').html('title : ' + footPlayer.info.music_nm);
-		$('#footArtists').html('artists : ' + artists);
+		$('#footTitle').html(footPlayer.info.music_nm);
+		$('#footArtists').html(artists);
+	});
+	
+	footPlayer.on('finish', function () {
+		var order = getCookie();
+		order = Number(order) + 1;
+		if (order >= getMaxCookie()) {
+			order = 1;
+		}
+		playFromList(getCookie(order), order);
 	});
 	
 	footPlayer.on('audioprocess', footProgress);
@@ -506,4 +515,46 @@ function deleteFromList(num) {
 	deleteCookie(num);
 }
 
-console.log(9);
+function nextList() {
+	var order = getCookie();
+	order = Number(order) + 1;
+	playFromList(getCookie(order), order);
+}
+
+function formerList() {
+	var order = getCookie();
+	order = (order) - 1;
+	playFromList(getCookie(order), order);
+}
+
+function shuffleList() {
+	var max = Number(getMaxCookie());
+	var ran = Math.trunc(max * Math.random());
+	if (ran == 0) {
+		ran = 1;
+	}
+	playFromList(getCookie(ran), ran);
+}
+
+function repeatOn() {
+	footPlayer.on('finish', function () {
+		playFromFoot();
+	});
+	$('#footRepeatBtnOff').toggleClass('cwi-foot-display-none');
+	$('#footRepeatBtnOn').toggleClass('cwi-foot-display-none');
+}
+
+function repeatOff() {
+	footPlayer.on('finish', function () {
+		var order = getCookie();
+		order = Number(order) + 1;
+		if (order >= getMaxCookie()) {
+			order = 1;
+		}
+		playFromList(getCookie(order), order);
+	});
+	$('#footRepeatBtnOn').toggleClass('cwi-foot-display-none');
+	$('#footRepeatBtnOff').toggleClass('cwi-foot-display-none');
+}
+
+console.log(4);

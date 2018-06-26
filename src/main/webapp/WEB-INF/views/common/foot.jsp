@@ -17,16 +17,17 @@
 			<div hidden="true" id="footWaveform"></div>	
 			<div class="cwi-foot-player-left">
 				<span class="cwi-foot-player-buttons">
-					<a id="footBackBtn"><img src="${pageContext.request.contextPath }/resources/img/icon/008-backward.png"></a>
+					<a id="footBackBtn" onclick="formerList()"><img src="${pageContext.request.contextPath }/resources/img/icon/008-backward.png"></a>
 					<a id="footPlayBtn" onclick="playFromFoot()">
 						<img src="${pageContext.request.contextPath }/resources/img/icon/011-play-button.png">
 					</a>
 					<a id="footPauseBtn" class="cwi-foot-display-none" onclick="pauseFromFoot()">
 						<img src="/heartbeat/resources/img/icon/006-pause.png">
 					</a>
-					<a id="footForBtn"><img src="${pageContext.request.contextPath }/resources/img/icon/009-forward.png"></a>
-					<a id="footChnageBtn"><img src="${pageContext.request.contextPath }/resources/img/icon/002-change.png"></a>
-					<a id="footRepeatBtn"><img src="${pageContext.request.contextPath }/resources/img/icon/001-refresh.png"></a>
+					<a id="footForBtn" onclick="nextList()"><img src="${pageContext.request.contextPath }/resources/img/icon/009-forward.png"></a>
+					<a id="footChnageBtn" onclick="shuffleList()"><img src="${pageContext.request.contextPath }/resources/img/icon/002-change.png"></a>
+					<%-- <a id="footRepeatBtnOff" onclick="repeatOn()"><img src="${pageContext.request.contextPath }/resources/img/icon/repeat-off-16.png"></a>
+					<a id="footRepeatBtnOn" onclick="repeatOff()" class="cwi-foot-display-none"><img src="${pageContext.request.contextPath }/resources/img/icon/repeat-on-16.png"></a> --%>
 				</span>
 				<span id="footProgress" class="cwi-foot-current">0:00</span>
 				<span class="cwi-foot-player-bar"> 

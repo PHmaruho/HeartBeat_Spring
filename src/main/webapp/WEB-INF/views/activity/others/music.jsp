@@ -83,7 +83,6 @@
 				예약
 			</span>
 		</div>
-		</div>
 		<div class="cwi-comment-wrapper">
 			<div>
 				<div class="cwi-comment-img-wrapper">
@@ -108,7 +107,6 @@
 			<div style="width:100%; height:50px;"></div>
 		</div>
 	</div>
-	
 <script src="${pageContext.request.contextPath }/resources/js/musicControlDetail.js?v=<%=System.currentTimeMillis() %>"></script>
 </body>
 
