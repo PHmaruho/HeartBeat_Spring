@@ -78,6 +78,11 @@
 					<img src="${pageContext.request.contextPath }/resources/img/icon/liked-16.png"> ${music.likeCnt }
 				</span>
 			</c:if>
+			<span class="badge badge-pill badge-light cwi-like" style="height: 24px;"
+				onclick="cookieFromAdd(${music.music_sq})">
+				예약
+			</span>
+		</div>
 		</div>
 		<div class="cwi-comment-wrapper">
 			<div>
