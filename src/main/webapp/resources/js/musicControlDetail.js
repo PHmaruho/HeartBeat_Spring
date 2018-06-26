@@ -367,8 +367,6 @@ function replyListPaging(page, detailNum){
 		data:{music_sq:music_sq,
 			  page:page},
 		success: function(data){
-			console.log(data);
-			console.log(data.list);
 			let str_list = '<table><tr><td>No</td><td>img</td><td>COMMENT</td><td id="member_td">MEMBER</td><td id="etc_td">ETC</td></tr>';
 			$.each(data.list, function(i, obj){
 				str_list += '<tr><td>' + (data.startRow+(i)) + '</td>';

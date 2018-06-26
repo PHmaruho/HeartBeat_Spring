@@ -63,7 +63,7 @@ function getAlarmCount() {
 		<div id="alarmContent" class="alarmContent"></div>
 		<div class="cwi-head-logo-position">
 			<p class="cwi-neon-logo-p">
-				<a class="cwi-neon-logo-a" href="" onclick="goto('/home')">HEARTBEAT</a>
+				<a class="cwi-neon-logo-a" href="#" onclick="goto('/home')">HEARTBEAT</a>
 			</p>
 		</div>
 		<div class="cwi-head-buttons">

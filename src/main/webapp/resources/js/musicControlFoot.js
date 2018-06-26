@@ -2,14 +2,22 @@ var footPlayer;
 var footProgressFlag = 0;
 
 (function() {
-	initFoot(getCookie(getCookie()));
-	cookieList();
+	if (getMaxCookie() == 0) {
+		var sq = 302;
+		initFoot(sq);
+		setCookie(1, 302);
+		setCookie(1);
+	} else {
+		initFoot(getCookie(getCookie()));
+		cookieList();
+	}
 })();
 
 function initFoot(sq) {
 	footPlayer = WaveSurfer.create({
 		container : '#footWaveform',
 	});
+	footPlayer.cookieList = {};
 	
 	loadFoot(sq);
 	getFootLoad(sq);
@@ -154,8 +162,6 @@ function getFootLoad(sq) {
 }
 
 function setCookie(cname, cvalue) {
-	console.log(cname);
-	console.log(cvalue);
     var d = new Date();
     d.setTime(d.getTime() + (90 * 24 * 60 * 60 * 1000));	// 90일 * 24시간 * 60분 * 60초 * 1000밀리초
     var expires = 'expires=' + d.toUTCString();
@@ -327,7 +333,6 @@ function cookieList() {
 			contentType: 'application/json; charset=UTF-8',
 			success : function(data) {
 				footPlayer.cookieList = data;
-				console.log(footPlayer.cookieList);
 				initPlaylist();
 			},
 			error:function(request,status,error){
@@ -341,6 +346,11 @@ function initPlaylist() {
 	var max = getMaxCookie();
 	var now = getCookie();
 	var newHtml = '';
+	
+	if (max == 0) {
+		$('#playlist').html('');
+		return false;
+	}
 	
 	for (var i = 1; i <= max; i++) {
 		var cookie = footPlayer.cookieList['cookieOrder' + i];
@@ -557,4 +567,3 @@ function repeatOff() {
 	$('#footRepeatBtnOff').toggleClass('cwi-foot-display-none');
 }
 
-console.log(4);

@@ -107,8 +107,19 @@ function unLikeCancel(sq, type,v) {
 }
 
 
-function following(sq,session,type) {
-
+function following(sq,session,type, num) {
+	var targetId = '';
+	var parentId = '';
+	
+	if (num == 0) {
+		targetId = 'follower' + type;
+		parentId = 'followerLi' + type;
+	} else {
+		targetId = 'following' + type;
+		parentId = 'followingLi' + type;
+	}
+	console.log('targetId : ' + targetId);
+	console.log('parentId : ' + parentId);
 	if(sq==session) alert('본인을 팔로우 할 수 없습니다.');
 	$.ajax({
 		url: '/heartbeat/do/follow',
@@ -119,18 +130,25 @@ function following(sq,session,type) {
 		success : function(data) {
 			
 			if(data == 1) {
-			$('#'+type).load('#'+type+' '+'#'+type);
+				$('#' + parentId).load('#'+targetId+' '+'#'+targetId);
 
 			} else if (data == 0) alert("이미 팔로우된 유저");
-			/*location.reload();*/
-			$('#'+type).load('#'+type+' '+'#'+type);
 			
 		}
 	})
 }
 
 
-function unfollow(targetSq,memberSq,type) {
+function unfollow(targetSq,memberSq,type, num) {
+	var targetId = '';
+		
+		if (num == 0) {
+			targetId = 'follower' + type;
+			parentId = 'followerLi' + type;
+		} else {
+			targetId = 'following' + type;
+			parentId = 'followingLi' + type;
+		}
 	
 	if(targetSq== memberSq) alert('본인을 팔로우할 수 없습니다.')
 	else{
@@ -142,7 +160,7 @@ function unfollow(targetSq,memberSq,type) {
 			},
 			success : function() {
 				/*location.reload();*/
-				$('#'+type).load('#'+type+' '+'#'+type);
+				$('#' + parentId).load('#'+targetId+' '+'#'+targetId);
 			}
 		});
 		

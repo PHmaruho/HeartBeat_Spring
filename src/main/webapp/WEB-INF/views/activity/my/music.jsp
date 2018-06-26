@@ -102,7 +102,7 @@
 					</div>
 				</div>	
 				<div class="cwi-artist-third-main">
-					<div id="detailLike${status.index }" class="cwi-`-wrapper">
+					<div id="detailLike${status.index }" class="cwi-like-wrapper">
 						<c:if test="${music.isLiked == 0}">
 							<span id="detailLikeButton${status.index }" class="badge badge-pill badge-light cwi-like"
 								onclick="cwi_reLike(${music.music_sq}, this)">
@@ -115,11 +115,11 @@
 								<img src="${pageContext.request.contextPath }/resources/img/icon/liked-16.png"> ${music.likeCnt }
 							</span>
 						</c:if>
-						<span class="badge badge-pill badge-light cwi-like" style="height: 24px;"
-							onclick="cookieFromAdd(${music.music_sq})">
-							예약
-						</span>
 					</div>
+					<span class="badge badge-pill badge-light cwi-like cwi-add-button" style="height: 24px;"
+						onclick="cookieFromAdd(${music.music_sq})">
+						예약
+					</span>
 					<div class="cwi-comment-wrapper">
 						<div class="cwi-comment-img-wrapper">
 							<c:if test="${empty loginSession }">

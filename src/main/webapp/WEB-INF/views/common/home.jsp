@@ -18,17 +18,14 @@
 </head>
 <body>
 <div class="box">
-	<div class="banner" id="sliderFrame">
-	<div id="slider">
+	<div class="product_con">
 	<!-- <h2> Main List Testing</h2> -->
-		<img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner4.png" class="bannerimg" id="slide">
-		<%-- <img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner1.png" class="bannerimg" >
-		<img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner2.png" class="bannerimg" >
-		<img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner3.png" class="bannerimg" > --%>
+		<img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner4.png" class="bannerimg">
 	</div>
-	</div> 
+	<br><br><br>
+	
 <div class="contents">
-	<h2 style="text-align:center;" class="subTitle">New Product List</h2>
+	<h6 style="color:gray;" >Up-and-coming tracks on SoundCloud :</h6>
 		<br><br>
 	<ul class="glul">
 		<c:forEach var="album" items="${newList}" varStatus="i">
@@ -38,23 +35,14 @@
 			<a onclick="goto('/others/music/${album.music_sq}')">
 				<input type="hidden" id="music_sq${i.index }" value="${album.music_sq}">
 			<img src="${pageContext.request.contextPath }/resources/img/album/${album.img_path }.png" class="albumImg" ></a>
-				<br>
-				<br>
-				<c:if test="${album.music_like_type == null }">
-				<a>
+				<%-- <a>
 					<img src="${pageContext.request.contextPath }/resources/img/profile/dislike.png" class="glul-img" onclick="likeAlbum(${album.album_sq},${loginSession },'popAlbum${i.index }')">
-				</a>
-				</c:if>
-				<c:if test="${album.code_meaning == '앨범' }">
-					<a>
-						<img src="${pageContext.request.contextPath }/resources/img/profile/like.png" class="glul-img" onclick="like_func(${like.music_like_sq},'${like.code_meaning }','likeList${i.index }')">
-					</a>
-				</c:if>
-							
+				</a> --%>
 					<br>
-					${album.album_nm }<br>
-					<a onclick="goto('/heartbeat/others/artist/${album.member_sq}')">
-					${album.nick }
+					<a href="/heartbeat/others/music/${album.music_sq}" class="music_nm">${album.album_nm }</a>
+					<br>
+					<a href="/heartbeat/others/artist/${album.member_sq}" class="member_nick">
+						${album.nick }
 					</a><br>
 				</div>
 				</div>
@@ -66,7 +54,7 @@
 	</ul>
 </div>
 		<Br><Br>
-<div class="contents">
+<%-- <div class="contents">
 	<h2 style="text-align:center;" class="subTitle">Popular List</h2>
 	<br><br>
 		<ul class="glul">
@@ -76,15 +64,18 @@
 					<input type="hidden" id="music_sq${i.index }" name="music_sq${i.index }" value="${album.music_sq}">
 					<img src="resources/${album.img_path }.png" class="albumImg"></a><br>
 					<br>
-					${album.album_nm }<br>
+					<a href="/heartbeat/others/music/${album.music_sq}" class="music_nm">${album.album_nm }</a>
+					<br>
 					${album.nick }<br>
 					<img src="resources/img/profile/like.png" class="glul-img">
 					${album.album_like }<br>
-<%-- 							<input type="button" value="공유" onclick="mainListShare(${i.index})"></td>
- --%>					
+							<input type="button" value="공유" onclick="mainListShare(${i.index})"></td>
+					
 				</li>
 			</c:forEach>
 		</ul>
-	</div>
+	</div> --%>
+	
+	
 </div>
 </body>

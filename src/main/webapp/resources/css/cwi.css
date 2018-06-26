@@ -412,6 +412,8 @@ input[type='range']::-webkit-slider-thumb {
 .cwi-like-wrapper {
 	position: relative;
 	top: 5px;
+	width: 42px;
+	display: inline-block;
 }
 
 .cwi-artist-third-main {
@@ -678,4 +680,9 @@ input[type='range']::-webkit-slider-thumb {
 }
 .ph-comment-list-wrapper{
 	overflow: scroll;
+}
+
+.cwi-add-button {
+	position: relative;
+	top: 5px;
 }
