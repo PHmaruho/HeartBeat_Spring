@@ -19,21 +19,13 @@
 <body>
 <div class="box">
 	<div class="product_con">
-	<ul class="product_list">
-	<!-- <h2> Main List Testing</h2> -->
-		<li class="hli"><img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner4.png" class="bannerimg"></li>
+<!-- 	<ul class="product_list">
+ -->	<!-- <h2> Main List Testing</h2> -->
+		<img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner4.png" class="bannerimg">
 		<%-- <li class="hli"><img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner1.png" class="bannerimg" ></li>
 		<li class="hli"><img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner2.png" class="bannerimg" ></li>
 		<li class="hli"><img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner3.png" class="bannerimg" ></li> --%>
-	</ul>
-	<a class="btn_prev" href="#none">◀</a>
-    <a class="btn_next" href="#none">▶</a>
-    <div class="numlist">
-        <a href="#none">●</a>
-        <a href="#none">●</a>
-        <a href="#none">●</a>
-        <a href="#none">●</a>
-    </div>
+	<!-- </ul> -->
 	</div>
 	<br><br><br>
 	
@@ -88,7 +80,18 @@
 			</c:forEach>
 		</ul>
 	</div> --%>
-	
-	
+	<div class="janjan">
+<!-- 	<ul class="product_list">
+ -->	<!-- <h2> Main List Testing</h2> -->
+ 		<p>Never stop listening<br>
+		SoundCloud is available on Web, iOS, Android,<br>
+		Sonos, Chromecast, and Xbox One.</p>   
+		<img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner2.png" class="janImg" >
+		<%-- <li class="hli"><img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner1.png" class="bannerimg" ></li>
+		<li class="hli"></li>
+		<li class="hli"><img src="${pageContext.request.contextPath }/resources/img/banner/mainBanner3.png" class="bannerimg" ></li> --%>
+	<!-- </ul> -->
+	</div>
+	<br><br>
 </div>
 </body>
