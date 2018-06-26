@@ -45,7 +45,8 @@ public interface ActivityService {
 	public Boolean uploadAlbumPro(MultipartHttpServletRequest mhsr, HttpServletRequest request);
 	public Boolean uploadMusicPro(MultipartHttpServletRequest mhsr, HttpServletRequest request);
 	public int insertReplyMusic(HttpServletRequest request);
-	public List<Reply> selectReplyList(HttpServletRequest request);
+	public Map<String, Object> selectReplyList(HttpServletRequest request);
+	public String deleteReply(HttpServletRequest request);
 	
 	Music selectMusicDetail(HashMap<String, Object> map); // 최우일
 	List<Member> selectMusicArtists(int sq); // 최우일

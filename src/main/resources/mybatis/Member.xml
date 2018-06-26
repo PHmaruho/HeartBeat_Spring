@@ -73,4 +73,11 @@
 	<select id="getMemberSq" parameterType="Member" resultType="java.lang.String">
 		select member_sq from member where email=#{email}
 	</select>
+	
+	<!-- 최우일 -->
+	<select id="selectAlarmCount" parameterType="int" resultType="int">
+		select count(*)
+		from alarm
+		where member_sq = #{member_sq} and status = 'N'
+	</select>
 </mapper>

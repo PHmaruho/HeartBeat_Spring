@@ -3,6 +3,8 @@ package com.zero.heartbeat.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +45,15 @@ public class CommonRestController {
 	
 	// 최우일
 	@RequestMapping("/footLoad/{sq}")
-	public Music footLoad(@PathVariable int sq) {
-		Music music = commonService.selectMusicFootLoad(sq);
+	public Music footLoad(@PathVariable int sq, HttpSession session) {
+		Object obj = session.getAttribute("loginSession");
+		int member_sq = obj == null ? 0 : Integer.parseInt(obj.toString());
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("member_sq", member_sq);
+		map.put("music_sq", sq);
+		
+		Music music = commonService.selectMusicFootLoad(map);
 		
 		return music;
 	}

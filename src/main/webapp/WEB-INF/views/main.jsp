@@ -14,6 +14,7 @@
 <script src="${pageContext.request.contextPath }/resources/js/bootstrap.js?v=<%=System.currentTimeMillis() %>"></script>
 <script src="${pageContext.request.contextPath }/resources/js/wavesurfer.js?v=<%=System.currentTimeMillis() %>"></script>
 <script src="${pageContext.request.contextPath }/resources/js/musicControlMain.js?v=<%=System.currentTimeMillis() %>"></script>
+<script src="${pageContext.request.contextPath }/resources/js/jsy.js?v=<%=System.currentTimeMillis() %>"></script>
 <style type="text/css">
 .headDiv {
 	height: 50px;

@@ -103,12 +103,19 @@ public class CommonController {
 	// 최우일
 	@RequestMapping("/foot")
 	public String foot(Model model, HttpServletRequest requset) {
+		// List<Music> list = commonService.selectPlaylistFoot(sessionSq);
+		
+		return "common/foot";
+	}
+	
+	// 최우일
+	@RequestMapping("/error")
+	public String errorControl(Model model, HttpServletRequest requset) {
 		int sessionSq = 703;
 		
 		List<Music> list = commonService.selectPlaylistFoot(sessionSq);
 		model.addAttribute("playlist", list);
 		
-		return "common/foot";
+		return "common/error";
 	}
-	
 }

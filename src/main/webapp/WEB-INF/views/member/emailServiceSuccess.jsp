@@ -3,6 +3,11 @@
 <head>
 </head>
 <body>
-<h2>인증에 성공하셨습니다.</h2>
-<a href="/heartbeat/loginForm">로그인 하러 가기</a>
+	<div class="cwi-discover-main">
+		<div class="jumbotron cwi-discover-jumbo">
+			<h1 class="display-4">인증 완료</h1>
+			<p class="lead">로그인 후 서비스를 이용해주세요.</p>
+			<hr class="my-4">
+		</div>
+	</div>
 </body>

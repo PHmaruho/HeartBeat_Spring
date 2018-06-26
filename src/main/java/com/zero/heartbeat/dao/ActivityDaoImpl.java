@@ -245,39 +245,39 @@ public class ActivityDaoImpl implements ActivityDao {
 	}
 	
 	@Override
-	public int insertReplyMusic(Reply replyDto) {
+	public Reply selectTargetReply(String reply_sq) {
 		// TODO Auto-generated method stub
-		return session.insert("insertReplyMusic", replyDto);
+		return session.selectOne("selectTargetReply", reply_sq);
 	}
 	
 	@Override
-	public int insertReplyMusic1(Reply replyDto) {
+	public int insertTargetReply(Reply replyDto) {
 		// TODO Auto-generated method stub
-		return session.insert("insertReplyMusic1", replyDto);
+		return session.insert("insertTargetReply", replyDto);
 	}
 	
 	@Override
-	public Map<String, Object> selectReplyOrders(String reply_sq_str) {
+	public Reply selectLastReplyByMe(String member_sq) {
 		// TODO Auto-generated method stub
-		return session.selectOne("selectReplyOrders", reply_sq_str);
+		return session.selectOne("selectLastReplyByMe", member_sq);
 	}
 	
 	@Override
-	public Map<String, Object> selectReplyOrders1(String reply_sq_str) {
+	public int updateLowerReply(Reply replyDto) {
 		// TODO Auto-generated method stub
-		return session.selectOne("selectReplyOrders1", reply_sq_str);
+		return session.update("updateLowerReply", replyDto);
 	}
 	
 	@Override
-	public Reply selectLastReply(int member_sq) {
+	public int selectSameTimeStamp(Reply replyDto) {
 		// TODO Auto-generated method stub
-		return session.selectOne("selectLastReply", member_sq);
+		return session.selectOne("selectSameTimeStamp", replyDto);
 	}
 	
 	@Override
-	public int updateReplyGroup(Reply replyDto) {
+	public int insertNormalReply(Reply replyDto) {
 		// TODO Auto-generated method stub
-		return session.update("updateReplyGroup", replyDto);
+		return session.insert("insertNormalReply", replyDto);
 	}
 	
 	@Override
@@ -290,6 +290,12 @@ public class ActivityDaoImpl implements ActivityDao {
 	public List<Reply> selectReplyList(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return session.selectList("selectReplyList", map);
+	}
+	
+	@Override
+	public int deleteReply(String reply_sq) {
+		// TODO Auto-generated method stub
+		return session.delete("deleteReply", reply_sq);
 	}
 	
 	// JSY

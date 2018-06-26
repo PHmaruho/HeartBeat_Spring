@@ -1,8 +1,10 @@
 var footPlayer;
 var footProgressFlag = 0;
 
-cookieList();
-initFoot(302);
+(function() {
+	initFoot(getCookie(getCookie()));
+	cookieList();
+})();
 
 function initFoot(sq) {
 	footPlayer = WaveSurfer.create({
@@ -38,8 +40,17 @@ function initFoot(sq) {
 			}
 		}
 		$('#footImage').html('<img src="/heartbeat/resources/img/album/' + footPlayer.info.album_sq + '.png" width="30" height="30">');
-		$('#footTitle').html('title : ' + footPlayer.info.music_nm);
-		$('#footArtists').html('artists : ' + artists);
+		$('#footTitle').html(footPlayer.info.music_nm);
+		$('#footArtists').html(artists);
+	});
+	
+	footPlayer.on('finish', function () {
+		var order = getCookie();
+		order = Number(order) + 1;
+		if (order >= getMaxCookie()) {
+			order = 1;
+		}
+		playFromList(getCookie(order), order);
 	});
 	
 	footPlayer.on('audioprocess', footProgress);
@@ -143,6 +154,8 @@ function getFootLoad(sq) {
 }
 
 function setCookie(cname, cvalue) {
+	console.log(cname);
+	console.log(cvalue);
     var d = new Date();
     d.setTime(d.getTime() + (90 * 24 * 60 * 60 * 1000));	// 90일 * 24시간 * 60분 * 60초 * 1000밀리초
     var expires = 'expires=' + d.toUTCString();
@@ -159,6 +172,7 @@ function setCookie(cname, cvalue) {
     		success : function(data) {
     			document.cookie = 'cookieOrder' + cname + '=' + encodeURI(cvalue) + ';' + expires + ';path=/';
     			footPlayer.cookieList[cookieName] = data.cookieOrder1;
+    			initPlaylist();
     		},
     		error:function(request,status,error){
     		    console.log('code : ' + request.status + '\n' + 'message : ' + request.responseText + '\n' + 'error : ' + error);
@@ -166,6 +180,7 @@ function setCookie(cname, cvalue) {
     	});
     } else if (arguments.length === 1) {
     	document.cookie = 'cookieOrder=' + encodeURI(cname) + ';' + expires + ';path=/';
+    	initPlaylist();
     } else {
     	console.log('musicControlFoot setCookie parameter error');
     }
@@ -240,9 +255,11 @@ function deleteCookie(cname) {
 		}
 		document.cookie = 'cookieOrder=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
 		delete footPlayer.cookieList;
+		initPlaylist();
 	} else {
 		console.log('musicControlFoot deleteCookie parameter error');
 	}
+	initPlaylist();
 }
 
 function getMaxCookie() {
@@ -311,6 +328,7 @@ function cookieList() {
 			success : function(data) {
 				footPlayer.cookieList = data;
 				console.log(footPlayer.cookieList);
+				initPlaylist();
 			},
 			error:function(request,status,error){
 			    console.log('code : ' + request.status + '\n' + 'message : ' + request.responseText + '\n' + 'error : ' + error);
@@ -320,22 +338,40 @@ function cookieList() {
 }
 
 function initPlaylist() {
-	var list = $('#playlistTable');
 	var max = getMaxCookie();
+	var now = getCookie();
 	var newHtml = '';
 	
 	for (var i = 1; i <= max; i++) {
 		var cookie = footPlayer.cookieList['cookieOrder' + i];
+		var artistList = cookie.artistList;
+		var artistLength = cookie.artistList.length;
+		
+		if (i == now) {
+			newHtml = newHtml + '<div id="cookieOrder' + i + '" class="cwi-list-row-div cwi-list-row-div-now">'
+		} else {
+			newHtml = newHtml + '<div id="cookieOrder' + i + '" class="cwi-list-row-div">'
+		}
 		newHtml = newHtml + 
-		'<tr onclick="loadFoot('+ cookie.music_sq +')">' +
-			'<td>sq : '+ cookie.music_sq +' </td>' +
-			'<td>'+
-				'<c:forEach var="artistList" items="${playlist.artistList}">' +
-					'artist : ${artistList.nick }' +
-				'</c:forEach>' +
-			'</td>' +
-		'</tr>';
+			'<img src="/heartbeat/resources/img/album/' + cookie.album_sq + '.png" width="32" height="32"' +
+			' onclick="playFromList(' + cookie.music_sq + ', this.parentNode.id.replace(\'cookieOrder\', \'\'))" class="cwi-list-img">' + 
+			'<div class="cwi-list-artist-wrapper">';
+			
+		for (var j = 0; j < artistLength; j++) {
+			newHtml = newHtml + 
+			'<a class="cwi-list-artist badge badge-dark" onclick="goto(\'/others/artist/' +
+				artistList[j].member_sq + '\')">' + artistList[j].nick + '</a>';
+		}
+		
+		newHtml = newHtml +
+		'</div>' +
+		'<div class="cwi-list-title-wrapper"><a class="cwi-list-title" onclick="goto(\'/others/music/' +
+			cookie.music_sq + '\')">' + cookie.music_nm + '</a></div>' +
+		'<button onclick="deleteFromList(' + i + ')" class="cwi-list-x-button close">x</button></div>';
 	}
+	
+	$('#playlist').html('');
+	$('#playlist').html(newHtml);
 }
 
 $('input[type="range"]').change(function () {
@@ -456,3 +492,69 @@ function cwi_unfollow(targetSq, v) {
 //deleteCookie();
 //cookieFromAdd(302);
 //console.log(document.cookie);
+
+function playlistClick() {
+	$('#footListOff').addClass('cwi-foot-display-none');
+	$('#footListOn').removeClass('cwi-foot-display-none');
+	$('#playlist').toggle();
+}
+
+function playlistClick2() {
+	$('#footListOff').removeClass('cwi-foot-display-none');
+	$('#footListOn').addClass('cwi-foot-display-none');
+	$('#playlist').toggle();
+}
+
+function playFromList(sq, number) {
+	loadFoot(sq);
+	setCookie(number);
+	checkFootReady(playFromFoot);
+}
+
+function deleteFromList(num) {
+	deleteCookie(num);
+}
+
+function nextList() {
+	var order = getCookie();
+	order = Number(order) + 1;
+	playFromList(getCookie(order), order);
+}
+
+function formerList() {
+	var order = getCookie();
+	order = (order) - 1;
+	playFromList(getCookie(order), order);
+}
+
+function shuffleList() {
+	var max = Number(getMaxCookie());
+	var ran = Math.trunc(max * Math.random());
+	if (ran == 0) {
+		ran = 1;
+	}
+	playFromList(getCookie(ran), ran);
+}
+
+function repeatOn() {
+	footPlayer.on('finish', function () {
+		playFromFoot();
+	});
+	$('#footRepeatBtnOff').toggleClass('cwi-foot-display-none');
+	$('#footRepeatBtnOn').toggleClass('cwi-foot-display-none');
+}
+
+function repeatOff() {
+	footPlayer.on('finish', function () {
+		var order = getCookie();
+		order = Number(order) + 1;
+		if (order >= getMaxCookie()) {
+			order = 1;
+		}
+		playFromList(getCookie(order), order);
+	});
+	$('#footRepeatBtnOn').toggleClass('cwi-foot-display-none');
+	$('#footRepeatBtnOff').toggleClass('cwi-foot-display-none');
+}
+
+console.log(4);

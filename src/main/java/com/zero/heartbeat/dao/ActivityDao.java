@@ -56,14 +56,15 @@ public interface ActivityDao {
 	public Boolean insertMusicTagList(MusicTag musicTagDto);
 	public void updateAlbumTitleMusic(int music_sq, int img_seq);
 	public int selectOneMusicSeq(int album_sq);
-	public Map<String, Object> selectReplyOrders(String reply_sq_str);
-	public Map<String, Object> selectReplyOrders1(String reply_sq_str);
-	public int insertReplyMusic(Reply replyDto);
-	public int insertReplyMusic1(Reply replyDto);
-	public Reply selectLastReply(int member_sq);
-	public int updateReplyGroup(Reply replyDto);
+	public Reply selectTargetReply(String reply_sq);
+	public int insertTargetReply(Reply replyDto);
+	public Reply selectLastReplyByMe(String member_sq);
+	public int updateLowerReply(Reply replyDto);
+	public int selectSameTimeStamp(Reply replyDto);
+	public int insertNormalReply(Reply replyDto);
 	public int selectTotalReply(int music_sq);
 	public List<Reply> selectReplyList(Map<String, Object> map);
+	public int deleteReply(String reply_sq);
 	
 	
 	Music selectMusicDetail(HashMap<String, Object> map);	// 최우일

@@ -2,6 +2,7 @@
 .cwi-neon-logo-p {
 	text-align: center;
 	font-size: 50px;
+	user-select: none;
 }
 
 .cwi-neon-logo-a {
@@ -65,3 +66,78 @@
 }
 
 /*REEEEEEEEEEESPONSIVE*/
+
+
+
+.light-up-letters {
+	display: inline-block;
+	font-family: 'Monoton';
+	font-size: 120px;
+	font-weight: 100;
+	color: red;
+	text-shadow: 0 0 5px red, 0 0 10px red, 0 0 85px red, 0 0 85px red, 0 0 85px red;
+	margin: auto;
+    position: absolute;
+    left: 100px;
+    user-select: none;
+}
+
+.light-up-letters .fade {
+	animation: fade 5s linear infinite;
+}
+
+.light-up-letters .flicker {
+	animation: flicker 6s 1s linear infinite;
+}
+
+.light-up-letters .sparkle {
+	animation: sparkle 3s 3s linear infinite;
+}
+
+@keyframes fade {
+	0%,9%,11%,13%,15%,41%,43%,45% {
+		text-shadow: 0 0 5px red, 0 0 10px red, 0 0 85px red, 0 0 85px red, 0 0 85px red;
+		opacity: 1;
+	}
+	10%,12%,14%,42%,44% {
+		opacity: 0.6;
+		text-shadow: none; 
+	}
+}
+
+@keyframes flicker {
+	51% {
+		text-shadow: 0 0 5px red, 0 0 10px red, 0 0 85px red, 0 0 85px red, 0 0 85px red;
+		opacity: 1;
+	}
+	0%,50%,52%,100% {
+	opacity: 0.6;
+	text-shadow: none; 
+	}
+}
+
+@keyframes sparkle {
+	0%,9%,11%,13%,15%,41%,43%,45% {
+		text-shadow: 0 0 5px red, 0 0 10px red, 0 0 85px red, 0 0 85px red, 0 0 85px red;
+		opacity: 1;
+	}
+	10%,12%,14%,42%,44% {
+		opacity: 0.6;
+		text-shadow: none; 
+	}
+}
+
+.cwi-error-main {
+	position: relative;
+	background-color: black;
+    height: calc(100vh - (100px));
+    width:  100vw;
+}
+
+.cwi-error-div {
+	position: relative;
+	margin: 0 auto;
+	width: 70%;
+	height: 100%;
+    padding-top: 50px;
+}

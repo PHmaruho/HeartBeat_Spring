@@ -76,28 +76,12 @@
 	outline: none;	
 }
 
-.cwi-foot-playlist {
-	background-color: gray;
-	position: absolute;
-	bottom: 100%;
-	right: 20%;
-	display: none;
-}
-
-.cwi-foot-playlist:hover {
-	cursor: pointer;
-}
-
 .cwi-foot-display-none {
 	display: none;
 }
 
 .cwi-foot-display-block {
 	display: block;
-}
-
-.cwi-foot-playlist-table {
-	border: 1px solid black;
 }
 
 .cwi-foot-player-info {
@@ -369,10 +353,12 @@ input[type='range']::-webkit-slider-thumb {
 	width: 36px;
 	height: 36px;
 	position: relative;
+	float: left; /* PHmaruho 추가 */
 }
 
 .cwi-comment-wrapper {
-	display: flex;
+	display: table;
+	width: 100%;
 	position: relative;
 	top: 10px;
 }
@@ -495,6 +481,7 @@ input[type='range']::-webkit-slider-thumb {
 
 .cwi-head-white-font {
 	color: white !important;
+	user-select: none;
 }
 
 .cwi-discover-radios {
@@ -505,6 +492,7 @@ input[type='range']::-webkit-slider-thumb {
 
 .cwi-discover-input {
 	margin-left: 5px;
+	display: inline-block;
 }
 
 
@@ -566,3 +554,128 @@ input[type='range']::-webkit-slider-thumb {
 	vertical-align: bottom;
 }
 
+#headAlramCount {
+	height: 19px;
+	margin: auto;
+	margin-left: -12px;
+}
+
+.cwi-login-button {
+	position: relative;
+	padding: 26px !important;
+}
+
+.cwi-login-table {
+	width: 100%;
+}
+
+#kkhform input {
+	margin-bottom: 5px;
+}
+
+#kkhform button {
+	display: inherit;
+	width: 100%;
+}
+
+#join_msg {
+	height: 25px;
+}
+
+.cwi-alarm-list {
+	margin-bottom: 5px;
+}
+
+.cwi-alarm-text {
+	width: 200px;
+	display: inline-block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.cwi-foot-playlist:hover {
+	cursor: pointer;
+}
+
+.cwi-foot-playlist {
+	background-color: white;
+	position: absolute;
+	bottom: 102%;
+	right: 0px;
+	display: none;
+	height: 400px;
+	width: 400px;
+	overflow-y: scroll;
+	padding: 10px 10px 10px 10px;
+	border: 1px solid #ced4da;
+}
+
+.cwi-list-row-div {
+	position: relative;
+	margin-bottom: 10px;
+	height: 32px;
+}
+
+.cwi-list-img {
+	position: absolute;
+}
+
+.cwi-list-artist-wrapper {
+	display: inline-block;
+	position: absolute;
+	height: 16px;
+	top: 0px;
+	left: 36px;
+}
+
+.cwi-list-artist {
+	font-size: 12px !important;
+	color: white !important;
+	position: relative;
+	top: -4px;
+/* 	margin-right: 2px;  */
+}
+
+.cwi-list-title-wrapper {
+	display: inline-block;
+	position: absolute;
+	height: 16px;
+	bottom: 0px;
+	left: 37px;
+}
+
+.cwi-list-title {
+	font-size: 12px !important;
+	position: relative;
+	bottom: 4px;
+}
+
+.cwi-list-x-button {
+	display: inline-block;
+	position: absolute;
+	right: 0px;
+}
+
+.cwi-list-row-div-now {
+	background-color: rgba(224, 113, 113, 0.2);
+}
+
+.cwi-foot-list-button {
+	position: absolute;
+	right: 0px;
+	top: 13px;
+}
+/* PHmaruho */
+.ph-comment-list-wrapper, .ph-comment-list-wrapper > table{
+	width: 100%;
+}
+.ph-comment-list-wrapper table #member_td{
+	width: 25%;
+}
+.ph-comment-list-wrapper table #etc_td{
+	width: 5%;
+}
+.ph-comment-list-wrapper{
+	overflow: scroll;
+}

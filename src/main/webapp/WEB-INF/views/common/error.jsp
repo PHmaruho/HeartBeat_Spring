@@ -3,6 +3,13 @@
 <head>
 </head>
 <body>
-<h2>에러페이지</h2>
-<p>잘못된 경로입니다.
+	<div class="cwi-error-main">
+		<div class="cwi-error-div">
+			<div class="light-up-letters">
+				40
+				<span class="fade">4<br>
+				</span> err<span class="flicker">o</span>r<br>
+				p<span class="sparkle">a</span>ge</div>
+		</div>
+	</div>
 </body>

@@ -78,8 +78,8 @@ public class CommonServiceImpl implements CommonService {
 	
 	// 최우일
 	@Override
-	public Music selectMusicFootLoad(int sq) {
-		return commonDao.selectMusicFootLoad(sq);
+	public Music selectMusicFootLoad(HashMap<String, Object> map) {
+		return commonDao.selectMusicFootLoad(map);
 	}
 	
 	// 최우일

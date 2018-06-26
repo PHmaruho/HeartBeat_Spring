@@ -300,10 +300,6 @@ function searchList(){
 		if(art.length==0 || art==null || art=='' || art==' ') art='all';
 		if(tit.length==0 || tit==null || tit==''|| tit==' ') tit='all';
 		if(tag.length==0 || tag==null || tag=='' || tag==' ') tag='all';
-		/*alert('필터 후');
-		alert('art:'+art);
-		alert('tag:'+tag);
-		alert('title:'+tit);*/
 	}
 
 		$.ajax({
@@ -327,9 +323,10 @@ function searchList(){
 /* member - memberAlarmList */
 function getMemberAlarmList(){
 	$('#alarmContent').toggle();
-	//alert('v:'+v);
-	/*var id=<%=session.getAttribute(loginSession)%>;*/
-	//alert('id:'+v);
+	getMemberAlarmList2();
+}
+
+function getMemberAlarmList2() {
 	$.ajax({
 		url:'/heartbeat/do/memberAlarmList',
 	
@@ -337,26 +334,9 @@ function getMemberAlarmList(){
 			$('#alarmContent').html("");
 			$('#alarmContent').html(data);
 		}
-	})
-	//alert('getMembreAlarmList: '+v);
-	/*$(document).ready(function(){
-		$('#alarmContent').toggle();
-		setTimeout(alarmContentShow(id),1000);
-		});*/
+	});
 }
-/*function alarmContentShow(v){
-	var id=v;
-	$.ajax({
-		url:'/heartbeat/do/memberAlarmList',
-		data:{
-			member_id:711// id
-		},
-		success:function(data){
-			$('#alarmContent').html("");
-			$('#alarmContent').html(data);
-		}
-	})
-}*/
+
 function updateAlarmStatus(v) {
 	$.ajax({
 		url:'/heartbeat/do/updateAlarmStatus',
@@ -364,7 +344,8 @@ function updateAlarmStatus(v) {
 			alarmSq:v,
 		},
 		success:function(){
-		getMemberAlarmList();
+			getMemberAlarmList2();
+			getAlarmCount();
 		}
-	})
+	});
 }

@@ -78,28 +78,35 @@
 					<img src="${pageContext.request.contextPath }/resources/img/icon/liked-16.png"> ${music.likeCnt }
 				</span>
 			</c:if>
+			<span class="badge badge-pill badge-light cwi-like" style="height: 24px;"
+				onclick="cookieFromAdd(${music.music_sq})">
+				예약
+			</span>
 		</div>
 		<div class="cwi-comment-wrapper">
-			<div class="cwi-comment-img-wrapper">
-				<c:if test="${empty loginSession }">
-					<img src="${pageContext.request.contextPath }/resources/img/profile/default-32.png" class="cwi-comment-img">
-				</c:if>
-				<c:if test="${!empty loginSession }">
-					<img src="${pageContext.request.contextPath }/resources/img/profile/${loginSession }.png"class="cwi-comment-img">
-				</c:if>
+			<div>
+				<div class="cwi-comment-img-wrapper">
+					<c:if test="${empty loginSession }">
+						<img src="${pageContext.request.contextPath }/resources/img/profile/default-32.png" class="cwi-comment-img">
+					</c:if>
+					<c:if test="${!empty loginSession }">
+						<img src="${pageContext.request.contextPath }/resources/img/profile/${loginSession }.png"class="cwi-comment-img">
+					</c:if>
+				</div>
+				<div class="cwi-comment-input-wrapper">
+					<a id="detailCommentTarget0" class="cwi-comment-target"></a>
+					<input type="text" id="detailCommentText0" class="cwi-comment-input"
+						onkeydown="commentKeyPress(0, 0)" placeholder="답글을 달아주세요">
+					<input type="hidden" id="detailCommentHidden0" value="">
+				</div>
 			</div>
-			<div class="cwi-comment-input-wrapper">
-				<a id="detailCommentTarget0" class="cwi-comment-target"></a>
-				<input type="text" id="detailCommentText0" class="cwi-comment-input"
-					onkeydown="commentKeyPress(0, 0)" placeholder="답글을 달아주세요">
-				<input type="hidden" id="detailCommentHidden0" value="">
-			</div>
+			<br />
 			<div class="ph-comment-list-wrapper">
 			
 			</div>
+			<div style="width:100%; height:50px;"></div>
 		</div>
 	</div>
-	
 <script src="${pageContext.request.contextPath }/resources/js/musicControlDetail.js?v=<%=System.currentTimeMillis() %>"></script>
 </body>
 

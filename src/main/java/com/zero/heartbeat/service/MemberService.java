@@ -28,4 +28,7 @@ public interface MemberService {
 	
 	String getMemberSq(Member member);
 	
+	// 최우일
+	int selectAlarmCount(int member_sq);
+	
 }

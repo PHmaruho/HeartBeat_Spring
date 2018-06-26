@@ -17,16 +17,17 @@
 			<div hidden="true" id="footWaveform"></div>	
 			<div class="cwi-foot-player-left">
 				<span class="cwi-foot-player-buttons">
-					<a id="footBackBtn"><img src="${pageContext.request.contextPath }/resources/img/icon/008-backward.png"></a>
+					<a id="footBackBtn" onclick="formerList()"><img src="${pageContext.request.contextPath }/resources/img/icon/008-backward.png"></a>
 					<a id="footPlayBtn" onclick="playFromFoot()">
 						<img src="${pageContext.request.contextPath }/resources/img/icon/011-play-button.png">
 					</a>
 					<a id="footPauseBtn" class="cwi-foot-display-none" onclick="pauseFromFoot()">
 						<img src="/heartbeat/resources/img/icon/006-pause.png">
 					</a>
-					<a id="footForBtn"><img src="${pageContext.request.contextPath }/resources/img/icon/009-forward.png"></a>
-					<a id="footChnageBtn"><img src="${pageContext.request.contextPath }/resources/img/icon/002-change.png"></a>
-					<a id="footRepeatBtn"><img src="${pageContext.request.contextPath }/resources/img/icon/001-refresh.png"></a>
+					<a id="footForBtn" onclick="nextList()"><img src="${pageContext.request.contextPath }/resources/img/icon/009-forward.png"></a>
+					<a id="footChnageBtn" onclick="shuffleList()"><img src="${pageContext.request.contextPath }/resources/img/icon/002-change.png"></a>
+					<%-- <a id="footRepeatBtnOff" onclick="repeatOn()"><img src="${pageContext.request.contextPath }/resources/img/icon/repeat-off-16.png"></a>
+					<a id="footRepeatBtnOn" onclick="repeatOff()" class="cwi-foot-display-none"><img src="${pageContext.request.contextPath }/resources/img/icon/repeat-on-16.png"></a> --%>
 				</span>
 				<span id="footProgress" class="cwi-foot-current">0:00</span>
 				<span class="cwi-foot-player-bar"> 
@@ -58,21 +59,14 @@
 					</tr>
 				</table>
 				
-				<%-- <input type="button" value="playlist" onclick="playlistClick()">
-				<div id="playlist" class="cwi-foot-playlist">
-					<table id="playlistTable" class="cwi-foot-playlist-table">
-						<c:forEach var="playlist" items="${playlist}">
-							<tr onclick="loadFoot(${playlist.music_sq}); alert(${playlist.music_sq} + '로 음악 변경, 임시기능이기에 직접 play 바람, 동기화 미지원')">
-								<td>sq : ${playlist.music_sq} </td>
-								<td>
-									<c:forEach var="artistList" items="${playlist.artistList}">
-										artist : ${artistList.nick }
-									</c:forEach>
-								</td>	
-		 					</tr>
-						</c:forEach>
-					</table>
-				</div> --%>
+				<div id="playlist" class="cwi-foot-playlist"></div>
+				
+				<a id="footListOff" onclick="playlistClick()" class="cwi-foot-list-button">
+					<img src="${pageContext.request.contextPath }/resources/img/icon/list-off-16.png">
+				</a>
+				<a id="footListOn" onclick="playlistClick2()" class="cwi-foot-list-button cwi-foot-display-none">
+					<img src="${pageContext.request.contextPath }/resources/img/icon/list-on-16.png">
+				</a>
 			</div>
 		</div>
 	</div>
