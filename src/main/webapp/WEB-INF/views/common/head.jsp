@@ -70,6 +70,8 @@ function getAlarmCount() {
 			<nav class="nav">
 				<c:if test="${!empty loginSession }">
 					<a class="nav-link cwi-head-white-font cwi-head-white-font" onclick="goto('/upload')">업로드</a>
+					<a class="nav-link cwi-head-white-font cwi-head-white-font" onclick="goto('/my/like')">좋아요</a>
+					<a class="nav-link cwi-head-white-font cwi-head-white-font" onclick="goto('/my/follow')">팔로우</a>
 					<a class="nav-link cwi-head-white-font" onclick="goto('/my/music')">내 페이지</a>
 					<a class="nav-link cwi-head-white-font" onclick="goto('/discover')">탐색</a>
 					<a class="nav-link cwi-head-white-font" onclick="logoutFunc()">로그아웃</a>
